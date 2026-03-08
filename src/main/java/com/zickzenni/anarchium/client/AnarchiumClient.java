@@ -19,6 +19,10 @@ public class AnarchiumClient
 
     final List<EffectInstance> activeEffects;
 
+    public int timerTicks;
+
+    public int timerDuration;
+
     private AnarchiumClient()
     {
         this.activeEffects = new ArrayList<>();

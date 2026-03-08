@@ -5,6 +5,7 @@ import com.zickzenni.anarchium.effect.EffectIdentifiers;
 import com.zickzenni.anarchium.effect.EffectRegistry;
 import com.zickzenni.anarchium.network.packets.ActivateEffectPacket;
 import com.zickzenni.anarchium.effect.EffectInstance;
+import com.zickzenni.anarchium.network.packets.TimerTickPacket;
 import com.zickzenni.anarchium.server.effect.ServerFakeTeleportToHeavenEffect;
 import com.zickzenni.anarchium.server.effect.ServerReversedGravityEffect;
 import com.zickzenni.anarchium.util.LevelTickStage;
@@ -26,12 +27,14 @@ public class AnarchiumServer
 
     private final List<EffectInstance> activeEffects;
 
-    private int newEffectTicks;
+    private static final int TIMER_DURATION = 20 * 15;
+
+    private int timerTicks;
 
     private AnarchiumServer()
     {
         this.activeEffects = new ArrayList<>();
-        this.newEffectTicks = 20 * 15;
+        this.timerTicks = TIMER_DURATION;
     }
 
     public static void setup()
@@ -93,14 +96,16 @@ public class AnarchiumServer
             }
         }
 
-        if (newEffectTicks <= 0)
+        if (timerTicks <= 0)
         {
-            newEffectTicks = 20 * 30;
+            timerTicks = TIMER_DURATION;
             chooseRandomEffect();
         } else
         {
-            newEffectTicks--;
+            timerTicks--;
         }
+
+        PacketDistributor.sendToAllPlayers(new TimerTickPacket(TIMER_DURATION - timerTicks, TIMER_DURATION));
     }
 
     /**

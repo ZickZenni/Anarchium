@@ -1,6 +1,7 @@
 package com.zickzenni.anarchium;
 
 import com.zickzenni.anarchium.network.packets.ActivateEffectPacket;
+import com.zickzenni.anarchium.network.packets.TimerTickPacket;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.network.event.RegisterPayloadHandlersEvent;
@@ -17,6 +18,11 @@ public class CommonEvents
         registrar.playToClient(
                 ActivateEffectPacket.TYPE,
                 ActivateEffectPacket.STREAM_CODEC
+        );
+
+        registrar.playToClient(
+                TimerTickPacket.TYPE,
+                TimerTickPacket.STREAM_CODEC
         );
     }
 }

@@ -3,6 +3,7 @@ package com.zickzenni.anarchium.client;
 import com.zickzenni.anarchium.effect.EffectRegistry;
 import com.zickzenni.anarchium.network.packets.ActivateEffectPacket;
 import com.zickzenni.anarchium.effect.EffectInstance;
+import com.zickzenni.anarchium.network.packets.TimerTickPacket;
 import net.minecraft.client.Minecraft;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.Identifier;
@@ -75,5 +76,11 @@ public class ClientPayloadHandler
         {
             AnarchiumClient.LOGGER.error("[Anarchium] Failed to create instance of effect {}: {}", identifier, e);
         }
+    }
+
+    public static void handleTimerTick(final TimerTickPacket data, final IPayloadContext ignoredCtx)
+    {
+        AnarchiumClient.getInstance().timerTicks = data.ticks();
+        AnarchiumClient.getInstance().timerDuration = data.duration();
     }
 }
