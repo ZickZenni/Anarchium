@@ -4,7 +4,7 @@ import com.mojang.logging.LogUtils;
 import com.zickzenni.anarchium.effect.EffectIdentifiers;
 import com.zickzenni.anarchium.effect.EffectRegistry;
 import com.zickzenni.anarchium.network.packets.ActivateEffectPacket;
-import com.zickzenni.anarchium.server.effect.EffectInstance;
+import com.zickzenni.anarchium.effect.EffectInstance;
 import com.zickzenni.anarchium.server.effect.ServerFakeTeleportToHeavenEffect;
 import com.zickzenni.anarchium.server.effect.ServerReversedGravityEffect;
 import com.zickzenni.anarchium.util.LevelTickStage;

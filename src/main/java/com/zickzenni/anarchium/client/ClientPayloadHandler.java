@@ -2,7 +2,7 @@ package com.zickzenni.anarchium.client;
 
 import com.zickzenni.anarchium.effect.EffectRegistry;
 import com.zickzenni.anarchium.network.packets.ActivateEffectPacket;
-import com.zickzenni.anarchium.server.effect.EffectInstance;
+import com.zickzenni.anarchium.effect.EffectInstance;
 import net.minecraft.client.Minecraft;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.Identifier;

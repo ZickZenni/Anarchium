@@ -3,7 +3,7 @@ package com.zickzenni.anarchium.client;
 import com.mojang.logging.LogUtils;
 import com.zickzenni.anarchium.client.effect.ClientReversedGravityEffect;
 import com.zickzenni.anarchium.effect.EffectIdentifiers;
-import com.zickzenni.anarchium.server.effect.EffectInstance;
+import com.zickzenni.anarchium.effect.EffectInstance;
 import com.zickzenni.anarchium.util.LevelTickStage;
 import net.minecraft.client.multiplayer.ClientLevel;
 import org.slf4j.Logger;

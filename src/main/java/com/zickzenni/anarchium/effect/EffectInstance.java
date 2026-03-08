@@ -1,6 +1,5 @@
-package com.zickzenni.anarchium.server.effect;
+package com.zickzenni.anarchium.effect;
 
-import com.zickzenni.anarchium.effect.IEffectHandler;
 import net.minecraft.resources.Identifier;
 
 public class EffectInstance
