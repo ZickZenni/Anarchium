@@ -20,7 +20,7 @@ public class EffectRegistry
 
     protected static Map<Side, Map<Identifier, Class<? extends IEffectHandler>>> HANDLERS = new HashMap<>();
 
-    protected static Map<Identifier, EffectDescription> DESCRIPTIONS = new HashMap<>();
+    protected static Map<Identifier, EffectProperties> DESCRIPTIONS = new HashMap<>();
 
     protected EffectRegistry()
     {
@@ -50,7 +50,7 @@ public class EffectRegistry
         LOGGER.info("[EffectRegistry] Registered effect: {}", identifier);
     }
 
-    public static void registerDescription(Identifier identifier, EffectDescription description)
+    public static void registerDescription(Identifier identifier, EffectProperties description)
     {
         if (identifier == null)
         {
@@ -82,7 +82,7 @@ public class EffectRegistry
         return map.getOrDefault(identifier, null);
     }
 
-    public static @Nullable EffectDescription getDescription(Identifier identifier)
+    public static @Nullable EffectProperties getDescription(Identifier identifier)
     {
         return DESCRIPTIONS.getOrDefault(identifier, null);
     }

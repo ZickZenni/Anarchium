@@ -1,7 +1,7 @@
 package com.zickzenni.anarchium;
 
 import com.mojang.logging.LogUtils;
-import com.zickzenni.anarchium.effect.EffectDescription;
+import com.zickzenni.anarchium.effect.EffectProperties;
 import com.zickzenni.anarchium.effect.EffectIdentifiers;
 import com.zickzenni.anarchium.effect.EffectRegistry;
 import com.zickzenni.anarchium.server.AnarchiumServer;
@@ -24,7 +24,7 @@ public class Anarchium
 
     private void commonSetup(final FMLCommonSetupEvent event)
     {
-        EffectRegistry.registerDescription(EffectIdentifiers.REVERSED_GRAVITY, EffectDescription.REVERSED_GRAVITY);
+        EffectRegistry.registerDescription(EffectIdentifiers.REVERSED_GRAVITY, EffectProperties.REVERSED_GRAVITY);
 
         AnarchiumServer.setup();
     }
