@@ -49,7 +49,7 @@ public class AnarchiumClient
     {
         for (var effect : activeEffects)
         {
-            if (effect.ticks > 0)
+            if (effect.ticks > 0 || (effect.indefinite && !effect.handler.hasIndefiniteEnded()))
             {
                 effect.handler.onLevelTick(level, LevelTickStage.Pre);
             }
@@ -66,6 +66,9 @@ public class AnarchiumClient
             {
                 effect.handler.onLevelTick(level, LevelTickStage.Post);
                 effect.ticks--;
+            } else if (effect.indefinite && !effect.handler.hasIndefiniteEnded())
+            {
+                effect.handler.onLevelTick(level, LevelTickStage.Post);
             } else
             {
                 it.remove();

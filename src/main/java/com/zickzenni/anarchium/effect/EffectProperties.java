@@ -5,11 +5,32 @@ package com.zickzenni.anarchium.effect;
  */
 public class EffectProperties
 {
-    private final int durationTicks;
+    private int durationTicks;
 
-    private EffectProperties(int ticks)
+    private boolean indefinite;
+
+    private EffectProperties() {}
+
+    private EffectProperties duration(int ticks)
     {
+        if (this.indefinite)
+        {
+            throw new IllegalStateException("Effect is already indefinite");
+        }
+
         this.durationTicks = ticks;
+        return this;
+    }
+
+    private EffectProperties indefinite()
+    {
+        if (this.durationTicks > 0)
+        {
+            throw new IllegalStateException("Effect is already tickable");
+        }
+
+        this.indefinite = true;
+        return this;
     }
 
     /**
@@ -28,9 +49,19 @@ public class EffectProperties
         return durationTicks;
     }
 
+    /**
+     * Determines if the effect is running indefinite.
+     */
+    public boolean isIndefinite()
+    {
+        return indefinite;
+    }
+
     /*
      * ======================================
      */
 
-    public static final EffectProperties REVERSED_GRAVITY = new EffectProperties(100);
+    public static final EffectProperties REVERSED_GRAVITY = new EffectProperties().duration(100);
+
+    public static final EffectProperties FAKE_TELEPORT_TO_HEAVEN = new EffectProperties().indefinite();
 }

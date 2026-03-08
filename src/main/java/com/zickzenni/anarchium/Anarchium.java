@@ -25,6 +25,7 @@ public class Anarchium
     private void commonSetup(final FMLCommonSetupEvent event)
     {
         EffectRegistry.registerDescription(EffectIdentifiers.REVERSED_GRAVITY, EffectProperties.REVERSED_GRAVITY);
+        EffectRegistry.registerDescription(EffectIdentifiers.FAKE_TELEPORT_TO_HEAVEN, EffectProperties.FAKE_TELEPORT_TO_HEAVEN);
 
         AnarchiumServer.setup();
     }

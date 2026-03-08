@@ -11,6 +11,8 @@ public class EffectInstance
 
     public int ticks;
 
+    public boolean indefinite;
+
     public EffectInstance(Identifier identifier, IEffectHandler handler)
     {
         this.identifier = identifier;

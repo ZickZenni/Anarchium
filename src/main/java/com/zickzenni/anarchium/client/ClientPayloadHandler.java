@@ -40,9 +40,9 @@ public class ClientPayloadHandler
 
         for (var activeEffect : AnarchiumClient.getInstance().activeEffects)
         {
-            if (activeEffect.identifier.equals(identifier))
+            if (activeEffect.identifier.equals(identifier) && !activeEffect.indefinite)
             {
-                activeEffect.ticks = description.ticks;
+                activeEffect.ticks = description.getDurationTicks();
                 player.displayClientMessage(Component.literal("Activated effect: " + data.id()), true);
                 return;
             }
@@ -52,10 +52,17 @@ public class ClientPayloadHandler
         {
             var handler = effect.getConstructor().newInstance();
 
-            if (description.tickable)
+            if (description.isTickable() || description.isIndefinite())
             {
                 var instance = new EffectInstance(identifier, handler);
-                instance.ticks = data.ticks();
+
+                if (description.isTickable())
+                {
+                    instance.ticks = description.getDurationTicks();
+                } else
+                {
+                    instance.indefinite = true;
+                }
 
                 AnarchiumClient.getInstance().activeEffects.add(instance);
             } else

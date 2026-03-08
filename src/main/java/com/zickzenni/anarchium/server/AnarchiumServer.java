@@ -5,6 +5,7 @@ import com.zickzenni.anarchium.effect.EffectIdentifiers;
 import com.zickzenni.anarchium.effect.EffectRegistry;
 import com.zickzenni.anarchium.network.packets.ActivateEffectPacket;
 import com.zickzenni.anarchium.server.effect.EffectInstance;
+import com.zickzenni.anarchium.server.effect.ServerFakeTeleportToHeavenEffect;
 import com.zickzenni.anarchium.server.effect.ServerReversedGravityEffect;
 import com.zickzenni.anarchium.util.LevelTickStage;
 import net.minecraft.resources.Identifier;
@@ -39,6 +40,10 @@ public class AnarchiumServer
                 EffectIdentifiers.REVERSED_GRAVITY,
                 ServerReversedGravityEffect.class
         );
+        ServerEffectRegistry.registerHandler(
+                EffectIdentifiers.FAKE_TELEPORT_TO_HEAVEN,
+                ServerFakeTeleportToHeavenEffect.class
+        );
     }
 
     /**
@@ -61,7 +66,7 @@ public class AnarchiumServer
     {
         for (var effect : activeEffects)
         {
-            if (effect.ticks > 0)
+            if (effect.ticks > 0 || (effect.indefinite && !effect.handler.hasIndefiniteEnded()))
             {
                 effect.handler.onLevelTick(level, LevelTickStage.Pre);
             }
@@ -78,6 +83,9 @@ public class AnarchiumServer
             {
                 effect.handler.onLevelTick(level, LevelTickStage.Post);
                 effect.ticks--;
+            } else if (effect.indefinite && !effect.handler.hasIndefiniteEnded())
+            {
+                effect.handler.onLevelTick(level, LevelTickStage.Post);
             } else
             {
                 effect.handler.onEnd();
@@ -85,59 +93,77 @@ public class AnarchiumServer
             }
         }
 
-        if (newEffectTicks > 0)
-        {
-            newEffectTicks--;
-        } else
+        if (newEffectTicks <= 0)
         {
             newEffectTicks = 20 * 30;
+            chooseRandomEffect();
+        } else
+        {
+            newEffectTicks--;
+        }
+    }
 
-            var registry = EffectRegistry.getHandlers(EffectRegistry.Side.SERVER);
-            var keys = registry.keySet().toArray();
-            var identifier = (Identifier) keys[new Random().nextInt(keys.length)];
+    /**
+     * Chooses a random effect to activate.
+     */
+    private void chooseRandomEffect()
+    {
+        var registry = EffectRegistry.getHandlers(EffectRegistry.Side.SERVER);
+        var keys = registry.keySet().toArray();
+        var identifier = (Identifier) keys[new Random().nextInt(keys.length)];
 
-            var effect = registry.get(identifier);
-            var description = EffectRegistry.getDescription(identifier);
+        var effect = registry.get(identifier);
+        var description = EffectRegistry.getDescription(identifier);
 
-            if (description == null)
+        if (description == null)
+        {
+            LOGGER.error("[Anarchium] Failed to find effect description for {}", identifier);
+            return;
+        }
+
+        LOGGER.info("[Anarchium] Picked new effect: {}", identifier);
+
+        /*
+         * Update timers when we already have the same effect running.
+         */
+        for (var activeEffect : activeEffects)
+        {
+            if (activeEffect.identifier.equals(identifier) && !activeEffect.indefinite)
             {
-                LOGGER.error("[Anarchium] Failed to find effect description for {}", identifier);
+                activeEffect.ticks = description.getDurationTicks();
+                PacketDistributor.sendToAllPlayers(new ActivateEffectPacket(identifier.toString(), activeEffect.ticks));
                 return;
             }
+        }
 
-            LOGGER.info("[Anarchium] Picked new effect: {}", identifier);
+        /*
+         * Create a new instance of the effect.
+         */
+        try
+        {
+            var handler = effect.getConstructor().newInstance();
 
-            for (var activeEffect : activeEffects)
+            if (description.isTickable() || description.isIndefinite())
             {
-                if (activeEffect.identifier.equals(identifier))
-                {
-                    activeEffect.ticks = description.getDurationTicks();
-                    PacketDistributor.sendToAllPlayers(new ActivateEffectPacket(identifier.toString(), activeEffect.ticks));
-                    return;
-                }
-            }
-
-            try
-            {
-                var handler = effect.getConstructor().newInstance();
+                var instance = new EffectInstance(identifier, handler);
 
                 if (description.isTickable())
                 {
-                    var instance = new EffectInstance(identifier, handler);
                     instance.ticks = description.getDurationTicks();
-
-                    activeEffects.add(instance);
                 } else
                 {
-                    handler.onStart();
+                    instance.indefinite = true;
                 }
 
-                PacketDistributor.sendToAllPlayers(new ActivateEffectPacket(identifier.toString(), description.getDurationTicks()));
-            } catch (InstantiationException | IllegalAccessException | InvocationTargetException |
-                     NoSuchMethodException e)
-            {
-                LOGGER.error("[Anarchium] Failed to create instance of effect {}: {}", identifier, e);
+                activeEffects.add(instance);
             }
+
+            handler.onStart();
+            PacketDistributor.sendToAllPlayers(new ActivateEffectPacket(identifier.toString(), description.getDurationTicks()));
+        } catch (InstantiationException | IllegalAccessException | InvocationTargetException |
+                 NoSuchMethodException e)
+        {
+            LOGGER.error("[Anarchium] Failed to create instance of effect {}: {}", identifier, e);
         }
     }
 
