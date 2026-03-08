@@ -80,6 +80,7 @@ public class AnarchiumServer
                 effect.ticks--;
             } else
             {
+                effect.handler.onEnd();
                 it.remove();
             }
         }
