@@ -1,23 +1,36 @@
 package com.zickzenni.anarchium.effect;
 
+/**
+ * Represents the properties of an effect.
+ */
 public class EffectProperties
 {
-    private final int ticks;
+    private final int durationTicks;
 
     private EffectProperties(int ticks)
     {
-        this.ticks = ticks;
+        this.durationTicks = ticks;
     }
 
+    /**
+     * Determines if the effect is tickable.
+     */
     public boolean isTickable()
     {
-        return ticks > 0;
+        return durationTicks > 0;
     }
 
-    public int getTicks()
+    /**
+     * Retrieves the duration of the effect in ticks.
+     */
+    public int getDurationTicks()
     {
-        return ticks;
+        return durationTicks;
     }
+
+    /*
+     * ======================================
+     */
 
     public static final EffectProperties REVERSED_GRAVITY = new EffectProperties(100);
 }

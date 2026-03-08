@@ -110,7 +110,7 @@ public class AnarchiumServer
             {
                 if (activeEffect.identifier.equals(identifier))
                 {
-                    activeEffect.ticks = description.getTicks();
+                    activeEffect.ticks = description.getDurationTicks();
                     PacketDistributor.sendToAllPlayers(new ActivateEffectPacket(identifier.toString(), activeEffect.ticks));
                     return;
                 }
@@ -123,7 +123,7 @@ public class AnarchiumServer
                 if (description.isTickable())
                 {
                     var instance = new EffectInstance(identifier, handler);
-                    instance.ticks = description.getTicks();
+                    instance.ticks = description.getDurationTicks();
 
                     activeEffects.add(instance);
                 } else
@@ -131,7 +131,7 @@ public class AnarchiumServer
                     handler.onStart();
                 }
 
-                PacketDistributor.sendToAllPlayers(new ActivateEffectPacket(identifier.toString(), description.getTicks()));
+                PacketDistributor.sendToAllPlayers(new ActivateEffectPacket(identifier.toString(), description.getDurationTicks()));
             } catch (InstantiationException | IllegalAccessException | InvocationTargetException |
                      NoSuchMethodException e)
             {
