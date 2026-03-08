@@ -1,0 +1,13 @@
+package com.zickzenni.anarchium.client;
+
+import com.zickzenni.anarchium.effect.EffectRegistry;
+import com.zickzenni.anarchium.effect.IEffectHandler;
+import net.minecraft.resources.Identifier;
+
+public class ClientEffectRegistry extends EffectRegistry
+{
+    public static void registerHandler(Identifier identifier, Class<? extends IEffectHandler> handler)
+    {
+        EffectRegistry.registerHandler(identifier, handler, Side.CLIENT);
+    }
+}
