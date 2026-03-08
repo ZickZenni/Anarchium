@@ -29,6 +29,8 @@ public class ClientPayloadHandler
             return;
         }
 
+        player.displayClientMessage(Component.literal("Activated effect: " + data.id()), true);
+
         var effect = EffectRegistry.getHandler(identifier, EffectRegistry.Side.CLIENT);
         var description = EffectRegistry.getDescription(identifier);
 
@@ -43,7 +45,6 @@ public class ClientPayloadHandler
             if (activeEffect.identifier.equals(identifier) && !activeEffect.indefinite)
             {
                 activeEffect.ticks = description.getDurationTicks();
-                player.displayClientMessage(Component.literal("Activated effect: " + data.id()), true);
                 return;
             }
         }
@@ -69,8 +70,6 @@ public class ClientPayloadHandler
             {
                 handler.onStart();
             }
-
-            player.displayClientMessage(Component.literal("Activated effect: " + data.id()), true);
         } catch (InstantiationException | IllegalAccessException | InvocationTargetException |
                  NoSuchMethodException e)
         {
