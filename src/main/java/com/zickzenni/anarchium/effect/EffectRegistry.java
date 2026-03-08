@@ -1,5 +1,6 @@
 package com.zickzenni.anarchium.effect;
 
+import com.google.common.collect.ImmutableMap;
 import com.mojang.logging.LogUtils;
 import net.minecraft.resources.Identifier;
 import org.jspecify.annotations.Nullable;
@@ -18,7 +19,10 @@ public class EffectRegistry
 
     private static final Logger LOGGER = LogUtils.getLogger();
 
-    protected static Map<Side, Map<Identifier, Class<? extends IEffectHandler>>> HANDLERS = new HashMap<>();
+    protected static Map<Side, Map<Identifier, Class<? extends IEffectHandler>>> HANDLERS = ImmutableMap.of(
+            Side.CLIENT, new HashMap<>(),
+            Side.SERVER, new HashMap<>()
+    );
 
     protected static Map<Identifier, EffectProperties> DESCRIPTIONS = new HashMap<>();
 
@@ -38,7 +42,7 @@ public class EffectRegistry
             throw new IllegalArgumentException("Handler cannot be null");
         }
 
-        var map = HANDLERS.getOrDefault(side, new HashMap<>());
+        var map = HANDLERS.get(side);
 
         if (map.containsKey(identifier))
         {
@@ -46,8 +50,7 @@ public class EffectRegistry
         }
 
         map.put(identifier, handler);
-        HANDLERS.put(side, map);
-        LOGGER.info("[EffectRegistry] Registered effect: {}", identifier);
+        LOGGER.info("[EffectRegistry] Registered effect '{}' for side {}", identifier, side);
     }
 
     public static void registerDescription(Identifier identifier, EffectProperties description)
