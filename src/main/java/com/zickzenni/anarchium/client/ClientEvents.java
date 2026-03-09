@@ -10,6 +10,7 @@ import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
+import net.neoforged.neoforge.client.event.ClientPlayerNetworkEvent;
 import net.neoforged.neoforge.client.event.RenderGuiEvent;
 import net.neoforged.neoforge.client.network.event.RegisterClientPayloadHandlersEvent;
 import net.neoforged.neoforge.event.tick.LevelTickEvent;
@@ -57,6 +58,13 @@ public final class ClientEvents
     }
 
     @SubscribeEvent
+    public static void onLoggingOut(ClientPlayerNetworkEvent.LoggingOut event)
+    {
+        AnarchiumClient.getInstance().effectManager.effects.clear();
+        AnarchiumClient.getInstance().timerTicks = 0;
+    }
+
+    @SubscribeEvent
     public static void onPostRenderGui(RenderGuiEvent.Post event)
     {
         var instance = AnarchiumClient.getInstance();
@@ -68,7 +76,7 @@ public final class ClientEvents
             return;
         }
 
-        final float progress = (float)instance.timerTicks / (float)instance.timerDuration;
+        final float progress = (float) instance.timerTicks / (float) instance.timerDuration;
         final int width = (int) Math.floor(progress * minecraft.getWindow().getGuiScaledWidth());
 
         event.getGuiGraphics().fill(
