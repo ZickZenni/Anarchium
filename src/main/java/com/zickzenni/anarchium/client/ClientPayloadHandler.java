@@ -3,6 +3,7 @@ package com.zickzenni.anarchium.client;
 import com.zickzenni.anarchium.effect.EffectRegistry;
 import com.zickzenni.anarchium.network.packets.ActivateEffectPacket;
 import com.zickzenni.anarchium.network.packets.TimerTickPacket;
+import com.zickzenni.anarchium.util.Environment;
 import net.minecraft.client.Minecraft;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.Identifier;
@@ -29,7 +30,7 @@ public class ClientPayloadHandler
 
         player.displayClientMessage(Component.literal("Activated effect: " + data.id()), true);
 
-        var handler = EffectRegistry.getHandler(identifier, EffectRegistry.Side.CLIENT);
+        var handler = EffectRegistry.getHandler(identifier, Environment.CLIENT);
 
         if (handler == null)
         {

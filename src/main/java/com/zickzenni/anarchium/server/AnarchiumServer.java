@@ -8,6 +8,7 @@ import com.zickzenni.anarchium.network.packets.ActivateEffectPacket;
 import com.zickzenni.anarchium.network.packets.TimerTickPacket;
 import com.zickzenni.anarchium.server.effect.ServerFakeTeleportToHeavenEffect;
 import com.zickzenni.anarchium.server.effect.ServerReversedGravityEffect;
+import com.zickzenni.anarchium.util.Environment;
 import com.zickzenni.anarchium.util.LevelTickStage;
 import net.minecraft.resources.Identifier;
 import net.minecraft.server.level.ServerLevel;
@@ -82,7 +83,7 @@ public class AnarchiumServer
         {
             tries--;
 
-            var registry = EffectRegistry.getHandlers(EffectRegistry.Side.SERVER);
+            var registry = EffectRegistry.getHandlers(Environment.SERVER);
             var identifier = registry.keySet().toArray(Identifier[]::new)[this.random.nextInt(registry.size())];
             var handler = registry.get(identifier);
             var properties = EffectRegistry.getDescription(identifier);
