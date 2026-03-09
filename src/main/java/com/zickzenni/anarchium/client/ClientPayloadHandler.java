@@ -2,14 +2,11 @@ package com.zickzenni.anarchium.client;
 
 import com.zickzenni.anarchium.effect.EffectRegistry;
 import com.zickzenni.anarchium.network.packets.ActivateEffectPacket;
-import com.zickzenni.anarchium.effect.EffectInstance;
 import com.zickzenni.anarchium.network.packets.TimerTickPacket;
 import net.minecraft.client.Minecraft;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.Identifier;
 import net.neoforged.neoforge.network.handling.IPayloadContext;
-
-import java.lang.reflect.InvocationTargetException;
 
 public class ClientPayloadHandler
 {
@@ -32,50 +29,23 @@ public class ClientPayloadHandler
 
         player.displayClientMessage(Component.literal("Activated effect: " + data.id()), true);
 
-        var effect = EffectRegistry.getHandler(identifier, EffectRegistry.Side.CLIENT);
-        var description = EffectRegistry.getDescription(identifier);
+        var handler = EffectRegistry.getHandler(identifier, EffectRegistry.Side.CLIENT);
 
-        if (effect == null || description == null)
+        if (handler == null)
         {
-            AnarchiumClient.LOGGER.error("[Anarchium] Failed to find effect {} on client", identifier);
+            AnarchiumClient.LOGGER.warn("[Anarchium] Effect {} does not have a client-bound handler", identifier);
             return;
         }
 
-        for (var activeEffect : AnarchiumClient.getInstance().activeEffects)
+        var properties = EffectRegistry.getDescription(identifier);
+
+        if (properties == null)
         {
-            if (activeEffect.identifier.equals(identifier) && !activeEffect.indefinite)
-            {
-                activeEffect.ticks = description.getDurationTicks();
-                return;
-            }
+            AnarchiumClient.LOGGER.error("[Anarchium] Failed to find properties for effect {} on client", identifier);
+            return;
         }
 
-        try
-        {
-            var handler = effect.getConstructor().newInstance();
-
-            if (description.isTickable() || description.isIndefinite())
-            {
-                var instance = new EffectInstance(identifier, handler);
-
-                if (description.isTickable())
-                {
-                    instance.ticks = description.getDurationTicks();
-                } else
-                {
-                    instance.indefinite = true;
-                }
-
-                AnarchiumClient.getInstance().activeEffects.add(instance);
-            } else
-            {
-                handler.onStart();
-            }
-        } catch (InstantiationException | IllegalAccessException | InvocationTargetException |
-                 NoSuchMethodException e)
-        {
-            AnarchiumClient.LOGGER.error("[Anarchium] Failed to create instance of effect {}: {}", identifier, e);
-        }
+        AnarchiumClient.getInstance().effectManager.createEffect(identifier, handler, properties);
     }
 
     public static void handleTimerTick(final TimerTickPacket data, final IPayloadContext ignoredCtx)
