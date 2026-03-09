@@ -4,7 +4,6 @@ import com.zickzenni.anarchium.Anarchium;
 import com.zickzenni.anarchium.network.packets.ActivateEffectPacket;
 import com.zickzenni.anarchium.network.packets.TimerTickPacket;
 import com.zickzenni.anarchium.util.LevelTickStage;
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;
@@ -67,26 +66,6 @@ public final class ClientEvents
     @SubscribeEvent
     public static void onPostRenderGui(RenderGuiEvent.Post event)
     {
-        var instance = AnarchiumClient.getInstance();
-        var minecraft = Minecraft.getInstance();
-        var player = minecraft.player;
-
-        if (player == null)
-        {
-            return;
-        }
-
-        final float progress = (float) instance.timerTicks / (float) instance.timerDuration;
-        final int width = (int) Math.floor(progress * minecraft.getWindow().getGuiScaledWidth());
-
-        event.getGuiGraphics().fill(
-                0,
-                0, minecraft.getWindow().getGuiScaledWidth(), 10,
-                0x80000000);
-
-        event.getGuiGraphics().fill(
-                0,
-                0, width, 10,
-                0xFF1144CC);
+        AnarchiumGUI.render(event.getGuiGraphics());
     }
 }

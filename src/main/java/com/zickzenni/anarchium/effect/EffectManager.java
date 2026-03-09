@@ -93,7 +93,7 @@ public class EffectManager
          */
         try
         {
-            var instance = new EffectInstance(identifier, handler.getConstructor().newInstance());
+            var instance = new EffectInstance(identifier, handler.getConstructor().newInstance(), properties);
 
             if (properties.isTickable() || properties.isIndefinite())
             {
