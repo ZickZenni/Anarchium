@@ -73,7 +73,7 @@ public class AnarchiumServer
 
         this.effectManager.tick(level, stage);
 
-        if (stage == LevelTickStage.Post)
+        if (stage == LevelTickStage.POST)
         {
             if (timerTicks <= 0)
             {

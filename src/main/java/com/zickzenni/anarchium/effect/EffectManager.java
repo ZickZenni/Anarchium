@@ -27,18 +27,18 @@ public class EffectManager
      */
     public void tick(Level level, LevelTickStage stage)
     {
-        if (stage == LevelTickStage.Pre)
+        if (stage == LevelTickStage.PRE)
         {
             for (var effect : effects)
             {
                 if (effect.ticks > 0 || (effect.indefinite && !effect.handler.hasIndefiniteEnded()))
                 {
-                    effect.handler.onLevelTick(level, LevelTickStage.Pre);
+                    effect.handler.onLevelTick(level, LevelTickStage.PRE);
                 }
             }
         }
 
-        if (stage == LevelTickStage.Post)
+        if (stage == LevelTickStage.POST)
         {
             for (var it = effects.iterator(); it.hasNext(); )
             {
@@ -46,11 +46,11 @@ public class EffectManager
 
                 if (effect.ticks > 0)
                 {
-                    effect.handler.onLevelTick(level, LevelTickStage.Post);
+                    effect.handler.onLevelTick(level, LevelTickStage.POST);
                     effect.ticks--;
                 } else if (effect.indefinite && !effect.handler.hasIndefiniteEnded())
                 {
-                    effect.handler.onLevelTick(level, LevelTickStage.Post);
+                    effect.handler.onLevelTick(level, LevelTickStage.POST);
                 } else
                 {
                     effect.handler.onEnd();

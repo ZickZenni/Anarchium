@@ -20,7 +20,7 @@ public final class ServerEvents
             return;
         }
 
-        AnarchiumServer.getInstance().processLevelTick((ServerLevel) level, LevelTickStage.Pre);
+        AnarchiumServer.getInstance().processLevelTick((ServerLevel) level, LevelTickStage.PRE);
     }
 
     @SubscribeEvent
@@ -33,6 +33,6 @@ public final class ServerEvents
             return;
         }
 
-        AnarchiumServer.getInstance().processLevelTick((ServerLevel) level, LevelTickStage.Post);
+        AnarchiumServer.getInstance().processLevelTick((ServerLevel) level, LevelTickStage.POST);
     }
 }

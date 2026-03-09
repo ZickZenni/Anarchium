@@ -22,7 +22,7 @@ public class ServerReversedGravityEffect implements IEffectHandler
     @Override
     public void onLevelTick(Level level, LevelTickStage stage)
     {
-        if (stage != LevelTickStage.Post)
+        if (stage != LevelTickStage.POST)
         {
             return;
         }

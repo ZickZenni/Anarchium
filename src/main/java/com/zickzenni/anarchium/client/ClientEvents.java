@@ -41,7 +41,7 @@ public final class ClientEvents
             return;
         }
 
-        AnarchiumClient.getInstance().processLevelTick((ClientLevel) level, LevelTickStage.Pre);
+        AnarchiumClient.getInstance().processLevelTick((ClientLevel) level, LevelTickStage.PRE);
     }
 
     @SubscribeEvent
@@ -54,7 +54,7 @@ public final class ClientEvents
             return;
         }
 
-        AnarchiumClient.getInstance().processLevelTick((ClientLevel) level, LevelTickStage.Post);
+        AnarchiumClient.getInstance().processLevelTick((ClientLevel) level, LevelTickStage.POST);
     }
 
     @SubscribeEvent
