@@ -57,6 +57,7 @@ public class ServerFakeTeleportToHeavenEffect implements IEffectHandler
             if (positions.containsKey(player.getUUID().toString()))
             {
                 var position = positions.get(player.getUUID().toString());
+                player.resetFallDistance();
                 player.teleportTo(position.x, position.y, position.z);
             }
         }
