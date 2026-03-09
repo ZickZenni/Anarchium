@@ -13,6 +13,7 @@ import com.zickzenni.anarchium.util.LevelTickStage;
 import net.minecraft.resources.Identifier;
 import net.minecraft.server.level.ServerLevel;
 import net.neoforged.neoforge.network.PacketDistributor;
+import net.neoforged.neoforge.server.ServerLifecycleHooks;
 import org.slf4j.Logger;
 
 import java.util.Random;
@@ -55,6 +56,21 @@ public class AnarchiumServer
      */
     public void processLevelTick(ServerLevel level, LevelTickStage stage)
     {
+        var server = ServerLifecycleHooks.getCurrentServer();
+
+        if (server == null)
+        {
+            return;
+        }
+
+        /*
+         * Do not tick current effects or create new ones if there are no players.
+         */
+        if (server.getPlayerList().getPlayers().isEmpty())
+        {
+            return;
+        }
+
         this.effectManager.tick(level, stage);
 
         if (stage == LevelTickStage.Post)
