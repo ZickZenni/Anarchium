@@ -45,7 +45,7 @@ public class EffectRegistry
         }
 
         map.put(identifier, handler);
-        LOGGER.info("[EffectRegistry] Registered effect '{}' for environment {}", identifier, environment);
+        LOGGER.info("Registered effect '{}' for environment {}", identifier, environment);
     }
 
     public static void registerDescription(Identifier identifier, EffectProperties description)
@@ -66,7 +66,7 @@ public class EffectRegistry
         }
 
         DESCRIPTIONS.put(identifier, description);
-        LOGGER.info("[EffectRegistry] Registered effect description: {}", identifier);
+        LOGGER.info("Registered effect description: {}", identifier);
     }
 
     public static Map<Identifier, Class<? extends IEffectHandler>> getHandlers(Environment environment)

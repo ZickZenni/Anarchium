@@ -100,12 +100,12 @@ public class AnarchiumServer
                 continue;
             }
 
-            LOGGER.info("[Anarchium] Picked new effect: {}", identifier);
+            LOGGER.info("Picked new effect: {}", identifier);
             PacketDistributor.sendToAllPlayers(new ActivateEffectPacket(identifier.toString(), instance.ticks));
             return;
         }
 
-        LOGGER.error("[Anarchium] Failed to pick a new effect. Tried 5 times.");
+        LOGGER.error("Failed to pick a new effect. Tried 5 times.");
     }
 
     /**

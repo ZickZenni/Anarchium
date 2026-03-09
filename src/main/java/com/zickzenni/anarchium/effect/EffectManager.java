@@ -113,7 +113,7 @@ public class EffectManager
         } catch (InstantiationException | IllegalAccessException | InvocationTargetException |
                  NoSuchMethodException e)
         {
-            LOGGER.error("[Anarchium] Failed to create instance of effect {}: {}", identifier, e);
+            LOGGER.error("Failed to create instance of effect {}: {}", identifier, e);
             return null;
         }
     }

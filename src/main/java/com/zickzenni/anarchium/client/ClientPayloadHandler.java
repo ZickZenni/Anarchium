@@ -24,7 +24,7 @@ public class ClientPayloadHandler
 
         if (identifier == null)
         {
-            AnarchiumClient.LOGGER.error("[Anarchium] Failed to parse effect identifier {}", data.id());
+            AnarchiumClient.LOGGER.error("Failed to parse effect identifier {}", data.id());
             return;
         }
 
@@ -34,7 +34,7 @@ public class ClientPayloadHandler
 
         if (handler == null)
         {
-            AnarchiumClient.LOGGER.warn("[Anarchium] Effect {} does not have a client-bound handler", identifier);
+            AnarchiumClient.LOGGER.warn("Effect {} does not have a client-bound handler", identifier);
             return;
         }
 
@@ -42,7 +42,7 @@ public class ClientPayloadHandler
 
         if (properties == null)
         {
-            AnarchiumClient.LOGGER.error("[Anarchium] Failed to find properties for effect {} on client", identifier);
+            AnarchiumClient.LOGGER.error("Failed to find properties for effect {} on client", identifier);
             return;
         }
 
