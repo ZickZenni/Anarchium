@@ -34,7 +34,7 @@ public class AnarchiumServer
 
     private AnarchiumServer()
     {
-        this.effectManager = new EffectManager();
+        this.effectManager = new EffectManager(Environment.SERVER);
         this.random = new Random();
         this.timerTicks = TIMER_DURATION;
     }

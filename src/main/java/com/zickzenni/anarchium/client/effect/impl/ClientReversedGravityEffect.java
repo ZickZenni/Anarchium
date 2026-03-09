@@ -1,4 +1,4 @@
-package com.zickzenni.anarchium.client.effect;
+package com.zickzenni.anarchium.client.effect.impl;
 
 import com.zickzenni.anarchium.effect.IEffectHandler;
 import com.zickzenni.anarchium.util.LevelTickStage;

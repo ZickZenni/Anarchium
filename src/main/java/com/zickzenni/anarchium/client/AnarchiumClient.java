@@ -2,8 +2,10 @@ package com.zickzenni.anarchium.client;
 
 import com.mojang.logging.LogUtils;
 import com.zickzenni.anarchium.client.effect.ClientReversedGravityEffect;
+import com.zickzenni.anarchium.client.effect.impl.ClientReversedGravityEffect;
 import com.zickzenni.anarchium.effect.EffectIdentifiers;
 import com.zickzenni.anarchium.effect.EffectManager;
+import com.zickzenni.anarchium.util.Environment;
 import com.zickzenni.anarchium.util.LevelTickStage;
 import net.minecraft.client.multiplayer.ClientLevel;
 import org.slf4j.Logger;
@@ -22,7 +24,7 @@ public class AnarchiumClient
 
     private AnarchiumClient()
     {
-        this.effectManager = new EffectManager();
+        this.effectManager = new EffectManager(Environment.CLIENT);
     }
 
     public static void setup()

@@ -2,6 +2,8 @@ package com.zickzenni.anarchium.client;
 
 import com.zickzenni.anarchium.Anarchium;
 import com.zickzenni.anarchium.network.packets.ActivateEffectPacket;
+import com.zickzenni.anarchium.network.packets.EndEffectPacket;
+import com.zickzenni.anarchium.network.packets.TickEffectPacket;
 import com.zickzenni.anarchium.network.packets.TimerTickPacket;
 import com.zickzenni.anarchium.util.LevelTickStage;
 import net.minecraft.client.multiplayer.ClientLevel;
@@ -27,6 +29,8 @@ public final class ClientEvents
     public static void onRegisterPayloadHandlers(RegisterClientPayloadHandlersEvent event)
     {
         event.register(ActivateEffectPacket.TYPE, ClientPayloadHandler::handleActivateEffect);
+        event.register(EndEffectPacket.TYPE, ClientPayloadHandler::handleEndEffect);
+        event.register(TickEffectPacket.TYPE, ClientPayloadHandler::handleTickEffect);
         event.register(TimerTickPacket.TYPE, ClientPayloadHandler::handleTimerTick);
     }
 
