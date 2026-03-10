@@ -1,10 +1,7 @@
 package com.zickzenni.anarchium;
 
 import com.mojang.logging.LogUtils;
-import com.zickzenni.anarchium.effect.EffectProperties;
-import com.zickzenni.anarchium.effect.EffectIdentifiers;
-import com.zickzenni.anarchium.effect.EffectRegistry;
-import com.zickzenni.anarchium.server.AnarchiumServer;
+import com.zickzenni.anarchium.effect.Effect;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
@@ -24,9 +21,6 @@ public class Anarchium
 
     private void commonSetup(final FMLCommonSetupEvent event)
     {
-        EffectRegistry.registerDescription(EffectIdentifiers.REVERSED_GRAVITY, EffectProperties.REVERSED_GRAVITY);
-        EffectRegistry.registerDescription(EffectIdentifiers.FAKE_TELEPORT_TO_HEAVEN, EffectProperties.FAKE_TELEPORT_TO_HEAVEN);
-
-        AnarchiumServer.setup();
+        Effect.init();
     }
 }

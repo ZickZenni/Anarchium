@@ -1,24 +1,19 @@
 package com.zickzenni.anarchium.effect;
 
-import net.minecraft.resources.Identifier;
+import org.jetbrains.annotations.Nullable;
 
 public class EffectInstance
 {
-    public final Identifier identifier;
+    public final Effect effect;
 
-    public final IEffectHandler handler;
-
-    public final EffectProperties properties;
+    public final @Nullable IEffectImpl impl;
 
     public int ticks;
 
-    public boolean indefinite;
-
-    public EffectInstance(Identifier identifier, IEffectHandler handler, EffectProperties properties)
+    public EffectInstance(Effect effect, @Nullable IEffectImpl impl)
     {
-        this.identifier = identifier;
-        this.handler = handler;
-        this.properties = properties;
-        this.ticks = 0;
+        this.effect = effect;
+        this.impl = impl;
+        this.ticks = effect.getProperties().getDurationTicks();
     }
 }

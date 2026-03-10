@@ -2,9 +2,10 @@ package com.zickzenni.anarchium.effect;
 
 import com.google.common.collect.ImmutableMap;
 import com.mojang.logging.LogUtils;
-import com.zickzenni.anarchium.util.Environment;
+import com.zickzenni.anarchium.Anarchium;
 import net.minecraft.resources.Identifier;
-import org.jspecify.annotations.Nullable;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import org.slf4j.Logger;
 
 import java.util.HashMap;
@@ -14,74 +15,40 @@ public class EffectRegistry
 {
     private static final Logger LOGGER = LogUtils.getLogger();
 
-    protected static Map<Environment, Map<Identifier, Class<? extends IEffectHandler>>> HANDLERS = ImmutableMap.of(
-            Environment.CLIENT, new HashMap<>(),
-            Environment.SERVER, new HashMap<>()
-    );
+    private static final Map<Identifier, Effect> EFFECTS = new HashMap<>();
 
-    protected static Map<Identifier, EffectProperties> DESCRIPTIONS = new HashMap<>();
-
-    protected EffectRegistry()
+    /**
+     * Registers a new effect.
+     */
+    public static @NotNull Effect register(String id, @NotNull EffectProperties properties)
     {
+        var identifier = Identifier.fromNamespaceAndPath(Anarchium.MODID, id);
+
+        if (EFFECTS.containsKey(identifier))
+        {
+            throw new IllegalStateException("Effect already registered: " + identifier);
+        }
+
+        var effect = new Effect(identifier, properties);
+        EFFECTS.put(identifier, effect);
+        LOGGER.info("Registering new effect: {}", identifier);
+
+        return effect;
     }
 
-    protected static void registerHandler(Identifier identifier, Class<? extends IEffectHandler> handler, Environment environment)
+    /**
+     * Retrieves an effect by its identifier.
+     */
+    public static @Nullable Effect get(Identifier identifier)
     {
-        if (identifier == null)
-        {
-            throw new IllegalArgumentException("Identifier cannot be null");
-        }
-
-        if (handler == null)
-        {
-            throw new IllegalArgumentException("Handler cannot be null");
-        }
-
-        var map = HANDLERS.get(environment);
-
-        if (map.containsKey(identifier))
-        {
-            throw new IllegalStateException("Duplicate effect identifier: " + identifier);
-        }
-
-        map.put(identifier, handler);
-        LOGGER.info("Registered effect '{}' for environment {}", identifier, environment);
+        return EFFECTS.getOrDefault(identifier, null);
     }
 
-    public static void registerDescription(Identifier identifier, EffectProperties description)
+    /**
+     * Retrieves all registered effects.
+     */
+    public static ImmutableMap<Identifier, Effect> getEffects()
     {
-        if (identifier == null)
-        {
-            throw new IllegalArgumentException("Identifier cannot be null");
-        }
-
-        if (description == null)
-        {
-            throw new IllegalArgumentException("Description cannot be null");
-        }
-
-        if (DESCRIPTIONS.containsKey(identifier))
-        {
-            throw new IllegalStateException("Duplicate effect identifier: " + identifier);
-        }
-
-        DESCRIPTIONS.put(identifier, description);
-        LOGGER.info("Registered effect description: {}", identifier);
-    }
-
-    public static Map<Identifier, Class<? extends IEffectHandler>> getHandlers(Environment environment)
-    {
-        return HANDLERS.getOrDefault(environment, new HashMap<>());
-    }
-
-    public static @Nullable Class<? extends IEffectHandler> getHandler(Identifier identifier, Environment environment)
-    {
-        var map = HANDLERS.getOrDefault(environment, new HashMap<>());
-        return map.getOrDefault(identifier, null);
-    }
-
-    public static @Nullable EffectProperties getDescription(Identifier identifier)
-    {
-        return DESCRIPTIONS.getOrDefault(identifier, null);
+        return ImmutableMap.copyOf(EFFECTS);
     }
 }

@@ -1,12 +1,10 @@
 package com.zickzenni.anarchium.client;
 
-import com.zickzenni.anarchium.effect.EffectInstance;
 import com.zickzenni.anarchium.effect.EffectRegistry;
 import com.zickzenni.anarchium.network.packets.ActivateEffectPacket;
 import com.zickzenni.anarchium.network.packets.EndEffectPacket;
 import com.zickzenni.anarchium.network.packets.TickEffectPacket;
 import com.zickzenni.anarchium.network.packets.TimerTickPacket;
-import com.zickzenni.anarchium.util.Environment;
 import net.minecraft.client.Minecraft;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.Identifier;
@@ -31,25 +29,19 @@ public class ClientPayloadHandler
             return;
         }
 
+        var effect = EffectRegistry.get(identifier);
+
+        if (effect == null)
+        {
+            player.connection.disconnect(Component.literal("Failed to find effect " + identifier));
+            AnarchiumClient.LOGGER.error("Failed to find effect {}", identifier);
+            return;
+        }
+
         player.displayClientMessage(Component.literal("Activated effect: " + data.id()), true);
 
-        var handler = EffectRegistry.getHandler(identifier, Environment.CLIENT);
-
-        if (handler == null)
-        {
-            AnarchiumClient.LOGGER.warn("Effect {} does not have a client-bound handler", identifier);
-            return;
-        }
-
-        var properties = EffectRegistry.getDescription(identifier);
-
-        if (properties == null)
-        {
-            AnarchiumClient.LOGGER.error("Failed to find properties for effect {} on client", identifier);
-            return;
-        }
-
-        AnarchiumClient.getInstance().effectManager.createEffect(identifier, handler, properties);
+        ClientEffectManager.createEffect(effect);
+        AnarchiumClient.getInstance().timerTicks = AnarchiumClient.getInstance().timerDuration;
     }
 
     public static void handleEndEffect(final EndEffectPacket data, final IPayloadContext ignoredCtx)
@@ -62,7 +54,7 @@ public class ClientPayloadHandler
             return;
         }
 
-        AnarchiumClient.getInstance().effectManager.removeEffect(identifier);
+        ClientEffectManager.removeEffect(identifier);
     }
 
     public static void handleTickEffect(final TickEffectPacket data, IPayloadContext ignoredCtx)
@@ -75,11 +67,9 @@ public class ClientPayloadHandler
             return;
         }
 
-        var effectManager = AnarchiumClient.getInstance().effectManager;
-
-        for (var effect : effectManager.effects)
+        for (var effect : ClientEffectManager.getInstances())
         {
-            if (effect.identifier.equals(identifier))
+            if (effect.effect.getIdentifier().equals(identifier))
             {
                 effect.ticks = data.ticks();
                 break;
@@ -89,7 +79,20 @@ public class ClientPayloadHandler
 
     public static void handleTimerTick(final TimerTickPacket data, final IPayloadContext ignoredCtx)
     {
-        AnarchiumClient.getInstance().timerTicks = data.ticks();
-        AnarchiumClient.getInstance().timerDuration = data.duration();
+        var instance = AnarchiumClient.getInstance();
+        var diff = instance.timerTicks - data.ticks();
+
+        /*
+         * Correct prediction from the client.
+         *
+         * 11 because of 10 prediction ticks and +1
+         */
+        if (diff <= (data.duration() - 11) && diff >= (data.duration() - 11))
+        {
+            instance.timerTicks = data.ticks();
+        }
+
+        instance.timerDuration = data.duration();
+        instance.predictTicks = 10;
     }
 }

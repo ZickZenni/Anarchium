@@ -10,7 +10,6 @@ import net.minecraft.client.multiplayer.ClientLevel;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
-import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
 import net.neoforged.neoforge.client.event.ClientPlayerNetworkEvent;
 import net.neoforged.neoforge.client.event.RenderGuiEvent;
 import net.neoforged.neoforge.client.network.event.RegisterClientPayloadHandlersEvent;
@@ -19,12 +18,6 @@ import net.neoforged.neoforge.event.tick.LevelTickEvent;
 @EventBusSubscriber(modid = Anarchium.MODID, value = Dist.CLIENT)
 public final class ClientEvents
 {
-    @SubscribeEvent
-    public static void onSetup(final FMLClientSetupEvent event)
-    {
-        AnarchiumClient.setup();
-    }
-
     @SubscribeEvent
     public static void onRegisterPayloadHandlers(RegisterClientPayloadHandlersEvent event)
     {
@@ -63,7 +56,6 @@ public final class ClientEvents
     @SubscribeEvent
     public static void onLoggingOut(ClientPlayerNetworkEvent.LoggingOut event)
     {
-        AnarchiumClient.getInstance().effectManager.effects.clear();
         AnarchiumClient.getInstance().timerTicks = 0;
     }
 

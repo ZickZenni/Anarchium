@@ -1,10 +1,6 @@
 package com.zickzenni.anarchium.client;
 
 import com.mojang.logging.LogUtils;
-import com.zickzenni.anarchium.client.effect.impl.ClientReversedGravityEffect;
-import com.zickzenni.anarchium.effect.EffectIdentifiers;
-import com.zickzenni.anarchium.effect.EffectManager;
-import com.zickzenni.anarchium.util.Environment;
 import com.zickzenni.anarchium.util.LevelTickStage;
 import net.minecraft.client.multiplayer.ClientLevel;
 import org.slf4j.Logger;
@@ -15,28 +11,38 @@ public class AnarchiumClient
 
     public static final Logger LOGGER = LogUtils.getLogger();
 
-    public final EffectManager effectManager;
-
     public int timerTicks;
 
     public int timerDuration;
 
+    public int predictTicks;
+
     private AnarchiumClient()
     {
-        this.effectManager = new EffectManager(Environment.CLIENT);
-    }
 
-    public static void setup()
-    {
-        ClientEffectRegistry.registerHandler(
-                EffectIdentifiers.REVERSED_GRAVITY,
-                ClientReversedGravityEffect.class
-        );
     }
 
     public void processLevelTick(ClientLevel level, LevelTickStage stage)
     {
-        this.effectManager.tick(level, stage);
+        ClientEffectManager.tick(level, stage);
+
+        if (stage == LevelTickStage.POST)
+        {
+            if (predictTicks <= 0)
+            {
+                return;
+            }
+
+            predictTicks--;
+
+            if (timerTicks > 0)
+            {
+                timerTicks--;
+            } else
+            {
+                timerTicks = timerDuration;
+            }
+        }
     }
 
     public static AnarchiumClient getInstance()

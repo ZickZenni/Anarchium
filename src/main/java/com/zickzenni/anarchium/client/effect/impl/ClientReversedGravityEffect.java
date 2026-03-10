@@ -1,11 +1,11 @@
 package com.zickzenni.anarchium.client.effect.impl;
 
-import com.zickzenni.anarchium.effect.IEffectHandler;
+import com.zickzenni.anarchium.effect.IEffectImpl;
 import com.zickzenni.anarchium.util.LevelTickStage;
 import net.minecraft.client.Minecraft;
 import net.minecraft.world.level.Level;
 
-public class ClientReversedGravityEffect implements IEffectHandler
+public class ClientReversedGravityEffect implements IEffectImpl
 {
     @Override
     public void onStart()

@@ -3,7 +3,7 @@ package com.zickzenni.anarchium.effect;
 import com.zickzenni.anarchium.util.LevelTickStage;
 import net.minecraft.world.level.Level;
 
-public interface IEffectHandler
+public interface IEffectImpl
 {
     void onStart();
 

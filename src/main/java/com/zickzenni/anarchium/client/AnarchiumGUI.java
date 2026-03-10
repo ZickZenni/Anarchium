@@ -1,6 +1,6 @@
 package com.zickzenni.anarchium.client;
 
-import com.zickzenni.anarchium.client.effect.ICustomEffectName;
+import com.zickzenni.anarchium.effect.EffectType;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 
@@ -43,7 +43,7 @@ public class AnarchiumGUI
         final var instance = AnarchiumClient.getInstance();
         final var minecraft = Minecraft.getInstance();
 
-        final var progress = (float) instance.timerTicks / (float) instance.timerDuration;
+        final var progress = (float) (instance.timerDuration - instance.timerTicks) / (float) instance.timerDuration;
         final var fillWidth = (int) Math.floor(progress * minecraft.getWindow().getGuiScaledWidth());
         final var windowWidth = minecraft.getWindow().getGuiScaledWidth();
 
@@ -69,53 +69,53 @@ public class AnarchiumGUI
      */
     private static void renderHistory(GuiGraphics graphics)
     {
-        final var instance = AnarchiumClient.getInstance();
         final var minecraft = Minecraft.getInstance();
 
         final var windowWidth = minecraft.getWindow().getGuiScaledWidth();
 
         int y = 0;
 
-        for (var effect : instance.effectManager.effects)
+        for (var instance : ClientEffectManager.getInstances())
         {
-            var name = effect.identifier.toString();
-
-            if (effect.handler instanceof ICustomEffectName)
-            {
-                name = ((ICustomEffectName) effect.handler).getCustomName();
-            }
-
+            final var name = instance.effect.getIdentifier().toString();
             final var textWidth = minecraft.font.width(name);
 
-            final var progress = (float) effect.ticks / (float) effect.properties.getDurationTicks();
-            final var fillWidth = (int) Math.floor(progress * HISTORY_ITEM_WIDTH);
+            int textXOffset = 0;
 
-            /*
-             * Background
-             */
-            graphics.fill(
-                    windowWidth - HISTORY_ITEM_X_OFFSET - HISTORY_ITEM_WIDTH,
-                    HISTORY_ITEM_Y_OFFSET + y,
-                    windowWidth - HISTORY_ITEM_X_OFFSET,
-                    HISTORY_ITEM_Y_OFFSET + HISTORY_ITEM_HEIGHT + y,
-                    BACKGROUND_COLOR
-            );
+            if (instance.effect.getProperties().getType() == EffectType.TICKED)
+            {
+                final var progress = (float) instance.ticks / (float) instance.effect.getProperties().getDurationTicks();
+                final var fillWidth = (int) Math.floor(progress * HISTORY_ITEM_WIDTH);
 
-            /*
-             * Time "Bar"
-             */
-            graphics.fill(
-                    windowWidth - HISTORY_ITEM_X_OFFSET - HISTORY_ITEM_WIDTH,
-                    HISTORY_ITEM_Y_OFFSET + y,
-                    windowWidth - HISTORY_ITEM_X_OFFSET - fillWidth,
-                    HISTORY_ITEM_Y_OFFSET + HISTORY_ITEM_HEIGHT + y,
-                    0xFFFFFFFF
-            );
+                /*
+                 * Background
+                 */
+                graphics.fill(
+                        windowWidth - HISTORY_ITEM_X_OFFSET - HISTORY_ITEM_WIDTH,
+                        HISTORY_ITEM_Y_OFFSET + y,
+                        windowWidth - HISTORY_ITEM_X_OFFSET,
+                        HISTORY_ITEM_Y_OFFSET + HISTORY_ITEM_HEIGHT + y,
+                        BACKGROUND_COLOR
+                );
+
+                /*
+                 * Time "Bar"
+                 */
+                graphics.fill(
+                        windowWidth - HISTORY_ITEM_X_OFFSET - HISTORY_ITEM_WIDTH,
+                        HISTORY_ITEM_Y_OFFSET + y,
+                        windowWidth - HISTORY_ITEM_X_OFFSET - fillWidth,
+                        HISTORY_ITEM_Y_OFFSET + HISTORY_ITEM_HEIGHT + y,
+                        0xFFFFFFFF
+                );
+
+                textXOffset += HISTORY_ITEM_WIDTH + 10;
+            }
 
             graphics.drawString(
                     minecraft.font,
                     name,
-                    windowWidth - HISTORY_ITEM_X_OFFSET - textWidth - HISTORY_ITEM_WIDTH - 10,
+                    windowWidth - HISTORY_ITEM_X_OFFSET - textWidth - textXOffset,
                     HISTORY_ITEM_Y_OFFSET + y,
                     0xFFFFFFFF
             );

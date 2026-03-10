@@ -1,6 +1,6 @@
-package com.zickzenni.anarchium.server.effect;
+package com.zickzenni.anarchium.server.effect.impl;
 
-import com.zickzenni.anarchium.effect.IEffectHandler;
+import com.zickzenni.anarchium.effect.IEffectImpl;
 import com.zickzenni.anarchium.util.LevelTickStage;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.level.Level;
@@ -10,7 +10,7 @@ import net.neoforged.neoforge.server.ServerLifecycleHooks;
 import java.util.HashMap;
 import java.util.Map;
 
-public class ServerFakeTeleportToHeavenEffect implements IEffectHandler
+public class ServerFakeTeleportToHeavenEffect implements IEffectImpl
 {
     private int ticks;
 
@@ -38,7 +38,9 @@ public class ServerFakeTeleportToHeavenEffect implements IEffectHandler
 
             positions.put(player.getUUID().toString(), position);
 
-            player.teleportTo(position.x, position.y + 20000, position.z);
+            player.setDeltaMovement(0, 0, 0);
+            player.teleportTo(position.x, 850, position.z);
+            player.hurtMarked = true;
         }
     }
 
@@ -57,8 +59,10 @@ public class ServerFakeTeleportToHeavenEffect implements IEffectHandler
             if (positions.containsKey(player.getUUID().toString()))
             {
                 var position = positions.get(player.getUUID().toString());
+                player.setDeltaMovement(0, 0, 0);
                 player.resetFallDistance();
                 player.teleportTo(position.x, position.y, position.z);
+                player.hurtMarked = true;
             }
         }
     }
