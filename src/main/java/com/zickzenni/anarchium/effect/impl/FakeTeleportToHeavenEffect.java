@@ -18,7 +18,7 @@ public class FakeTeleportToHeavenEffect extends InstantEffect
 {
     public static final EffectSupplier<FakeTeleportToHeavenEffect> SUPPLIER = FakeTeleportToHeavenEffect::new;
 
-    public static final Identifier ID = Identifier.fromNamespaceAndPath(Anarchium.MODID, "fake_teleport_to_heaven");
+    public static final Identifier ID = Anarchium.identifier("fake_teleport_to_heaven");
 
     private final Map<String, Vec3> positions;
 

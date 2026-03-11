@@ -10,7 +10,7 @@ public class BurnPlayersEffect extends InstantEffect
 {
     public static final EffectSupplier<BurnPlayersEffect> SUPPLIER = BurnPlayersEffect::new;
 
-    public static final Identifier ID = Identifier.fromNamespaceAndPath(Anarchium.MODID, "burn_players");
+    public static final Identifier ID = Anarchium.identifier("burn_players");
 
     public BurnPlayersEffect()
     {

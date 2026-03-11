@@ -13,7 +13,7 @@ public class InvertedFieldOfViewEffect extends TimedEffect
 {
     public static final EffectSupplier<InvertedFieldOfViewEffect> SUPPLIER = InvertedFieldOfViewEffect::new;
 
-    public static final Identifier ID = Identifier.fromNamespaceAndPath(Anarchium.MODID, "inverted_field_of_view");
+    public static final Identifier ID = Anarchium.identifier("inverted_field_of_view");
 
     public InvertedFieldOfViewEffect()
     {

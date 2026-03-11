@@ -2,6 +2,7 @@ package com.zickzenni.anarchium;
 
 import com.mojang.logging.LogUtils;
 import com.zickzenni.anarchium.effect.EffectRegistry;
+import net.minecraft.resources.Identifier;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
@@ -22,5 +23,13 @@ public class Anarchium
     private void commonSetup(final FMLCommonSetupEvent event)
     {
         EffectRegistry.init();
+    }
+
+    /**
+     * Creates an identifier using Anarchium's mod id as the namespace and a given path.
+     */
+    public static Identifier identifier(String path)
+    {
+        return Identifier.fromNamespaceAndPath(MODID, path);
     }
 }

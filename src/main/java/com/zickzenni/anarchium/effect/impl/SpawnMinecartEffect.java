@@ -16,7 +16,7 @@ public class SpawnMinecartEffect extends InstantEffect
 
     public static final EffectSupplier<SpawnMinecartEffect> SUPPLIER = SpawnMinecartEffect::new;
 
-    public static final Identifier ID = Identifier.fromNamespaceAndPath(Anarchium.MODID, "spawn_minecart");
+    public static final Identifier ID = Anarchium.identifier("spawn_minecart");
 
     public SpawnMinecartEffect()
     {

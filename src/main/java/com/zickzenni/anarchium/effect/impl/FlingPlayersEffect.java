@@ -10,7 +10,7 @@ public class FlingPlayersEffect extends InstantEffect
 {
     public static final EffectSupplier<FlingPlayersEffect> SUPPLIER = FlingPlayersEffect::new;
 
-    public static final Identifier ID = Identifier.fromNamespaceAndPath(Anarchium.MODID, "fling_players");
+    public static final Identifier ID = Anarchium.identifier("fling_players");
 
     public FlingPlayersEffect()
     {

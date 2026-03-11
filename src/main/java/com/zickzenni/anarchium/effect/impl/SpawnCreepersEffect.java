@@ -12,7 +12,7 @@ public class SpawnCreepersEffect extends InstantEffect
 {
     public static final EffectSupplier<SpawnCreepersEffect> SUPPLIER = SpawnCreepersEffect::new;
 
-    public static final Identifier ID = Identifier.fromNamespaceAndPath(Anarchium.MODID, "spawn_creepers");
+    public static final Identifier ID = Anarchium.identifier("spawn_creepers");
 
     public SpawnCreepersEffect()
     {

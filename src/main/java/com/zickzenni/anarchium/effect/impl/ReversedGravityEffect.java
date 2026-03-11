@@ -13,7 +13,7 @@ public class ReversedGravityEffect extends TimedEffect
 {
     public static final EffectSupplier<ReversedGravityEffect> SUPPLIER = ReversedGravityEffect::new;
 
-    public static final Identifier ID = Identifier.fromNamespaceAndPath(Anarchium.MODID, "reversed_gravity");
+    public static final Identifier ID = Anarchium.identifier("reversed_gravity");
 
     public ReversedGravityEffect()
     {
