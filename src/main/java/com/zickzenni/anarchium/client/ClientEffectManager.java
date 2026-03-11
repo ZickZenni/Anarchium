@@ -14,9 +14,13 @@ import java.util.List;
 
 public class ClientEffectManager
 {
+    private static final int MAX_HISTORY_SIZE = 5;
+
     private static final Logger LOGGER = LogUtils.getLogger();
 
     private static final List<Effect> EFFECTS = new ArrayList<>();
+
+    private static final List<String> HISTORY = new ArrayList<>();
 
     private ClientEffectManager()
     {
@@ -34,7 +38,7 @@ public class ClientEffectManager
     }
 
     /**
-     * Creates a new effect instance.
+     * Creates a new effect.
      */
     public static void createEffect(Identifier identifier)
     {
@@ -52,6 +56,9 @@ public class ClientEffectManager
         EFFECTS.add(effect);
     }
 
+    /**
+     * Removes an active effect.
+     */
     public static void removeEffect(Identifier identifier)
     {
         for (var it = EFFECTS.iterator(); it.hasNext(); )
@@ -61,12 +68,25 @@ public class ClientEffectManager
             if (effect.getIdentifier().equals(identifier))
             {
                 effect.onEndClient();
+
+                /*
+                 * Remove old items when we reached the maxiumum size.
+                 */
+                if (HISTORY.size() > MAX_HISTORY_SIZE)
+                {
+                    HISTORY.removeFirst();
+                }
+
+                HISTORY.add(effect.getGUIName());
                 it.remove();
                 break;
             }
         }
     }
 
+    /**
+     * Clears all active effects.
+     */
     public static void clear()
     {
         for (var effect : EFFECTS)
@@ -75,10 +95,22 @@ public class ClientEffectManager
         }
 
         EFFECTS.clear();
+        HISTORY.clear();
     }
 
+    /**
+     * Retrieves all active effects.
+     */
     public static List<Effect> getEffects()
     {
         return Collections.unmodifiableList(EFFECTS);
+    }
+
+    /**
+     * Retrieves the history of effects that occurred.
+     */
+    public static List<String> getHistory()
+    {
+        return Collections.unmodifiableList(HISTORY);
     }
 }

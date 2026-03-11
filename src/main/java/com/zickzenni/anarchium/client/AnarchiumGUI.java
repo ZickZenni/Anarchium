@@ -15,7 +15,9 @@ public class AnarchiumGUI
 
     private static final int BACKGROUND_COLOR = 0x80000000;
 
-    private AnarchiumGUI() {}
+    private AnarchiumGUI()
+    {
+    }
 
     /**
      * Renders the GUI.
@@ -68,58 +70,71 @@ public class AnarchiumGUI
      */
     private static void renderHistory(GuiGraphics graphics)
     {
-        final var minecraft = Minecraft.getInstance();
-
-        final var windowWidth = minecraft.getWindow().getGuiScaledWidth();
-
         int y = 0;
+
+        for (var name : ClientEffectManager.getHistory())
+        {
+            y = renderHistoryItem(graphics, name, y, 0, 0);
+        }
 
         for (var effect : ClientEffectManager.getEffects())
         {
-            final var name = effect.getGUIName();
-            final var textWidth = minecraft.font.width(name);
+            y = renderHistoryItem(graphics, effect.getGUIName(), y, effect.getTicks(), effect.getDurationTicks());
+        }
+    }
 
-            int textXOffset = 0;
+    /**
+     * Renders a single history item.
+     * Can also be an active effect.
+     */
+    private static int renderHistoryItem(GuiGraphics graphics, String name, int y, int ticks, int durationTicks)
+    {
+        final var minecraft = Minecraft.getInstance();
+        final var textWidth = minecraft.font.width(name);
+        final var windowWidth = minecraft.getWindow().getGuiScaledWidth();
 
-            if (effect.getDurationTicks() > 0)
-            {
-                final var progress = (float) effect.getTicks() / (float) effect.getDurationTicks();
-                final var fillWidth = (int) Math.floor(progress * HISTORY_ITEM_WIDTH);
+        int textXOffset = 0;
 
-                /*
-                 * Background
-                 */
-                graphics.fill(
-                        windowWidth - HISTORY_ITEM_X_OFFSET - HISTORY_ITEM_WIDTH,
-                        HISTORY_ITEM_Y_OFFSET + y,
-                        windowWidth - HISTORY_ITEM_X_OFFSET,
-                        HISTORY_ITEM_Y_OFFSET + HISTORY_ITEM_HEIGHT + y,
-                        BACKGROUND_COLOR
-                );
+        if (durationTicks > 0)
+        {
+            final var progress = (float) ticks / (float) durationTicks;
+            final var fillWidth = (int) Math.floor(progress * HISTORY_ITEM_WIDTH);
 
-                /*
-                 * Time "Bar"
-                 */
-                graphics.fill(
-                        windowWidth - HISTORY_ITEM_X_OFFSET - HISTORY_ITEM_WIDTH,
-                        HISTORY_ITEM_Y_OFFSET + y,
-                        windowWidth - HISTORY_ITEM_X_OFFSET - fillWidth,
-                        HISTORY_ITEM_Y_OFFSET + HISTORY_ITEM_HEIGHT + y,
-                        0xFFFFFFFF
-                );
-
-                textXOffset += HISTORY_ITEM_WIDTH + 10;
-            }
-
-            graphics.drawString(
-                    minecraft.font,
-                    name,
-                    windowWidth - HISTORY_ITEM_X_OFFSET - textWidth - textXOffset,
+            /*
+             * Background
+             */
+            graphics.fill(
+                    windowWidth - HISTORY_ITEM_X_OFFSET - HISTORY_ITEM_WIDTH,
                     HISTORY_ITEM_Y_OFFSET + y,
+                    windowWidth - HISTORY_ITEM_X_OFFSET,
+                    HISTORY_ITEM_Y_OFFSET + HISTORY_ITEM_HEIGHT + y,
+                    BACKGROUND_COLOR
+            );
+
+            /*
+             * Time "Bar"
+             */
+            graphics.fill(
+                    windowWidth - HISTORY_ITEM_X_OFFSET - HISTORY_ITEM_WIDTH,
+                    HISTORY_ITEM_Y_OFFSET + y,
+                    windowWidth - HISTORY_ITEM_X_OFFSET - fillWidth,
+                    HISTORY_ITEM_Y_OFFSET + HISTORY_ITEM_HEIGHT + y,
                     0xFFFFFFFF
             );
 
-            y += HISTORY_ITEM_HEIGHT + 12;
+            textXOffset += HISTORY_ITEM_WIDTH + 10;
         }
+
+        graphics.drawString(
+                minecraft.font,
+                name,
+                windowWidth - HISTORY_ITEM_X_OFFSET - textWidth - textXOffset,
+                HISTORY_ITEM_Y_OFFSET + y,
+                0xFFFFFFFF
+        );
+
+        y += HISTORY_ITEM_HEIGHT + 12;
+
+        return y;
     }
 }
