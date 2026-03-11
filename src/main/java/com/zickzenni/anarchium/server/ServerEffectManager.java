@@ -70,6 +70,17 @@ public class ServerEffectManager
                 var registry = EffectRegistry.getSuppliers();
                 var identifier = registry.keySet().toArray(Identifier[]::new)[new Random().nextInt(registry.size())];
                 var supplier = registry.get(identifier);
+
+                for (var effect : EFFECTS)
+                {
+                    if (effect.getIdentifier().equals(identifier) && effect.getDurationTicks() > 0)
+                    {
+                        effect.setTicks(effect.getDurationTicks());
+                        LOGGER.info("Reset active effect: {}", identifier);
+                        return;
+                    }
+                }
+
                 var effect = supplier.create();
                 effect.onStartServer();
 
