@@ -1,0 +1,63 @@
+package com.zickzenni.anarchium.effect;
+
+import com.zickzenni.anarchium.util.LevelTickStage;
+import net.minecraft.resources.Identifier;
+import net.minecraft.server.level.ServerLevel;
+
+public class TimedEffect extends BaseEffect
+{
+    private final int durationTicks;
+
+    private int ticks;
+
+    private boolean ended;
+
+    public TimedEffect(Identifier identifier, int durationTicks)
+    {
+        super(identifier);
+        this.durationTicks = durationTicks;
+        this.ticks = durationTicks;
+    }
+
+    @Override
+    public void onLevelTickServer(ServerLevel level, LevelTickStage stage)
+    {
+        if (stage != LevelTickStage.POST)
+        {
+            return;
+        }
+
+        if (this.ticks > 0)
+        {
+            this.ticks--;
+            return;
+        }
+
+        this.ended = true;
+        this.onEndServer();
+    }
+
+    @Override
+    public boolean hasEnded()
+    {
+        return this.ended;
+    }
+
+    @Override
+    public int getTicks()
+    {
+        return this.ticks;
+    }
+
+    @Override
+    public void setTicks(int ticks)
+    {
+        this.ticks = ticks;
+    }
+
+    @Override
+    public int getDurationTicks()
+    {
+        return this.durationTicks;
+    }
+}

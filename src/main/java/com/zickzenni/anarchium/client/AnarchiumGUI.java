@@ -1,6 +1,5 @@
 package com.zickzenni.anarchium.client;
 
-import com.zickzenni.anarchium.effect.EffectType;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 
@@ -75,16 +74,16 @@ public class AnarchiumGUI
 
         int y = 0;
 
-        for (var instance : ClientEffectManager.getInstances())
+        for (var effect : ClientEffectManager.getEffects())
         {
-            final var name = instance.effect.getIdentifier().toString();
+            final var name = effect.getIdentifier().toString();
             final var textWidth = minecraft.font.width(name);
 
             int textXOffset = 0;
 
-            if (instance.effect.getProperties().getType() == EffectType.TICKED)
+            if (effect.getDurationTicks() > 0)
             {
-                final var progress = (float) instance.ticks / (float) instance.effect.getProperties().getDurationTicks();
+                final var progress = (float) effect.getTicks() / (float) effect.getDurationTicks();
                 final var fillWidth = (int) Math.floor(progress * HISTORY_ITEM_WIDTH);
 
                 /*

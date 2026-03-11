@@ -2,9 +2,7 @@ package com.zickzenni.anarchium.client;
 
 import com.mojang.logging.LogUtils;
 import com.zickzenni.anarchium.effect.Effect;
-import com.zickzenni.anarchium.effect.EffectInstance;
-import com.zickzenni.anarchium.effect.EffectType;
-import com.zickzenni.anarchium.util.Environment;
+import com.zickzenni.anarchium.effect.EffectRegistry;
 import com.zickzenni.anarchium.util.LevelTickStage;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.resources.Identifier;
@@ -18,83 +16,69 @@ public class ClientEffectManager
 {
     private static final Logger LOGGER = LogUtils.getLogger();
 
-    private static final List<EffectInstance> INSTANCES = new ArrayList<>();
+    private static final List<Effect> EFFECTS = new ArrayList<>();
 
-    private ClientEffectManager() {}
+    private ClientEffectManager()
+    {
+    }
 
     /**
      * Executes a tick update for all effects.
      */
     public static void tick(ClientLevel level, LevelTickStage stage)
     {
-        for (var instance : INSTANCES)
+        for (var effects : EFFECTS)
         {
-            if (instance.impl != null)
-            {
-                instance.impl.onLevelTick(level, stage);
-            }
+            effects.onLevelTickClient(level, stage);
         }
     }
 
     /**
      * Creates a new effect instance.
      */
-    public static void createEffect(Effect effect)
+    public static void createEffect(Identifier identifier)
     {
-        /*
-         * Update timers when we already have the same effect running.
-         */
-        for (var instance : INSTANCES)
+        var supplier = EffectRegistry.getSuppliers().get(identifier);
+
+        if (supplier == null)
         {
-            if (!instance.effect.equals(effect))
-            {
-                continue;
-            }
-
-            /*
-             * Indefinite effects do not have a "shared" timer, so we can't really reset it.
-             * Probably implement this some time later.
-             */
-            if (instance.effect.getProperties().getType() == EffectType.INDEFINITE)
-            {
-                return;
-            }
-
-            instance.ticks = instance.effect.getProperties().getDurationTicks();
+            LOGGER.error("Failed to get effect factory: {}", identifier);
             return;
         }
 
-        var impl = effect.createImplInstance(Environment.CLIENT);
-        var instance = new EffectInstance(effect, impl);
+        var effect = supplier.create();
+        effect.onStartClient();
 
-        if (instance.impl != null)
-        {
-            instance.impl.onStart();
-        }
-
-        INSTANCES.add(instance);
+        EFFECTS.add(effect);
     }
 
     public static void removeEffect(Identifier identifier)
     {
-        for (var it = INSTANCES.iterator(); it.hasNext(); )
+        for (var it = EFFECTS.iterator(); it.hasNext(); )
         {
-            var instance = it.next();
+            var effect = it.next();
 
-            if (instance.effect.getIdentifier().equals(identifier))
+            if (effect.getIdentifier().equals(identifier))
             {
-                if (instance.impl != null)
-                {
-                    instance.impl.onEnd();
-                }
-
+                effect.onEndClient();
                 it.remove();
+                break;
             }
         }
     }
 
-    public static List<EffectInstance> getInstances()
+    public static void clear()
     {
-        return Collections.unmodifiableList(INSTANCES);
+        for (var effect : EFFECTS)
+        {
+            effect.onEndClient();
+        }
+
+        EFFECTS.clear();
+    }
+
+    public static List<Effect> getEffects()
+    {
+        return Collections.unmodifiableList(EFFECTS);
     }
 }

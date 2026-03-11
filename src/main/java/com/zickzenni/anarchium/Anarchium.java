@@ -1,7 +1,7 @@
 package com.zickzenni.anarchium;
 
 import com.mojang.logging.LogUtils;
-import com.zickzenni.anarchium.effect.Effect;
+import com.zickzenni.anarchium.effect.EffectRegistry;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
@@ -21,6 +21,6 @@ public class Anarchium
 
     private void commonSetup(final FMLCommonSetupEvent event)
     {
-        Effect.init();
+        EffectRegistry.init();
     }
 }

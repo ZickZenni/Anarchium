@@ -1,6 +1,5 @@
 package com.zickzenni.anarchium.client;
 
-import com.zickzenni.anarchium.effect.EffectRegistry;
 import com.zickzenni.anarchium.network.packets.ActivateEffectPacket;
 import com.zickzenni.anarchium.network.packets.EndEffectPacket;
 import com.zickzenni.anarchium.network.packets.TickEffectPacket;
@@ -29,18 +28,9 @@ public class ClientPayloadHandler
             return;
         }
 
-        var effect = EffectRegistry.get(identifier);
-
-        if (effect == null)
-        {
-            player.connection.disconnect(Component.literal("Failed to find effect " + identifier));
-            AnarchiumClient.LOGGER.error("Failed to find effect {}", identifier);
-            return;
-        }
-
         player.displayClientMessage(Component.literal("Activated effect: " + data.id()), true);
 
-        ClientEffectManager.createEffect(effect);
+        ClientEffectManager.createEffect(identifier);
         AnarchiumClient.getInstance().timerTicks = AnarchiumClient.getInstance().timerDuration;
     }
 
@@ -67,11 +57,11 @@ public class ClientPayloadHandler
             return;
         }
 
-        for (var effect : ClientEffectManager.getInstances())
+        for (var effect : ClientEffectManager.getEffects())
         {
-            if (effect.effect.getIdentifier().equals(identifier))
+            if (effect.getIdentifier().equals(identifier))
             {
-                effect.ticks = data.ticks();
+                effect.setTicks(data.ticks());
                 break;
             }
         }

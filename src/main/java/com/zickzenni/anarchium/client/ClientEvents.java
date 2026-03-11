@@ -56,6 +56,7 @@ public final class ClientEvents
     @SubscribeEvent
     public static void onLoggingOut(ClientPlayerNetworkEvent.LoggingOut event)
     {
+        ClientEffectManager.clear();
         AnarchiumClient.getInstance().timerTicks = 0;
     }
 
