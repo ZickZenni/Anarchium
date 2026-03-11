@@ -4,6 +4,7 @@ import com.zickzenni.anarchium.Anarchium;
 import com.zickzenni.anarchium.client.EffectStates;
 import com.zickzenni.anarchium.effect.EffectSupplier;
 import com.zickzenni.anarchium.effect.TimedEffect;
+import com.zickzenni.anarchium.effect.event.EffectRenderLevelStageEvent;
 import net.minecraft.resources.Identifier;
 
 public class SpinningMobsEffect extends TimedEffect
@@ -31,8 +32,11 @@ public class SpinningMobsEffect extends TimedEffect
     }
 
     @Override
-    public void onAfterLevelRender(float deltaTime)
+    public void onRenderLevel(EffectRenderLevelStageEvent event, float deltaTime)
     {
-        EffectStates.spinningLivingEntityRotation -= 16.4f * deltaTime;
+        if (event.stage() == EffectRenderLevelStageEvent.Stage.AFTER_SKY)
+        {
+            EffectStates.spinningLivingEntityRotation -= 16.4f * deltaTime;
+        }
     }
 }

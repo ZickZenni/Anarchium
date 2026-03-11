@@ -3,6 +3,7 @@ package com.zickzenni.anarchium.client;
 import com.mojang.logging.LogUtils;
 import com.zickzenni.anarchium.effect.Effect;
 import com.zickzenni.anarchium.effect.EffectRegistry;
+import com.zickzenni.anarchium.effect.event.EffectRenderLevelStageEvent;
 import com.zickzenni.anarchium.util.LevelTickStage;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.ClientLevel;
@@ -43,13 +44,13 @@ public class ClientEffectManager
      *
      * @see net.neoforged.neoforge.client.event.RenderLevelStageEvent.AfterLevel
      */
-    public static void sendAfterLevelRender()
+    public static void sendRenderLevelEvent(EffectRenderLevelStageEvent event)
     {
         var deltaTime = Minecraft.getInstance().getDeltaTracker().getRealtimeDeltaTicks();
 
         for (var effects : EFFECTS)
         {
-            effects.onAfterLevelRender(deltaTime);
+            effects.onRenderLevel(event, deltaTime);
         }
     }
 

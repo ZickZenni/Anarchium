@@ -4,9 +4,8 @@ import com.zickzenni.anarchium.Anarchium;
 import com.zickzenni.anarchium.client.EffectStates;
 import com.zickzenni.anarchium.effect.EffectSupplier;
 import com.zickzenni.anarchium.effect.TimedEffect;
-import com.zickzenni.anarchium.util.LevelTickStage;
+import com.zickzenni.anarchium.effect.event.EffectRenderLevelStageEvent;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.resources.Identifier;
 
 public class InvertedFieldOfViewEffect extends TimedEffect
@@ -34,14 +33,12 @@ public class InvertedFieldOfViewEffect extends TimedEffect
     }
 
     @Override
-    public void onLevelTickClient(ClientLevel level, LevelTickStage stage)
+    public void onRenderLevel(EffectRenderLevelStageEvent event, float deltaTime)
     {
-        if (stage == LevelTickStage.PRE)
+        if (event.stage() == EffectRenderLevelStageEvent.Stage.AFTER_SKY)
         {
             EffectStates.customFOV = -Minecraft.getInstance().options.fov().get();
         }
-
-        super.onLevelTickClient(level, stage);
     }
 }
 

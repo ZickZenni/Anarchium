@@ -1,6 +1,7 @@
 package com.zickzenni.anarchium.client;
 
 import com.zickzenni.anarchium.Anarchium;
+import com.zickzenni.anarchium.effect.event.EffectRenderLevelStageEvent;
 import com.zickzenni.anarchium.network.packets.ActivateEffectPacket;
 import com.zickzenni.anarchium.network.packets.EndEffectPacket;
 import com.zickzenni.anarchium.network.packets.TickEffectPacket;
@@ -55,11 +56,129 @@ public final class ClientEvents
         AnarchiumClient.getInstance().processLevelTick((ClientLevel) level, LevelTickStage.POST);
     }
 
+    // ================ RENDER ================
+
+    @SubscribeEvent
+    public static void onAfterSkyRender(RenderLevelStageEvent.AfterSky event)
+    {
+        ClientEffectManager.sendRenderLevelEvent(
+                new EffectRenderLevelStageEvent(
+                        EffectRenderLevelStageEvent.Stage.AFTER_SKY,
+                        event.getLevelRenderer(),
+                        event.getLevelRenderState(),
+                        event.getPoseStack(),
+                        event.getModelViewMatrix(),
+                        event.getRenderableSections()
+                )
+        );
+    }
+
+    @SubscribeEvent
+    public static void onAfterOpaqueBlocksRender(RenderLevelStageEvent.AfterOpaqueBlocks event)
+    {
+        ClientEffectManager.sendRenderLevelEvent(
+                new EffectRenderLevelStageEvent(
+                        EffectRenderLevelStageEvent.Stage.AFTER_OPAQUE_BLOCKS,
+                        event.getLevelRenderer(),
+                        event.getLevelRenderState(),
+                        event.getPoseStack(),
+                        event.getModelViewMatrix(),
+                        event.getRenderableSections()
+                )
+        );
+    }
+
+    @SubscribeEvent
+    public static void onAfterEntitiesRender(RenderLevelStageEvent.AfterEntities event)
+    {
+        ClientEffectManager.sendRenderLevelEvent(
+                new EffectRenderLevelStageEvent(
+                        EffectRenderLevelStageEvent.Stage.AFTER_ENTITIES,
+                        event.getLevelRenderer(),
+                        event.getLevelRenderState(),
+                        event.getPoseStack(),
+                        event.getModelViewMatrix(),
+                        event.getRenderableSections()
+                )
+        );
+    }
+
+    @SubscribeEvent
+    public static void onAfterTranslucentBlocksRender(RenderLevelStageEvent.AfterTranslucentBlocks event)
+    {
+        ClientEffectManager.sendRenderLevelEvent(
+                new EffectRenderLevelStageEvent(
+                        EffectRenderLevelStageEvent.Stage.AFTER_TRANSLUCENT_BLOCKS,
+                        event.getLevelRenderer(),
+                        event.getLevelRenderState(),
+                        event.getPoseStack(),
+                        event.getModelViewMatrix(),
+                        event.getRenderableSections()
+                )
+        );
+    }
+
+    @SubscribeEvent
+    public static void onAfterTripwireBlocksRender(RenderLevelStageEvent.AfterTripwireBlocks event)
+    {
+        ClientEffectManager.sendRenderLevelEvent(
+                new EffectRenderLevelStageEvent(
+                        EffectRenderLevelStageEvent.Stage.AFTER_TRIPWIRE_BLOCKS,
+                        event.getLevelRenderer(),
+                        event.getLevelRenderState(),
+                        event.getPoseStack(),
+                        event.getModelViewMatrix(),
+                        event.getRenderableSections()
+                )
+        );
+    }
+
+    @SubscribeEvent
+    public static void onAfterParticlesRender(RenderLevelStageEvent.AfterParticles event)
+    {
+        ClientEffectManager.sendRenderLevelEvent(
+                new EffectRenderLevelStageEvent(
+                        EffectRenderLevelStageEvent.Stage.AFTER_PARTICLES,
+                        event.getLevelRenderer(),
+                        event.getLevelRenderState(),
+                        event.getPoseStack(),
+                        event.getModelViewMatrix(),
+                        event.getRenderableSections()
+                )
+        );
+    }
+
+    @SubscribeEvent
+    public static void onAfterWeatherRender(RenderLevelStageEvent.AfterWeather event)
+    {
+        ClientEffectManager.sendRenderLevelEvent(
+                new EffectRenderLevelStageEvent(
+                        EffectRenderLevelStageEvent.Stage.AFTER_WEATHER,
+                        event.getLevelRenderer(),
+                        event.getLevelRenderState(),
+                        event.getPoseStack(),
+                        event.getModelViewMatrix(),
+                        event.getRenderableSections()
+                )
+        );
+    }
+
     @SubscribeEvent
     public static void onAfterLevelRender(RenderLevelStageEvent.AfterLevel event)
     {
-        ClientEffectManager.sendAfterLevelRender();
+        ClientEffectManager.sendRenderLevelEvent(
+                new EffectRenderLevelStageEvent(
+                        EffectRenderLevelStageEvent.Stage.AFTER_LEVEL,
+                        event.getLevelRenderer(),
+                        event.getLevelRenderState(),
+                        event.getPoseStack(),
+                        event.getModelViewMatrix(),
+                        event.getRenderableSections()
+                )
+        );
     }
+
+    // ========================================
 
     @SubscribeEvent
     public static void onLoggingOut(ClientPlayerNetworkEvent.LoggingOut event)
