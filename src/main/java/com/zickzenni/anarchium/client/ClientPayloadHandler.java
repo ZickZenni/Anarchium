@@ -5,7 +5,6 @@ import com.zickzenni.anarchium.network.packets.EndEffectPacket;
 import com.zickzenni.anarchium.network.packets.TickEffectPacket;
 import com.zickzenni.anarchium.network.packets.TimerTickPacket;
 import net.minecraft.client.Minecraft;
-import net.minecraft.network.chat.Component;
 import net.minecraft.resources.Identifier;
 import net.neoforged.neoforge.network.handling.IPayloadContext;
 
@@ -27,8 +26,6 @@ public class ClientPayloadHandler
             AnarchiumClient.LOGGER.error("Failed to parse effect identifier {}", data.id());
             return;
         }
-
-        player.displayClientMessage(Component.literal("Activated effect: " + data.id()), true);
 
         ClientEffectManager.createEffect(identifier);
         AnarchiumClient.getInstance().timerTicks = AnarchiumClient.getInstance().timerDuration;
