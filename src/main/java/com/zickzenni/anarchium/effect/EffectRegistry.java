@@ -23,6 +23,7 @@ public class EffectRegistry
         register(InvertedFieldOfViewEffect.ID, InvertedFieldOfViewEffect.SUPPLIER);
         register(SpawnCreepersEffect.ID, SpawnCreepersEffect.SUPPLIER);
         register(SpawnMinecartEffect.ID, SpawnMinecartEffect.SUPPLIER);
+        register(BurnPlayersEffect.ID, BurnPlayersEffect.SUPPLIER);
     }
 
     /**
