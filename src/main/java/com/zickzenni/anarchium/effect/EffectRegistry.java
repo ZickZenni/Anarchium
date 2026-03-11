@@ -1,10 +1,7 @@
 package com.zickzenni.anarchium.effect;
 
 import com.mojang.logging.LogUtils;
-import com.zickzenni.anarchium.effect.impl.FakeTeleportToHeavenEffect;
-import com.zickzenni.anarchium.effect.impl.FlingPlayersEffect;
-import com.zickzenni.anarchium.effect.impl.InvertedFieldOfViewEffect;
-import com.zickzenni.anarchium.effect.impl.ReversedGravityEffect;
+import com.zickzenni.anarchium.effect.impl.*;
 import net.minecraft.resources.Identifier;
 import org.slf4j.Logger;
 
@@ -24,6 +21,7 @@ public class EffectRegistry
         register(FlingPlayersEffect.ID, FlingPlayersEffect.SUPPLIER);
         register(FakeTeleportToHeavenEffect.ID, FakeTeleportToHeavenEffect.SUPPLIER);
         register(InvertedFieldOfViewEffect.ID, InvertedFieldOfViewEffect.SUPPLIER);
+        register(SpawnCreepersEffect.ID, SpawnCreepersEffect.SUPPLIER);
     }
 
     /**
