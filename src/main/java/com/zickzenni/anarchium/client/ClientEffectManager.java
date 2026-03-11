@@ -53,6 +53,14 @@ public class ClientEffectManager
         var effect = supplier.create();
         effect.onStartClient();
 
+        /*
+         * Remove old items when we reached the maximum size.
+         */
+        if (HISTORY.size() >= MAX_HISTORY_SIZE)
+        {
+            HISTORY.removeFirst();
+        }
+
         EFFECTS.add(effect);
     }
 
@@ -70,14 +78,13 @@ public class ClientEffectManager
                 effect.onEndClient();
 
                 /*
-                 * Remove old items when we reached the maxiumum size.
+                 * Prevent showing ticked effects.
                  */
-                if (HISTORY.size() > MAX_HISTORY_SIZE)
+                if (effect.getDurationTicks() == 0)
                 {
-                    HISTORY.removeFirst();
+                    HISTORY.add(effect.getGUIName());
                 }
 
-                HISTORY.add(effect.getGUIName());
                 it.remove();
                 break;
             }
