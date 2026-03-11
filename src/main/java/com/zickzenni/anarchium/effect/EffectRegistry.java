@@ -22,6 +22,7 @@ public class EffectRegistry
         register(FakeTeleportToHeavenEffect.ID, FakeTeleportToHeavenEffect.SUPPLIER);
         register(InvertedFieldOfViewEffect.ID, InvertedFieldOfViewEffect.SUPPLIER);
         register(SpawnCreepersEffect.ID, SpawnCreepersEffect.SUPPLIER);
+        register(SpawnMinecartEffect.ID, SpawnMinecartEffect.SUPPLIER);
     }
 
     /**
