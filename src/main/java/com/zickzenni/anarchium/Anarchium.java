@@ -15,9 +15,10 @@ public class Anarchium
 
     public static final Logger LOGGER = LogUtils.getLogger();
 
-    public Anarchium(IEventBus eventBus)
+    public Anarchium(IEventBus bus)
     {
-        eventBus.addListener(this::commonSetup);
+        AnarchiumSounds.SOUND_EVENTS.register(bus);
+        bus.addListener(this::commonSetup);
     }
 
     private void commonSetup(final FMLCommonSetupEvent event)
