@@ -1,4 +1,4 @@
-package com.zickzenni.anarchium.effect.test;
+package com.zickzenni.anarchium.effect.impl;
 
 import com.zickzenni.anarchium.Anarchium;
 import com.zickzenni.anarchium.effect.EffectSupplier;

@@ -1,8 +1,8 @@
 package com.zickzenni.anarchium.effect;
 
 import com.mojang.logging.LogUtils;
-import com.zickzenni.anarchium.effect.test.FlingPlayersEffect;
-import com.zickzenni.anarchium.effect.test.ReversedGravityEffect;
+import com.zickzenni.anarchium.effect.impl.FlingPlayersEffect;
+import com.zickzenni.anarchium.effect.impl.ReversedGravityEffect;
 import net.minecraft.resources.Identifier;
 import org.slf4j.Logger;
 
