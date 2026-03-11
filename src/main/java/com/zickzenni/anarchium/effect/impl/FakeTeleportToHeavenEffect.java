@@ -14,9 +14,9 @@ import net.neoforged.neoforge.server.ServerLifecycleHooks;
 import java.util.HashMap;
 import java.util.Map;
 
-public class FakeTeleportToHeaven extends InstantEffect
+public class FakeTeleportToHeavenEffect extends InstantEffect
 {
-    public static final EffectSupplier<FakeTeleportToHeaven> SUPPLIER = FakeTeleportToHeaven::new;
+    public static final EffectSupplier<FakeTeleportToHeavenEffect> SUPPLIER = FakeTeleportToHeavenEffect::new;
 
     public static final Identifier ID = Identifier.fromNamespaceAndPath(Anarchium.MODID, "fake_teleport_to_heaven");
 
@@ -26,7 +26,7 @@ public class FakeTeleportToHeaven extends InstantEffect
 
     private int ticks;
 
-    public FakeTeleportToHeaven()
+    public FakeTeleportToHeavenEffect()
     {
         super(ID);
         this.positions = new HashMap<>();
