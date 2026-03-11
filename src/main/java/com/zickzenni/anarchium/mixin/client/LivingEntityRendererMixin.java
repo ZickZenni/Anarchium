@@ -25,5 +25,9 @@ public class LivingEntityRendererMixin
             poseStack.scale(2, 1, 1);
             poseStack.mulPose(Axis.YP.rotationDegrees(-rotation));
         }
+
+        if (EffectStates.enableSpinningLivingEntities) {
+            poseStack.mulPose(Axis.YP.rotationDegrees(EffectStates.spinningLivingEntityRotation));
+        }
     }
 }

@@ -31,11 +31,17 @@ public interface Effect
     {
     }
 
+    default void onAfterLevelRender(float deltaTime)
+    {
+    }
+
     boolean hasEnded();
 
     int getTicks();
 
-    default void setTicks(int ticks) {}
+    default void setTicks(int ticks)
+    {
+    }
 
     int getDurationTicks();
 

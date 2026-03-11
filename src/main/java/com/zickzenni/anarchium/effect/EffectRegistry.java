@@ -26,6 +26,7 @@ public class EffectRegistry
         register(BurnPlayersEffect.ID, BurnPlayersEffect.SUPPLIER);
         register(WideMobsEffect.ID, WideMobsEffect.SUPPLIER);
         register(LargeEntitiesEffect.ID, LargeEntitiesEffect.SUPPLIER);
+        register(SpinningMobsEffect.ID, SpinningMobsEffect.SUPPLIER);
     }
 
     /**

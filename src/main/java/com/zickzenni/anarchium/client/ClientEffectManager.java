@@ -4,6 +4,7 @@ import com.mojang.logging.LogUtils;
 import com.zickzenni.anarchium.effect.Effect;
 import com.zickzenni.anarchium.effect.EffectRegistry;
 import com.zickzenni.anarchium.util.LevelTickStage;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.resources.Identifier;
 import org.slf4j.Logger;
@@ -34,6 +35,21 @@ public class ClientEffectManager
         for (var effects : EFFECTS)
         {
             effects.onLevelTickClient(level, stage);
+        }
+    }
+
+    /**
+     * Sends an "after level render" event to all effects.
+     *
+     * @see net.neoforged.neoforge.client.event.RenderLevelStageEvent.AfterLevel
+     */
+    public static void sendAfterLevelRender()
+    {
+        var deltaTime = Minecraft.getInstance().getDeltaTracker().getRealtimeDeltaTicks();
+
+        for (var effects : EFFECTS)
+        {
+            effects.onAfterLevelRender(deltaTime);
         }
     }
 
