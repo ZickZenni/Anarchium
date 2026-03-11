@@ -29,7 +29,12 @@ public class FlingPlayersEffect extends InstantEffect
 
         for (var player : server.getPlayerList().getPlayers())
         {
-            player.setDeltaMovement(0, 1.5, 0);
+            var random = player.getRandom();
+            var x = (random.nextDouble() * 2) - 1;
+            var y = random.nextDouble() * 1.75;
+            var z = (random.nextDouble() * 2) - 1;
+
+            player.setDeltaMovement(x, y, z);
             player.hurtMarked = true;
         }
     }
