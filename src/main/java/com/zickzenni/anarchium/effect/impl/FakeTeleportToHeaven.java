@@ -4,6 +4,7 @@ import com.zickzenni.anarchium.Anarchium;
 import com.zickzenni.anarchium.effect.EffectSupplier;
 import com.zickzenni.anarchium.effect.InstantEffect;
 import com.zickzenni.anarchium.util.LevelTickStage;
+import net.minecraft.network.chat.Component;
 import net.minecraft.resources.Identifier;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
@@ -111,6 +112,11 @@ public class FakeTeleportToHeaven extends InstantEffect
     @Override
     public String getGUIName()
     {
-        return this.trolled ? "Fake Teleport to Heaven" : "Teleport to Heaven";
+        if (!this.trolled)
+        {
+            return Component.translatable("anarchium.teleport_to_heaven").getString();
+        }
+
+        return super.getGUIName();
     }
 }
