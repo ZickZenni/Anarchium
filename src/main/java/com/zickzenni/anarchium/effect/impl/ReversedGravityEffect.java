@@ -17,7 +17,7 @@ public class ReversedGravityEffect extends TimedEffect
 
     public ReversedGravityEffect()
     {
-        super(ID, 60);
+        super(ID, 220);
     }
 
     @Override
@@ -37,7 +37,7 @@ public class ReversedGravityEffect extends TimedEffect
                 }
 
                 var deltaMovement = entity.getDeltaMovement();
-                entity.setDeltaMovement(deltaMovement.x, gravity * 2, deltaMovement.z);
+                entity.setDeltaMovement(deltaMovement.x, gravity, deltaMovement.z);
             }
         }
 
@@ -64,7 +64,7 @@ public class ReversedGravityEffect extends TimedEffect
             }
 
             var deltaMovement = player.getDeltaMovement();
-            player.setDeltaMovement(deltaMovement.x, gravity * 2, deltaMovement.z);
+            player.setDeltaMovement(deltaMovement.x, gravity, deltaMovement.z);
         }
 
         super.onLevelTickClient(level, stage);
