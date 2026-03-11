@@ -11,7 +11,7 @@ public class AnarchiumGUI
 
     private static final int HISTORY_ITEM_WIDTH = 32;
 
-    private static final int HISTORY_ITEM_HEIGHT = 10;
+    private static final int HISTORY_ITEM_HEIGHT = 8;
 
     private static final int BACKGROUND_COLOR = 0x80000000;
 
