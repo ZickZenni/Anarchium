@@ -16,4 +16,10 @@ public abstract class BaseEffect implements Effect
     {
         return this.identifier;
     }
+
+    @Override
+    public String getGUIName()
+    {
+        return this.identifier.toString();
+    }
 }

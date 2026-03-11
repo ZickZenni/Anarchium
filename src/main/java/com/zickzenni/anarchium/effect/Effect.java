@@ -41,4 +41,5 @@ public interface Effect
 
     Identifier getIdentifier();
 
+    String getGUIName();
 }

@@ -76,7 +76,7 @@ public class AnarchiumGUI
 
         for (var effect : ClientEffectManager.getEffects())
         {
-            final var name = effect.getIdentifier().toString();
+            final var name = effect.getGUIName();
             final var textWidth = minecraft.font.width(name);
 
             int textXOffset = 0;
