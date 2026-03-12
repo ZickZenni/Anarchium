@@ -30,6 +30,7 @@ public class EffectRegistry
         register(ZeusEffect.ID, ZeusEffect.SUPPLIER);
         register(HoppingEffect.ID, HoppingEffect.SUPPLIER);
         register(ReplaceEverySoundWithVillagersEffect.ID, ReplaceEverySoundWithVillagersEffect.SUPPLIER);
+        register(SuicideEffect.ID, SuicideEffect.SUPPLIER);
     }
 
     /**
