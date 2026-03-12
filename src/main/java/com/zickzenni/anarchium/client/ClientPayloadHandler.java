@@ -1,6 +1,5 @@
 package com.zickzenni.anarchium.client;
 
-import com.zickzenni.anarchium.AnarchiumSounds;
 import com.zickzenni.anarchium.network.packets.ActivateEffectPacket;
 import com.zickzenni.anarchium.network.packets.EndEffectPacket;
 import com.zickzenni.anarchium.network.packets.TickEffectPacket;
@@ -28,8 +27,13 @@ public class ClientPayloadHandler
             return;
         }
 
-        player.playSound(AnarchiumSounds.DISPATCH_EFFECT_SOUND.value(), 1.0f, 1.0f);
-        ClientEffectManager.createEffect(location);
+        var effect = ClientEffectManager.createEffect(location);
+
+        if (effect != null)
+        {
+            player.playSound(effect.getDispatchSound().value(), 1.0f, 1.0f);
+        }
+
         AnarchiumClient.getInstance().timerTicks = AnarchiumClient.getInstance().timerDuration;
     }
 

@@ -8,6 +8,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.resources.ResourceLocation;
 import net.neoforged.neoforge.client.event.RenderLevelStageEvent;
+import org.jetbrains.annotations.Nullable;
 import org.slf4j.Logger;
 
 import java.util.ArrayList;
@@ -57,14 +58,14 @@ public class ClientEffectManager
     /**
      * Creates a new effect.
      */
-    public static void createEffect(ResourceLocation location)
+    public static @Nullable Effect createEffect(ResourceLocation location)
     {
         var supplier = EffectRegistry.getSuppliers().get(location);
 
         if (supplier == null)
         {
             LOGGER.error("Failed to get effect factory: {}", location);
-            return;
+            return null;
         }
 
         var effect = supplier.create();
@@ -79,6 +80,7 @@ public class ClientEffectManager
         }
 
         EFFECTS.add(effect);
+        return effect;
     }
 
     /**

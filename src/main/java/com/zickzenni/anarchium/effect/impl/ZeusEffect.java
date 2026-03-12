@@ -1,12 +1,15 @@
 package com.zickzenni.anarchium.effect.impl;
 
 import com.zickzenni.anarchium.Anarchium;
+import com.zickzenni.anarchium.AnarchiumSounds;
 import com.zickzenni.anarchium.effect.EffectSupplier;
 import com.zickzenni.anarchium.effect.InstantEffect;
 import com.zickzenni.anarchium.util.LevelTickStage;
+import net.minecraft.core.Holder;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobSpawnType;
 import net.neoforged.neoforge.server.ServerLifecycleHooks;
@@ -24,7 +27,7 @@ public class ZeusEffect extends InstantEffect
     public ZeusEffect()
     {
         super(ID);
-        this.ticks = 100;
+        this.ticks = 80;
     }
 
     @Override
@@ -83,5 +86,11 @@ public class ZeusEffect extends InstantEffect
         }
 
         return super.getGUIName();
+    }
+
+    @Override
+    public Holder<SoundEvent> getDispatchSound()
+    {
+        return AnarchiumSounds.ZEUS_EFFECT_SOUND;
     }
 }

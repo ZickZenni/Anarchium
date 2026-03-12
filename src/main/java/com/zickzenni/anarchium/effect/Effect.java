@@ -2,8 +2,10 @@ package com.zickzenni.anarchium.effect;
 
 import com.zickzenni.anarchium.util.LevelTickStage;
 import net.minecraft.client.multiplayer.ClientLevel;
+import net.minecraft.core.Holder;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.sounds.SoundEvent;
 import net.neoforged.neoforge.client.event.RenderLevelStageEvent;
 
 public interface Effect
@@ -49,4 +51,6 @@ public interface Effect
     ResourceLocation getLocation();
 
     String getGUIName();
+
+    Holder<SoundEvent> getDispatchSound();
 }

@@ -3,5 +3,10 @@
     "sounds": [
       "anarchium:dispatch_effect"
     ]
+  },
+  "zeus_effect": {
+    "sounds": [
+      "anarchium:effects/zeus"
+    ]
   }
 }
