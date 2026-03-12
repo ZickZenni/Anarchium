@@ -9,7 +9,7 @@
     "client.EntityRenderDispatcherMixin",
     "client.EntityRendererMixin",
     "client.LivingEntityRendererMixin",
-    "client.SoundInstanceMixin"
+    "client.SoundEngineMixin"
   ],
   "injectors": {
     "defaultRequire": 1

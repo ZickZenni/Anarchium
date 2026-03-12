@@ -13,7 +13,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.ModifyVariable;
 
 @Mixin(SoundEngine.class)
-public class SoundInstanceMixin
+public class SoundEngineMixin
 {
     @Unique
     private static final RandomSource anarchium$random = RandomSource.create();
