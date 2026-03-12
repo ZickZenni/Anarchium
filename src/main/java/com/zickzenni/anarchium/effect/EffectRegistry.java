@@ -31,6 +31,8 @@ public class EffectRegistry
         register(HoppingEffect.ID, HoppingEffect.SUPPLIER);
         register(ReplaceEverySoundWithVillagersEffect.ID, ReplaceEverySoundWithVillagersEffect.SUPPLIER);
         register(SuicideEffect.ID, SuicideEffect.SUPPLIER);
+        register(TeleportToHeavenEffect.ID, TeleportToHeavenEffect.SUPPLIER);
+        register(TeleportToVoidEffect.ID, TeleportToVoidEffect.SUPPLIER);
     }
 
     /**

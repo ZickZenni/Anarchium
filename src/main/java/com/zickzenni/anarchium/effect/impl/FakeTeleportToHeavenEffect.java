@@ -50,7 +50,7 @@ public class FakeTeleportToHeavenEffect extends InstantEffect
             positions.put(player.getUUID().toString(), position);
 
             player.setDeltaMovement(0, 0, 0);
-            player.teleportTo(position.x, 850, position.z);
+            player.teleportTo(position.x, TeleportToHeavenEffect.HEIGHT, position.z);
             player.hurtMarked = true;
         }
     }
