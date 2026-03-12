@@ -5,6 +5,7 @@ import com.mojang.math.Axis;
 import com.zickzenni.anarchium.client.EffectStates;
 import net.minecraft.client.renderer.SubmitNodeCollector;
 import net.minecraft.client.renderer.entity.LivingEntityRenderer;
+import net.minecraft.client.renderer.entity.state.AvatarRenderState;
 import net.minecraft.client.renderer.entity.state.LivingEntityRenderState;
 import net.minecraft.client.renderer.state.CameraRenderState;
 import org.spongepowered.asm.mixin.Mixin;
@@ -18,7 +19,9 @@ public class LivingEntityRendererMixin
     @Inject(at = @At(value = "INVOKE", target = "Lcom/mojang/blaze3d/vertex/PoseStack;pushPose()V"), method = "submit(Lnet/minecraft/client/renderer/entity/state/LivingEntityRenderState;Lcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/SubmitNodeCollector;Lnet/minecraft/client/renderer/state/CameraRenderState;)V")
     public <S extends LivingEntityRenderState> void submit(S renderState, PoseStack poseStack, SubmitNodeCollector nodeCollector, CameraRenderState cameraRenderState, CallbackInfo ci)
     {
-        if (EffectStates.enableWideLivingEntities)
+        var isPlayer = renderState instanceof AvatarRenderState;
+
+        if (EffectStates.enableWideLivingEntities && !isPlayer)
         {
             var rotation = 180.0F - renderState.bodyRot;
             poseStack.mulPose(Axis.YP.rotationDegrees(rotation));
@@ -26,7 +29,7 @@ public class LivingEntityRendererMixin
             poseStack.mulPose(Axis.YP.rotationDegrees(-rotation));
         }
 
-        if (EffectStates.enableSpinningLivingEntities) {
+        if (EffectStates.enableSpinningLivingEntities && !isPlayer) {
             poseStack.mulPose(Axis.YP.rotationDegrees(EffectStates.spinningLivingEntityRotation));
         }
     }
