@@ -1,0 +1,36 @@
+package com.zickzenni.anarchium.effect.impl;
+
+import com.zickzenni.anarchium.Anarchium;
+import com.zickzenni.anarchium.effect.EffectSupplier;
+import com.zickzenni.anarchium.effect.TimedEffect;
+import com.zickzenni.anarchium.util.LevelTickStage;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.multiplayer.ClientLevel;
+import net.minecraft.resources.Identifier;
+
+public class HoppingEffect extends TimedEffect
+{
+    public static final EffectSupplier<HoppingEffect> SUPPLIER = HoppingEffect::new;
+
+    public static final Identifier ID = Anarchium.identifier("hopping");
+
+    public HoppingEffect()
+    {
+        super(ID, 20 * 27);
+    }
+
+    @Override
+    public void onLevelTickClient(ClientLevel level, LevelTickStage stage)
+    {
+        if (stage == LevelTickStage.PRE)
+        {
+            var player = Minecraft.getInstance().player;
+
+            if (player != null && player.onGround())
+            {
+                player.jumpFromGround();;
+            }
+        }
+        super.onLevelTickClient(level, stage);
+    }
+}
