@@ -27,6 +27,7 @@ public class EffectRegistry
         register(WideMobsEffect.ID, WideMobsEffect.SUPPLIER);
         register(LargeEntitiesEffect.ID, LargeEntitiesEffect.SUPPLIER);
         register(SpinningMobsEffect.ID, SpinningMobsEffect.SUPPLIER);
+        register(ZeusEffect.ID, ZeusEffect.SUPPLIER);
     }
 
     /**
