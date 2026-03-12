@@ -4,9 +4,9 @@ import com.mojang.logging.LogUtils;
 import com.zickzenni.anarchium.Anarchium;
 import com.zickzenni.anarchium.effect.EffectSupplier;
 import com.zickzenni.anarchium.effect.InstantEffect;
-import net.minecraft.resources.Identifier;
-import net.minecraft.world.entity.EntitySpawnReason;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.MobSpawnType;
 import net.neoforged.neoforge.server.ServerLifecycleHooks;
 import org.slf4j.Logger;
 
@@ -16,7 +16,7 @@ public class SpawnMinecartEffect extends InstantEffect
 
     public static final EffectSupplier<SpawnMinecartEffect> SUPPLIER = SpawnMinecartEffect::new;
 
-    public static final Identifier ID = Anarchium.identifier("spawn_minecart");
+    public static final ResourceLocation ID = Anarchium.location("spawn_minecart");
 
     public SpawnMinecartEffect()
     {
@@ -40,7 +40,7 @@ public class SpawnMinecartEffect extends InstantEffect
                 continue;
             }
 
-            var minecart = EntityType.MINECART.spawn(player.level(), player.blockPosition(), EntitySpawnReason.NATURAL);
+            var minecart = EntityType.MINECART.spawn(player.serverLevel(), player.blockPosition(), MobSpawnType.NATURAL);
 
             if (minecart == null)
             {

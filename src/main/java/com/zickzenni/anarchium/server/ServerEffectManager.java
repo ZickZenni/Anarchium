@@ -7,7 +7,7 @@ import com.zickzenni.anarchium.network.packets.EndEffectPacket;
 import com.zickzenni.anarchium.network.packets.TickEffectPacket;
 import com.zickzenni.anarchium.network.packets.TimerTickPacket;
 import com.zickzenni.anarchium.util.LevelTickStage;
-import net.minecraft.resources.Identifier;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.neoforged.neoforge.network.PacketDistributor;
 import org.slf4j.Logger;
@@ -52,11 +52,11 @@ public class ServerEffectManager
                 if (!effect.hasEnded())
                 {
                     effect.onLevelTickServer(level, stage);
-                    PacketDistributor.sendToAllPlayers(new TickEffectPacket(effect.getIdentifier().toString(), effect.getTicks()));
+                    PacketDistributor.sendToAllPlayers(new TickEffectPacket(effect.getLocation().toString(), effect.getTicks()));
                 } else
                 {
                     it.remove();
-                    PacketDistributor.sendToAllPlayers(new EndEffectPacket(effect.getIdentifier().toString()));
+                    PacketDistributor.sendToAllPlayers(new EndEffectPacket(effect.getLocation().toString()));
                 }
             }
 
@@ -68,15 +68,15 @@ public class ServerEffectManager
                 timerTicks = TIMER_DURATION;
 
                 var registry = EffectRegistry.getSuppliers();
-                var identifier = registry.keySet().toArray(Identifier[]::new)[new Random().nextInt(registry.size())];
-                var supplier = registry.get(identifier);
+                var location = registry.keySet().toArray(ResourceLocation[]::new)[new Random().nextInt(registry.size())];
+                var supplier = registry.get(location);
 
                 for (var effect : EFFECTS)
                 {
-                    if (effect.getIdentifier().equals(identifier) && effect.getDurationTicks() > 0)
+                    if (effect.getLocation().equals(location) && effect.getDurationTicks() > 0)
                     {
                         effect.setTicks(effect.getDurationTicks());
-                        LOGGER.info("Reset active effect: {}", identifier);
+                        LOGGER.info("Reset active effect: {}", location);
                         return;
                     }
                 }
@@ -84,9 +84,9 @@ public class ServerEffectManager
                 var effect = supplier.create();
                 effect.onStartServer();
 
-                LOGGER.info("Picked new effect: {}", identifier);
+                LOGGER.info("Picked new effect: {}", location);
                 EFFECTS.add(effect);
-                PacketDistributor.sendToAllPlayers(new ActivateEffectPacket(identifier.toString()));
+                PacketDistributor.sendToAllPlayers(new ActivateEffectPacket(location.toString()));
             }
 
             /*

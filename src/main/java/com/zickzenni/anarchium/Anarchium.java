@@ -2,7 +2,7 @@ package com.zickzenni.anarchium;
 
 import com.mojang.logging.LogUtils;
 import com.zickzenni.anarchium.effect.EffectRegistry;
-import net.minecraft.resources.Identifier;
+import net.minecraft.resources.ResourceLocation;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
@@ -27,10 +27,10 @@ public class Anarchium
     }
 
     /**
-     * Creates an identifier using Anarchium's mod id as the namespace and a given path.
+     * Creates a location using Anarchium's mod id as the namespace and a given path.
      */
-    public static Identifier identifier(String path)
+    public static ResourceLocation location(String path)
     {
-        return Identifier.fromNamespaceAndPath(MODID, path);
+        return ResourceLocation.fromNamespaceAndPath(MODID, path);
     }
 }

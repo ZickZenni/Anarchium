@@ -3,11 +3,11 @@ package com.zickzenni.anarchium.client;
 import com.mojang.logging.LogUtils;
 import com.zickzenni.anarchium.effect.Effect;
 import com.zickzenni.anarchium.effect.EffectRegistry;
-import com.zickzenni.anarchium.effect.event.EffectRenderLevelStageEvent;
 import com.zickzenni.anarchium.util.LevelTickStage;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.ClientLevel;
-import net.minecraft.resources.Identifier;
+import net.minecraft.resources.ResourceLocation;
+import net.neoforged.neoforge.client.event.RenderLevelStageEvent;
 import org.slf4j.Logger;
 
 import java.util.ArrayList;
@@ -40,13 +40,13 @@ public class ClientEffectManager
     }
 
     /**
-     * Sends an "after level render" event to all effects.
+     * Sends an "level stage render" event to all effects.
      *
-     * @see net.neoforged.neoforge.client.event.RenderLevelStageEvent.AfterLevel
+     * @see net.neoforged.neoforge.client.event.RenderLevelStageEvent
      */
-    public static void sendRenderLevelEvent(EffectRenderLevelStageEvent event)
+    public static void sendRenderLevelStageEvent(RenderLevelStageEvent event)
     {
-        var deltaTime = Minecraft.getInstance().getDeltaTracker().getRealtimeDeltaTicks();
+        var deltaTime = Minecraft.getInstance().getTimer().getRealtimeDeltaTicks();
 
         for (var effects : EFFECTS)
         {
@@ -57,13 +57,13 @@ public class ClientEffectManager
     /**
      * Creates a new effect.
      */
-    public static void createEffect(Identifier identifier)
+    public static void createEffect(ResourceLocation location)
     {
-        var supplier = EffectRegistry.getSuppliers().get(identifier);
+        var supplier = EffectRegistry.getSuppliers().get(location);
 
         if (supplier == null)
         {
-            LOGGER.error("Failed to get effect factory: {}", identifier);
+            LOGGER.error("Failed to get effect factory: {}", location);
             return;
         }
 
@@ -84,13 +84,13 @@ public class ClientEffectManager
     /**
      * Removes an active effect.
      */
-    public static void removeEffect(Identifier identifier)
+    public static void removeEffect(ResourceLocation location)
     {
         for (var it = EFFECTS.iterator(); it.hasNext(); )
         {
             var effect = it.next();
 
-            if (effect.getIdentifier().equals(identifier))
+            if (effect.getLocation().equals(location))
             {
                 effect.onEndClient();
 

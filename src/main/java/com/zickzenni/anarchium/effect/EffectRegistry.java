@@ -2,7 +2,7 @@ package com.zickzenni.anarchium.effect;
 
 import com.mojang.logging.LogUtils;
 import com.zickzenni.anarchium.effect.impl.*;
-import net.minecraft.resources.Identifier;
+import net.minecraft.resources.ResourceLocation;
 import org.slf4j.Logger;
 
 import java.util.Collections;
@@ -13,7 +13,7 @@ public class EffectRegistry
 {
     private static final Logger LOGGER = LogUtils.getLogger();
 
-    private static final Map<Identifier, EffectSupplier<?>> SUPPLIERS = new HashMap<>();
+    private static final Map<ResourceLocation, EffectSupplier<?>> SUPPLIERS = new HashMap<>();
 
     public static void init()
     {
@@ -34,18 +34,18 @@ public class EffectRegistry
     /**
      * Registers a new effect.
      */
-    private static <T extends Effect> void register(Identifier identifier, EffectSupplier<T> factory)
+    private static <T extends Effect> void register(ResourceLocation location, EffectSupplier<T> factory)
     {
-        if (SUPPLIERS.containsKey(identifier))
+        if (SUPPLIERS.containsKey(location))
         {
-            throw new IllegalStateException("Effect already registered: " + identifier);
+            throw new IllegalStateException("Effect already registered: " + location);
         }
 
-        SUPPLIERS.put(identifier, factory);
-        LOGGER.info("Registering new effect: {}", identifier);
+        SUPPLIERS.put(location, factory);
+        LOGGER.info("Registering new effect: {}", location);
     }
 
-    public static Map<Identifier, EffectSupplier<?>> getSuppliers()
+    public static Map<ResourceLocation, EffectSupplier<?>> getSuppliers()
     {
         return Collections.unmodifiableMap(SUPPLIERS);
     }

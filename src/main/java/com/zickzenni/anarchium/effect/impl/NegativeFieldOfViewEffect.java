@@ -4,15 +4,15 @@ import com.zickzenni.anarchium.Anarchium;
 import com.zickzenni.anarchium.client.EffectStates;
 import com.zickzenni.anarchium.effect.EffectSupplier;
 import com.zickzenni.anarchium.effect.TimedEffect;
-import com.zickzenni.anarchium.effect.event.EffectRenderLevelStageEvent;
 import net.minecraft.client.Minecraft;
-import net.minecraft.resources.Identifier;
+import net.minecraft.resources.ResourceLocation;
+import net.neoforged.neoforge.client.event.RenderLevelStageEvent;
 
 public class NegativeFieldOfViewEffect extends TimedEffect
 {
     public static final EffectSupplier<NegativeFieldOfViewEffect> SUPPLIER = NegativeFieldOfViewEffect::new;
 
-    public static final Identifier ID = Anarchium.identifier("negative_field_of_view");
+    public static final ResourceLocation ID = Anarchium.location("negative_field_of_view");
 
     public NegativeFieldOfViewEffect()
     {
@@ -33,9 +33,9 @@ public class NegativeFieldOfViewEffect extends TimedEffect
     }
 
     @Override
-    public void onRenderLevel(EffectRenderLevelStageEvent event, float deltaTime)
+    public void onRenderLevel(RenderLevelStageEvent event, float deltaTime)
     {
-        if (event.stage() == EffectRenderLevelStageEvent.Stage.AFTER_SKY)
+        if (event.getStage() == RenderLevelStageEvent.Stage.AFTER_SKY)
         {
             EffectStates.customFOV = -Minecraft.getInstance().options.fov().get();
         }

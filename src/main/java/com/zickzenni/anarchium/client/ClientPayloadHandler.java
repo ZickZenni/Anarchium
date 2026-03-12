@@ -6,7 +6,7 @@ import com.zickzenni.anarchium.network.packets.EndEffectPacket;
 import com.zickzenni.anarchium.network.packets.TickEffectPacket;
 import com.zickzenni.anarchium.network.packets.TimerTickPacket;
 import net.minecraft.client.Minecraft;
-import net.minecraft.resources.Identifier;
+import net.minecraft.resources.ResourceLocation;
 import net.neoforged.neoforge.network.handling.IPayloadContext;
 
 public class ClientPayloadHandler
@@ -20,45 +20,45 @@ public class ClientPayloadHandler
             return;
         }
 
-        var identifier = Identifier.tryParse(data.id());
+        var location = ResourceLocation.tryParse(data.id());
 
-        if (identifier == null)
+        if (location == null)
         {
-            AnarchiumClient.LOGGER.error("Failed to parse effect identifier {}", data.id());
+            AnarchiumClient.LOGGER.error("Failed to parse effect location {}", data.id());
             return;
         }
 
         player.playSound(AnarchiumSounds.DISPATCH_EFFECT_SOUND.value(), 1.0f, 1.0f);
-        ClientEffectManager.createEffect(identifier);
+        ClientEffectManager.createEffect(location);
         AnarchiumClient.getInstance().timerTicks = AnarchiumClient.getInstance().timerDuration;
     }
 
     public static void handleEndEffect(final EndEffectPacket data, final IPayloadContext ignoredCtx)
     {
-        var identifier = Identifier.tryParse(data.id());
+        var location = ResourceLocation.tryParse(data.id());
 
-        if (identifier == null)
+        if (location == null)
         {
-            AnarchiumClient.LOGGER.error("Failed to parse effect identifier {}", data.id());
+            AnarchiumClient.LOGGER.error("Failed to parse effect location {}", data.id());
             return;
         }
 
-        ClientEffectManager.removeEffect(identifier);
+        ClientEffectManager.removeEffect(location);
     }
 
     public static void handleTickEffect(final TickEffectPacket data, IPayloadContext ignoredCtx)
     {
-        var identifier = Identifier.tryParse(data.id());
+        var location = ResourceLocation.tryParse(data.id());
 
-        if (identifier == null)
+        if (location == null)
         {
-            AnarchiumClient.LOGGER.error("Failed to parse effect identifier {}", data.id());
+            AnarchiumClient.LOGGER.error("Failed to parse effect location {}", data.id());
             return;
         }
 
         for (var effect : ClientEffectManager.getEffects())
         {
-            if (effect.getIdentifier().equals(identifier))
+            if (effect.getLocation().equals(location))
             {
                 effect.setTicks(data.ticks());
                 break;

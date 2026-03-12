@@ -28,7 +28,7 @@ public final class ServerEvents
     {
         var level = event.getLevel();
 
-        if (level.isClientSide() || !level.dimension().identifier().getPath().equals("overworld"))
+        if (level.isClientSide() || !level.dimension().location().getPath().equals("overworld"))
         {
             return;
         }

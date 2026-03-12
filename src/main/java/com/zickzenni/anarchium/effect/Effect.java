@@ -1,10 +1,10 @@
 package com.zickzenni.anarchium.effect;
 
-import com.zickzenni.anarchium.effect.event.EffectRenderLevelStageEvent;
 import com.zickzenni.anarchium.util.LevelTickStage;
 import net.minecraft.client.multiplayer.ClientLevel;
-import net.minecraft.resources.Identifier;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
+import net.neoforged.neoforge.client.event.RenderLevelStageEvent;
 
 public interface Effect
 {
@@ -32,7 +32,7 @@ public interface Effect
     {
     }
 
-    default void onRenderLevel(EffectRenderLevelStageEvent event, float deltaTime)
+    default void onRenderLevel(RenderLevelStageEvent event, float deltaTime)
     {
     }
 
@@ -46,7 +46,7 @@ public interface Effect
 
     int getDurationTicks();
 
-    Identifier getIdentifier();
+    ResourceLocation getLocation();
 
     String getGUIName();
 }

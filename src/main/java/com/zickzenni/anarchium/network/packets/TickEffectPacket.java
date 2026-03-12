@@ -5,12 +5,11 @@ import io.netty.buffer.ByteBuf;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
-import net.minecraft.resources.Identifier;
 import org.jspecify.annotations.NonNull;
 
 public record TickEffectPacket(String id, int ticks) implements CustomPacketPayload
 {
-    public static final Type<TickEffectPacket> TYPE = new Type<>(Identifier.fromNamespaceAndPath(Anarchium.MODID, "tick_effect"));
+    public static final Type<TickEffectPacket> TYPE = new Type<>(Anarchium.location("tick_effect"));
 
     public static final StreamCodec<ByteBuf, TickEffectPacket> STREAM_CODEC = StreamCodec.composite(
             ByteBufCodecs.STRING_UTF8,

@@ -1,34 +1,34 @@
 package com.zickzenni.anarchium.effect;
 
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.Identifier;
+import net.minecraft.resources.ResourceLocation;
 
 public abstract class BaseEffect implements Effect
 {
-    protected final Identifier identifier;
+    protected final ResourceLocation location;
 
-    public BaseEffect(Identifier identifier)
+    public BaseEffect(ResourceLocation location)
     {
-        this.identifier = identifier;
+        this.location = location;
     }
 
     @Override
-    public Identifier getIdentifier()
+    public ResourceLocation getLocation()
     {
-        return this.identifier;
+        return this.location;
     }
 
     @Override
     public String getGUIName()
     {
-        return Component.translatable(getTranslationKey(this.identifier)).getString();
+        return Component.translatable(getTranslationKey(this.location)).getString();
     }
 
     /**
-     * Gets the translation key for the given identifier.
+     * Gets the translation key for the given location.
      */
-    protected static String getTranslationKey(Identifier identifier)
+    protected static String getTranslationKey(ResourceLocation location)
     {
-        return identifier.getNamespace() + "." + identifier.getPath();
+        return location.getNamespace() + "." + location.getPath();
     }
 }

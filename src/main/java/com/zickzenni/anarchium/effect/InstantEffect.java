@@ -1,12 +1,12 @@
 package com.zickzenni.anarchium.effect;
 
-import net.minecraft.resources.Identifier;
+import net.minecraft.resources.ResourceLocation;
 
 public class InstantEffect extends BaseEffect
 {
-    public InstantEffect(Identifier identifier)
+    public InstantEffect(ResourceLocation location)
     {
-        super(identifier);
+        super(location);
     }
 
     @Override

@@ -4,14 +4,14 @@ import com.zickzenni.anarchium.Anarchium;
 import com.zickzenni.anarchium.client.EffectStates;
 import com.zickzenni.anarchium.effect.EffectSupplier;
 import com.zickzenni.anarchium.effect.TimedEffect;
-import com.zickzenni.anarchium.effect.event.EffectRenderLevelStageEvent;
-import net.minecraft.resources.Identifier;
+import net.minecraft.resources.ResourceLocation;
+import net.neoforged.neoforge.client.event.RenderLevelStageEvent;
 
 public class SpinningMobsEffect extends TimedEffect
 {
     public static final EffectSupplier<SpinningMobsEffect> SUPPLIER = SpinningMobsEffect::new;
 
-    public static final Identifier ID = Anarchium.identifier("spinning_mobs");
+    public static final ResourceLocation ID = Anarchium.location("spinning_mobs");
 
     public SpinningMobsEffect()
     {
@@ -32,9 +32,9 @@ public class SpinningMobsEffect extends TimedEffect
     }
 
     @Override
-    public void onRenderLevel(EffectRenderLevelStageEvent event, float deltaTime)
+    public void onRenderLevel(RenderLevelStageEvent event, float deltaTime)
     {
-        if (event.stage() == EffectRenderLevelStageEvent.Stage.AFTER_SKY)
+        if (event.getStage() == RenderLevelStageEvent.Stage.AFTER_SKY)
         {
             EffectStates.spinningLivingEntityRotation -= 16.4f * deltaTime;
         }

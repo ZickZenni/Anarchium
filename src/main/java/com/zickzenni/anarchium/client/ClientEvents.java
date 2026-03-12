@@ -1,11 +1,6 @@
 package com.zickzenni.anarchium.client;
 
 import com.zickzenni.anarchium.Anarchium;
-import com.zickzenni.anarchium.effect.event.EffectRenderLevelStageEvent;
-import com.zickzenni.anarchium.network.packets.ActivateEffectPacket;
-import com.zickzenni.anarchium.network.packets.EndEffectPacket;
-import com.zickzenni.anarchium.network.packets.TickEffectPacket;
-import com.zickzenni.anarchium.network.packets.TimerTickPacket;
 import com.zickzenni.anarchium.util.LevelTickStage;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.neoforged.api.distmarker.Dist;
@@ -15,21 +10,11 @@ import net.neoforged.neoforge.client.event.ClientPlayerNetworkEvent;
 import net.neoforged.neoforge.client.event.RenderGuiEvent;
 import net.neoforged.neoforge.client.event.RenderLevelStageEvent;
 import net.neoforged.neoforge.client.event.ViewportEvent;
-import net.neoforged.neoforge.client.network.event.RegisterClientPayloadHandlersEvent;
 import net.neoforged.neoforge.event.tick.LevelTickEvent;
 
 @EventBusSubscriber(modid = Anarchium.MODID, value = Dist.CLIENT)
 public final class ClientEvents
 {
-    @SubscribeEvent
-    public static void onRegisterPayloadHandlers(RegisterClientPayloadHandlersEvent event)
-    {
-        event.register(ActivateEffectPacket.TYPE, ClientPayloadHandler::handleActivateEffect);
-        event.register(EndEffectPacket.TYPE, ClientPayloadHandler::handleEndEffect);
-        event.register(TickEffectPacket.TYPE, ClientPayloadHandler::handleTickEffect);
-        event.register(TimerTickPacket.TYPE, ClientPayloadHandler::handleTimerTick);
-    }
-
     @SubscribeEvent
     public static void onPreLevelTick(LevelTickEvent.Pre event)
     {
@@ -59,123 +44,9 @@ public final class ClientEvents
     // ================ RENDER ================
 
     @SubscribeEvent
-    public static void onAfterSkyRender(RenderLevelStageEvent.AfterSky event)
+    public static void onAfterOpaqueBlocksRender(RenderLevelStageEvent event)
     {
-        ClientEffectManager.sendRenderLevelEvent(
-                new EffectRenderLevelStageEvent(
-                        EffectRenderLevelStageEvent.Stage.AFTER_SKY,
-                        event.getLevelRenderer(),
-                        event.getLevelRenderState(),
-                        event.getPoseStack(),
-                        event.getModelViewMatrix(),
-                        event.getRenderableSections()
-                )
-        );
-    }
-
-    @SubscribeEvent
-    public static void onAfterOpaqueBlocksRender(RenderLevelStageEvent.AfterOpaqueBlocks event)
-    {
-        ClientEffectManager.sendRenderLevelEvent(
-                new EffectRenderLevelStageEvent(
-                        EffectRenderLevelStageEvent.Stage.AFTER_OPAQUE_BLOCKS,
-                        event.getLevelRenderer(),
-                        event.getLevelRenderState(),
-                        event.getPoseStack(),
-                        event.getModelViewMatrix(),
-                        event.getRenderableSections()
-                )
-        );
-    }
-
-    @SubscribeEvent
-    public static void onAfterEntitiesRender(RenderLevelStageEvent.AfterEntities event)
-    {
-        ClientEffectManager.sendRenderLevelEvent(
-                new EffectRenderLevelStageEvent(
-                        EffectRenderLevelStageEvent.Stage.AFTER_ENTITIES,
-                        event.getLevelRenderer(),
-                        event.getLevelRenderState(),
-                        event.getPoseStack(),
-                        event.getModelViewMatrix(),
-                        event.getRenderableSections()
-                )
-        );
-    }
-
-    @SubscribeEvent
-    public static void onAfterTranslucentBlocksRender(RenderLevelStageEvent.AfterTranslucentBlocks event)
-    {
-        ClientEffectManager.sendRenderLevelEvent(
-                new EffectRenderLevelStageEvent(
-                        EffectRenderLevelStageEvent.Stage.AFTER_TRANSLUCENT_BLOCKS,
-                        event.getLevelRenderer(),
-                        event.getLevelRenderState(),
-                        event.getPoseStack(),
-                        event.getModelViewMatrix(),
-                        event.getRenderableSections()
-                )
-        );
-    }
-
-    @SubscribeEvent
-    public static void onAfterTripwireBlocksRender(RenderLevelStageEvent.AfterTripwireBlocks event)
-    {
-        ClientEffectManager.sendRenderLevelEvent(
-                new EffectRenderLevelStageEvent(
-                        EffectRenderLevelStageEvent.Stage.AFTER_TRIPWIRE_BLOCKS,
-                        event.getLevelRenderer(),
-                        event.getLevelRenderState(),
-                        event.getPoseStack(),
-                        event.getModelViewMatrix(),
-                        event.getRenderableSections()
-                )
-        );
-    }
-
-    @SubscribeEvent
-    public static void onAfterParticlesRender(RenderLevelStageEvent.AfterParticles event)
-    {
-        ClientEffectManager.sendRenderLevelEvent(
-                new EffectRenderLevelStageEvent(
-                        EffectRenderLevelStageEvent.Stage.AFTER_PARTICLES,
-                        event.getLevelRenderer(),
-                        event.getLevelRenderState(),
-                        event.getPoseStack(),
-                        event.getModelViewMatrix(),
-                        event.getRenderableSections()
-                )
-        );
-    }
-
-    @SubscribeEvent
-    public static void onAfterWeatherRender(RenderLevelStageEvent.AfterWeather event)
-    {
-        ClientEffectManager.sendRenderLevelEvent(
-                new EffectRenderLevelStageEvent(
-                        EffectRenderLevelStageEvent.Stage.AFTER_WEATHER,
-                        event.getLevelRenderer(),
-                        event.getLevelRenderState(),
-                        event.getPoseStack(),
-                        event.getModelViewMatrix(),
-                        event.getRenderableSections()
-                )
-        );
-    }
-
-    @SubscribeEvent
-    public static void onAfterLevelRender(RenderLevelStageEvent.AfterLevel event)
-    {
-        ClientEffectManager.sendRenderLevelEvent(
-                new EffectRenderLevelStageEvent(
-                        EffectRenderLevelStageEvent.Stage.AFTER_LEVEL,
-                        event.getLevelRenderer(),
-                        event.getLevelRenderState(),
-                        event.getPoseStack(),
-                        event.getModelViewMatrix(),
-                        event.getRenderableSections()
-                )
-        );
+        ClientEffectManager.sendRenderLevelStageEvent(event);
     }
 
     // ========================================

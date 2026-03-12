@@ -4,18 +4,18 @@ import com.zickzenni.anarchium.Anarchium;
 import com.zickzenni.anarchium.effect.EffectSupplier;
 import com.zickzenni.anarchium.effect.InstantEffect;
 import com.zickzenni.anarchium.util.LevelTickStage;
-import net.minecraft.resources.Identifier;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.world.entity.EntitySpawnReason;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.MobSpawnType;
 import net.neoforged.neoforge.server.ServerLifecycleHooks;
 
 public class ZeusEffect extends InstantEffect
 {
     public static final EffectSupplier<ZeusEffect> SUPPLIER = ZeusEffect::new;
 
-    public static final Identifier ID = Anarchium.identifier("zeus");
+    public static final ResourceLocation ID = Anarchium.location("zeus");
 
     private boolean struck;
 
@@ -39,7 +39,7 @@ public class ZeusEffect extends InstantEffect
 
         for (ServerPlayer player : server.getPlayerList().getPlayers())
         {
-            EntityType.LIGHTNING_BOLT.spawn(player.level(), player.blockPosition(), EntitySpawnReason.MOB_SUMMONED);
+            EntityType.LIGHTNING_BOLT.spawn(player.serverLevel(), player.blockPosition(), MobSpawnType.MOB_SUMMONED);
         }
     }
 

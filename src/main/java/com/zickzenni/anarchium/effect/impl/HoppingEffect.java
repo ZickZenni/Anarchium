@@ -6,13 +6,13 @@ import com.zickzenni.anarchium.effect.TimedEffect;
 import com.zickzenni.anarchium.util.LevelTickStage;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.ClientLevel;
-import net.minecraft.resources.Identifier;
+import net.minecraft.resources.ResourceLocation;
 
 public class HoppingEffect extends TimedEffect
 {
     public static final EffectSupplier<HoppingEffect> SUPPLIER = HoppingEffect::new;
 
-    public static final Identifier ID = Anarchium.identifier("hopping");
+    public static final ResourceLocation ID = Anarchium.location("hopping");
 
     public HoppingEffect()
     {
@@ -28,7 +28,7 @@ public class HoppingEffect extends TimedEffect
 
             if (player != null && player.onGround())
             {
-                player.jumpFromGround();;
+                player.jumpFromGround();
             }
         }
         super.onLevelTickClient(level, stage);

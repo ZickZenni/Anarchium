@@ -1,7 +1,7 @@
 package com.zickzenni.anarchium.effect;
 
 import com.zickzenni.anarchium.util.LevelTickStage;
-import net.minecraft.resources.Identifier;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 
 public class TimedEffect extends BaseEffect
@@ -12,9 +12,9 @@ public class TimedEffect extends BaseEffect
 
     private boolean ended;
 
-    public TimedEffect(Identifier identifier, int durationTicks)
+    public TimedEffect(ResourceLocation location, int durationTicks)
     {
-        super(identifier);
+        super(location);
         this.durationTicks = durationTicks;
         this.ticks = durationTicks;
     }

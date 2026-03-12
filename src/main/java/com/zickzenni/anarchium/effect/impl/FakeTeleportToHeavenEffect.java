@@ -5,7 +5,7 @@ import com.zickzenni.anarchium.effect.EffectSupplier;
 import com.zickzenni.anarchium.effect.InstantEffect;
 import com.zickzenni.anarchium.util.LevelTickStage;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.Identifier;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.phys.Vec3;
@@ -18,7 +18,7 @@ public class FakeTeleportToHeavenEffect extends InstantEffect
 {
     public static final EffectSupplier<FakeTeleportToHeavenEffect> SUPPLIER = FakeTeleportToHeavenEffect::new;
 
-    public static final Identifier ID = Anarchium.identifier("fake_teleport_to_heaven");
+    public static final ResourceLocation ID = Anarchium.location("fake_teleport_to_heaven");
 
     private final Map<String, Vec3> positions;
 
