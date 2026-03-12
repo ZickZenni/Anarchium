@@ -3,9 +3,11 @@ package com.zickzenni.anarchium.mixin.client;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
 import com.zickzenni.anarchium.client.EffectStates;
+import com.zickzenni.anarchium.effect.impl.SkeletonsHaveSpinbotEffect;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.entity.LivingEntityRenderer;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.monster.AbstractSkeleton;
 import net.minecraft.world.entity.player.Player;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
@@ -32,6 +34,11 @@ public class LivingEntityRendererMixin
         if (EffectStates.enableSpinningLivingEntities && !isPlayer)
         {
             poseStack.mulPose(Axis.YP.rotationDegrees(EffectStates.spinningLivingEntityRotation));
+        }
+
+        if (SkeletonsHaveSpinbotEffect.enabled && entity instanceof AbstractSkeleton)
+        {
+            poseStack.mulPose(Axis.YP.rotationDegrees(SkeletonsHaveSpinbotEffect.rotation));
         }
     }
 }
