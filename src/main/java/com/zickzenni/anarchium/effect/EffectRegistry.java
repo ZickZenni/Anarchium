@@ -29,6 +29,7 @@ public class EffectRegistry
         register(SpinningMobsEffect.ID, SpinningMobsEffect.SUPPLIER);
         register(ZeusEffect.ID, ZeusEffect.SUPPLIER);
         register(HoppingEffect.ID, HoppingEffect.SUPPLIER);
+        register(ReplaceEverySoundWithVillagersEffect.ID, ReplaceEverySoundWithVillagersEffect.SUPPLIER);
     }
 
     /**
