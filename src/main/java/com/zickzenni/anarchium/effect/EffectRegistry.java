@@ -20,7 +20,7 @@ public class EffectRegistry
         register(ReversedGravityEffect.ID, ReversedGravityEffect.SUPPLIER);
         register(FlingPlayersEffect.ID, FlingPlayersEffect.SUPPLIER);
         register(FakeTeleportToHeavenEffect.ID, FakeTeleportToHeavenEffect.SUPPLIER);
-        register(InvertedFieldOfViewEffect.ID, InvertedFieldOfViewEffect.SUPPLIER);
+        register(NegativeFieldOfViewEffect.ID, NegativeFieldOfViewEffect.SUPPLIER);
         register(SpawnCreepersEffect.ID, SpawnCreepersEffect.SUPPLIER);
         register(SpawnMinecartEffect.ID, SpawnMinecartEffect.SUPPLIER);
         register(BurnPlayersEffect.ID, BurnPlayersEffect.SUPPLIER);

@@ -8,13 +8,13 @@ import com.zickzenni.anarchium.effect.event.EffectRenderLevelStageEvent;
 import net.minecraft.client.Minecraft;
 import net.minecraft.resources.Identifier;
 
-public class InvertedFieldOfViewEffect extends TimedEffect
+public class NegativeFieldOfViewEffect extends TimedEffect
 {
-    public static final EffectSupplier<InvertedFieldOfViewEffect> SUPPLIER = InvertedFieldOfViewEffect::new;
+    public static final EffectSupplier<NegativeFieldOfViewEffect> SUPPLIER = NegativeFieldOfViewEffect::new;
 
-    public static final Identifier ID = Anarchium.identifier("inverted_field_of_view");
+    public static final Identifier ID = Anarchium.identifier("negative_field_of_view");
 
-    public InvertedFieldOfViewEffect()
+    public NegativeFieldOfViewEffect()
     {
         super(ID, 300);
     }
