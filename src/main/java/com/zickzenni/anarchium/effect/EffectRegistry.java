@@ -37,6 +37,7 @@ public class EffectRegistry
         register(EveryoneIsAVillagerEffect.ID, EveryoneIsAVillagerEffect.SUPPLIER);
         register(PlaceLavaEffect.ID, PlaceLavaEffect.SUPPLIER);
         register(ExplodePlayersEffect.ID, ExplodePlayersEffect.SUPPLIER);
+        register(ExplodeNearbyEntitiesEvent.ID, ExplodeNearbyEntitiesEvent.SUPPLIER);
     }
 
     /**

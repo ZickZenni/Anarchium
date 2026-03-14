@@ -18,5 +18,7 @@
   "anarchium.skeletons_have_spinbot": "Skeletons Have Spinbot",
   "anarchium.everyone_is_a_villager": "Everyone is a Villager",
   "anarchium.place_lava": "Place Lava",
-  "anarchium.explode_players": "Explode Players"
+  "anarchium.explode_players": "Explode Players",
+  "anarchium.explode_mobs": "Explode Mobs",
+  "anarchium.explode_nearby_entities": "Explode Nearby Entities"
 }
