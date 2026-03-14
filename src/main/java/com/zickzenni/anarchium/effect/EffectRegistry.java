@@ -34,6 +34,7 @@ public class EffectRegistry
         register(TeleportToHeavenEffect.ID, TeleportToHeavenEffect.SUPPLIER);
         register(TeleportToVoidEffect.ID, TeleportToVoidEffect.SUPPLIER);
         register(SkeletonsHaveSpinbotEffect.ID, SkeletonsHaveSpinbotEffect.SUPPLIER);
+        register(EveryoneIsAVillagerEffect.ID, EveryoneIsAVillagerEffect.SUPPLIER);
     }
 
     /**

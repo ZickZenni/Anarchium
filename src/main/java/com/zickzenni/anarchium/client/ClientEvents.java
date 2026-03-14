@@ -1,15 +1,15 @@
 package com.zickzenni.anarchium.client;
 
 import com.zickzenni.anarchium.Anarchium;
+import com.zickzenni.anarchium.effect.impl.EveryoneIsAVillagerEffect;
 import com.zickzenni.anarchium.util.LevelTickStage;
+import net.minecraft.client.model.VillagerModel;
+import net.minecraft.client.model.geom.ModelLayers;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
-import net.neoforged.neoforge.client.event.ClientPlayerNetworkEvent;
-import net.neoforged.neoforge.client.event.RenderGuiEvent;
-import net.neoforged.neoforge.client.event.RenderLevelStageEvent;
-import net.neoforged.neoforge.client.event.ViewportEvent;
+import net.neoforged.neoforge.client.event.*;
 import net.neoforged.neoforge.event.tick.LevelTickEvent;
 
 @EventBusSubscriber(modid = Anarchium.MODID, value = Dist.CLIENT)
@@ -71,5 +71,11 @@ public final class ClientEvents
         {
             event.setFOV(EffectStates.customFOV);
         }
+    }
+
+    @SubscribeEvent
+    public static void onAddEntityLayers(EntityRenderersEvent.AddLayers event)
+    {
+        EveryoneIsAVillagerEffect.VILLAGER_MODEL = new VillagerModel<>(event.getContext().bakeLayer(ModelLayers.VILLAGER));
     }
 }
