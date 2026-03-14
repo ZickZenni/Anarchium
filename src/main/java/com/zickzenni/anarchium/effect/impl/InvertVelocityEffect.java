@@ -12,8 +12,6 @@ public class InvertVelocityEffect extends InstantEffect
 
     public static final ResourceLocation ID = Anarchium.location("invert_velocity");
 
-    public static final float RADIUS = 50;
-
     public InvertVelocityEffect()
     {
         super(ID);
