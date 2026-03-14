@@ -38,6 +38,7 @@ public class EffectRegistry
         register(PlaceLavaEffect.ID, PlaceLavaEffect.SUPPLIER);
         register(ExplodePlayersEffect.ID, ExplodePlayersEffect.SUPPLIER);
         register(ExplodeNearbyEntitiesEvent.ID, ExplodeNearbyEntitiesEvent.SUPPLIER);
+        register(EntityMagnetEffect.ID, EntityMagnetEffect.SUPPLIER);
     }
 
     /**
