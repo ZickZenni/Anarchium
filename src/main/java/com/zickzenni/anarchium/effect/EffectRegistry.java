@@ -39,6 +39,7 @@ public class EffectRegistry
         register(ExplodePlayersEffect.ID, ExplodePlayersEffect.SUPPLIER);
         register(ExplodeNearbyEntitiesEvent.ID, ExplodeNearbyEntitiesEvent.SUPPLIER);
         register(EntityMagnetEffect.ID, EntityMagnetEffect.SUPPLIER);
+        register(TeleportNearbyMobsToPlayersEffect.ID, TeleportNearbyMobsToPlayersEffect.SUPPLIER);
     }
 
     /**

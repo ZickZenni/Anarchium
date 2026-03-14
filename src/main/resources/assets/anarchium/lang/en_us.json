@@ -21,5 +21,6 @@
   "anarchium.explode_players": "Explode Players",
   "anarchium.explode_mobs": "Explode Mobs",
   "anarchium.explode_nearby_entities": "Explode Nearby Entities",
-  "anarchium.entity_magnet": "Entity Magnet"
+  "anarchium.entity_magnet": "Entity Magnet",
+  "anarchium.teleport_nearby_mobs_to_players": "Teleport Nearby Mobs to Players"
 }
