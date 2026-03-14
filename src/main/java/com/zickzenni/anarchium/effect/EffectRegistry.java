@@ -42,6 +42,7 @@ public class EffectRegistry
         register(TeleportNearbyMobsToPlayersEffect.ID, TeleportNearbyMobsToPlayersEffect.SUPPLIER);
         register(InvertVelocityEffect.ID, InvertVelocityEffect.SUPPLIER);
         register(SpawnBoatEffect.ID, SpawnBoatEffect.SUPPLIER);
+        register(PlaceNearbyMobsIntoBoatEffect.ID, PlaceNearbyMobsIntoBoatEffect.SUPPLIER);
     }
 
     /**
