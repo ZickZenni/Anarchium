@@ -3,8 +3,12 @@ package com.zickzenni.anarchium.server;
 import com.mojang.logging.LogUtils;
 import com.zickzenni.anarchium.util.LevelTickStage;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.server.level.ServerPlayer;
 import net.neoforged.neoforge.server.ServerLifecycleHooks;
 import org.slf4j.Logger;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class AnarchiumServer
 {
@@ -43,5 +47,14 @@ public class AnarchiumServer
     public static AnarchiumServer getInstance()
     {
         return INSTANCE;
+    }
+
+    /**
+     * Retrieves the list of players.
+     */
+    public static List<ServerPlayer> getPlayers()
+    {
+        var server = ServerLifecycleHooks.getCurrentServer();
+        return server != null ? server.getPlayerList().getPlayers() : new ArrayList<>();
     }
 }

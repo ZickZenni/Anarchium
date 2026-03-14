@@ -35,6 +35,7 @@ public class EffectRegistry
         register(TeleportToVoidEffect.ID, TeleportToVoidEffect.SUPPLIER);
         register(SkeletonsHaveSpinbotEffect.ID, SkeletonsHaveSpinbotEffect.SUPPLIER);
         register(EveryoneIsAVillagerEffect.ID, EveryoneIsAVillagerEffect.SUPPLIER);
+        register(PlaceLavaEffect.ID, PlaceLavaEffect.SUPPLIER);
     }
 
     /**
