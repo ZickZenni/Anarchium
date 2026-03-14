@@ -17,22 +17,22 @@ public class EffectRegistry
 
     public static void init()
     {
-//        register(ReversedGravityEffect.ID, ReversedGravityEffect.SUPPLIER);
-//        register(FlingPlayersEffect.ID, FlingPlayersEffect.SUPPLIER);
-//        register(FakeTeleportToHeavenEffect.ID, FakeTeleportToHeavenEffect.SUPPLIER);
-//        register(NegativeFieldOfViewEffect.ID, NegativeFieldOfViewEffect.SUPPLIER);
-//        register(SpawnCreepersEffect.ID, SpawnCreepersEffect.SUPPLIER);
-//        register(SpawnMinecartEffect.ID, SpawnMinecartEffect.SUPPLIER);
-//        register(BurnPlayersEffect.ID, BurnPlayersEffect.SUPPLIER);
-//        register(WideMobsEffect.ID, WideMobsEffect.SUPPLIER);
-//        register(LargeEntitiesEffect.ID, LargeEntitiesEffect.SUPPLIER);
-//        register(SpinningMobsEffect.ID, SpinningMobsEffect.SUPPLIER);
-//        register(ZeusEffect.ID, ZeusEffect.SUPPLIER);
-//        register(HoppingEffect.ID, HoppingEffect.SUPPLIER);
-//        register(ReplaceEverySoundWithVillagersEffect.ID, ReplaceEverySoundWithVillagersEffect.SUPPLIER);
-//        register(SuicideEffect.ID, SuicideEffect.SUPPLIER);
-//        register(TeleportToHeavenEffect.ID, TeleportToHeavenEffect.SUPPLIER);
-//        register(TeleportToVoidEffect.ID, TeleportToVoidEffect.SUPPLIER);
+        register(ReversedGravityEffect.ID, ReversedGravityEffect.SUPPLIER);
+        register(FlingPlayersEffect.ID, FlingPlayersEffect.SUPPLIER);
+        register(FakeTeleportToHeavenEffect.ID, FakeTeleportToHeavenEffect.SUPPLIER);
+        register(NegativeFieldOfViewEffect.ID, NegativeFieldOfViewEffect.SUPPLIER);
+        register(SpawnCreepersEffect.ID, SpawnCreepersEffect.SUPPLIER);
+        register(SpawnMinecartEffect.ID, SpawnMinecartEffect.SUPPLIER);
+        register(BurnPlayersEffect.ID, BurnPlayersEffect.SUPPLIER);
+        register(WideMobsEffect.ID, WideMobsEffect.SUPPLIER);
+        register(LargeEntitiesEffect.ID, LargeEntitiesEffect.SUPPLIER);
+        register(SpinningMobsEffect.ID, SpinningMobsEffect.SUPPLIER);
+        register(ZeusEffect.ID, ZeusEffect.SUPPLIER);
+        register(HoppingEffect.ID, HoppingEffect.SUPPLIER);
+        register(ReplaceEverySoundWithVillagersEffect.ID, ReplaceEverySoundWithVillagersEffect.SUPPLIER);
+        register(SuicideEffect.ID, SuicideEffect.SUPPLIER);
+        register(TeleportToHeavenEffect.ID, TeleportToHeavenEffect.SUPPLIER);
+        register(TeleportToVoidEffect.ID, TeleportToVoidEffect.SUPPLIER);
         register(SkeletonsHaveSpinbotEffect.ID, SkeletonsHaveSpinbotEffect.SUPPLIER);
     }
 
