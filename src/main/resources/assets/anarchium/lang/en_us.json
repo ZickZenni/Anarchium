@@ -23,5 +23,6 @@
   "anarchium.explode_nearby_entities": "Explode Nearby Entities",
   "anarchium.entity_magnet": "Entity Magnet",
   "anarchium.teleport_nearby_mobs_to_players": "Teleport Nearby Mobs to Players",
-  "anarchium.invert_velocity": "Invert Velocity"
+  "anarchium.invert_velocity": "Invert Velocity",
+  "anarchium.spawn_boat": "Spawn Boat"
 }
