@@ -35,5 +35,6 @@
   "anarchium.spawn_wandering_trader": "Spawn Wandering Trader",
   "anarchium.rotating_camera": "Rotating Camera",
   "anarchium.rolling_camera": "Rolling Camera",
-  "anarchium.drop_item": "Drop Item"
+  "anarchium.drop_item": "Drop Item",
+  "anarchium.drop_inventory": "Drop Inventory"
 }

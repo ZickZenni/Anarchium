@@ -53,6 +53,7 @@ public class EffectRegistry
         register(RotatingCameraEffect.ID, RotatingCameraEffect.SUPPLIER);
         register(RollingCameraEffect.ID, RollingCameraEffect.SUPPLIER);
         register(DropItemEffect.ID, DropItemEffect.SUPPLIER);
+        register(DropInventoryEffect.ID, DropInventoryEffect.SUPPLIER);
     }
 
     /**
