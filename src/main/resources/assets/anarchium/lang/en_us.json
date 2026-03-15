@@ -32,5 +32,6 @@
   "anarchium.get_rotated": "Get Rotated",
   "anarchium.portrait": "Portrait Mode",
   "anarchium.black_screen": "Black Screen",
-  "anarchium.spawn_wandering_trader": "Spawn Wandering Trader"
+  "anarchium.spawn_wandering_trader": "Spawn Wandering Trader",
+  "anarchium.rotating_camera": "Rotating Camera"
 }

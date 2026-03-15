@@ -7,6 +7,7 @@
     "server.EntityMixin"
   ],
   "client": [
+    "client.CameraMixin",
     "client.EntityRenderDispatcherMixin",
     "client.EntityRendererMixin",
     "client.HumanoidModelMixin",
