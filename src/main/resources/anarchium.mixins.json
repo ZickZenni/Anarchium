@@ -5,15 +5,16 @@
   "compatibilityLevel": "JAVA_21",
   "mixins": [
     "server.EntityMixin",
-    "server.PlayerMixin"
+    "server.PlayerMixin",
+    "server.ServerGamePacketListenerImplMixin"
   ],
   "client": [
     "client.CameraMixin",
     "client.EntityRenderDispatcherMixin",
     "client.EntityRendererMixin",
     "client.HumanoidModelMixin",
-    "client.LivingEntityRendererMixin",
     "client.KeyboardInputMixin",
+    "client.LivingEntityRendererMixin",
     "client.OptionsMixin",
     "client.SoundEngineMixin"
   ],
