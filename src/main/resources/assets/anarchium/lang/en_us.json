@@ -25,5 +25,6 @@
   "anarchium.teleport_nearby_mobs_to_players": "Teleport Nearby Mobs to Players",
   "anarchium.invert_velocity": "Invert Velocity",
   "anarchium.spawn_boat": "Spawn Boat",
-  "anarchium.place_nearby_mobs_into_boat": "Place Nearby Mobs into a Boat"
+  "anarchium.place_nearby_mobs_into_boat": "Place Nearby Mobs into a Boat",
+  "anarchium.jail": "Jail"
 }
