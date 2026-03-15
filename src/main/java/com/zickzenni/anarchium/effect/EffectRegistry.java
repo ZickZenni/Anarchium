@@ -44,6 +44,7 @@ public class EffectRegistry
         register(SpawnBoatEffect.ID, SpawnBoatEffect.SUPPLIER);
         register(PlaceNearbyMobsIntoBoatEffect.ID, PlaceNearbyMobsIntoBoatEffect.SUPPLIER);
         register(JailEffect.ID, JailEffect.SUPPLIER);
+        register(NoGravityEffect.ID, NoGravityEffect.SUPPLIER);
     }
 
     /**

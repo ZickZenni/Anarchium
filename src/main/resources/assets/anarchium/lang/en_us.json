@@ -26,5 +26,6 @@
   "anarchium.invert_velocity": "Invert Velocity",
   "anarchium.spawn_boat": "Spawn Boat",
   "anarchium.place_nearby_mobs_into_boat": "Place Nearby Mobs into a Boat",
-  "anarchium.jail": "Jail"
+  "anarchium.jail": "Jail",
+  "anarchium.no_gravity": "No Gravity"
 }
