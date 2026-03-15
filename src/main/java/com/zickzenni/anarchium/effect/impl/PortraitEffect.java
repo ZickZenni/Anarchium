@@ -2,13 +2,10 @@ package com.zickzenni.anarchium.effect.impl;
 
 import com.zickzenni.anarchium.Anarchium;
 import com.zickzenni.anarchium.effect.EffectSupplier;
-import com.zickzenni.anarchium.effect.InstantEffect;
 import com.zickzenni.anarchium.effect.TimedEffect;
-import com.zickzenni.anarchium.server.AnarchiumServer;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.level.block.Blocks;
 
 public class PortraitEffect extends TimedEffect
 {
