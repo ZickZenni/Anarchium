@@ -52,6 +52,7 @@ public class EffectRegistry
         register(SpawnWanderingTraderEffect.ID, SpawnWanderingTraderEffect.SUPPLIER);
         register(RotatingCameraEffect.ID, RotatingCameraEffect.SUPPLIER);
         register(RollingCameraEffect.ID, RollingCameraEffect.SUPPLIER);
+        register(DropItemEffect.ID, DropItemEffect.SUPPLIER);
     }
 
     /**
