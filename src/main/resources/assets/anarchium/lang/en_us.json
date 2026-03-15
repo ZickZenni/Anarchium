@@ -41,5 +41,7 @@
   "anarchium.damage_players": "Damage Players",
   "anarchium.fatigue": "Fatigue",
   "anarchium.blindness": "Blindness",
-  "anarchium.no_jumping": "No Jumping"
+  "anarchium.no_jumping": "No Jumping",
+  "anarchium.no_sneaking": "No Sneaking",
+  "anarchium.force_sneak": "My sneak key is broken"
 }

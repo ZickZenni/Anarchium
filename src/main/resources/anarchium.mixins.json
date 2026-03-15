@@ -13,6 +13,7 @@
     "client.EntityRendererMixin",
     "client.HumanoidModelMixin",
     "client.LivingEntityRendererMixin",
+    "client.KeyboardInputMixin",
     "client.OptionsMixin",
     "client.SoundEngineMixin"
   ],
