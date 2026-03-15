@@ -1,5 +1,6 @@
 package com.zickzenni.anarchium.client;
 
+import com.zickzenni.anarchium.effect.Effect;
 import com.zickzenni.anarchium.network.packets.ActivateEffectPacket;
 import com.zickzenni.anarchium.network.packets.EndEffectPacket;
 import com.zickzenni.anarchium.network.packets.TickEffectPacket;
@@ -25,6 +26,16 @@ public class ClientPayloadHandler
         {
             AnarchiumClient.LOGGER.error("Failed to parse effect location {}", data.id());
             return;
+        }
+
+        for (var effect : ClientEffectManager.getEffects())
+        {
+            if (effect.getLocation().equals(location))
+            {
+                player.playSound(effect.getDispatchSound().value(), 1.0f, 1.0f);
+                AnarchiumClient.getInstance().timerTicks = AnarchiumClient.getInstance().timerDuration;
+                return;
+            }
         }
 
         var effect = ClientEffectManager.createEffect(location);

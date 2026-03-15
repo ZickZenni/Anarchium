@@ -75,8 +75,9 @@ public class ServerEffectManager
                 {
                     if (effect.getLocation().equals(location) && effect.getDurationTicks() > 0)
                     {
-                        effect.setTicks(effect.getDurationTicks());
                         LOGGER.info("Reset active effect: {}", location);
+                        effect.setTicks(effect.getDurationTicks());
+                        PacketDistributor.sendToAllPlayers(new ActivateEffectPacket(location.toString()));
                         return;
                     }
                 }
