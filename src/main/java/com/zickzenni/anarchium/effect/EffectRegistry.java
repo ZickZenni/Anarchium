@@ -65,6 +65,7 @@ public class EffectRegistry
         register(ForceSneakEffect.ID, ForceSneakEffect.SUPPLIER);
         register(WhereAreMyChunksEffect.ID, WhereAreMyChunksEffect.SUPPLIER);
         register(WhereIsTheSkyEffect.ID, WhereIsTheSkyEffect.SUPPLIER);
+        register(BiggerBlockEntitiesEffect.ID, BiggerBlockEntitiesEffect.SUPPLIER);
 
         frozen = true;
         LOGGER.info("Registered {} effects", SUPPLIERS.size());

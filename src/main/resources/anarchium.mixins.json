@@ -9,6 +9,7 @@
     "server.ServerGamePacketListenerImplMixin"
   ],
   "client": [
+    "client.BlockEntityRenderDispatcherMixin",
     "client.CameraMixin",
     "client.EntityRenderDispatcherMixin",
     "client.EntityRendererMixin",
