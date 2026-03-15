@@ -43,5 +43,6 @@
   "anarchium.blindness": "Blindness",
   "anarchium.no_jumping": "No Jumping",
   "anarchium.no_sneaking": "No Sneaking",
-  "anarchium.force_sneak": "My sneak key is broken"
+  "anarchium.force_sneak": "My sneak key is broken",
+  "anarchium.where_are_my_chunks": "Where are my chunks?"
 }
