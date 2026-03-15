@@ -48,6 +48,7 @@ public class EffectRegistry
         register(QuakeFieldOfViewEffect.ID, QuakeFieldOfViewEffect.SUPPLIER);
         register(GetRotatedEffect.ID, GetRotatedEffect.SUPPLIER);
         register(PortraitEffect.ID, PortraitEffect.SUPPLIER);
+        register(BlackScreenEffect.ID, BlackScreenEffect.SUPPLIER);
     }
 
     /**
