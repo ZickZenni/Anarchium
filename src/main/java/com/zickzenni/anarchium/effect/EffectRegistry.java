@@ -69,6 +69,7 @@ public class EffectRegistry
         register(BurnNearbyMobsEffect.ID, BurnNearbyMobsEffect.SUPPLIER);
         register(HighPitchEffect.ID, HighPitchEffect.SUPPLIER);
         register(LowPitchEffect.ID, LowPitchEffect.SUPPLIER);
+        register(BrokenWorldEffect.ID, BrokenWorldEffect.SUPPLIER);
 
         frozen = true;
         LOGGER.info("Registered {} effects", SUPPLIERS.size());

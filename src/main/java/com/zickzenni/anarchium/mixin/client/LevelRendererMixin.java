@@ -3,6 +3,7 @@ package com.zickzenni.anarchium.mixin.client;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.*;
 import com.mojang.math.Axis;
+import com.zickzenni.anarchium.effect.impl.BrokenWorldEffect;
 import com.zickzenni.anarchium.effect.impl.WhereAreMyChunksEffect;
 import com.zickzenni.anarchium.effect.impl.WhereIsTheSkyEffect;
 import net.minecraft.client.Camera;
@@ -25,6 +26,12 @@ public class LevelRendererMixin
         if (WhereAreMyChunksEffect.ENABLED)
         {
             ci.cancel();
+            return;
+        }
+
+        if (BrokenWorldEffect.ENABLED)
+        {
+            projectionMatrix.mul(new Matrix4f().scale(3.0f));
         }
     }
 
