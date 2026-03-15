@@ -54,6 +54,7 @@ public class EffectRegistry
         register(RollingCameraEffect.ID, RollingCameraEffect.SUPPLIER);
         register(DropItemEffect.ID, DropItemEffect.SUPPLIER);
         register(DropInventoryEffect.ID, DropInventoryEffect.SUPPLIER);
+        register(BlurryScreenEffect.ID, BlurryScreenEffect.SUPPLIER);
     }
 
     /**

@@ -12,6 +12,7 @@
     "client.EntityRendererMixin",
     "client.HumanoidModelMixin",
     "client.LivingEntityRendererMixin",
+    "client.OptionsMixin",
     "client.SoundEngineMixin"
   ],
   "injectors": {
