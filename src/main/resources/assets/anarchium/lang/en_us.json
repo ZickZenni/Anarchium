@@ -46,5 +46,6 @@
   "anarchium.force_sneak": "My sneak key is broken",
   "anarchium.where_are_my_chunks": "Where are my chunks?",
   "anarchium.where_is_the_sky": "Where is the sky?",
-  "anarchium.bigger_block_entities": "Bigger Block Entities"
+  "anarchium.bigger_block_entities": "Bigger Block Entities",
+  "anarchium.burn_nearby_mobs": "Burn Nearby Mobs"
 }

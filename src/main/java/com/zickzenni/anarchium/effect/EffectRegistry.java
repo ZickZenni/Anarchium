@@ -66,6 +66,7 @@ public class EffectRegistry
         register(WhereAreMyChunksEffect.ID, WhereAreMyChunksEffect.SUPPLIER);
         register(WhereIsTheSkyEffect.ID, WhereIsTheSkyEffect.SUPPLIER);
         register(BiggerBlockEntitiesEffect.ID, BiggerBlockEntitiesEffect.SUPPLIER);
+        register(BurnNearbyMobsEffect.ID, BurnNearbyMobsEffect.SUPPLIER);
 
         frozen = true;
         LOGGER.info("Registered {} effects", SUPPLIERS.size());
