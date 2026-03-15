@@ -38,5 +38,7 @@
   "anarchium.drop_item": "Drop Item",
   "anarchium.drop_inventory": "Drop Inventory",
   "anarchium.blurry_screen": "Blurry Screen",
-  "anarchium.damage_players": "Damage Players"
+  "anarchium.damage_players": "Damage Players",
+  "anarchium.fatigue": "Fatigue",
+  "anarchium.blindness": "Blindness"
 }

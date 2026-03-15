@@ -58,6 +58,8 @@ public class EffectRegistry
         register(DropInventoryEffect.ID, DropInventoryEffect.SUPPLIER);
         register(BlurryScreenEffect.ID, BlurryScreenEffect.SUPPLIER);
         register(DamagePlayersEffect.ID, DamagePlayersEffect.SUPPLIER);
+        register(FatiguePotionEffect.ID, FatiguePotionEffect.SUPPLIER);
+        register(BlindnessPotionEffect.ID, BlindnessPotionEffect.SUPPLIER);
 
         frozen = true;
         LOGGER.info("Registered {} effects", SUPPLIERS.size());
