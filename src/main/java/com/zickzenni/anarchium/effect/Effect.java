@@ -39,7 +39,7 @@ public interface Effect
     {
     }
 
-    default void onRenderGUI(GuiGraphics graphics)
+    default void onRenderGUI(GuiGraphics graphics, float deltaTime)
     {
     }
 

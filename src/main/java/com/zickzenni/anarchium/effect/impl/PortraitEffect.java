@@ -22,7 +22,7 @@ public class PortraitEffect extends TimedEffect
     }
 
     @Override
-    public void onRenderGUI(GuiGraphics graphics)
+    public void onRenderGUI(GuiGraphics graphics, float deltaTime)
     {
         var window = Minecraft.getInstance().getWindow();
         var width = window.getGuiScaledWidth();

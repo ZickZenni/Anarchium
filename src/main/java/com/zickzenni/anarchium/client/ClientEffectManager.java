@@ -65,7 +65,7 @@ public class ClientEffectManager
     {
         for (var effects : EFFECTS)
         {
-            effects.onRenderGUI(event.getGuiGraphics());
+            effects.onRenderGUI(event.getGuiGraphics(), event.getPartialTick().getRealtimeDeltaTicks());
         }
     }
 
