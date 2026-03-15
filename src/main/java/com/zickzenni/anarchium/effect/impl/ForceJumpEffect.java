@@ -8,13 +8,13 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.resources.ResourceLocation;
 
-public class HoppingEffect extends TimedEffect
+public class ForceJumpEffect extends TimedEffect
 {
-    public static final EffectSupplier<HoppingEffect> SUPPLIER = HoppingEffect::new;
+    public static final EffectSupplier<ForceJumpEffect> SUPPLIER = ForceJumpEffect::new;
 
-    public static final ResourceLocation ID = Anarchium.location("hopping");
+    public static final ResourceLocation ID = Anarchium.location("force_jump");
 
-    public HoppingEffect()
+    public ForceJumpEffect()
     {
         super(ID, 20 * 27);
     }
