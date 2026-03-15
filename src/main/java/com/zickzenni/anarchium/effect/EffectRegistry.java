@@ -55,6 +55,7 @@ public class EffectRegistry
         register(DropItemEffect.ID, DropItemEffect.SUPPLIER);
         register(DropInventoryEffect.ID, DropInventoryEffect.SUPPLIER);
         register(BlurryScreenEffect.ID, BlurryScreenEffect.SUPPLIER);
+        register(DamagePlayersEffect.ID, DamagePlayersEffect.SUPPLIER);
     }
 
     /**
