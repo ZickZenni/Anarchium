@@ -15,6 +15,8 @@ public class EffectRegistry
 
     private static final Map<ResourceLocation, EffectSupplier<?>> SUPPLIERS = new HashMap<>();
 
+    private static boolean frozen;
+
     public static void init()
     {
         register(ReversedGravityEffect.ID, ReversedGravityEffect.SUPPLIER);
@@ -56,6 +58,9 @@ public class EffectRegistry
         register(DropInventoryEffect.ID, DropInventoryEffect.SUPPLIER);
         register(BlurryScreenEffect.ID, BlurryScreenEffect.SUPPLIER);
         register(DamagePlayersEffect.ID, DamagePlayersEffect.SUPPLIER);
+
+        frozen = true;
+        LOGGER.info("Registered {} effects", SUPPLIERS.size());
     }
 
     /**
@@ -63,6 +68,11 @@ public class EffectRegistry
      */
     private static <T extends Effect> void register(ResourceLocation location, EffectSupplier<T> factory)
     {
+        if (frozen)
+        {
+            throw new IllegalStateException("Registry is frozen");
+        }
+
         if (SUPPLIERS.containsKey(location))
         {
             throw new IllegalStateException("Effect already registered: " + location);
