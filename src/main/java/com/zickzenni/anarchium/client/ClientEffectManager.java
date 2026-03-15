@@ -7,6 +7,7 @@ import com.zickzenni.anarchium.util.LevelTickStage;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.resources.ResourceLocation;
+import net.neoforged.neoforge.client.event.RenderGuiEvent;
 import net.neoforged.neoforge.client.event.RenderLevelStageEvent;
 import org.jetbrains.annotations.Nullable;
 import org.slf4j.Logger;
@@ -41,7 +42,7 @@ public class ClientEffectManager
     }
 
     /**
-     * Sends an "level stage render" event to all effects.
+     * Sends a "level stage render" event to all effects.
      *
      * @see net.neoforged.neoforge.client.event.RenderLevelStageEvent
      */
@@ -52,6 +53,19 @@ public class ClientEffectManager
         for (var effects : EFFECTS)
         {
             effects.onRenderLevel(event, deltaTime);
+        }
+    }
+
+    /**
+     * Sends a "render gui" event to all effects.
+     *
+     * @see net.neoforged.neoforge.client.event.RenderGuiEvent
+     */
+    public static void sendRenderGuiEvent(RenderGuiEvent event)
+    {
+        for (var effects : EFFECTS)
+        {
+            effects.onRenderGUI(event.getGuiGraphics());
         }
     }
 

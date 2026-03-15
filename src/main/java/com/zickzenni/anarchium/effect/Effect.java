@@ -1,6 +1,7 @@
 package com.zickzenni.anarchium.effect;
 
 import com.zickzenni.anarchium.util.LevelTickStage;
+import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.core.Holder;
 import net.minecraft.resources.ResourceLocation;
@@ -35,6 +36,10 @@ public interface Effect
     }
 
     default void onRenderLevel(RenderLevelStageEvent event, float deltaTime)
+    {
+    }
+
+    default void onRenderGUI(GuiGraphics graphics)
     {
     }
 

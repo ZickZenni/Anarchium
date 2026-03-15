@@ -47,6 +47,7 @@ public class EffectRegistry
         register(NoGravityEffect.ID, NoGravityEffect.SUPPLIER);
         register(QuakeFieldOfViewEffect.ID, QuakeFieldOfViewEffect.SUPPLIER);
         register(GetRotatedEffect.ID, GetRotatedEffect.SUPPLIER);
+        register(PortraitEffect.ID, PortraitEffect.SUPPLIER);
     }
 
     /**

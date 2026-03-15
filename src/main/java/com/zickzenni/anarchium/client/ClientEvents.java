@@ -49,6 +49,13 @@ public final class ClientEvents
         ClientEffectManager.sendRenderLevelStageEvent(event);
     }
 
+    @SubscribeEvent
+    public static void onPostRenderGui(RenderGuiEvent.Post event)
+    {
+        ClientEffectManager.sendRenderGuiEvent(event);
+        AnarchiumGUI.render(event.getGuiGraphics(), event.getPartialTick().getRealtimeDeltaTicks());
+    }
+
     // ========================================
 
     @SubscribeEvent
@@ -56,12 +63,6 @@ public final class ClientEvents
     {
         ClientEffectManager.clear();
         AnarchiumClient.getInstance().timerTicks = 0;
-    }
-
-    @SubscribeEvent
-    public static void onPostRenderGui(RenderGuiEvent.Post event)
-    {
-        AnarchiumGUI.render(event.getGuiGraphics(), event.getPartialTick().getRealtimeDeltaTicks());
     }
 
     @SubscribeEvent
