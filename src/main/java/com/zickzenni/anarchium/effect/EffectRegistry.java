@@ -46,6 +46,7 @@ public class EffectRegistry
         register(JailEffect.ID, JailEffect.SUPPLIER);
         register(NoGravityEffect.ID, NoGravityEffect.SUPPLIER);
         register(QuakeFieldOfViewEffect.ID, QuakeFieldOfViewEffect.SUPPLIER);
+        register(GetRotatedEffect.ID, GetRotatedEffect.SUPPLIER);
     }
 
     /**
