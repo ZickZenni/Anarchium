@@ -12,9 +12,9 @@ public class SkeletonsHaveSpinbotEffect extends TimedEffect
 
     public static final ResourceLocation ID = Anarchium.location("skeletons_have_spinbot");
 
-    public static boolean enabled = false;
+    public static boolean ENABLED = false;
 
-    public static float rotation = 0;
+    public static float ROTATION = 0;
 
     public SkeletonsHaveSpinbotEffect()
     {
@@ -24,13 +24,13 @@ public class SkeletonsHaveSpinbotEffect extends TimedEffect
     @Override
     public void onStartClient()
     {
-        enabled = true;
+        ENABLED = true;
     }
 
     @Override
     public void onEndClient()
     {
-        enabled = false;
+        ENABLED = false;
     }
 
     @Override
@@ -38,7 +38,7 @@ public class SkeletonsHaveSpinbotEffect extends TimedEffect
     {
         if (event.getStage() == RenderLevelStageEvent.Stage.AFTER_SKY)
         {
-            rotation -= 72.4f * deltaTime;
+            ROTATION -= 72.4f * deltaTime;
         }
     }
 }

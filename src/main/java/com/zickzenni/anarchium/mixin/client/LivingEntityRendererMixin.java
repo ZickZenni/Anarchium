@@ -57,9 +57,9 @@ public abstract class LivingEntityRendererMixin
             poseStack.mulPose(Axis.YP.rotationDegrees(EffectStates.spinningLivingEntityRotation));
         }
 
-        if (SkeletonsHaveSpinbotEffect.enabled && entity instanceof AbstractSkeleton)
+        if (SkeletonsHaveSpinbotEffect.ENABLED && entity instanceof AbstractSkeleton)
         {
-            poseStack.mulPose(Axis.YP.rotationDegrees(SkeletonsHaveSpinbotEffect.rotation));
+            poseStack.mulPose(Axis.YP.rotationDegrees(SkeletonsHaveSpinbotEffect.ROTATION));
         }
     }
 

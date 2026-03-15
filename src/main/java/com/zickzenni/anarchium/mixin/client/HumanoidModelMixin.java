@@ -23,9 +23,9 @@ public class HumanoidModelMixin
     public <T extends LivingEntity> void setupAnim(T entity, float ignoredA, float ignoredB, float ignoredC,
                                                    float ignoredD, float ignoredE, CallbackInfo ci)
     {
-        if (SkeletonsHaveSpinbotEffect.enabled && entity instanceof AbstractSkeleton)
+        if (SkeletonsHaveSpinbotEffect.ENABLED && entity instanceof AbstractSkeleton)
         {
-            head.yRot = -(SkeletonsHaveSpinbotEffect.rotation * 1.2f) * ((float) Math.PI / 180F);
+            head.yRot = -(SkeletonsHaveSpinbotEffect.ROTATION * 1.2f) * ((float) Math.PI / 180F);
             head.xRot = -80 * (float) Math.PI / 180;
         }
     }
