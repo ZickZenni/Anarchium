@@ -45,6 +45,7 @@ public class EffectRegistry
         register(PlaceNearbyMobsIntoBoatEffect.ID, PlaceNearbyMobsIntoBoatEffect.SUPPLIER);
         register(JailEffect.ID, JailEffect.SUPPLIER);
         register(NoGravityEffect.ID, NoGravityEffect.SUPPLIER);
+        register(QuakeFieldOfViewEffect.ID, QuakeFieldOfViewEffect.SUPPLIER);
     }
 
     /**

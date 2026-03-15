@@ -27,5 +27,6 @@
   "anarchium.spawn_boat": "Spawn Boat",
   "anarchium.place_nearby_mobs_into_boat": "Place Nearby Mobs into a Boat",
   "anarchium.jail": "Jail",
-  "anarchium.no_gravity": "No Gravity"
+  "anarchium.no_gravity": "No Gravity",
+  "anarchium.quake_field_of_view": "Quake Field of View"
 }
