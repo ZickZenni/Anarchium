@@ -51,6 +51,7 @@ public class EffectRegistry
         register(BlackScreenEffect.ID, BlackScreenEffect.SUPPLIER);
         register(SpawnWanderingTraderEffect.ID, SpawnWanderingTraderEffect.SUPPLIER);
         register(RotatingCameraEffect.ID, RotatingCameraEffect.SUPPLIER);
+        register(RollingCameraEffect.ID, RollingCameraEffect.SUPPLIER);
     }
 
     /**

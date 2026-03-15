@@ -1,5 +1,6 @@
 package com.zickzenni.anarchium.mixin.client;
 
+import com.zickzenni.anarchium.effect.impl.RollingCameraEffect;
 import com.zickzenni.anarchium.effect.impl.RotatingCameraEffect;
 import net.minecraft.client.Camera;
 import net.minecraft.world.entity.Entity;
@@ -22,12 +23,20 @@ public abstract class CameraMixin
     @Shadow
     private float xRot;
 
+    @Shadow
+    private float roll;
+
     @Inject(at = @At("TAIL"), method = "setup(Lnet/minecraft/world/level/BlockGetter;Lnet/minecraft/world/entity/Entity;ZZF)V")
     public void setup(BlockGetter level, Entity entity, boolean detached, boolean thirdPersonReverse, float partialTick, CallbackInfo ci)
     {
         if (RotatingCameraEffect.ENABLED)
         {
             setRotation(yRot, xRot, RotatingCameraEffect.ROTATION);
+        }
+
+        if (RollingCameraEffect.ENABLED)
+        {
+            setRotation(yRot, RollingCameraEffect.ROTATION, roll);
         }
     }
 }
