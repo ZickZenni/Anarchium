@@ -67,6 +67,8 @@ public class EffectRegistry
         register(WhereIsTheSkyEffect.ID, WhereIsTheSkyEffect.SUPPLIER);
         register(BiggerBlockEntitiesEffect.ID, BiggerBlockEntitiesEffect.SUPPLIER);
         register(BurnNearbyMobsEffect.ID, BurnNearbyMobsEffect.SUPPLIER);
+        register(HighPitchEffect.ID, HighPitchEffect.SUPPLIER);
+        register(LowPitchEffect.ID, LowPitchEffect.SUPPLIER);
 
         frozen = true;
         LOGGER.info("Registered {} effects", SUPPLIERS.size());

@@ -15,4 +15,8 @@ public class EffectStates
     public static boolean enableSpinningLivingEntities = false;
 
     public static boolean enableReplaceEverySoundWithVillagers = false;
+
+    public static float customPitch = 0;
+
+    public static boolean enableCustomPitch = false;
 }
