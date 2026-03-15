@@ -2,6 +2,7 @@ package com.zickzenni.anarchium.client;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.util.Mth;
 
 public class AnarchiumGUI
 {
@@ -22,7 +23,7 @@ public class AnarchiumGUI
     /**
      * Renders the GUI.
      */
-    public static void render(GuiGraphics graphics)
+    public static void render(GuiGraphics graphics, float deltaTime)
     {
         /*
          * Only render stuff when we are in the world.
@@ -32,37 +33,8 @@ public class AnarchiumGUI
             return;
         }
 
-        renderBar(graphics);
+        ProgressBar.render(graphics, deltaTime);
         renderHistory(graphics);
-    }
-
-    /**
-     * Renders the timer bar.
-     */
-    private static void renderBar(GuiGraphics graphics)
-    {
-        final var instance = AnarchiumClient.getInstance();
-        final var minecraft = Minecraft.getInstance();
-
-        final var progress = (float) (instance.timerDuration - instance.timerTicks) / (float) instance.timerDuration;
-        final var fillWidth = (int) Math.floor(progress * minecraft.getWindow().getGuiScaledWidth());
-        final var windowWidth = minecraft.getWindow().getGuiScaledWidth();
-
-        graphics.fill(
-                0,
-                0,
-                windowWidth,
-                10,
-                BACKGROUND_COLOR
-        );
-
-        graphics.fill(
-                0,
-                0,
-                fillWidth,
-                10,
-                0xFF1144CC
-        );
     }
 
     /**
@@ -136,5 +108,56 @@ public class AnarchiumGUI
         y += HISTORY_ITEM_HEIGHT + 12;
 
         return y;
+    }
+
+    /**
+     * The progress bar on top of the screen.
+     */
+    private static class ProgressBar
+    {
+        private static int windowWidth = 0;
+
+        private static float progress = 0;
+
+        /**
+         * Renders the progress bar.
+         */
+        public static void render(GuiGraphics graphics, float deltaTime)
+        {
+            final var instance = AnarchiumClient.getInstance();
+            final var minecraft = Minecraft.getInstance();
+
+            final var nextProgress = (float) (instance.timerDuration - instance.timerTicks) / (float) instance.timerDuration;
+
+            if (windowWidth != minecraft.getWindow().getGuiScaledWidth())
+            {
+                windowWidth = minecraft.getWindow().getGuiScaledWidth();
+                progress = nextProgress;
+            } else
+            {
+                progress = Mth.lerp(deltaTime * 2.0f, progress, nextProgress);
+            }
+
+            if (Float.isNaN(progress))
+            {
+                progress = 0;
+            }
+
+            graphics.fill(
+                    0,
+                    0,
+                    windowWidth,
+                    10,
+                    BACKGROUND_COLOR
+            );
+
+            graphics.fill(
+                    0,
+                    0,
+                    (int) Math.floor(progress * windowWidth),
+                    10,
+                    0xFF1144CC
+            );
+        }
     }
 }

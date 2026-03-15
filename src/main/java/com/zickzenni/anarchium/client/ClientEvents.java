@@ -61,7 +61,7 @@ public final class ClientEvents
     @SubscribeEvent
     public static void onPostRenderGui(RenderGuiEvent.Post event)
     {
-        AnarchiumGUI.render(event.getGuiGraphics());
+        AnarchiumGUI.render(event.getGuiGraphics(), event.getPartialTick().getRealtimeDeltaTicks());
     }
 
     @SubscribeEvent
