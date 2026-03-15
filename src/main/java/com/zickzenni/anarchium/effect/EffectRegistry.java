@@ -60,6 +60,7 @@ public class EffectRegistry
         register(DamagePlayersEffect.ID, DamagePlayersEffect.SUPPLIER);
         register(FatiguePotionEffect.ID, FatiguePotionEffect.SUPPLIER);
         register(BlindnessPotionEffect.ID, BlindnessPotionEffect.SUPPLIER);
+        register(NoJumpingEffect.ID, NoJumpingEffect.SUPPLIER);
 
         frozen = true;
         LOGGER.info("Registered {} effects", SUPPLIERS.size());

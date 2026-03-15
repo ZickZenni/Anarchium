@@ -4,7 +4,8 @@
   "package": "com.zickzenni.anarchium.mixin",
   "compatibilityLevel": "JAVA_21",
   "mixins": [
-    "server.EntityMixin"
+    "server.EntityMixin",
+    "server.PlayerMixin"
   ],
   "client": [
     "client.CameraMixin",
