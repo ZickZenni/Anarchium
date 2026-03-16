@@ -11,6 +11,8 @@ public class AnarchiumClient
 
     public static final Logger LOGGER = LogUtils.getLogger();
 
+    private final AnarchiumGui gui;
+
     public int timerTicks;
 
     public int timerDuration;
@@ -19,7 +21,7 @@ public class AnarchiumClient
 
     private AnarchiumClient()
     {
-
+        this.gui = new AnarchiumGui();
     }
 
     public void processLevelTick(ClientLevel level, LevelTickStage stage)
@@ -48,5 +50,10 @@ public class AnarchiumClient
     public static AnarchiumClient getInstance()
     {
         return INSTANCE;
+    }
+
+    public AnarchiumGui getGui()
+    {
+        return this.gui;
     }
 }

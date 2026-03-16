@@ -53,7 +53,7 @@ public final class ClientEvents
     public static void onPostRenderGui(RenderGuiEvent.Post event)
     {
         ClientEffectManager.sendRenderGuiEvent(event);
-        AnarchiumGUI.render(event.getGuiGraphics(), event.getPartialTick().getRealtimeDeltaTicks());
+        AnarchiumClient.getInstance().getGui().render(event);
     }
 
     // ========================================

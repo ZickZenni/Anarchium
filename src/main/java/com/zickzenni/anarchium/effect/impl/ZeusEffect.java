@@ -1,7 +1,7 @@
 package com.zickzenni.anarchium.effect.impl;
 
 import com.zickzenni.anarchium.Anarchium;
-import com.zickzenni.anarchium.AnarchiumSounds;
+import com.zickzenni.anarchium.registry.SoundRegistry;
 import com.zickzenni.anarchium.effect.EffectSupplier;
 import com.zickzenni.anarchium.effect.InstantEffect;
 import com.zickzenni.anarchium.util.LevelTickStage;
@@ -91,6 +91,6 @@ public class ZeusEffect extends InstantEffect
     @Override
     public Holder<SoundEvent> getDispatchSound()
     {
-        return AnarchiumSounds.ZEUS_EFFECT_SOUND;
+        return SoundRegistry.ZEUS_EFFECT_SOUND;
     }
 }

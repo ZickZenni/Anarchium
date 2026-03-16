@@ -1,6 +1,6 @@
 package com.zickzenni.anarchium.effect;
 
-import com.zickzenni.anarchium.AnarchiumSounds;
+import com.zickzenni.anarchium.registry.SoundRegistry;
 import net.minecraft.core.Holder;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
@@ -30,7 +30,7 @@ public abstract class BaseEffect implements Effect
     @Override
     public Holder<SoundEvent> getDispatchSound()
     {
-        return AnarchiumSounds.DISPATCH_EFFECT_SOUND;
+        return SoundRegistry.DISPATCH_EFFECT_SOUND;
     }
 
     /**

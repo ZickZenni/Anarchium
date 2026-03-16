@@ -2,7 +2,7 @@ package com.zickzenni.anarchium.client;
 
 import com.mojang.logging.LogUtils;
 import com.zickzenni.anarchium.effect.Effect;
-import com.zickzenni.anarchium.effect.EffectRegistry;
+import com.zickzenni.anarchium.registry.EffectRegistry;
 import com.zickzenni.anarchium.util.LevelTickStage;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.ClientLevel;

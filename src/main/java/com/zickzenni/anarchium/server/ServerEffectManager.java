@@ -2,10 +2,11 @@ package com.zickzenni.anarchium.server;
 
 import com.mojang.logging.LogUtils;
 import com.zickzenni.anarchium.effect.*;
-import com.zickzenni.anarchium.network.packets.ActivateEffectPacket;
-import com.zickzenni.anarchium.network.packets.EndEffectPacket;
-import com.zickzenni.anarchium.network.packets.TickEffectPacket;
-import com.zickzenni.anarchium.network.packets.TimerTickPacket;
+import com.zickzenni.anarchium.network.packet.ActivateEffectPacket;
+import com.zickzenni.anarchium.network.packet.EndEffectPacket;
+import com.zickzenni.anarchium.network.packet.TickEffectPacket;
+import com.zickzenni.anarchium.network.packet.TimerTickPacket;
+import com.zickzenni.anarchium.registry.EffectRegistry;
 import com.zickzenni.anarchium.util.LevelTickStage;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;

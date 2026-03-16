@@ -1,4 +1,4 @@
-package com.zickzenni.anarchium.network.packets;
+package com.zickzenni.anarchium.network.packet;
 
 import com.zickzenni.anarchium.Anarchium;
 import io.netty.buffer.ByteBuf;
