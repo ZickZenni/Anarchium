@@ -15,7 +15,7 @@ public abstract class OptionsMixin
     {
         if (BlurryScreenEffect.ENABLED)
         {
-            cir.setReturnValue(BlurryScreenEffect.BLUR_RADIUS);
+            cir.setReturnValue(BlurryScreenEffect.BLUR_RADIUS.get());
         }
     }
 }

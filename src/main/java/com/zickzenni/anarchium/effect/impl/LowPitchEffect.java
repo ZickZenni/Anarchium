@@ -5,19 +5,25 @@ import com.zickzenni.anarchium.effect.EffectProperties;
 import com.zickzenni.anarchium.effect.TimedEffect;
 import com.zickzenni.anarchium.util.LevelTickStage;
 import net.minecraft.client.multiplayer.ClientLevel;
+import net.neoforged.neoforge.common.ModConfigSpec;
 
 public class LowPitchEffect extends TimedEffect
 {
+    public static ModConfigSpec.ConfigValue<Integer> DURATION;
+
     public static final EffectProperties<LowPitchEffect> PROPERTIES =
             EffectProperties.Builder.of(LowPitchEffect.class)
                     .id("low_pitch")
                     .supplier(LowPitchEffect::new)
                     .conflict(HighPitchEffect.class)
+                    .configure(LowPitchEffect::configure)
                     .build();
+
+    // ======================================================
 
     public LowPitchEffect()
     {
-        super(PROPERTIES.getId(), 20 * 30);
+        super(PROPERTIES.getId(), DURATION.get());
     }
 
     @Override
@@ -39,5 +45,12 @@ public class LowPitchEffect extends TimedEffect
         EffectStates.enableCustomPitch = true;
 
         super.onLevelTickClient(level, stage);
+    }
+
+    // ======================================================
+
+    private static void configure(ModConfigSpec.Builder builder)
+    {
+        DURATION = builder.define("duration", 20 * 45);
     }
 }

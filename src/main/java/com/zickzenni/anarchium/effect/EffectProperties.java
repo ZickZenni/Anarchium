@@ -2,6 +2,7 @@ package com.zickzenni.anarchium.effect;
 
 import com.zickzenni.anarchium.Anarchium;
 import net.minecraft.resources.ResourceLocation;
+import net.neoforged.neoforge.common.ModConfigSpec;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,15 +21,19 @@ public class EffectProperties<T extends Effect>
 
     private final List<Class<? extends Effect>> conflicts;
 
+    private final EffectConfigurer configurer;
+
     private EffectProperties(Class<T> clazz,
                              ResourceLocation id,
                              EffectSupplier<T> supplier,
-                             List<Class<? extends Effect>> conflicts)
+                             List<Class<? extends Effect>> conflicts,
+                             EffectConfigurer configurer)
     {
         this.clazz = clazz;
         this.id = id;
         this.supplier = supplier;
         this.conflicts = conflicts;
+        this.configurer = configurer;
     }
 
     /**
@@ -64,6 +69,11 @@ public class EffectProperties<T extends Effect>
         return conflicts;
     }
 
+    public EffectConfigurer getConfigurer()
+    {
+        return configurer;
+    }
+
     // ===================================================
 
     /**
@@ -80,6 +90,8 @@ public class EffectProperties<T extends Effect>
         private EffectSupplier<T> supplier;
 
         private final List<Class<? extends Effect>> conflicts;
+
+        private EffectConfigurer configurer;
 
         private Builder(Class<T> clazz)
         {
@@ -122,12 +134,18 @@ public class EffectProperties<T extends Effect>
             return this;
         }
 
+        public Builder<T> configure(EffectConfigurer configurer)
+        {
+            this.configurer = configurer;
+            return this;
+        }
+
         public EffectProperties<T> build()
         {
             Objects.requireNonNull(this.clazz, "Class must not be null");
             Objects.requireNonNull(this.id, "Id must not be null");
 
-            return new EffectProperties<>(this.clazz, this.id, this.supplier, this.conflicts);
+            return new EffectProperties<>(this.clazz, this.id, this.supplier, this.conflicts, this.configurer);
         }
     }
 
@@ -143,5 +161,11 @@ public class EffectProperties<T extends Effect>
     {
         @SuppressWarnings("unused")
         T create();
+    }
+
+    @FunctionalInterface
+    public interface EffectConfigurer
+    {
+        void configure(ModConfigSpec.Builder builder);
     }
 }

@@ -5,19 +5,25 @@ import com.zickzenni.anarchium.effect.EffectProperties;
 import com.zickzenni.anarchium.effect.TimedEffect;
 import net.minecraft.client.Minecraft;
 import net.neoforged.neoforge.client.event.RenderLevelStageEvent;
+import net.neoforged.neoforge.common.ModConfigSpec;
 
 public class NegativeFieldOfViewEffect extends TimedEffect
 {
+    public static ModConfigSpec.ConfigValue<Integer> DURATION;
+
     public static final EffectProperties<NegativeFieldOfViewEffect> PROPERTIES =
             EffectProperties.Builder.of(NegativeFieldOfViewEffect.class)
                     .id("negative_field_of_view")
                     .supplier(NegativeFieldOfViewEffect::new)
                     .conflict(QuakeFieldOfViewEffect.class)
+                    .configure(NegativeFieldOfViewEffect::configure)
                     .build();
+
+    // ======================================================
 
     public NegativeFieldOfViewEffect()
     {
-        super(PROPERTIES.getId(), 300);
+        super(PROPERTIES.getId(), DURATION.get());
     }
 
     @Override
@@ -40,6 +46,13 @@ public class NegativeFieldOfViewEffect extends TimedEffect
         {
             EffectStates.customFOV = -Minecraft.getInstance().options.fov().get();
         }
+    }
+
+    // ======================================================
+
+    private static void configure(ModConfigSpec.Builder builder)
+    {
+        DURATION = builder.define("duration", 20 * 15);
     }
 }
 

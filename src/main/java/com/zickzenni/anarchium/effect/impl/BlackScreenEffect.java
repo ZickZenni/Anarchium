@@ -4,19 +4,25 @@ import com.zickzenni.anarchium.effect.EffectProperties;
 import com.zickzenni.anarchium.effect.TimedEffect;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
+import net.neoforged.neoforge.common.ModConfigSpec;
 
 public class BlackScreenEffect extends TimedEffect
 {
+    public static ModConfigSpec.ConfigValue<Integer> DURATION;
+
     public static final EffectProperties<BlackScreenEffect> PROPERTIES =
             EffectProperties.Builder.of(BlackScreenEffect.class)
                     .id("black_screen")
                     .supplier(BlackScreenEffect::new)
                     .conflict(PortraitEffect.class)
+                    .configure(BlackScreenEffect::configure)
                     .build();
+
+    // ======================================================
 
     public BlackScreenEffect()
     {
-        super(PROPERTIES.getId(), 20 * 33);
+        super(PROPERTIES.getId(), DURATION.get());
     }
 
     @Override
@@ -27,5 +33,12 @@ public class BlackScreenEffect extends TimedEffect
         var height = window.getGuiScaledHeight();
 
         graphics.fill(0, 0, width, height, 0xFF000000);
+    }
+
+    // ======================================================
+
+    private static void configure(ModConfigSpec.Builder builder)
+    {
+        DURATION = builder.define("duration", 20 * 33);
     }
 }

@@ -6,16 +6,20 @@ import com.zickzenni.anarchium.server.AnarchiumServer;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.phys.AABB;
+import net.neoforged.neoforge.common.ModConfigSpec;
 
 public class BurnNearbyMobsEffect extends InstantEffect
 {
+    public static ModConfigSpec.ConfigValue<Integer> RADIUS;
+
     public static final EffectProperties<BurnNearbyMobsEffect> PROPERTIES =
             EffectProperties.Builder.of(BurnNearbyMobsEffect.class)
                     .id("burn_nearby_mobs")
                     .supplier(BurnNearbyMobsEffect::new)
+                    .configure(BurnNearbyMobsEffect::configure)
                     .build();
 
-    public static final float RADIUS = 50;
+    // ======================================================
 
     public BurnNearbyMobsEffect()
     {
@@ -27,9 +31,11 @@ public class BurnNearbyMobsEffect extends InstantEffect
     {
         for (var player : AnarchiumServer.getPlayers())
         {
+            int radius = RADIUS.get();
             var level = player.serverLevel();
             var playerPosition = player.position();
-            var entities = level.getEntities(player, new AABB(playerPosition.add(RADIUS, RADIUS, RADIUS), playerPosition.add(-RADIUS, -RADIUS, -RADIUS)));
+            var entities =
+                    level.getEntities(player, new AABB(playerPosition.add(radius, radius, radius), playerPosition.add(-radius, -radius, -radius)));
 
             for (var entity : entities)
             {
@@ -41,5 +47,12 @@ public class BurnNearbyMobsEffect extends InstantEffect
                 entity.igniteForSeconds(8.0f);
             }
         }
+    }
+
+    // ======================================================
+
+    private static void configure(ModConfigSpec.Builder builder)
+    {
+        RADIUS = builder.define("radius", 50);
     }
 }

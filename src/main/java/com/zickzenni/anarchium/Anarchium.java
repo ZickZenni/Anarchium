@@ -5,18 +5,19 @@ import com.zickzenni.anarchium.client.network.handler.ActivateEffectPacketHandle
 import com.zickzenni.anarchium.client.network.handler.EndEffectPacketHandler;
 import com.zickzenni.anarchium.client.network.handler.TickEffectPacketHandler;
 import com.zickzenni.anarchium.client.network.handler.TimerTickPacketHandler;
-import com.zickzenni.anarchium.registry.SoundRegistry;
-import com.zickzenni.anarchium.registry.EffectRegistry;
 import com.zickzenni.anarchium.network.packet.ActivateEffectPacket;
 import com.zickzenni.anarchium.network.packet.EndEffectPacket;
 import com.zickzenni.anarchium.network.packet.TickEffectPacket;
 import com.zickzenni.anarchium.network.packet.TimerTickPacket;
+import com.zickzenni.anarchium.registry.EffectRegistry;
+import com.zickzenni.anarchium.registry.SoundRegistry;
 import net.minecraft.resources.ResourceLocation;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.fml.ModContainer;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.fml.common.Mod;
-import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
+import net.neoforged.fml.config.ModConfig;
 import net.neoforged.neoforge.network.event.RegisterPayloadHandlersEvent;
 import org.slf4j.Logger;
 
@@ -27,15 +28,12 @@ public class Anarchium
 
     public static final Logger LOGGER = LogUtils.getLogger();
 
-    public Anarchium(IEventBus bus)
+    public Anarchium(IEventBus bus, ModContainer container)
     {
         SoundRegistry.register(bus);
-        bus.addListener(this::commonSetup);
-    }
-
-    private void commonSetup(final FMLCommonSetupEvent event)
-    {
         EffectRegistry.register();
+
+        container.registerConfig(ModConfig.Type.COMMON, EffectRegistry.getSpecs());
     }
 
     /**
