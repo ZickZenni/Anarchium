@@ -2,7 +2,6 @@ package com.zickzenni.anarchium.effect;
 
 import com.zickzenni.anarchium.Anarchium;
 import net.minecraft.resources.ResourceLocation;
-import net.neoforged.neoforge.common.ModConfigSpec;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,19 +20,19 @@ public class EffectProperties<T extends Effect>
 
     private final List<Class<? extends Effect>> conflicts;
 
-    private final EffectConfigurer configurer;
+    private final List<ConfigValue<?>> config;
 
     private EffectProperties(Class<T> clazz,
                              ResourceLocation id,
                              EffectSupplier<T> supplier,
                              List<Class<? extends Effect>> conflicts,
-                             EffectConfigurer configurer)
+                             List<ConfigValue<?>> config)
     {
         this.clazz = clazz;
         this.id = id;
         this.supplier = supplier;
         this.conflicts = conflicts;
-        this.configurer = configurer;
+        this.config = config;
     }
 
     /**
@@ -69,9 +68,12 @@ public class EffectProperties<T extends Effect>
         return conflicts;
     }
 
-    public EffectConfigurer getConfigurer()
+    /**
+     * Retrieves the list of config values.
+     */
+    public List<ConfigValue<?>> getConfig()
     {
-        return configurer;
+        return config;
     }
 
     // ===================================================
@@ -91,12 +93,13 @@ public class EffectProperties<T extends Effect>
 
         private final List<Class<? extends Effect>> conflicts;
 
-        private EffectConfigurer configurer;
+        private final List<ConfigValue<?>> config;
 
         private Builder(Class<T> clazz)
         {
             this.clazz = clazz;
             this.conflicts = new ArrayList<>();
+            this.config = new ArrayList<>();
         }
 
         public static <T extends Effect> Builder<T> of(Class<T> clazz)
@@ -134,9 +137,9 @@ public class EffectProperties<T extends Effect>
             return this;
         }
 
-        public Builder<T> configure(EffectConfigurer configurer)
+        public Builder<T> config(ConfigValue<?> value)
         {
-            this.configurer = configurer;
+            this.config.add(value);
             return this;
         }
 
@@ -145,7 +148,7 @@ public class EffectProperties<T extends Effect>
             Objects.requireNonNull(this.clazz, "Class must not be null");
             Objects.requireNonNull(this.id, "Id must not be null");
 
-            return new EffectProperties<>(this.clazz, this.id, this.supplier, this.conflicts, this.configurer);
+            return new EffectProperties<>(this.clazz, this.id, this.supplier, this.conflicts, this.config);
         }
     }
 
@@ -161,11 +164,5 @@ public class EffectProperties<T extends Effect>
     {
         @SuppressWarnings("unused")
         T create();
-    }
-
-    @FunctionalInterface
-    public interface EffectConfigurer
-    {
-        void configure(ModConfigSpec.Builder builder);
     }
 }

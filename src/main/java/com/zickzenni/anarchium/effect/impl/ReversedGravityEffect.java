@@ -1,23 +1,23 @@
 package com.zickzenni.anarchium.effect.impl;
 
+import com.zickzenni.anarchium.effect.ConfigValue;
 import com.zickzenni.anarchium.effect.EffectProperties;
 import com.zickzenni.anarchium.effect.TimedEffect;
 import com.zickzenni.anarchium.util.LevelTickStage;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.server.level.ServerLevel;
-import net.neoforged.neoforge.common.ModConfigSpec;
 
 public class ReversedGravityEffect extends TimedEffect
 {
-    public static ModConfigSpec.ConfigValue<Integer> DURATION;
+    public static final ConfigValue<Integer> DURATION = ConfigValue.newInteger("duration", 20 * 30);
 
     public static final EffectProperties<ReversedGravityEffect> PROPERTIES =
             EffectProperties.Builder.of(ReversedGravityEffect.class)
                     .id("reversed_gravity")
                     .supplier(ReversedGravityEffect::new)
                     .conflict(NoGravityEffect.class)
-                    .configure(ReversedGravityEffect::configure)
+                    .config(DURATION)
                     .build();
 
     // ======================================================
@@ -75,12 +75,5 @@ public class ReversedGravityEffect extends TimedEffect
         }
 
         super.onLevelTickClient(level, stage);
-    }
-
-    // ======================================================
-
-    private static void configure(ModConfigSpec.Builder builder)
-    {
-        DURATION = builder.define("duration", 20 * 30);
     }
 }

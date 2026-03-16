@@ -1,18 +1,18 @@
 package com.zickzenni.anarchium.effect.impl;
 
+import com.zickzenni.anarchium.effect.ConfigValue;
 import com.zickzenni.anarchium.effect.EffectProperties;
 import com.zickzenni.anarchium.effect.TimedEffect;
-import net.neoforged.neoforge.common.ModConfigSpec;
 
 public class WhereIsTheSkyEffect extends TimedEffect
 {
-    public static ModConfigSpec.ConfigValue<Integer> DURATION;
+    public static final ConfigValue<Integer> DURATION = ConfigValue.newInteger("duration", 20 * 35);
 
     public static final EffectProperties<WhereIsTheSkyEffect> PROPERTIES =
             EffectProperties.Builder.of(WhereIsTheSkyEffect.class)
                     .id("where_is_the_sky")
                     .supplier(WhereIsTheSkyEffect::new)
-                    .configure(WhereIsTheSkyEffect::configure)
+                    .config(DURATION)
                     .build();
 
     // ======================================================
@@ -34,12 +34,5 @@ public class WhereIsTheSkyEffect extends TimedEffect
     public void onEndClient()
     {
         ENABLED = false;
-    }
-
-    // ======================================================
-
-    private static void configure(ModConfigSpec.Builder builder)
-    {
-        DURATION = builder.define("duration", 20 * 35);
     }
 }

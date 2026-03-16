@@ -1,22 +1,23 @@
 package com.zickzenni.anarchium.effect.impl;
 
 import com.zickzenni.anarchium.client.EffectStates;
+import com.zickzenni.anarchium.effect.ConfigValue;
 import com.zickzenni.anarchium.effect.EffectProperties;
 import com.zickzenni.anarchium.effect.TimedEffect;
 import net.neoforged.neoforge.client.event.RenderLevelStageEvent;
-import net.neoforged.neoforge.common.ModConfigSpec;
 
 public class SpinningMobsEffect extends TimedEffect
 {
-    public static ModConfigSpec.ConfigValue<Integer> DURATION;
+    public static final ConfigValue<Integer> DURATION = ConfigValue.newInteger("duration", 20 * 35);
 
-    public static ModConfigSpec.ConfigValue<Double> SPEED;
+    public static final ConfigValue<Double> SPEED = ConfigValue.newDoubleInRange("speed", 16.4, 0.0, 250.0);
 
     public static final EffectProperties<SpinningMobsEffect> PROPERTIES =
             EffectProperties.Builder.of(SpinningMobsEffect.class)
                     .id("spinning_mobs")
                     .supplier(SpinningMobsEffect::new)
-                    .configure(SpinningMobsEffect::configure)
+                    .config(DURATION)
+                    .config(SPEED)
                     .build();
 
     // ======================================================
@@ -46,13 +47,5 @@ public class SpinningMobsEffect extends TimedEffect
         {
             EffectStates.spinningLivingEntityRotation -= SPEED.get().floatValue() * deltaTime;
         }
-    }
-
-    // ======================================================
-
-    private static void configure(ModConfigSpec.Builder builder)
-    {
-        DURATION = builder.define("duration", 20 * 35);
-        SPEED = builder.defineInRange("speed", 16.4, 0.0, 250.0);
     }
 }

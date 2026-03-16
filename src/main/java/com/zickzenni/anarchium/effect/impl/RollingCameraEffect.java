@@ -1,21 +1,22 @@
 package com.zickzenni.anarchium.effect.impl;
 
+import com.zickzenni.anarchium.effect.ConfigValue;
 import com.zickzenni.anarchium.effect.EffectProperties;
 import com.zickzenni.anarchium.effect.TimedEffect;
 import net.neoforged.neoforge.client.event.RenderLevelStageEvent;
-import net.neoforged.neoforge.common.ModConfigSpec;
 
 public class RollingCameraEffect extends TimedEffect
 {
-    public static ModConfigSpec.ConfigValue<Integer> DURATION;
+    public static final ConfigValue<Integer> DURATION = ConfigValue.newInteger("duration", 20 * 30);
 
-    public static ModConfigSpec.ConfigValue<Double> SPEED;
+    public static final ConfigValue<Double> SPEED = ConfigValue.newDoubleInRange("speed", 7.67, 0.0, 250.0);
 
     public static final EffectProperties<RollingCameraEffect> PROPERTIES =
             EffectProperties.Builder.of(RollingCameraEffect.class)
                     .id("rolling_camera")
                     .supplier(RollingCameraEffect::new)
-                    .configure(RollingCameraEffect::configure)
+                    .config(DURATION)
+                    .config(SPEED)
                     .build();
 
     // ======================================================
@@ -48,14 +49,6 @@ public class RollingCameraEffect extends TimedEffect
         {
             ROTATION += SPEED.get().floatValue() * deltaTime;
         }
-    }
-
-    // ======================================================
-
-    private static void configure(ModConfigSpec.Builder builder)
-    {
-        DURATION = builder.define("duration", 20 * 30);
-        SPEED = builder.defineInRange("speed", 7.67, 0.0, 250.0);
     }
 }
 

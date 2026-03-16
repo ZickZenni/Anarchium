@@ -1,5 +1,6 @@
 package com.zickzenni.anarchium.effect.impl;
 
+import com.zickzenni.anarchium.effect.ConfigValue;
 import com.zickzenni.anarchium.effect.EffectProperties;
 import com.zickzenni.anarchium.effect.TimedEffect;
 import com.zickzenni.anarchium.server.AnarchiumServer;
@@ -7,19 +8,19 @@ import com.zickzenni.anarchium.util.LevelTickStage;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.phys.AABB;
-import net.neoforged.neoforge.common.ModConfigSpec;
 
 public class EntityMagnetEffect extends TimedEffect
 {
-    public static ModConfigSpec.ConfigValue<Integer> DURATION;
+    public static final ConfigValue<Integer> DURATION = ConfigValue.newInteger("duration", 20 * 30);
 
-    public static ModConfigSpec.ConfigValue<Integer> RADIUS;
+    public static final ConfigValue<Integer> RADIUS = ConfigValue.newInteger("radius", 10);
 
     public static final EffectProperties<EntityMagnetEffect> PROPERTIES =
             EffectProperties.Builder.of(EntityMagnetEffect.class)
                     .id("entity_magnet")
                     .supplier(EntityMagnetEffect::new)
-                    .configure(EntityMagnetEffect::configure)
+                    .config(DURATION)
+                    .config(RADIUS)
                     .build();
 
     // ======================================================
@@ -71,13 +72,5 @@ public class EntityMagnetEffect extends TimedEffect
         }
 
         super.onLevelTickServer(ignoredLevel, stage);
-    }
-
-    // ======================================================
-
-    private static void configure(ModConfigSpec.Builder builder)
-    {
-        DURATION = builder.define("duration", 20 * 30);
-        RADIUS = builder.define("radius", 10);
     }
 }

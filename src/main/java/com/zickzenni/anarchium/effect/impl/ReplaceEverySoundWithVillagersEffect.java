@@ -1,19 +1,19 @@
 package com.zickzenni.anarchium.effect.impl;
 
 import com.zickzenni.anarchium.client.EffectStates;
+import com.zickzenni.anarchium.effect.ConfigValue;
 import com.zickzenni.anarchium.effect.EffectProperties;
 import com.zickzenni.anarchium.effect.TimedEffect;
-import net.neoforged.neoforge.common.ModConfigSpec;
 
 public class ReplaceEverySoundWithVillagersEffect extends TimedEffect
 {
-    public static ModConfigSpec.ConfigValue<Integer> DURATION;
+    public static final ConfigValue<Integer> DURATION = ConfigValue.newInteger("duration", 20 * 30);
 
     public static final EffectProperties<ReplaceEverySoundWithVillagersEffect> PROPERTIES =
             EffectProperties.Builder.of(ReplaceEverySoundWithVillagersEffect.class)
                     .id("replace_every_sound_with_villagers")
                     .supplier(ReplaceEverySoundWithVillagersEffect::new)
-                    .configure(ReplaceEverySoundWithVillagersEffect::configure)
+                    .config(DURATION)
                     .build();
 
     // ======================================================
@@ -33,12 +33,5 @@ public class ReplaceEverySoundWithVillagersEffect extends TimedEffect
     public void onEndClient()
     {
         EffectStates.enableReplaceEverySoundWithVillagers = false;
-    }
-
-    // ======================================================
-
-    private static void configure(ModConfigSpec.Builder builder)
-    {
-        DURATION = builder.define("duration", 20 * 30);
     }
 }

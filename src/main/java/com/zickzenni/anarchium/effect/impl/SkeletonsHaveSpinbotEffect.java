@@ -1,21 +1,22 @@
 package com.zickzenni.anarchium.effect.impl;
 
+import com.zickzenni.anarchium.effect.ConfigValue;
 import com.zickzenni.anarchium.effect.EffectProperties;
 import com.zickzenni.anarchium.effect.TimedEffect;
 import net.neoforged.neoforge.client.event.RenderLevelStageEvent;
-import net.neoforged.neoforge.common.ModConfigSpec;
 
 public class SkeletonsHaveSpinbotEffect extends TimedEffect
 {
-    public static ModConfigSpec.ConfigValue<Integer> DURATION;
+    public static final ConfigValue<Integer> DURATION = ConfigValue.newInteger("duration", 20 * 40);
 
-    public static ModConfigSpec.ConfigValue<Double> SPEED;
+    public static final ConfigValue<Double> SPEED = ConfigValue.newDoubleInRange("speed", 72.4, 0.0, 400.0);
 
     public static final EffectProperties<SkeletonsHaveSpinbotEffect> PROPERTIES =
             EffectProperties.Builder.of(SkeletonsHaveSpinbotEffect.class)
                     .id("skeletons_have_spinbot")
                     .supplier(SkeletonsHaveSpinbotEffect::new)
-                    .configure(SkeletonsHaveSpinbotEffect::configure)
+                    .config(DURATION)
+                    .config(SPEED)
                     .build();
 
     // ======================================================
@@ -48,13 +49,5 @@ public class SkeletonsHaveSpinbotEffect extends TimedEffect
         {
             ROTATION -= SPEED.get().floatValue() * deltaTime;
         }
-    }
-
-    // ======================================================
-
-    private static void configure(ModConfigSpec.Builder builder)
-    {
-        DURATION = builder.define("duration", 20 * 40);
-        SPEED = builder.defineInRange("speed", 72.4, 0.0, 400.0);
     }
 }

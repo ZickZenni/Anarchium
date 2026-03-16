@@ -1,19 +1,19 @@
 package com.zickzenni.anarchium.effect.impl;
 
+import com.zickzenni.anarchium.effect.ConfigValue;
 import com.zickzenni.anarchium.effect.EffectProperties;
 import com.zickzenni.anarchium.effect.TimedEffect;
-import net.neoforged.neoforge.common.ModConfigSpec;
 
 public class ForceSneakEffect extends TimedEffect
 {
-    public static ModConfigSpec.ConfigValue<Integer> DURATION;
+    public static final ConfigValue<Integer> DURATION = ConfigValue.newInteger("duration", 20 * 30);
 
     public static final EffectProperties<ForceSneakEffect> PROPERTIES =
             EffectProperties.Builder.of(ForceSneakEffect.class)
                     .id("force_sneak")
                     .supplier(ForceSneakEffect::new)
                     .conflict(NoGravityEffect.class)
-                    .configure(ForceSneakEffect::configure)
+                    .config(DURATION)
                     .build();
 
     // ======================================================
@@ -35,12 +35,5 @@ public class ForceSneakEffect extends TimedEffect
     public void onEndClient()
     {
         ENABLED = false;
-    }
-
-    // ======================================================
-
-    private static void configure(ModConfigSpec.Builder builder)
-    {
-        DURATION = builder.define("duration", 20 * 30);
     }
 }

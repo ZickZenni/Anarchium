@@ -1,14 +1,8 @@
 package com.zickzenni.anarchium;
 
 import com.mojang.logging.LogUtils;
-import com.zickzenni.anarchium.client.network.handler.ActivateEffectPacketHandler;
-import com.zickzenni.anarchium.client.network.handler.EndEffectPacketHandler;
-import com.zickzenni.anarchium.client.network.handler.TickEffectPacketHandler;
-import com.zickzenni.anarchium.client.network.handler.TimerTickPacketHandler;
-import com.zickzenni.anarchium.network.packet.ActivateEffectPacket;
-import com.zickzenni.anarchium.network.packet.EndEffectPacket;
-import com.zickzenni.anarchium.network.packet.TickEffectPacket;
-import com.zickzenni.anarchium.network.packet.TimerTickPacket;
+import com.zickzenni.anarchium.client.network.handler.*;
+import com.zickzenni.anarchium.network.packet.*;
 import com.zickzenni.anarchium.registry.EffectRegistry;
 import com.zickzenni.anarchium.registry.SoundRegistry;
 import net.minecraft.resources.ResourceLocation;
@@ -55,6 +49,7 @@ public class Anarchium
             registrar.playToClient(EndEffectPacket.TYPE, EndEffectPacket.STREAM_CODEC, EndEffectPacketHandler::handle);
             registrar.playToClient(TickEffectPacket.TYPE, TickEffectPacket.STREAM_CODEC, TickEffectPacketHandler::handle);
             registrar.playToClient(TimerTickPacket.TYPE, TimerTickPacket.STREAM_CODEC, TimerTickPacketHandler::handle);
+            registrar.playToClient(ConfigurationPacket.TYPE, ConfigurationPacket.STREAM_CODEC, ConfigurationPacketHandler::handle);
         }
     }
 }

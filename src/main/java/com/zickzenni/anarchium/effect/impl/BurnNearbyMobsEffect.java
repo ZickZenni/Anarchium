@@ -1,22 +1,22 @@
 package com.zickzenni.anarchium.effect.impl;
 
+import com.zickzenni.anarchium.effect.ConfigValue;
 import com.zickzenni.anarchium.effect.EffectProperties;
 import com.zickzenni.anarchium.effect.InstantEffect;
 import com.zickzenni.anarchium.server.AnarchiumServer;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.phys.AABB;
-import net.neoforged.neoforge.common.ModConfigSpec;
 
 public class BurnNearbyMobsEffect extends InstantEffect
 {
-    public static ModConfigSpec.ConfigValue<Integer> RADIUS;
+    public static final ConfigValue<Integer> RADIUS = ConfigValue.newInteger("radius", 50);
 
     public static final EffectProperties<BurnNearbyMobsEffect> PROPERTIES =
             EffectProperties.Builder.of(BurnNearbyMobsEffect.class)
                     .id("burn_nearby_mobs")
                     .supplier(BurnNearbyMobsEffect::new)
-                    .configure(BurnNearbyMobsEffect::configure)
+                    .config(RADIUS)
                     .build();
 
     // ======================================================
@@ -47,12 +47,5 @@ public class BurnNearbyMobsEffect extends InstantEffect
                 entity.igniteForSeconds(8.0f);
             }
         }
-    }
-
-    // ======================================================
-
-    private static void configure(ModConfigSpec.Builder builder)
-    {
-        RADIUS = builder.define("radius", 50);
     }
 }

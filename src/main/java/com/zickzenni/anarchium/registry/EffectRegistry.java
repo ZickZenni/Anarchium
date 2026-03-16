@@ -104,9 +104,9 @@ public class EffectRegistry
         {
             builder.push(property.getId().toString());
 
-            if (property.getConfigurer() != null)
+            for (var value : property.getConfig())
             {
-                property.getConfigurer().configure(builder);
+                value.configure(builder);
             }
 
             builder.pop();

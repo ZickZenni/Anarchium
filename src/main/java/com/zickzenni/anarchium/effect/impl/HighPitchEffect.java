@@ -1,22 +1,22 @@
 package com.zickzenni.anarchium.effect.impl;
 
 import com.zickzenni.anarchium.client.EffectStates;
+import com.zickzenni.anarchium.effect.ConfigValue;
 import com.zickzenni.anarchium.effect.EffectProperties;
 import com.zickzenni.anarchium.effect.TimedEffect;
 import com.zickzenni.anarchium.util.LevelTickStage;
 import net.minecraft.client.multiplayer.ClientLevel;
-import net.neoforged.neoforge.common.ModConfigSpec;
 
 public class HighPitchEffect extends TimedEffect
 {
-    public static ModConfigSpec.ConfigValue<Integer> DURATION;
+    public static final ConfigValue<Integer> DURATION = ConfigValue.newInteger("duration", 20 * 45);
 
     public static final EffectProperties<HighPitchEffect> PROPERTIES =
             EffectProperties.Builder.of(HighPitchEffect.class)
                     .id("high_pitch")
                     .supplier(HighPitchEffect::new)
                     .conflict(LowPitchEffect.class)
-                    .configure(HighPitchEffect::configure)
+                    .config(DURATION)
                     .build();
 
     // ======================================================
@@ -45,12 +45,5 @@ public class HighPitchEffect extends TimedEffect
         EffectStates.enableCustomPitch = true;
 
         super.onLevelTickClient(level, stage);
-    }
-
-    // ======================================================
-
-    private static void configure(ModConfigSpec.Builder builder)
-    {
-        DURATION = builder.define("duration", 20 * 45);
     }
 }

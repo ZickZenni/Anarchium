@@ -1,23 +1,23 @@
 
 package com.zickzenni.anarchium.effect.impl;
 
+import com.zickzenni.anarchium.effect.ConfigValue;
 import com.zickzenni.anarchium.effect.EffectProperties;
 import com.zickzenni.anarchium.effect.InstantEffect;
 import com.zickzenni.anarchium.server.AnarchiumServer;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.AABB;
-import net.neoforged.neoforge.common.ModConfigSpec;
 
 public class ExplodeNearbyEntitiesEvent extends InstantEffect
 {
-    public static ModConfigSpec.ConfigValue<Integer> RADIUS;
+    public static final ConfigValue<Integer> RADIUS = ConfigValue.newInteger("radius", 50);
 
     public static final EffectProperties<ExplodeNearbyEntitiesEvent> PROPERTIES =
             EffectProperties.Builder.of(ExplodeNearbyEntitiesEvent.class)
                     .id("explode_nearby_entities")
                     .supplier(ExplodeNearbyEntitiesEvent::new)
-                    .configure(ExplodeNearbyEntitiesEvent::configure)
+                    .config(RADIUS)
                     .build();
 
     // ======================================================
@@ -49,12 +49,5 @@ public class ExplodeNearbyEntitiesEvent extends InstantEffect
                 level.explode(player, entityPosition.x, entityPosition.y, entityPosition.z, 2.2f, Level.ExplosionInteraction.MOB);
             }
         }
-    }
-
-    // ======================================================
-
-    private static void configure(ModConfigSpec.Builder builder)
-    {
-        RADIUS = builder.define("radius", 50);
     }
 }

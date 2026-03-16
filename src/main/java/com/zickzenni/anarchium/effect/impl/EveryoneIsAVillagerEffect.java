@@ -1,20 +1,20 @@
 package com.zickzenni.anarchium.effect.impl;
 
+import com.zickzenni.anarchium.effect.ConfigValue;
 import com.zickzenni.anarchium.effect.EffectProperties;
 import com.zickzenni.anarchium.effect.TimedEffect;
 import net.minecraft.client.model.VillagerModel;
 import net.minecraft.world.entity.npc.Villager;
-import net.neoforged.neoforge.common.ModConfigSpec;
 
 public class EveryoneIsAVillagerEffect extends TimedEffect
 {
-    public static ModConfigSpec.ConfigValue<Integer> DURATION;
+    public static final ConfigValue<Integer> DURATION = ConfigValue.newInteger("duration", 20 * 50);
 
     public static final EffectProperties<EveryoneIsAVillagerEffect> PROPERTIES =
             EffectProperties.Builder.of(EveryoneIsAVillagerEffect.class)
                     .id("everyone_is_a_villager")
                     .supplier(EveryoneIsAVillagerEffect::new)
-                    .configure(EveryoneIsAVillagerEffect::configure)
+                    .config(DURATION)
                     .build();
 
     // ======================================================
@@ -38,12 +38,5 @@ public class EveryoneIsAVillagerEffect extends TimedEffect
     public void onEndClient()
     {
         ENABLED = false;
-    }
-
-    // ======================================================
-
-    private static void configure(ModConfigSpec.Builder builder)
-    {
-        DURATION = builder.define("duration", 20 * 50);
     }
 }
