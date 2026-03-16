@@ -1,15 +1,15 @@
 package com.zickzenni.anarchium.effect.impl;
 
-import com.zickzenni.anarchium.Anarchium;
-import com.zickzenni.anarchium.effect.EffectSupplier;
+import com.zickzenni.anarchium.effect.EffectProperties;
 import com.zickzenni.anarchium.effect.TimedEffect;
-import net.minecraft.resources.ResourceLocation;
 
 public class BiggerBlockEntitiesEffect extends TimedEffect
 {
-    public static final EffectSupplier<BiggerBlockEntitiesEffect> SUPPLIER = BiggerBlockEntitiesEffect::new;
-
-    public static final ResourceLocation ID = Anarchium.location("bigger_block_entities");
+    public static final EffectProperties<BiggerBlockEntitiesEffect> PROPERTIES =
+            EffectProperties.Builder.of(BiggerBlockEntitiesEffect.class)
+                    .id("bigger_block_entities")
+                    .supplier(BiggerBlockEntitiesEffect::new)
+                    .build();
 
     public static final float SCALE_MULTIPLIER = 3.0f;
 
@@ -17,7 +17,7 @@ public class BiggerBlockEntitiesEffect extends TimedEffect
 
     public BiggerBlockEntitiesEffect()
     {
-        super(ID, 20 * 45);
+        super(PROPERTIES.getId(), 20 * 45);
     }
 
     @Override

@@ -1,24 +1,24 @@
 
 package com.zickzenni.anarchium.effect.impl;
 
-import com.zickzenni.anarchium.Anarchium;
-import com.zickzenni.anarchium.effect.EffectSupplier;
+import com.zickzenni.anarchium.effect.EffectProperties;
 import com.zickzenni.anarchium.effect.InstantEffect;
 import com.zickzenni.anarchium.server.AnarchiumServer;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.AABB;
 
 public class ExplodeNearbyEntitiesEvent extends InstantEffect
 {
-    public static final EffectSupplier<ExplodeNearbyEntitiesEvent> SUPPLIER = ExplodeNearbyEntitiesEvent::new;
-
-    public static final ResourceLocation ID = Anarchium.location("explode_nearby_entities");
+    public static final EffectProperties<ExplodeNearbyEntitiesEvent> PROPERTIES =
+            EffectProperties.Builder.of(ExplodeNearbyEntitiesEvent.class)
+                    .id("explode_nearby_entities")
+                    .supplier(ExplodeNearbyEntitiesEvent::new)
+                    .build();
 
     public ExplodeNearbyEntitiesEvent()
     {
-        super(ID);
+        super(PROPERTIES.getId());
     }
 
     @Override

@@ -1,21 +1,22 @@
 package com.zickzenni.anarchium.effect.impl;
 
-import com.zickzenni.anarchium.Anarchium;
-import com.zickzenni.anarchium.effect.EffectSupplier;
+import com.zickzenni.anarchium.effect.EffectProperties;
 import com.zickzenni.anarchium.effect.TimedEffect;
-import net.minecraft.resources.ResourceLocation;
 
 public class WhereAreMyChunksEffect extends TimedEffect
 {
-    public static final EffectSupplier<WhereAreMyChunksEffect> SUPPLIER = WhereAreMyChunksEffect::new;
-
-    public static final ResourceLocation ID = Anarchium.location("where_are_my_chunks");
+    public static final EffectProperties<WhereAreMyChunksEffect> PROPERTIES =
+            EffectProperties.Builder.of(WhereAreMyChunksEffect.class)
+                    .id("where_are_my_chunks")
+                    .supplier(WhereAreMyChunksEffect::new)
+                    .conflict(BrokenWorldEffect.class)
+                    .build();
 
     public static boolean ENABLED = false;
 
     public WhereAreMyChunksEffect()
     {
-        super(ID, 20 * 35);
+        super(PROPERTIES.getId(), 20 * 35);
     }
 
     @Override

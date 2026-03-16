@@ -1,11 +1,9 @@
 package com.zickzenni.anarchium.effect.impl;
 
 import com.mojang.logging.LogUtils;
-import com.zickzenni.anarchium.Anarchium;
-import com.zickzenni.anarchium.effect.EffectSupplier;
+import com.zickzenni.anarchium.effect.EffectProperties;
 import com.zickzenni.anarchium.effect.InstantEffect;
 import com.zickzenni.anarchium.server.AnarchiumServer;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobSpawnType;
 import net.minecraft.world.entity.animal.horse.TraderLlama;
@@ -19,13 +17,15 @@ public class SpawnWanderingTraderEffect extends InstantEffect
 {
     private static final Logger LOGGER = LogUtils.getLogger();
 
-    public static final EffectSupplier<SpawnWanderingTraderEffect> SUPPLIER = SpawnWanderingTraderEffect::new;
-
-    public static final ResourceLocation ID = Anarchium.location("spawn_wandering_trader");
+    public static final EffectProperties<SpawnWanderingTraderEffect> PROPERTIES =
+            EffectProperties.Builder.of(SpawnWanderingTraderEffect.class)
+                    .id("spawn_wandering_trader")
+                    .supplier(SpawnWanderingTraderEffect::new)
+                    .build();
 
     public SpawnWanderingTraderEffect()
     {
-        super(ID);
+        super(PROPERTIES.getId());
     }
 
     @Override

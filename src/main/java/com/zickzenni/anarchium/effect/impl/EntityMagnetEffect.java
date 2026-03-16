@@ -1,26 +1,26 @@
 package com.zickzenni.anarchium.effect.impl;
 
-import com.zickzenni.anarchium.Anarchium;
-import com.zickzenni.anarchium.effect.EffectSupplier;
+import com.zickzenni.anarchium.effect.EffectProperties;
 import com.zickzenni.anarchium.effect.TimedEffect;
 import com.zickzenni.anarchium.server.AnarchiumServer;
 import com.zickzenni.anarchium.util.LevelTickStage;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.phys.AABB;
 
 public class EntityMagnetEffect extends TimedEffect
 {
-    public static final EffectSupplier<EntityMagnetEffect> SUPPLIER = EntityMagnetEffect::new;
-
-    public static final ResourceLocation ID = Anarchium.location("entity_magnet");
+    public static final EffectProperties<EntityMagnetEffect> PROPERTIES =
+            EffectProperties.Builder.of(EntityMagnetEffect.class)
+                    .id("entity_magnet")
+                    .supplier(EntityMagnetEffect::new)
+                    .build();
 
     public static final float RADIUS = 8;
 
     public EntityMagnetEffect()
     {
-        super(ID, 20 * 30);
+        super(PROPERTIES.getId(), 20 * 30);
     }
 
     @Override

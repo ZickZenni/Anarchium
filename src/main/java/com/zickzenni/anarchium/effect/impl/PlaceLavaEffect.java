@@ -1,21 +1,21 @@
 package com.zickzenni.anarchium.effect.impl;
 
-import com.zickzenni.anarchium.Anarchium;
-import com.zickzenni.anarchium.effect.EffectSupplier;
+import com.zickzenni.anarchium.effect.EffectProperties;
 import com.zickzenni.anarchium.effect.InstantEffect;
 import com.zickzenni.anarchium.server.AnarchiumServer;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.Blocks;
 
 public class PlaceLavaEffect extends InstantEffect
 {
-    public static final EffectSupplier<PlaceLavaEffect> SUPPLIER = PlaceLavaEffect::new;
-
-    public static final ResourceLocation ID = Anarchium.location("place_lava");
+    public static final EffectProperties<PlaceLavaEffect> PROPERTIES =
+            EffectProperties.Builder.of(PlaceLavaEffect.class)
+                    .id("place_lava")
+                    .supplier(PlaceLavaEffect::new)
+                    .build();
 
     public PlaceLavaEffect()
     {
-        super(ID);
+        super(PROPERTIES.getId());
     }
 
     @Override

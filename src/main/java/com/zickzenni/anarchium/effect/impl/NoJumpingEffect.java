@@ -1,21 +1,22 @@
 package com.zickzenni.anarchium.effect.impl;
 
-import com.zickzenni.anarchium.Anarchium;
-import com.zickzenni.anarchium.effect.EffectSupplier;
+import com.zickzenni.anarchium.effect.EffectProperties;
 import com.zickzenni.anarchium.effect.TimedEffect;
-import net.minecraft.resources.ResourceLocation;
 
 public class NoJumpingEffect extends TimedEffect
 {
-    public static final EffectSupplier<NoJumpingEffect> SUPPLIER = NoJumpingEffect::new;
-
-    public static final ResourceLocation ID = Anarchium.location("no_jumping");
+    public static final EffectProperties<NoJumpingEffect> PROPERTIES =
+            EffectProperties.Builder.of(NoJumpingEffect.class)
+                    .id("no_jumping")
+                    .supplier(NoJumpingEffect::new)
+                    .conflict(ForceJumpEffect.class)
+                    .build();
 
     public static boolean ENABLED = false;
 
     public NoJumpingEffect()
     {
-        super(ID, 20 * 35);
+        super(PROPERTIES.getId(), 20 * 35);
     }
 
     @Override

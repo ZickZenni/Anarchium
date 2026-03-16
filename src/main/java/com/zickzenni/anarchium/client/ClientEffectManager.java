@@ -74,15 +74,15 @@ public class ClientEffectManager
      */
     public static @Nullable Effect createEffect(ResourceLocation location)
     {
-        var supplier = EffectRegistry.getSuppliers().get(location);
+        var properties = EffectRegistry.getRegistry().get(location);
 
-        if (supplier == null)
+        if (properties == null)
         {
             LOGGER.error("Failed to get effect factory: {}", location);
             return null;
         }
 
-        var effect = supplier.create();
+        var effect = properties.getSupplier().create();
         effect.onStartClient();
 
         /*

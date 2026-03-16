@@ -1,16 +1,16 @@
 package com.zickzenni.anarchium.effect.impl;
 
-import com.zickzenni.anarchium.Anarchium;
-import com.zickzenni.anarchium.effect.EffectSupplier;
+import com.zickzenni.anarchium.effect.EffectProperties;
 import com.zickzenni.anarchium.effect.TimedEffect;
-import net.minecraft.resources.ResourceLocation;
 import net.neoforged.neoforge.client.event.RenderLevelStageEvent;
 
 public class RotatingCameraEffect extends TimedEffect
 {
-    public static final EffectSupplier<RotatingCameraEffect> SUPPLIER = RotatingCameraEffect::new;
-
-    public static final ResourceLocation ID = Anarchium.location("rotating_camera");
+    public static final EffectProperties<RotatingCameraEffect> PROPERTIES =
+            EffectProperties.Builder.of(RotatingCameraEffect.class)
+                    .id("rotating_camera")
+                    .supplier(RotatingCameraEffect::new)
+                    .build();
 
     public static boolean ENABLED = false;
 
@@ -18,7 +18,7 @@ public class RotatingCameraEffect extends TimedEffect
 
     public RotatingCameraEffect()
     {
-        super(ID, 20 * 30);
+        super(PROPERTIES.getId(), 20 * 30);
     }
 
     @Override

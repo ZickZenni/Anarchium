@@ -2,10 +2,12 @@ package com.zickzenni.anarchium.registry;
 
 import com.mojang.logging.LogUtils;
 import com.zickzenni.anarchium.effect.Effect;
-import com.zickzenni.anarchium.effect.EffectSupplier;
+import com.zickzenni.anarchium.effect.EffectProperties;
 import com.zickzenni.anarchium.effect.impl.*;
 import net.minecraft.resources.ResourceLocation;
 import org.slf4j.Logger;
+import org.slf4j.Marker;
+import org.slf4j.MarkerFactory;
 
 import java.util.Collections;
 import java.util.HashMap;
@@ -15,89 +17,88 @@ public class EffectRegistry
 {
     private static final Logger LOGGER = LogUtils.getLogger();
 
-    private static final Map<ResourceLocation, EffectSupplier<?>> SUPPLIERS = new HashMap<>();
+    private static final Marker LOADING = MarkerFactory.getMarker("LOADING");
+
+    private static final Map<ResourceLocation, EffectProperties<?>> REGISTRY = new HashMap<>();
 
     private static boolean frozen;
 
     public static void register()
     {
-        registerEffect(ReversedGravityEffect.ID, ReversedGravityEffect.SUPPLIER);
-        registerEffect(FlingPlayersEffect.ID, FlingPlayersEffect.SUPPLIER);
-        registerEffect(FakeTeleportToHeavenEffect.ID, FakeTeleportToHeavenEffect.SUPPLIER);
-        registerEffect(NegativeFieldOfViewEffect.ID, NegativeFieldOfViewEffect.SUPPLIER);
-        registerEffect(SpawnCreepersEffect.ID, SpawnCreepersEffect.SUPPLIER);
-        registerEffect(SpawnMinecartEffect.ID, SpawnMinecartEffect.SUPPLIER);
-        registerEffect(BurnPlayersEffect.ID, BurnPlayersEffect.SUPPLIER);
-        registerEffect(WideMobsEffect.ID, WideMobsEffect.SUPPLIER);
-        registerEffect(LargeEntitiesEffect.ID, LargeEntitiesEffect.SUPPLIER);
-        registerEffect(SpinningMobsEffect.ID, SpinningMobsEffect.SUPPLIER);
-        registerEffect(ZeusEffect.ID, ZeusEffect.SUPPLIER);
-        registerEffect(ForceJumpEffect.ID, ForceJumpEffect.SUPPLIER);
-        registerEffect(ReplaceEverySoundWithVillagersEffect.ID, ReplaceEverySoundWithVillagersEffect.SUPPLIER);
-        registerEffect(SuicideEffect.ID, SuicideEffect.SUPPLIER);
-        registerEffect(TeleportToHeavenEffect.ID, TeleportToHeavenEffect.SUPPLIER);
-        registerEffect(TeleportToVoidEffect.ID, TeleportToVoidEffect.SUPPLIER);
-        registerEffect(SkeletonsHaveSpinbotEffect.ID, SkeletonsHaveSpinbotEffect.SUPPLIER);
-        registerEffect(EveryoneIsAVillagerEffect.ID, EveryoneIsAVillagerEffect.SUPPLIER);
-        registerEffect(PlaceLavaEffect.ID, PlaceLavaEffect.SUPPLIER);
-        registerEffect(ExplodePlayersEffect.ID, ExplodePlayersEffect.SUPPLIER);
-        registerEffect(ExplodeNearbyEntitiesEvent.ID, ExplodeNearbyEntitiesEvent.SUPPLIER);
-        registerEffect(EntityMagnetEffect.ID, EntityMagnetEffect.SUPPLIER);
-        registerEffect(TeleportNearbyMobsToPlayersEffect.ID, TeleportNearbyMobsToPlayersEffect.SUPPLIER);
-        registerEffect(InvertVelocityEffect.ID, InvertVelocityEffect.SUPPLIER);
-        registerEffect(SpawnBoatEffect.ID, SpawnBoatEffect.SUPPLIER);
-        registerEffect(PlaceNearbyMobsIntoBoatEffect.ID, PlaceNearbyMobsIntoBoatEffect.SUPPLIER);
-        registerEffect(JailEffect.ID, JailEffect.SUPPLIER);
-        registerEffect(NoGravityEffect.ID, NoGravityEffect.SUPPLIER);
-        registerEffect(QuakeFieldOfViewEffect.ID, QuakeFieldOfViewEffect.SUPPLIER);
-        registerEffect(GetRotatedEffect.ID, GetRotatedEffect.SUPPLIER);
-        registerEffect(PortraitEffect.ID, PortraitEffect.SUPPLIER);
-        registerEffect(BlackScreenEffect.ID, BlackScreenEffect.SUPPLIER);
-        registerEffect(SpawnWanderingTraderEffect.ID, SpawnWanderingTraderEffect.SUPPLIER);
-        registerEffect(RotatingCameraEffect.ID, RotatingCameraEffect.SUPPLIER);
-        registerEffect(RollingCameraEffect.ID, RollingCameraEffect.SUPPLIER);
-        registerEffect(DropItemEffect.ID, DropItemEffect.SUPPLIER);
-        registerEffect(DropInventoryEffect.ID, DropInventoryEffect.SUPPLIER);
-        registerEffect(BlurryScreenEffect.ID, BlurryScreenEffect.SUPPLIER);
-        registerEffect(DamagePlayersEffect.ID, DamagePlayersEffect.SUPPLIER);
-        registerEffect(FatiguePotionEffect.ID, FatiguePotionEffect.SUPPLIER);
-        registerEffect(BlindnessPotionEffect.ID, BlindnessPotionEffect.SUPPLIER);
-        registerEffect(NoJumpingEffect.ID, NoJumpingEffect.SUPPLIER);
-        registerEffect(NoSneakingEffect.ID, NoSneakingEffect.SUPPLIER);
-        registerEffect(ForceSneakEffect.ID, ForceSneakEffect.SUPPLIER);
-        registerEffect(WhereAreMyChunksEffect.ID, WhereAreMyChunksEffect.SUPPLIER);
-        registerEffect(WhereIsTheSkyEffect.ID, WhereIsTheSkyEffect.SUPPLIER);
-        registerEffect(BiggerBlockEntitiesEffect.ID, BiggerBlockEntitiesEffect.SUPPLIER);
-        registerEffect(BurnNearbyMobsEffect.ID, BurnNearbyMobsEffect.SUPPLIER);
-        registerEffect(HighPitchEffect.ID, HighPitchEffect.SUPPLIER);
-        registerEffect(LowPitchEffect.ID, LowPitchEffect.SUPPLIER);
-        registerEffect(BrokenWorldEffect.ID, BrokenWorldEffect.SUPPLIER);
+        register(BiggerBlockEntitiesEffect.PROPERTIES);
+        register(BlackScreenEffect.PROPERTIES);
+        register(BlindnessPotionEffect.PROPERTIES);
+        register(BlurryScreenEffect.PROPERTIES);
+        register(BrokenWorldEffect.PROPERTIES);
+        register(BurnNearbyMobsEffect.PROPERTIES);
+        register(BurnPlayersEffect.PROPERTIES);
+        register(DamagePlayersEffect.PROPERTIES);
+        register(DropInventoryEffect.PROPERTIES);
+        register(DropItemEffect.PROPERTIES);
+        register(EntityMagnetEffect.PROPERTIES);
+        register(EveryoneIsAVillagerEffect.PROPERTIES);
+        register(ExplodeNearbyEntitiesEvent.PROPERTIES);
+        register(ExplodePlayersEffect.PROPERTIES);
+        register(FakeTeleportToHeavenEffect.PROPERTIES);
+        register(FatiguePotionEffect.PROPERTIES);
+        register(FlingPlayersEffect.PROPERTIES);
+        register(ForceJumpEffect.PROPERTIES);
+        register(ForceSneakEffect.PROPERTIES);
+        register(GetRotatedEffect.PROPERTIES);
+        register(HighPitchEffect.PROPERTIES);
+        register(InvertVelocityEffect.PROPERTIES);
+        register(JailEffect.PROPERTIES);
+        register(LargeEntitiesEffect.PROPERTIES);
+        register(LowPitchEffect.PROPERTIES);
+        register(NegativeFieldOfViewEffect.PROPERTIES);
+        register(NoGravityEffect.PROPERTIES);
+        register(NoJumpingEffect.PROPERTIES);
+        register(NoSneakingEffect.PROPERTIES);
+        register(PlaceLavaEffect.PROPERTIES);
+        register(PlaceNearbyMobsIntoBoatEffect.PROPERTIES);
+        register(PortraitEffect.PROPERTIES);
+        register(QuakeFieldOfViewEffect.PROPERTIES);
+        register(ReplaceEverySoundWithVillagersEffect.PROPERTIES);
+        register(ReversedGravityEffect.PROPERTIES);
+        register(RollingCameraEffect.PROPERTIES);
+        register(RotatingCameraEffect.PROPERTIES);
+        register(SkeletonsHaveSpinbotEffect.PROPERTIES);
+        register(SpawnBoatEffect.PROPERTIES);
+        register(SpawnCreepersEffect.PROPERTIES);
+        register(SpawnMinecartEffect.PROPERTIES);
+        register(SpawnWanderingTraderEffect.PROPERTIES);
+        register(SpinningMobsEffect.PROPERTIES);
+        register(SuicideEffect.PROPERTIES);
+        register(TeleportNearbyMobsToPlayersEffect.PROPERTIES);
+        register(TeleportToHeavenEffect.PROPERTIES);
+        register(TeleportToVoidEffect.PROPERTIES);
+        register(WhereAreMyChunksEffect.PROPERTIES);
+        register(WhereIsTheSkyEffect.PROPERTIES);
+        register(WideMobsEffect.PROPERTIES);
+        register(ZeusEffect.PROPERTIES);
 
         frozen = true;
-        LOGGER.info("Registered {} effects", SUPPLIERS.size());
+        LOGGER.info("Finished registration with a total of {} entries", REGISTRY.size());
     }
 
-    /**
-     * Registers a new effect.
-     */
-    private static <T extends Effect> void registerEffect(ResourceLocation location, EffectSupplier<T> supplier)
+    private static <T extends Effect> void register(EffectProperties<T> properties)
     {
         if (frozen)
         {
             throw new IllegalStateException("Cannot register new entries to EffectRegistry after the registry has been frozen.");
         }
 
-        if (SUPPLIERS.containsKey(location))
+        if (REGISTRY.containsKey(properties.getId()))
         {
-            throw new IllegalArgumentException("Duplicate registration " + location);
+            throw new IllegalArgumentException("Duplicate registration " + properties.getId());
         }
 
-        SUPPLIERS.put(location, supplier);
-        LOGGER.info("Registering new effect {} of mod @{}", location.getPath(), location.getNamespace());
+        REGISTRY.put(properties.getId(), properties);
+        LOGGER.info(LOADING, "Registering new effect class {} of mod @{}", properties.getClazz().getCanonicalName(), properties.getId().getNamespace());
     }
 
-    public static Map<ResourceLocation, EffectSupplier<?>> getSuppliers()
+    public static Map<ResourceLocation, EffectProperties<?>> getRegistry()
     {
-        return Collections.unmodifiableMap(SUPPLIERS);
+        return Collections.unmodifiableMap(REGISTRY);
     }
 }

@@ -1,11 +1,9 @@
 package com.zickzenni.anarchium.effect.impl;
 
-import com.zickzenni.anarchium.Anarchium;
-import com.zickzenni.anarchium.effect.EffectSupplier;
+import com.zickzenni.anarchium.effect.EffectProperties;
 import com.zickzenni.anarchium.effect.InstantEffect;
 import com.zickzenni.anarchium.util.LevelTickStage;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.phys.Vec3;
@@ -16,9 +14,11 @@ import java.util.Map;
 
 public class FakeTeleportToHeavenEffect extends InstantEffect
 {
-    public static final EffectSupplier<FakeTeleportToHeavenEffect> SUPPLIER = FakeTeleportToHeavenEffect::new;
-
-    public static final ResourceLocation ID = Anarchium.location("fake_teleport_to_heaven");
+    public static final EffectProperties<FakeTeleportToHeavenEffect> PROPERTIES =
+            EffectProperties.Builder.of(FakeTeleportToHeavenEffect.class)
+                    .id("fake_teleport_to_heaven")
+                    .supplier(FakeTeleportToHeavenEffect::new)
+                    .build();
 
     private final Map<String, Vec3> positions;
 
@@ -28,7 +28,7 @@ public class FakeTeleportToHeavenEffect extends InstantEffect
 
     public FakeTeleportToHeavenEffect()
     {
-        super(ID);
+        super(PROPERTIES.getId());
         this.positions = new HashMap<>();
         this.ticks = 100;
     }

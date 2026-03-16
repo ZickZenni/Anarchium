@@ -1,25 +1,25 @@
 package com.zickzenni.anarchium.effect.impl;
 
-import com.zickzenni.anarchium.Anarchium;
-import com.zickzenni.anarchium.effect.EffectSupplier;
+import com.zickzenni.anarchium.effect.EffectProperties;
 import com.zickzenni.anarchium.effect.InstantEffect;
 import com.zickzenni.anarchium.server.AnarchiumServer;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.phys.AABB;
 
 public class BurnNearbyMobsEffect extends InstantEffect
 {
-    public static final EffectSupplier<BurnNearbyMobsEffect> SUPPLIER = BurnNearbyMobsEffect::new;
-
-    public static final ResourceLocation ID = Anarchium.location("burn_nearby_mobs");
+    public static final EffectProperties<BurnNearbyMobsEffect> PROPERTIES =
+            EffectProperties.Builder.of(BurnNearbyMobsEffect.class)
+                    .id("burn_nearby_mobs")
+                    .supplier(BurnNearbyMobsEffect::new)
+                    .build();
 
     public static final float RADIUS = 50;
 
     public BurnNearbyMobsEffect()
     {
-        super(ID);
+        super(PROPERTIES.getId());
     }
 
     @Override

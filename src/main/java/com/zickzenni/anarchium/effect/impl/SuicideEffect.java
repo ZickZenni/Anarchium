@@ -1,20 +1,20 @@
 package com.zickzenni.anarchium.effect.impl;
 
-import com.zickzenni.anarchium.Anarchium;
-import com.zickzenni.anarchium.effect.EffectSupplier;
+import com.zickzenni.anarchium.effect.EffectProperties;
 import com.zickzenni.anarchium.effect.InstantEffect;
-import net.minecraft.resources.ResourceLocation;
 import net.neoforged.neoforge.server.ServerLifecycleHooks;
 
 public class SuicideEffect extends InstantEffect
 {
-    public static final EffectSupplier<SuicideEffect> SUPPLIER = SuicideEffect::new;
-
-    public static final ResourceLocation ID = Anarchium.location("suicide");
+    public static final EffectProperties<SuicideEffect> PROPERTIES =
+            EffectProperties.Builder.of(SuicideEffect.class)
+                    .id("suicide")
+                    .supplier(SuicideEffect::new)
+                    .build();
 
     public SuicideEffect()
     {
-        super(ID);
+        super(PROPERTIES.getId());
     }
 
     @Override

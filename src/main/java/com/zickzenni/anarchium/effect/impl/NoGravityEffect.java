@@ -1,21 +1,22 @@
 package com.zickzenni.anarchium.effect.impl;
 
-import com.zickzenni.anarchium.Anarchium;
-import com.zickzenni.anarchium.effect.EffectSupplier;
+import com.zickzenni.anarchium.effect.EffectProperties;
 import com.zickzenni.anarchium.effect.TimedEffect;
-import net.minecraft.resources.ResourceLocation;
 
 public class NoGravityEffect extends TimedEffect
 {
-    public static final EffectSupplier<NoGravityEffect> SUPPLIER = NoGravityEffect::new;
-
-    public static final ResourceLocation ID = Anarchium.location("no_gravity");
+    public static final EffectProperties<NoGravityEffect> PROPERTIES =
+            EffectProperties.Builder.of(NoGravityEffect.class)
+                    .id("no_gravity")
+                    .supplier(NoGravityEffect::new)
+                    .conflict(ReversedGravityEffect.class)
+                    .build();
 
     public static boolean ENABLED = false;
 
     public NoGravityEffect()
     {
-        super(ID, 20 * 40);
+        super(PROPERTIES.getId(), 20 * 40);
     }
 
     @Override

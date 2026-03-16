@@ -1,22 +1,23 @@
 package com.zickzenni.anarchium.effect.impl;
 
-import com.zickzenni.anarchium.Anarchium;
 import com.zickzenni.anarchium.client.EffectStates;
-import com.zickzenni.anarchium.effect.EffectSupplier;
+import com.zickzenni.anarchium.effect.EffectProperties;
 import com.zickzenni.anarchium.effect.TimedEffect;
 import net.minecraft.client.Minecraft;
-import net.minecraft.resources.ResourceLocation;
 import net.neoforged.neoforge.client.event.RenderLevelStageEvent;
 
 public class NegativeFieldOfViewEffect extends TimedEffect
 {
-    public static final EffectSupplier<NegativeFieldOfViewEffect> SUPPLIER = NegativeFieldOfViewEffect::new;
-
-    public static final ResourceLocation ID = Anarchium.location("negative_field_of_view");
+    public static final EffectProperties<NegativeFieldOfViewEffect> PROPERTIES =
+            EffectProperties.Builder.of(NegativeFieldOfViewEffect.class)
+                    .id("negative_field_of_view")
+                    .supplier(NegativeFieldOfViewEffect::new)
+                    .conflict(QuakeFieldOfViewEffect.class)
+                    .build();
 
     public NegativeFieldOfViewEffect()
     {
-        super(ID, 300);
+        super(PROPERTIES.getId(), 300);
     }
 
     @Override

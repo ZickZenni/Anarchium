@@ -1,20 +1,20 @@
 package com.zickzenni.anarchium.effect.impl;
 
-import com.zickzenni.anarchium.Anarchium;
 import com.zickzenni.anarchium.client.EffectStates;
-import com.zickzenni.anarchium.effect.EffectSupplier;
+import com.zickzenni.anarchium.effect.EffectProperties;
 import com.zickzenni.anarchium.effect.TimedEffect;
-import net.minecraft.resources.ResourceLocation;
 
 public class LargeEntitiesEffect extends TimedEffect
 {
-    public static final EffectSupplier<LargeEntitiesEffect> SUPPLIER = LargeEntitiesEffect::new;
-
-    public static final ResourceLocation ID = Anarchium.location("large_entities");
+    public static final EffectProperties<LargeEntitiesEffect> PROPERTIES =
+            EffectProperties.Builder.of(LargeEntitiesEffect.class)
+                    .id("large_entities")
+                    .supplier(LargeEntitiesEffect::new)
+                    .build();
 
     public LargeEntitiesEffect()
     {
-        super(ID, 20 * 45);
+        super(PROPERTIES.getId(), 20 * 45);
     }
 
     @Override

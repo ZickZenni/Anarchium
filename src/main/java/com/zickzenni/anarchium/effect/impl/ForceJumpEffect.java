@@ -1,22 +1,23 @@
 package com.zickzenni.anarchium.effect.impl;
 
-import com.zickzenni.anarchium.Anarchium;
-import com.zickzenni.anarchium.effect.EffectSupplier;
+import com.zickzenni.anarchium.effect.EffectProperties;
 import com.zickzenni.anarchium.effect.TimedEffect;
 import com.zickzenni.anarchium.util.LevelTickStage;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.ClientLevel;
-import net.minecraft.resources.ResourceLocation;
 
 public class ForceJumpEffect extends TimedEffect
 {
-    public static final EffectSupplier<ForceJumpEffect> SUPPLIER = ForceJumpEffect::new;
-
-    public static final ResourceLocation ID = Anarchium.location("force_jump");
+    public static final EffectProperties<ForceJumpEffect> PROPERTIES =
+            EffectProperties.Builder.of(ForceJumpEffect.class)
+                    .id("force_jump")
+                    .supplier(ForceJumpEffect::new)
+                    .conflict(NoJumpingEffect.class)
+                    .build();
 
     public ForceJumpEffect()
     {
-        super(ID, 20 * 27);
+        super(PROPERTIES.getId(), 20 * 27);
     }
 
     @Override

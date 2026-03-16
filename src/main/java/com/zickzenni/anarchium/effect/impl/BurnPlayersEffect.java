@@ -1,20 +1,20 @@
 package com.zickzenni.anarchium.effect.impl;
 
-import com.zickzenni.anarchium.Anarchium;
-import com.zickzenni.anarchium.effect.EffectSupplier;
+import com.zickzenni.anarchium.effect.EffectProperties;
 import com.zickzenni.anarchium.effect.InstantEffect;
-import net.minecraft.resources.ResourceLocation;
 import net.neoforged.neoforge.server.ServerLifecycleHooks;
 
 public class BurnPlayersEffect extends InstantEffect
 {
-    public static final EffectSupplier<BurnPlayersEffect> SUPPLIER = BurnPlayersEffect::new;
-
-    public static final ResourceLocation ID = Anarchium.location("burn_players");
+    public static final EffectProperties<BurnPlayersEffect> PROPERTIES =
+            EffectProperties.Builder.of(BurnPlayersEffect.class)
+                    .id("burn_players")
+                    .supplier(BurnPlayersEffect::new)
+                    .build();
 
     public BurnPlayersEffect()
     {
-        super(ID);
+        super(PROPERTIES.getId());
     }
 
     @Override

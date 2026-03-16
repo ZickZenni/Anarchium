@@ -1,10 +1,8 @@
 package com.zickzenni.anarchium.effect.impl;
 
 import com.mojang.logging.LogUtils;
-import com.zickzenni.anarchium.Anarchium;
-import com.zickzenni.anarchium.effect.EffectSupplier;
+import com.zickzenni.anarchium.effect.EffectProperties;
 import com.zickzenni.anarchium.effect.InstantEffect;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobSpawnType;
 import net.neoforged.neoforge.server.ServerLifecycleHooks;
@@ -14,13 +12,15 @@ public class SpawnMinecartEffect extends InstantEffect
 {
     private static final Logger LOGGER = LogUtils.getLogger();
 
-    public static final EffectSupplier<SpawnMinecartEffect> SUPPLIER = SpawnMinecartEffect::new;
-
-    public static final ResourceLocation ID = Anarchium.location("spawn_minecart");
+    public static final EffectProperties<SpawnMinecartEffect> PROPERTIES =
+            EffectProperties.Builder.of(SpawnMinecartEffect.class)
+                    .id("spawn_minecart")
+                    .supplier(SpawnMinecartEffect::new)
+                    .build();
 
     public SpawnMinecartEffect()
     {
-        super(ID);
+        super(PROPERTIES.getId());
     }
 
     @Override

@@ -1,12 +1,10 @@
 package com.zickzenni.anarchium.effect.impl;
 
-import com.zickzenni.anarchium.Anarchium;
-import com.zickzenni.anarchium.registry.SoundRegistry;
-import com.zickzenni.anarchium.effect.EffectSupplier;
+import com.zickzenni.anarchium.effect.EffectProperties;
 import com.zickzenni.anarchium.effect.InstantEffect;
+import com.zickzenni.anarchium.registry.SoundRegistry;
 import com.zickzenni.anarchium.util.LevelTickStage;
 import net.minecraft.core.Holder;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvent;
@@ -16,9 +14,11 @@ import net.neoforged.neoforge.server.ServerLifecycleHooks;
 
 public class ZeusEffect extends InstantEffect
 {
-    public static final EffectSupplier<ZeusEffect> SUPPLIER = ZeusEffect::new;
-
-    public static final ResourceLocation ID = Anarchium.location("zeus");
+    public static final EffectProperties<ZeusEffect> PROPERTIES =
+            EffectProperties.Builder.of(ZeusEffect.class)
+                    .id("zeus")
+                    .supplier(ZeusEffect::new)
+                    .build();
 
     private boolean struck;
 
@@ -26,7 +26,7 @@ public class ZeusEffect extends InstantEffect
 
     public ZeusEffect()
     {
-        super(ID);
+        super(PROPERTIES.getId());
         this.ticks = 80;
     }
 

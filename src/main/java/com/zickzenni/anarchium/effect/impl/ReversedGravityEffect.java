@@ -1,23 +1,24 @@
 package com.zickzenni.anarchium.effect.impl;
 
-import com.zickzenni.anarchium.Anarchium;
-import com.zickzenni.anarchium.effect.EffectSupplier;
+import com.zickzenni.anarchium.effect.EffectProperties;
 import com.zickzenni.anarchium.effect.TimedEffect;
 import com.zickzenni.anarchium.util.LevelTickStage;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.ClientLevel;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 
 public class ReversedGravityEffect extends TimedEffect
 {
-    public static final EffectSupplier<ReversedGravityEffect> SUPPLIER = ReversedGravityEffect::new;
-
-    public static final ResourceLocation ID = Anarchium.location("reversed_gravity");
+    public static final EffectProperties<ReversedGravityEffect> PROPERTIES =
+            EffectProperties.Builder.of(ReversedGravityEffect.class)
+                    .id("reversed_gravity")
+                    .supplier(ReversedGravityEffect::new)
+                    .conflict(NoGravityEffect.class)
+                    .build();
 
     public ReversedGravityEffect()
     {
-        super(ID, 220);
+        super(PROPERTIES.getId(), 220);
     }
 
     @Override

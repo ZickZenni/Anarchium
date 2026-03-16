@@ -1,7 +1,7 @@
 package com.zickzenni.anarchium.server;
 
 import com.mojang.logging.LogUtils;
-import com.zickzenni.anarchium.effect.*;
+import com.zickzenni.anarchium.effect.Effect;
 import com.zickzenni.anarchium.network.packet.ActivateEffectPacket;
 import com.zickzenni.anarchium.network.packet.EndEffectPacket;
 import com.zickzenni.anarchium.network.packet.TickEffectPacket;
@@ -68,9 +68,9 @@ public class ServerEffectManager
             {
                 timerTicks = TIMER_DURATION;
 
-                var registry = EffectRegistry.getSuppliers();
+                var registry = EffectRegistry.getRegistry();
                 var location = registry.keySet().toArray(ResourceLocation[]::new)[new Random().nextInt(registry.size())];
-                var supplier = registry.get(location);
+                var properties = registry.get(location);
 
                 for (var effect : EFFECTS)
                 {
@@ -83,7 +83,7 @@ public class ServerEffectManager
                     }
                 }
 
-                var effect = supplier.create();
+                var effect = properties.getSupplier().create();
                 effect.onStartServer();
 
                 LOGGER.info("Picked new effect: {}", location);

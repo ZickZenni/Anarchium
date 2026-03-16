@@ -1,21 +1,22 @@
 package com.zickzenni.anarchium.effect.impl;
 
-import com.zickzenni.anarchium.Anarchium;
-import com.zickzenni.anarchium.effect.EffectSupplier;
+import com.zickzenni.anarchium.effect.EffectProperties;
 import com.zickzenni.anarchium.effect.TimedEffect;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
-import net.minecraft.resources.ResourceLocation;
 
 public class PortraitEffect extends TimedEffect
 {
-    public static final EffectSupplier<PortraitEffect> SUPPLIER = PortraitEffect::new;
-
-    public static final ResourceLocation ID = Anarchium.location("portrait");
+    public static final EffectProperties<PortraitEffect> PROPERTIES =
+            EffectProperties.Builder.of(PortraitEffect.class)
+                    .id("portrait")
+                    .supplier(PortraitEffect::new)
+                    .conflict(BlackScreenEffect.class)
+                    .build();
 
     public PortraitEffect()
     {
-        super(ID, 20 * 45);
+        super(PROPERTIES.getId(), 20 * 45);
     }
 
     @Override

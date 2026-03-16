@@ -1,22 +1,20 @@
 package com.zickzenni.anarchium.effect.impl;
 
-import com.zickzenni.anarchium.Anarchium;
-import com.zickzenni.anarchium.effect.EffectSupplier;
+import com.zickzenni.anarchium.effect.EffectProperties;
 import com.zickzenni.anarchium.effect.InstantEffect;
 import com.zickzenni.anarchium.server.AnarchiumServer;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.damagesource.DamageSources;
-import net.neoforged.neoforge.server.ServerLifecycleHooks;
 
 public class DamagePlayersEffect extends InstantEffect
 {
-    public static final EffectSupplier<DamagePlayersEffect> SUPPLIER = DamagePlayersEffect::new;
-
-    public static final ResourceLocation ID = Anarchium.location("damage_players");
+    public static final EffectProperties<DamagePlayersEffect> PROPERTIES =
+            EffectProperties.Builder.of(DamagePlayersEffect.class)
+                    .id("damage_players")
+                    .supplier(DamagePlayersEffect::new)
+                    .build();
 
     public DamagePlayersEffect()
     {
-        super(ID);
+        super(PROPERTIES.getId());
     }
 
     @Override

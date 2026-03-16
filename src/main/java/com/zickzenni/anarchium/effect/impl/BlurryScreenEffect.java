@@ -1,18 +1,18 @@
 package com.zickzenni.anarchium.effect.impl;
 
 import com.mojang.blaze3d.systems.RenderSystem;
-import com.zickzenni.anarchium.Anarchium;
-import com.zickzenni.anarchium.effect.EffectSupplier;
+import com.zickzenni.anarchium.effect.EffectProperties;
 import com.zickzenni.anarchium.effect.TimedEffect;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
-import net.minecraft.resources.ResourceLocation;
 
 public class BlurryScreenEffect extends TimedEffect
 {
-    public static final EffectSupplier<BlurryScreenEffect> SUPPLIER = BlurryScreenEffect::new;
-
-    public static final ResourceLocation ID = Anarchium.location("blurry_screen");
+    public static final EffectProperties<BlurryScreenEffect> PROPERTIES =
+            EffectProperties.Builder.of(BlurryScreenEffect.class)
+                    .id("blurry_screen")
+                    .supplier(BlurryScreenEffect::new)
+                    .build();
 
     public static final int BLUR_RADIUS = 4;
 
@@ -20,7 +20,7 @@ public class BlurryScreenEffect extends TimedEffect
 
     public BlurryScreenEffect()
     {
-        super(ID, 20 * 33);
+        super(PROPERTIES.getId(), 20 * 33);
     }
 
     @Override

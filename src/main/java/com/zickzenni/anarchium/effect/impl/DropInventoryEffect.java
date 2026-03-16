@@ -1,20 +1,20 @@
 package com.zickzenni.anarchium.effect.impl;
 
-import com.zickzenni.anarchium.Anarchium;
-import com.zickzenni.anarchium.effect.EffectSupplier;
+import com.zickzenni.anarchium.effect.EffectProperties;
 import com.zickzenni.anarchium.effect.InstantEffect;
 import com.zickzenni.anarchium.server.AnarchiumServer;
-import net.minecraft.resources.ResourceLocation;
 
 public class DropInventoryEffect extends InstantEffect
 {
-    public static final EffectSupplier<DropInventoryEffect> SUPPLIER = DropInventoryEffect::new;
-
-    public static final ResourceLocation ID = Anarchium.location("drop_inventory");
+    public static final EffectProperties<DropInventoryEffect> PROPERTIES =
+            EffectProperties.Builder.of(DropInventoryEffect.class)
+                    .id("drop_inventory")
+                    .supplier(DropInventoryEffect::new)
+                    .build();
 
     public DropInventoryEffect()
     {
-        super(ID);
+        super(PROPERTIES.getId());
     }
 
     @Override

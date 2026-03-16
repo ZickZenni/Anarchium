@@ -1,20 +1,20 @@
 package com.zickzenni.anarchium.effect.impl;
 
-import com.zickzenni.anarchium.Anarchium;
 import com.zickzenni.anarchium.client.EffectStates;
-import com.zickzenni.anarchium.effect.EffectSupplier;
+import com.zickzenni.anarchium.effect.EffectProperties;
 import com.zickzenni.anarchium.effect.TimedEffect;
-import net.minecraft.resources.ResourceLocation;
 
 public class ReplaceEverySoundWithVillagersEffect extends TimedEffect
 {
-    public static final EffectSupplier<ReplaceEverySoundWithVillagersEffect> SUPPLIER = ReplaceEverySoundWithVillagersEffect::new;
-
-    public static final ResourceLocation ID = Anarchium.location("replace_every_sound_with_villagers");
+    public static final EffectProperties<ReplaceEverySoundWithVillagersEffect> PROPERTIES =
+            EffectProperties.Builder.of(ReplaceEverySoundWithVillagersEffect.class)
+                    .id("replace_every_sound_with_villagers")
+                    .supplier(ReplaceEverySoundWithVillagersEffect::new)
+                    .build();
 
     public ReplaceEverySoundWithVillagersEffect()
     {
-        super(ID, 20 * 30);
+        super(PROPERTIES.getId(), 20 * 30);
     }
 
     @Override

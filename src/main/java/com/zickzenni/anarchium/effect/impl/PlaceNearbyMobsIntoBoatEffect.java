@@ -1,11 +1,9 @@
 
 package com.zickzenni.anarchium.effect.impl;
 
-import com.zickzenni.anarchium.Anarchium;
-import com.zickzenni.anarchium.effect.EffectSupplier;
+import com.zickzenni.anarchium.effect.EffectProperties;
 import com.zickzenni.anarchium.effect.InstantEffect;
 import com.zickzenni.anarchium.server.AnarchiumServer;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
@@ -14,15 +12,17 @@ import net.minecraft.world.phys.AABB;
 
 public class PlaceNearbyMobsIntoBoatEffect extends InstantEffect
 {
-    public static final EffectSupplier<PlaceNearbyMobsIntoBoatEffect> SUPPLIER = PlaceNearbyMobsIntoBoatEffect::new;
-
-    public static final ResourceLocation ID = Anarchium.location("place_nearby_mobs_into_boat");
+    public static final EffectProperties<PlaceNearbyMobsIntoBoatEffect> PROPERTIES =
+            EffectProperties.Builder.of(PlaceNearbyMobsIntoBoatEffect.class)
+                    .id("place_nearby_mobs_into_boat")
+                    .supplier(PlaceNearbyMobsIntoBoatEffect::new)
+                    .build();
 
     public static final float RADIUS = 65;
 
     public PlaceNearbyMobsIntoBoatEffect()
     {
-        super(ID);
+        super(PROPERTIES.getId());
     }
 
     @Override

@@ -1,22 +1,23 @@
 package com.zickzenni.anarchium.effect.impl;
 
-import com.zickzenni.anarchium.Anarchium;
 import com.zickzenni.anarchium.client.EffectStates;
-import com.zickzenni.anarchium.effect.EffectSupplier;
+import com.zickzenni.anarchium.effect.EffectProperties;
 import com.zickzenni.anarchium.effect.TimedEffect;
 import com.zickzenni.anarchium.util.LevelTickStage;
 import net.minecraft.client.multiplayer.ClientLevel;
-import net.minecraft.resources.ResourceLocation;
 
 public class LowPitchEffect extends TimedEffect
 {
-    public static final EffectSupplier<LowPitchEffect> SUPPLIER = LowPitchEffect::new;
-
-    public static final ResourceLocation ID = Anarchium.location("low_pitch");
+    public static final EffectProperties<LowPitchEffect> PROPERTIES =
+            EffectProperties.Builder.of(LowPitchEffect.class)
+                    .id("low_pitch")
+                    .supplier(LowPitchEffect::new)
+                    .conflict(HighPitchEffect.class)
+                    .build();
 
     public LowPitchEffect()
     {
-        super(ID, 20 * 30);
+        super(PROPERTIES.getId(), 20 * 30);
     }
 
     @Override

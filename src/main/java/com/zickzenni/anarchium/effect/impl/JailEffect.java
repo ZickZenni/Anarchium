@@ -1,23 +1,23 @@
 package com.zickzenni.anarchium.effect.impl;
 
-import com.zickzenni.anarchium.Anarchium;
-import com.zickzenni.anarchium.effect.EffectSupplier;
+import com.zickzenni.anarchium.effect.EffectProperties;
 import com.zickzenni.anarchium.effect.InstantEffect;
 import com.zickzenni.anarchium.server.AnarchiumServer;
 import net.minecraft.core.BlockPos;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 
 public class JailEffect extends InstantEffect
 {
-    public static final EffectSupplier<JailEffect> SUPPLIER = JailEffect::new;
-
-    public static final ResourceLocation ID = Anarchium.location("jail");
+    public static final EffectProperties<JailEffect> PROPERTIES =
+            EffectProperties.Builder.of(JailEffect.class)
+                    .id("jail")
+                    .supplier(JailEffect::new)
+                    .build();
 
     public JailEffect()
     {
-        super(ID);
+        super(PROPERTIES.getId());
     }
 
     @Override

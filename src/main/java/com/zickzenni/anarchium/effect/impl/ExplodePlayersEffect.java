@@ -1,21 +1,21 @@
 package com.zickzenni.anarchium.effect.impl;
 
-import com.zickzenni.anarchium.Anarchium;
-import com.zickzenni.anarchium.effect.EffectSupplier;
+import com.zickzenni.anarchium.effect.EffectProperties;
 import com.zickzenni.anarchium.effect.InstantEffect;
 import com.zickzenni.anarchium.server.AnarchiumServer;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.Level;
 
 public class ExplodePlayersEffect extends InstantEffect
 {
-    public static final EffectSupplier<ExplodePlayersEffect> SUPPLIER = ExplodePlayersEffect::new;
-
-    public static final ResourceLocation ID = Anarchium.location("explode_players");
+    public static final EffectProperties<ExplodePlayersEffect> PROPERTIES =
+            EffectProperties.Builder.of(ExplodePlayersEffect.class)
+                    .id("explode_players")
+                    .supplier(ExplodePlayersEffect::new)
+                    .build();
 
     public ExplodePlayersEffect()
     {
-        super(ID);
+        super(PROPERTIES.getId());
     }
 
     @Override

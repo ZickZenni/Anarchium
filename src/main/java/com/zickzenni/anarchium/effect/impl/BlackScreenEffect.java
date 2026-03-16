@@ -1,21 +1,22 @@
 package com.zickzenni.anarchium.effect.impl;
 
-import com.zickzenni.anarchium.Anarchium;
-import com.zickzenni.anarchium.effect.EffectSupplier;
+import com.zickzenni.anarchium.effect.EffectProperties;
 import com.zickzenni.anarchium.effect.TimedEffect;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
-import net.minecraft.resources.ResourceLocation;
 
 public class BlackScreenEffect extends TimedEffect
 {
-    public static final EffectSupplier<BlackScreenEffect> SUPPLIER = BlackScreenEffect::new;
-
-    public static final ResourceLocation ID = Anarchium.location("black_screen");
+    public static final EffectProperties<BlackScreenEffect> PROPERTIES =
+            EffectProperties.Builder.of(BlackScreenEffect.class)
+                    .id("black_screen")
+                    .supplier(BlackScreenEffect::new)
+                    .conflict(PortraitEffect.class)
+                    .build();
 
     public BlackScreenEffect()
     {
-        super(ID, 20 * 33);
+        super(PROPERTIES.getId(), 20 * 33);
     }
 
     @Override
