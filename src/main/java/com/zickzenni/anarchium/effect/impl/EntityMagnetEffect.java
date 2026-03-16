@@ -1,5 +1,6 @@
 package com.zickzenni.anarchium.effect.impl;
 
+import com.zickzenni.anarchium.effect.ConfigValue;
 import com.zickzenni.anarchium.effect.EffectProperties;
 import com.zickzenni.anarchium.effect.TimedEffect;
 import com.zickzenni.anarchium.server.AnarchiumServer;
@@ -10,17 +11,23 @@ import net.minecraft.world.phys.AABB;
 
 public class EntityMagnetEffect extends TimedEffect
 {
+    public static final ConfigValue<Integer> DURATION = ConfigValue.newInteger("duration", 20 * 30);
+
+    public static final ConfigValue<Integer> RADIUS = ConfigValue.newInteger("radius", 10);
+
     public static final EffectProperties<EntityMagnetEffect> PROPERTIES =
             EffectProperties.Builder.of(EntityMagnetEffect.class)
                     .id("entity_magnet")
                     .supplier(EntityMagnetEffect::new)
+                    .config(DURATION)
+                    .config(RADIUS)
                     .build();
 
-    public static final float RADIUS = 8;
+    // ======================================================
 
     public EntityMagnetEffect()
     {
-        super(PROPERTIES.getId(), 20 * 30);
+        super(PROPERTIES.getId(), DURATION.get());
     }
 
     @Override
@@ -30,8 +37,10 @@ public class EntityMagnetEffect extends TimedEffect
         {
             for (var player : AnarchiumServer.getPlayers())
             {
+                int radius = RADIUS.get();
                 var playerPosition = player.position();
-                var entities = player.serverLevel().getEntities(player, new AABB(playerPosition.add(RADIUS, RADIUS, RADIUS), playerPosition.add(-RADIUS, -RADIUS, -RADIUS)));
+                var entities = player.serverLevel()
+                        .getEntities(player, new AABB(playerPosition.add(radius, radius, radius), playerPosition.add(-radius, -radius, -radius)));
 
                 for (var entity : entities)
                 {
@@ -49,7 +58,8 @@ public class EntityMagnetEffect extends TimedEffect
                      * Slow down when the entity is already near the player.
                      * Without it there is no outplay potential.
                      */
-                    if (distance <= 4.5f) {
+                    if (distance <= 4.5f)
+                    {
                         speed *= (float) (distance / 4.5f);
                     }
 

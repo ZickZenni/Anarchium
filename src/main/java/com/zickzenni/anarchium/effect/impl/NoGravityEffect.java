@@ -1,22 +1,28 @@
 package com.zickzenni.anarchium.effect.impl;
 
+import com.zickzenni.anarchium.effect.ConfigValue;
 import com.zickzenni.anarchium.effect.EffectProperties;
 import com.zickzenni.anarchium.effect.TimedEffect;
 
 public class NoGravityEffect extends TimedEffect
 {
+    public static final ConfigValue<Integer> DURATION = ConfigValue.newInteger("duration", 20 * 40);
+
     public static final EffectProperties<NoGravityEffect> PROPERTIES =
             EffectProperties.Builder.of(NoGravityEffect.class)
                     .id("no_gravity")
                     .supplier(NoGravityEffect::new)
                     .conflict(ReversedGravityEffect.class)
+                    .config(DURATION)
                     .build();
+
+    // ======================================================
 
     public static boolean ENABLED = false;
 
     public NoGravityEffect()
     {
-        super(PROPERTIES.getId(), 20 * 40);
+        super(PROPERTIES.getId(), DURATION.get());
     }
 
     @Override

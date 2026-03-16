@@ -1,5 +1,6 @@
 package com.zickzenni.anarchium.effect.impl;
 
+import com.zickzenni.anarchium.effect.ConfigValue;
 import com.zickzenni.anarchium.effect.EffectProperties;
 import com.zickzenni.anarchium.effect.InstantEffect;
 import com.zickzenni.anarchium.server.AnarchiumServer;
@@ -9,13 +10,16 @@ import net.minecraft.world.phys.AABB;
 
 public class TeleportNearbyMobsToPlayersEffect extends InstantEffect
 {
+    public static final ConfigValue<Integer> RADIUS = ConfigValue.newInteger("radius", 50);
+
     public static final EffectProperties<TeleportNearbyMobsToPlayersEffect> PROPERTIES =
             EffectProperties.Builder.of(TeleportNearbyMobsToPlayersEffect.class)
                     .id("teleport_nearby_mobs_to_players")
                     .supplier(TeleportNearbyMobsToPlayersEffect::new)
+                    .config(RADIUS)
                     .build();
 
-    public static final float RADIUS = 50;
+    // ======================================================
 
     public TeleportNearbyMobsToPlayersEffect()
     {
@@ -25,11 +29,14 @@ public class TeleportNearbyMobsToPlayersEffect extends InstantEffect
     @Override
     public void onStartServer()
     {
+        int radius = RADIUS.get();
+
         for (var player : AnarchiumServer.getPlayers())
         {
             var level = player.serverLevel();
             var playerPosition = player.position();
-            var entities = level.getEntities(player, new AABB(playerPosition.add(RADIUS, RADIUS, RADIUS), playerPosition.add(-RADIUS, -RADIUS, -RADIUS)));
+            var entities =
+                    level.getEntities(player, new AABB(playerPosition.add(radius, radius, radius), playerPosition.add(-radius, -radius, -radius)));
 
             for (var entity : entities)
             {

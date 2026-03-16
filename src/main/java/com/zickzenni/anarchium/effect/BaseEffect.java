@@ -38,6 +38,6 @@ public abstract class BaseEffect implements Effect
      */
     protected static String getTranslationKey(ResourceLocation location)
     {
-        return location.getNamespace() + "." + location.getPath();
+        return location.toLanguageKey();
     }
 }

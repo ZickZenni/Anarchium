@@ -20,15 +20,19 @@ public class EffectProperties<T extends Effect>
 
     private final List<Class<? extends Effect>> conflicts;
 
+    private final List<ConfigValue<?>> config;
+
     private EffectProperties(Class<T> clazz,
                              ResourceLocation id,
                              EffectSupplier<T> supplier,
-                             List<Class<? extends Effect>> conflicts)
+                             List<Class<? extends Effect>> conflicts,
+                             List<ConfigValue<?>> config)
     {
         this.clazz = clazz;
         this.id = id;
         this.supplier = supplier;
         this.conflicts = conflicts;
+        this.config = config;
     }
 
     /**
@@ -64,6 +68,14 @@ public class EffectProperties<T extends Effect>
         return conflicts;
     }
 
+    /**
+     * Retrieves the list of config values.
+     */
+    public List<ConfigValue<?>> getConfig()
+    {
+        return config;
+    }
+
     // ===================================================
 
     /**
@@ -81,10 +93,13 @@ public class EffectProperties<T extends Effect>
 
         private final List<Class<? extends Effect>> conflicts;
 
+        private final List<ConfigValue<?>> config;
+
         private Builder(Class<T> clazz)
         {
             this.clazz = clazz;
             this.conflicts = new ArrayList<>();
+            this.config = new ArrayList<>();
         }
 
         public static <T extends Effect> Builder<T> of(Class<T> clazz)
@@ -122,12 +137,18 @@ public class EffectProperties<T extends Effect>
             return this;
         }
 
+        public Builder<T> config(ConfigValue<?> value)
+        {
+            this.config.add(value);
+            return this;
+        }
+
         public EffectProperties<T> build()
         {
             Objects.requireNonNull(this.clazz, "Class must not be null");
             Objects.requireNonNull(this.id, "Id must not be null");
 
-            return new EffectProperties<>(this.clazz, this.id, this.supplier, this.conflicts);
+            return new EffectProperties<>(this.clazz, this.id, this.supplier, this.conflicts, this.config);
         }
     }
 

@@ -1,6 +1,7 @@
 package com.zickzenni.anarchium.effect.impl;
 
 import com.zickzenni.anarchium.client.EffectStates;
+import com.zickzenni.anarchium.effect.ConfigValue;
 import com.zickzenni.anarchium.effect.EffectProperties;
 import com.zickzenni.anarchium.effect.TimedEffect;
 import com.zickzenni.anarchium.util.LevelTickStage;
@@ -8,16 +9,21 @@ import net.minecraft.client.multiplayer.ClientLevel;
 
 public class LowPitchEffect extends TimedEffect
 {
+    public static final ConfigValue<Integer> DURATION = ConfigValue.newInteger("duration", 20 * 45);
+
     public static final EffectProperties<LowPitchEffect> PROPERTIES =
             EffectProperties.Builder.of(LowPitchEffect.class)
                     .id("low_pitch")
                     .supplier(LowPitchEffect::new)
                     .conflict(HighPitchEffect.class)
+                    .config(DURATION)
                     .build();
+
+    // ======================================================
 
     public LowPitchEffect()
     {
-        super(PROPERTIES.getId(), 20 * 30);
+        super(PROPERTIES.getId(), DURATION.get());
     }
 
     @Override

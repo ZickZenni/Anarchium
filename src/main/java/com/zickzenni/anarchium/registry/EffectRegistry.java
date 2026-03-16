@@ -5,6 +5,8 @@ import com.zickzenni.anarchium.effect.Effect;
 import com.zickzenni.anarchium.effect.EffectProperties;
 import com.zickzenni.anarchium.effect.impl.*;
 import net.minecraft.resources.ResourceLocation;
+import net.neoforged.fml.config.IConfigSpec;
+import net.neoforged.neoforge.common.ModConfigSpec;
 import org.slf4j.Logger;
 import org.slf4j.Marker;
 import org.slf4j.MarkerFactory;
@@ -19,7 +21,11 @@ public class EffectRegistry
 
     private static final Marker LOADING = MarkerFactory.getMarker("LOADING");
 
+    private static final Marker CONFIG = MarkerFactory.getMarker("CONFIG");
+
     private static final Map<ResourceLocation, EffectProperties<?>> REGISTRY = new HashMap<>();
+
+    private static ModConfigSpec SPECS;
 
     private static boolean frozen;
 
@@ -79,6 +85,40 @@ public class EffectRegistry
 
         frozen = true;
         LOGGER.info("Finished registration with a total of {} entries", REGISTRY.size());
+
+        initConfiguration();
+    }
+
+    private static void initConfiguration()
+    {
+        if (!frozen)
+        {
+            throw new IllegalStateException("Cannot initialize configuration before the registry has been frozen.");
+        }
+
+        var builder = new ModConfigSpec.Builder();
+
+        builder.push("effects");
+
+        for (var property : REGISTRY.values())
+        {
+            builder.push(property.getId().toString());
+
+            for (var value : property.getConfig())
+            {
+                value.configure(builder);
+            }
+
+            builder.pop();
+
+            LOGGER.debug(CONFIG, "Configuring effect class {} of mod @{}", property.getClazz()
+                    .getCanonicalName(), property.getId().getNamespace());
+        }
+
+        builder.pop();
+
+        SPECS = builder.build();
+        LOGGER.info("Finished configuration of effects");
     }
 
     private static <T extends Effect> void register(EffectProperties<T> properties)
@@ -94,11 +134,17 @@ public class EffectRegistry
         }
 
         REGISTRY.put(properties.getId(), properties);
-        LOGGER.info(LOADING, "Registering new effect class {} of mod @{}", properties.getClazz().getCanonicalName(), properties.getId().getNamespace());
+        LOGGER.debug(LOADING, "Registering new effect class {} of mod @{}", properties.getClazz()
+                .getCanonicalName(), properties.getId().getNamespace());
     }
 
     public static Map<ResourceLocation, EffectProperties<?>> getRegistry()
     {
         return Collections.unmodifiableMap(REGISTRY);
+    }
+
+    public static IConfigSpec getSpecs()
+    {
+        return SPECS;
     }
 }

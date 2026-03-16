@@ -1,6 +1,7 @@
 
 package com.zickzenni.anarchium.effect.impl;
 
+import com.zickzenni.anarchium.effect.ConfigValue;
 import com.zickzenni.anarchium.effect.EffectProperties;
 import com.zickzenni.anarchium.effect.InstantEffect;
 import com.zickzenni.anarchium.server.AnarchiumServer;
@@ -12,13 +13,16 @@ import net.minecraft.world.phys.AABB;
 
 public class PlaceNearbyMobsIntoBoatEffect extends InstantEffect
 {
+    public static final ConfigValue<Integer> RADIUS = ConfigValue.newInteger("radius", 50);
+
     public static final EffectProperties<PlaceNearbyMobsIntoBoatEffect> PROPERTIES =
             EffectProperties.Builder.of(PlaceNearbyMobsIntoBoatEffect.class)
                     .id("place_nearby_mobs_into_boat")
                     .supplier(PlaceNearbyMobsIntoBoatEffect::new)
+                    .config(RADIUS)
                     .build();
 
-    public static final float RADIUS = 65;
+    // ======================================================
 
     public PlaceNearbyMobsIntoBoatEffect()
     {
@@ -30,9 +34,11 @@ public class PlaceNearbyMobsIntoBoatEffect extends InstantEffect
     {
         for (var player : AnarchiumServer.getPlayers())
         {
+            int radius = RADIUS.get();
             var level = player.serverLevel();
             var playerPosition = player.position();
-            var entities = level.getEntities(player, new AABB(playerPosition.add(RADIUS, RADIUS, RADIUS), playerPosition.add(-RADIUS, -RADIUS, -RADIUS)));
+            var entities =
+                    level.getEntities(player, new AABB(playerPosition.add(radius, radius, radius), playerPosition.add(-radius, -radius, -radius)));
 
             for (var entity : entities)
             {

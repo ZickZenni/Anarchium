@@ -1,5 +1,6 @@
 package com.zickzenni.anarchium.effect.impl;
 
+import com.zickzenni.anarchium.effect.ConfigValue;
 import com.zickzenni.anarchium.effect.EffectProperties;
 import com.zickzenni.anarchium.effect.TimedEffect;
 import com.zickzenni.anarchium.util.LevelTickStage;
@@ -9,16 +10,21 @@ import net.minecraft.server.level.ServerLevel;
 
 public class ReversedGravityEffect extends TimedEffect
 {
+    public static final ConfigValue<Integer> DURATION = ConfigValue.newInteger("duration", 20 * 30);
+
     public static final EffectProperties<ReversedGravityEffect> PROPERTIES =
             EffectProperties.Builder.of(ReversedGravityEffect.class)
                     .id("reversed_gravity")
                     .supplier(ReversedGravityEffect::new)
                     .conflict(NoGravityEffect.class)
+                    .config(DURATION)
                     .build();
+
+    // ======================================================
 
     public ReversedGravityEffect()
     {
-        super(PROPERTIES.getId(), 220);
+        super(PROPERTIES.getId(), DURATION.get());
     }
 
     @Override

@@ -19,7 +19,7 @@ public class BlockEntityRenderDispatcherMixin
     {
         if (BiggerBlockEntitiesEffect.ENABLED)
         {
-            float scale = BiggerBlockEntitiesEffect.SCALE_MULTIPLIER;
+            float scale = BiggerBlockEntitiesEffect.SCALE_MULTIPLIER.get().floatValue();
             float offset = -((scale - 1) / 2);
 
             poseStack.pushPose();

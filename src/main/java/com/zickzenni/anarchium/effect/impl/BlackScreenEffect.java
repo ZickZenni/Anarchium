@@ -1,5 +1,6 @@
 package com.zickzenni.anarchium.effect.impl;
 
+import com.zickzenni.anarchium.effect.ConfigValue;
 import com.zickzenni.anarchium.effect.EffectProperties;
 import com.zickzenni.anarchium.effect.TimedEffect;
 import net.minecraft.client.Minecraft;
@@ -7,16 +8,21 @@ import net.minecraft.client.gui.GuiGraphics;
 
 public class BlackScreenEffect extends TimedEffect
 {
+    public static final ConfigValue<Integer> DURATION = ConfigValue.newInteger("duration", 20 * 33);
+
     public static final EffectProperties<BlackScreenEffect> PROPERTIES =
             EffectProperties.Builder.of(BlackScreenEffect.class)
                     .id("black_screen")
                     .supplier(BlackScreenEffect::new)
                     .conflict(PortraitEffect.class)
+                    .config(DURATION)
                     .build();
+
+    // ======================================================
 
     public BlackScreenEffect()
     {
-        super(PROPERTIES.getId(), 20 * 33);
+        super(PROPERTIES.getId(), DURATION.get());
     }
 
     @Override
