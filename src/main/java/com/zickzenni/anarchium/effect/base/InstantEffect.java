@@ -1,4 +1,4 @@
-package com.zickzenni.anarchium.effect;
+package com.zickzenni.anarchium.effect.base;
 
 import net.minecraft.resources.ResourceLocation;
 

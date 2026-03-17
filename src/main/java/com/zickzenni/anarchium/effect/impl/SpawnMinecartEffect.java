@@ -2,7 +2,7 @@ package com.zickzenni.anarchium.effect.impl;
 
 import com.mojang.logging.LogUtils;
 import com.zickzenni.anarchium.effect.EffectProperties;
-import com.zickzenni.anarchium.effect.InstantEffect;
+import com.zickzenni.anarchium.effect.base.InstantEffect;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobSpawnType;
 import net.neoforged.neoforge.server.ServerLifecycleHooks;

@@ -1,5 +1,6 @@
 package com.zickzenni.anarchium.effect.impl;
 
+import com.zickzenni.anarchium.effect.base.BaseTeleportToEffect;
 import com.zickzenni.anarchium.effect.EffectProperties;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.phys.Vec3;

@@ -1,7 +1,7 @@
 package com.zickzenni.anarchium.effect.impl;
 
 import com.zickzenni.anarchium.effect.EffectProperties;
-import com.zickzenni.anarchium.effect.InstantEffect;
+import com.zickzenni.anarchium.effect.base.InstantEffect;
 import com.zickzenni.anarchium.util.LevelTickStage;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;

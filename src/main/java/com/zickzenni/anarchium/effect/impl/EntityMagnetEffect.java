@@ -2,7 +2,7 @@ package com.zickzenni.anarchium.effect.impl;
 
 import com.zickzenni.anarchium.effect.ConfigValue;
 import com.zickzenni.anarchium.effect.EffectProperties;
-import com.zickzenni.anarchium.effect.TimedEffect;
+import com.zickzenni.anarchium.effect.base.TimedEffect;
 import com.zickzenni.anarchium.server.AnarchiumServer;
 import com.zickzenni.anarchium.util.LevelTickStage;
 import net.minecraft.server.level.ServerLevel;

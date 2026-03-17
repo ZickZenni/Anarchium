@@ -1,5 +1,6 @@
-package com.zickzenni.anarchium.effect;
+package com.zickzenni.anarchium.effect.base;
 
+import com.zickzenni.anarchium.effect.Effect;
 import com.zickzenni.anarchium.registry.SoundRegistry;
 import net.minecraft.core.Holder;
 import net.minecraft.network.chat.Component;

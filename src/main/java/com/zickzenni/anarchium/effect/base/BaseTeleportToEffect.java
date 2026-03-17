@@ -1,6 +1,5 @@
-package com.zickzenni.anarchium.effect.impl;
+package com.zickzenni.anarchium.effect.base;
 
-import com.zickzenni.anarchium.effect.InstantEffect;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.phys.Vec3;
