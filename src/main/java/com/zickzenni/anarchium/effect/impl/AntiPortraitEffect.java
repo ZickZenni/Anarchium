@@ -12,7 +12,7 @@ public class AntiPortraitEffect extends TimedEffect
 
     public static final EffectProperties<AntiPortraitEffect> PROPERTIES =
             EffectProperties.Builder.of(AntiPortraitEffect.class)
-                    .id("portrait")
+                    .id("anti_portrait")
                     .supplier(AntiPortraitEffect::new)
                     .conflict(BlackScreenEffect.class)
                     .conflict(PortraitEffect.class)
