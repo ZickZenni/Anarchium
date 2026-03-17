@@ -62,6 +62,7 @@ public final class ServerEvents
     @SubscribeEvent
     public static void onPlayerLogin(PlayerEvent.PlayerLoggedInEvent event)
     {
+        //noinspection resource
         if (event.getEntity().level().isClientSide())
         {
             return;
@@ -88,6 +89,11 @@ public final class ServerEvents
 
             for (ConfigValue<?> value : property.getConfig())
             {
+                if (value.getName().equals("enabled"))
+                {
+                    continue;
+                }
+
                 entries.add(new ConfigurationPacket.Entry(value.getName(), value.getType(), value.getRaw()));
             }
 

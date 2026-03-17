@@ -22,6 +22,8 @@ public class EffectProperties<T extends Effect>
 
     private final List<ConfigValue<?>> config;
 
+    private final ConfigValue<Boolean> enabledValue;
+
     private EffectProperties(Class<T> clazz,
                              ResourceLocation id,
                              EffectSupplier<T> supplier,
@@ -33,6 +35,9 @@ public class EffectProperties<T extends Effect>
         this.supplier = supplier;
         this.conflicts = conflicts;
         this.config = config;
+
+        this.enabledValue = ConfigValue.newBoolean("enabled", true);
+        this.config.add(enabledValue);
     }
 
     /**
@@ -74,6 +79,14 @@ public class EffectProperties<T extends Effect>
     public List<ConfigValue<?>> getConfig()
     {
         return config;
+    }
+
+    /**
+     * Checks if the effect is enabled.
+     */
+    public boolean isEnabled()
+    {
+        return enabledValue.get();
     }
 
     // ===================================================
