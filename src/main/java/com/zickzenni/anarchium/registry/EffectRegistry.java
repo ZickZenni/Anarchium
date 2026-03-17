@@ -31,6 +31,7 @@ public class EffectRegistry
 
     public static void register()
     {
+        register(AntiPortraitEffect.PROPERTIES);
         register(BiggerBlockEntitiesEffect.PROPERTIES);
         register(BlackScreenEffect.PROPERTIES);
         register(BlindnessPotionEffect.PROPERTIES);

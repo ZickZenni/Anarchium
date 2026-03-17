@@ -6,22 +6,22 @@ import com.zickzenni.anarchium.effect.TimedEffect;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 
-public class PortraitEffect extends TimedEffect
+public class AntiPortraitEffect extends TimedEffect
 {
     public static final ConfigValue<Integer> DURATION = ConfigValue.newInteger("duration", 20 * 45);
 
-    public static final EffectProperties<PortraitEffect> PROPERTIES =
-            EffectProperties.Builder.of(PortraitEffect.class)
+    public static final EffectProperties<AntiPortraitEffect> PROPERTIES =
+            EffectProperties.Builder.of(AntiPortraitEffect.class)
                     .id("portrait")
-                    .supplier(PortraitEffect::new)
+                    .supplier(AntiPortraitEffect::new)
                     .conflict(BlackScreenEffect.class)
-                    .conflict(AntiPortraitEffect.class)
+                    .conflict(PortraitEffect.class)
                     .config(DURATION)
                     .build();
 
     // ======================================================
 
-    public PortraitEffect()
+    public AntiPortraitEffect()
     {
         super(PROPERTIES.getId(), DURATION.get());
     }
@@ -35,7 +35,6 @@ public class PortraitEffect extends TimedEffect
 
         var thirdWidth = width / 3;
 
-        graphics.fill(0, 0, thirdWidth, height, 0xFF000000);
-        graphics.fill(width - thirdWidth, 0, width, height, 0xFF000000);
+        graphics.fill(thirdWidth, 0, width - thirdWidth, height, 0xFF000000);
     }
 }
