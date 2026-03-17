@@ -28,10 +28,19 @@ public class BlackScreenEffect extends TimedEffect
     @Override
     public void onRenderGUI(GuiGraphics graphics, float deltaTime)
     {
-        var window = Minecraft.getInstance().getWindow();
+        var minecraft = Minecraft.getInstance();
+        minecraft.options.hideGui = true;
+
+        var window = minecraft.getWindow();
         var width = window.getGuiScaledWidth();
         var height = window.getGuiScaledHeight();
 
         graphics.fill(0, 0, width, height, 0xFF000000);
+    }
+
+    @Override
+    public void onEndClient()
+    {
+        Minecraft.getInstance().options.hideGui = false;
     }
 }
