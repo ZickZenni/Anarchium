@@ -89,7 +89,7 @@ public final class ServerEvents
 
             for (ConfigValue<?> value : property.getConfig())
             {
-                if (value.getName().equals("enabled"))
+                if (value.getName().equals("enabled") || value.getName().equals("weight"))
                 {
                     continue;
                 }

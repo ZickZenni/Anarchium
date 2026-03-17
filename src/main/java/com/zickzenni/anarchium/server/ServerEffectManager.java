@@ -14,6 +14,7 @@ import net.neoforged.neoforge.network.PacketDistributor;
 import org.slf4j.Logger;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
@@ -73,26 +74,15 @@ public class ServerEffectManager
                 var entries = registry.values().stream()
                         .filter(EffectProperties::isEnabled)
                         .toArray(EffectProperties[]::new);
-                var property = entries[new Random().nextInt(entries.length)];
-                var id = property.getId();
+                var property = getRandomEffect(entries);
 
-                for (var effect : EFFECTS)
+                if (property == null)
                 {
-                    if (effect.getLocation().equals(id) && effect.getDurationTicks() > 0)
-                    {
-                        LOGGER.info("Reset active effect: {}", id);
-                        effect.setTicks(effect.getDurationTicks());
-                        PacketDistributor.sendToAllPlayers(new ActivateEffectPacket(id.toString()));
-                        return;
-                    }
+                    LOGGER.error("Could not find a random effect!");
+                    return;
                 }
 
-                var effect = property.getSupplier().create();
-                effect.onStartServer();
-
-                LOGGER.debug("Picked new effect: {}", id);
-                EFFECTS.add(effect);
-                PacketDistributor.sendToAllPlayers(new ActivateEffectPacket(id.toString()));
+                activateEffect(property);
             }
 
             /*
@@ -103,5 +93,47 @@ public class ServerEffectManager
                 PacketDistributor.sendToAllPlayers(new TimerTickPacket(timerTicks, TIMER_DURATION));
             }
         }
+    }
+
+    public static EffectProperties<?> getRandomEffect(EffectProperties<?>[] entries)
+    {
+        var totalWeight = Arrays.stream(entries).mapToInt(EffectProperties::getWeight).sum();
+        var random = new Random().nextInt(totalWeight);
+        var weight = 0;
+
+        for (var entry : entries)
+        {
+            weight += entry.getWeight();
+
+            if (random < weight)
+            {
+                return entry;
+            }
+        }
+
+        return null;
+    }
+
+    public static void activateEffect(EffectProperties<?> property)
+    {
+        var id = property.getId();
+
+        for (var effect : EFFECTS)
+        {
+            if (effect.getLocation().equals(id) && effect.getDurationTicks() > 0)
+            {
+                LOGGER.debug("Reset active effect: {}", id);
+                effect.setTicks(effect.getDurationTicks());
+                PacketDistributor.sendToAllPlayers(new ActivateEffectPacket(id.toString()));
+                return;
+            }
+        }
+
+        var effect = property.getSupplier().create();
+        effect.onStartServer();
+
+        LOGGER.debug("Picked new effect: {}", id);
+        EFFECTS.add(effect);
+        PacketDistributor.sendToAllPlayers(new ActivateEffectPacket(id.toString()));
     }
 }

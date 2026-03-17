@@ -24,6 +24,8 @@ public class EffectProperties<T extends Effect>
 
     private final ConfigValue<Boolean> enabledValue;
 
+    private final ConfigValue<Integer> weightValue;
+
     private EffectProperties(Class<T> clazz,
                              ResourceLocation id,
                              EffectSupplier<T> supplier,
@@ -37,7 +39,9 @@ public class EffectProperties<T extends Effect>
         this.config = config;
 
         this.enabledValue = ConfigValue.newBoolean("enabled", true);
+        this.weightValue = ConfigValue.newInteger("weight", 1000);
         this.config.add(enabledValue);
+        this.config.add(weightValue);
     }
 
     /**
@@ -87,6 +91,14 @@ public class EffectProperties<T extends Effect>
     public boolean isEnabled()
     {
         return enabledValue.get();
+    }
+
+    /**
+     * Retrieves the weight of the effect for selection.
+     */
+    public int getWeight()
+    {
+        return weightValue.get();
     }
 
     // ===================================================
