@@ -54,6 +54,7 @@ public class EffectRegistry
         register(GetRotatedEffect.PROPERTIES);
         register(HighPitchEffect.PROPERTIES);
         register(InvertVelocityEffect.PROPERTIES);
+        register(InvisibilityPotionEffect.PROPERTIES);
         register(JailEffect.PROPERTIES);
         register(LargeEntitiesEffect.PROPERTIES);
         register(LowPitchEffect.PROPERTIES);
