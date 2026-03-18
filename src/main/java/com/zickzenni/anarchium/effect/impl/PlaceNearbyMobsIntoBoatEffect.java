@@ -1,4 +1,3 @@
-
 package com.zickzenni.anarchium.effect.impl;
 
 import com.zickzenni.anarchium.effect.ConfigValue;
@@ -42,7 +41,7 @@ public class PlaceNearbyMobsIntoBoatEffect extends InstantEffect
 
             for (var entity : entities)
             {
-                if (entity == null || entity.isRemoved() || entity instanceof ServerPlayer || !(entity instanceof LivingEntity))
+                if (entity == null || entity.isRemoved() || entity.getVehicle() != null || entity instanceof ServerPlayer || !(entity instanceof LivingEntity))
                 {
                     continue;
                 }
