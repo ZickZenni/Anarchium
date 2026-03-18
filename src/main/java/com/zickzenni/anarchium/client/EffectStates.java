@@ -10,8 +10,6 @@ public class EffectStates
 
     public static boolean enableWideLivingEntities = false;
 
-    public static boolean enableLargeEntities = false;
-
     public static boolean enableSpinningLivingEntities = false;
 
     public static boolean enableReplaceEverySoundWithVillagers = false;

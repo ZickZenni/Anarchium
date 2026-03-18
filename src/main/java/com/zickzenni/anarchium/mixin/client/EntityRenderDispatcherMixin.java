@@ -1,7 +1,7 @@
 package com.zickzenni.anarchium.mixin.client;
 
 import com.mojang.blaze3d.vertex.PoseStack;
-import com.zickzenni.anarchium.client.EffectStates;
+import com.zickzenni.anarchium.effect.impl.LargeEntitiesEffect;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.entity.EntityRenderDispatcher;
 import net.minecraft.world.entity.Entity;
@@ -22,9 +22,10 @@ public class EntityRenderDispatcherMixin
     )
     public <E extends Entity> void render(E entity, double x, double y, double z, float rotationYaw, float partialTicks, PoseStack poseStack, MultiBufferSource buffer, int packedLight, CallbackInfo ci)
     {
-        if (EffectStates.enableLargeEntities)
+        if (LargeEntitiesEffect.ENABLED)
         {
-            poseStack.scale(10, 10, 10);
+            var scale = LargeEntitiesEffect.SCALE_MULTIPLIER.get().floatValue();
+            poseStack.scale(scale, scale, scale);
         }
     }
 }
