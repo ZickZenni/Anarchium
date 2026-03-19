@@ -1,6 +1,6 @@
 package com.zickzenni.anarchium.client.network.handler;
 
-import com.zickzenni.anarchium.client.AnarchiumClient;
+import com.zickzenni.anarchium.Anarchium;
 import com.zickzenni.anarchium.client.ClientEffectManager;
 import com.zickzenni.anarchium.network.packet.ActivateEffectPacket;
 import net.minecraft.client.Minecraft;
@@ -24,7 +24,7 @@ public final class ActivateEffectPacketHandler
 
         if (location == null)
         {
-            AnarchiumClient.LOGGER.error("Failed to parse effect location {}", packet.id());
+            Anarchium.LOGGER.error("Failed to parse effect location {}", packet.id());
             return;
         }
 
@@ -33,7 +33,7 @@ public final class ActivateEffectPacketHandler
             if (effect.getLocation().equals(location))
             {
                 player.playSound(effect.getDispatchSound().value(), 1.0f, 1.0f);
-                AnarchiumClient.getInstance().timerTicks = AnarchiumClient.getInstance().timerDuration;
+                Anarchium.getClient().resetTimer();
                 return;
             }
         }
@@ -45,6 +45,6 @@ public final class ActivateEffectPacketHandler
             player.playSound(effect.getDispatchSound().value(), 1.0f, 1.0f);
         }
 
-        AnarchiumClient.getInstance().timerTicks = AnarchiumClient.getInstance().timerDuration;
+        Anarchium.getClient().resetTimer();
     }
 }

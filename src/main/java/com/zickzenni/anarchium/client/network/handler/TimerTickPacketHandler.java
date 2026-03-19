@@ -1,6 +1,6 @@
 package com.zickzenni.anarchium.client.network.handler;
 
-import com.zickzenni.anarchium.client.AnarchiumClient;
+import com.zickzenni.anarchium.Anarchium;
 import com.zickzenni.anarchium.network.packet.TimerTickPacket;
 import net.neoforged.neoforge.network.handling.IPayloadContext;
 
@@ -8,8 +8,8 @@ public class TimerTickPacketHandler
 {
     public static void handle(final TimerTickPacket packet, final IPayloadContext ignoredCtx)
     {
-        var instance = AnarchiumClient.getInstance();
-        var diff = instance.timerTicks - packet.ticks();
+        var instance = Anarchium.getClient();
+        var diff = instance.getTimerTicks() - packet.ticks();
 
         /*
          * Correct prediction from the client.
@@ -18,10 +18,10 @@ public class TimerTickPacketHandler
          */
         if (diff <= (packet.duration() - 11) && diff >= (packet.duration() - 11))
         {
-            instance.timerTicks = packet.ticks();
+            instance.setTimerTicks(packet.ticks());
         }
 
-        instance.timerDuration = packet.duration();
+        instance.setTimerDuration(packet.duration());
         instance.predictTicks = 10;
     }
 }

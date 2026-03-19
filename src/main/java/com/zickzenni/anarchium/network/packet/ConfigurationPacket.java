@@ -18,7 +18,7 @@ public record ConfigurationPacket(List<Effect> effects) implements CustomPacketP
 
     // ==========================================================
 
-    public static final Type<ConfigurationPacket> TYPE = new Type<>(Anarchium.location("configuration"));
+    public static final Type<ConfigurationPacket> TYPE = new Type<>(Anarchium.getLocation("configuration"));
 
     public static final StreamCodec<FriendlyByteBuf, ConfigurationPacket> STREAM_CODEC =
             StreamCodec.of(ConfigurationPacket::encode, ConfigurationPacket::decode);

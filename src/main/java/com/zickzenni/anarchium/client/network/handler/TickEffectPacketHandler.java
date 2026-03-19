@@ -1,6 +1,6 @@
 package com.zickzenni.anarchium.client.network.handler;
 
-import com.zickzenni.anarchium.client.AnarchiumClient;
+import com.zickzenni.anarchium.Anarchium;
 import com.zickzenni.anarchium.client.ClientEffectManager;
 import com.zickzenni.anarchium.network.packet.TickEffectPacket;
 import net.minecraft.resources.ResourceLocation;
@@ -14,7 +14,7 @@ public class TickEffectPacketHandler
 
         if (location == null)
         {
-            AnarchiumClient.LOGGER.error("Failed to parse effect location {}", packet.id());
+            Anarchium.LOGGER.error("Failed to parse effect location {}", packet.id());
             return;
         }
 

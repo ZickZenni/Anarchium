@@ -9,7 +9,7 @@ import org.jspecify.annotations.NonNull;
 
 public record TimerTickPacket(int ticks, int duration) implements CustomPacketPayload
 {
-    public static final Type<TimerTickPacket> TYPE = new Type<>(Anarchium.location("timer_tick"));
+    public static final Type<TimerTickPacket> TYPE = new Type<>(Anarchium.getLocation("timer_tick"));
 
     public static final StreamCodec<ByteBuf, TimerTickPacket> STREAM_CODEC = StreamCodec.composite(
             ByteBufCodecs.INT,

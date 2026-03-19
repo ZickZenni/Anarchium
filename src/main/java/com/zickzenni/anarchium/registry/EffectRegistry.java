@@ -23,8 +23,16 @@ public class EffectRegistry
     private static final Map<ResourceLocation, EffectProperties<?>> REGISTRY = new HashMap<>();
     private static boolean frozen;
 
+    /**
+     * Registers all base effects of Anarchium.
+     */
     public static void register()
     {
+        if (frozen)
+        {
+            throw new IllegalStateException("Registry is already frozen.");
+        }
+
         register(AntiPortraitEffect.PROPERTIES);
         register(BiggerBlockEntitiesEffect.PROPERTIES);
         register(BlackScreenEffect.PROPERTIES);
@@ -85,6 +93,9 @@ public class EffectRegistry
         LOGGER.info("Finished registration with a total of {} entries", REGISTRY.size());
     }
 
+    /**
+     * Creates the configuration specs.
+     */
     public static void createConfigSpecs(ModConfigSpec.Builder builder)
     {
         if (!frozen)
@@ -113,6 +124,9 @@ public class EffectRegistry
         LOGGER.info("Finished configuration of effects");
     }
 
+    /**
+     * Registers a new effect.
+     */
     private static <T extends Effect> void register(EffectProperties<T> properties)
     {
         if (frozen)
@@ -130,6 +144,9 @@ public class EffectRegistry
                 .getCanonicalName(), properties.getId().getNamespace());
     }
 
+    /**
+     * Retrieves the registered effects in the registry.
+     */
     public static Map<ResourceLocation, EffectProperties<?>> getRegistry()
     {
         return Collections.unmodifiableMap(REGISTRY);

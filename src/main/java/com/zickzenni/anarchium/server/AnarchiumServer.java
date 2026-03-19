@@ -1,42 +1,46 @@
 package com.zickzenni.anarchium.server;
 
-import com.mojang.logging.LogUtils;
+import com.zickzenni.anarchium.Anarchium;
 import com.zickzenni.anarchium.effect.ConfigValue;
 import com.zickzenni.anarchium.util.LevelTickStage;
+import com.zickzenni.anarchium.util.OnlinePlayersSupplier;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.neoforged.neoforge.server.ServerLifecycleHooks;
-import org.slf4j.Logger;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class AnarchiumServer
+public class AnarchiumServer implements OnlinePlayersSupplier<ServerPlayer>
 {
-    private static final AnarchiumServer INSTANCE = new AnarchiumServer();
-
-    private static final Logger LOGGER = LogUtils.getLogger();
-
     public static final ConfigValue<Integer> TIMER_DURATION = ConfigValue.newInteger("duration", 20 * 45);
 
-    private AnarchiumServer() {}
+    public AnarchiumServer()
+    {
+        if (Anarchium.getServer() != null)
+        {
+            throw new IllegalStateException("Server already initialized!");
+        }
+    }
 
     /**
-     * Processes a level tick.
+     * Retrieves the server instance.
+     */
+    public static AnarchiumServer getInstance()
+    {
+        return Anarchium.getServer();
+    }
+
+    /**
+     * Processes a tick update for the provided tick stage.
+     * This method handles server effects.
      */
     public void processLevelTick(ServerLevel level, LevelTickStage stage)
     {
-        var server = ServerLifecycleHooks.getCurrentServer();
-
-        if (server == null)
-        {
-            return;
-        }
-
         /*
-         * Do not tick current effects or create new ones if there are no players.
+         * If there are no online players, skip the tick.
          */
-        if (server.getPlayerList().getPlayers().isEmpty())
+        if (this.getOnlinePlayers().isEmpty())
         {
             return;
         }
@@ -45,17 +49,10 @@ public class AnarchiumServer
     }
 
     /**
-     * Retrieves the instance.
+     * Retrieves the online players.
      */
-    public static AnarchiumServer getInstance()
-    {
-        return INSTANCE;
-    }
-
-    /**
-     * Retrieves the list of players.
-     */
-    public static List<ServerPlayer> getPlayers()
+    @Override
+    public List<ServerPlayer> getOnlinePlayers()
     {
         var server = ServerLifecycleHooks.getCurrentServer();
         return server != null ? server.getPlayerList().getPlayers() : new ArrayList<>();

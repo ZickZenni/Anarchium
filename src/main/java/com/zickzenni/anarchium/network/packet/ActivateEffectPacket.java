@@ -9,7 +9,8 @@ import org.jspecify.annotations.NonNull;
 
 public record ActivateEffectPacket(String id) implements CustomPacketPayload
 {
-    public static final CustomPacketPayload.Type<ActivateEffectPacket> TYPE = new CustomPacketPayload.Type<>(Anarchium.location("activate_effect"));
+    public static final CustomPacketPayload.Type<ActivateEffectPacket> TYPE =
+            new CustomPacketPayload.Type<>(Anarchium.getLocation("activate_effect"));
 
     public static final StreamCodec<ByteBuf, ActivateEffectPacket> STREAM_CODEC = StreamCodec.composite(
             ByteBufCodecs.STRING_UTF8,

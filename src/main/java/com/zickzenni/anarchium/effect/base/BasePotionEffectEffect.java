@@ -1,6 +1,6 @@
 package com.zickzenni.anarchium.effect.base;
 
-import com.zickzenni.anarchium.server.AnarchiumServer;
+import com.zickzenni.anarchium.Anarchium;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.effect.MobEffectInstance;
@@ -15,7 +15,8 @@ public abstract class BasePotionEffectEffect extends InstantEffect
     @Override
     public void onStartServer()
     {
-        for (var player : AnarchiumServer.getPlayers()) {
+        for (var player : Anarchium.getServer().getOnlinePlayers())
+        {
             player.addEffect(getPotionEffect(player));
         }
     }

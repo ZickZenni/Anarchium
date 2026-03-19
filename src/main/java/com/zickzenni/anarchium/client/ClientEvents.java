@@ -25,7 +25,7 @@ public final class ClientEvents
             return;
         }
 
-        AnarchiumClient.getInstance().processLevelTick((ClientLevel) level, LevelTickStage.PRE);
+        Anarchium.getClient().processLevelTick((ClientLevel) level, LevelTickStage.PRE);
     }
 
     @SubscribeEvent
@@ -38,7 +38,7 @@ public final class ClientEvents
             return;
         }
 
-        AnarchiumClient.getInstance().processLevelTick((ClientLevel) level, LevelTickStage.POST);
+        Anarchium.getClient().processLevelTick((ClientLevel) level, LevelTickStage.POST);
     }
 
     // ================ RENDER ================
@@ -53,7 +53,7 @@ public final class ClientEvents
     public static void onPostRenderGui(RenderGuiEvent.Post event)
     {
         ClientEffectManager.sendRenderGuiEvent(event);
-        AnarchiumClient.getInstance().getGui().render(event);
+        Anarchium.getClient().getGui().render(event);
     }
 
     // ========================================
@@ -62,7 +62,7 @@ public final class ClientEvents
     public static void onLoggingOut(ClientPlayerNetworkEvent.LoggingOut event)
     {
         ClientEffectManager.clear();
-        AnarchiumClient.getInstance().timerTicks = 0;
+        Anarchium.getClient().resetTimer();
     }
 
     @SubscribeEvent

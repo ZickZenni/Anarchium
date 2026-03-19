@@ -1,29 +1,44 @@
 package com.zickzenni.anarchium.client;
 
-import com.mojang.logging.LogUtils;
+import com.zickzenni.anarchium.Anarchium;
 import com.zickzenni.anarchium.util.LevelTickStage;
+import com.zickzenni.anarchium.util.OnlinePlayersSupplier;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.ClientLevel;
-import org.slf4j.Logger;
+import net.minecraft.client.player.AbstractClientPlayer;
 
-public class AnarchiumClient
+import java.util.List;
+
+public class AnarchiumClient implements OnlinePlayersSupplier<AbstractClientPlayer>
 {
-    private static final AnarchiumClient INSTANCE = new AnarchiumClient();
-
-    public static final Logger LOGGER = LogUtils.getLogger();
-
     private final AnarchiumGui gui;
 
-    public int timerTicks;
-
-    public int timerDuration;
-
+    private int timerTicks;
+    private int timerDuration;
     public int predictTicks;
 
-    private AnarchiumClient()
+    public AnarchiumClient()
     {
+        if (Anarchium.getClient() != null)
+        {
+            throw new IllegalStateException("Client already initialized!");
+        }
+
         this.gui = new AnarchiumGui();
     }
 
+    /**
+     * Retrieves the client instance.
+     */
+    public static AnarchiumClient getInstance()
+    {
+        return Anarchium.getClient();
+    }
+
+    /**
+     * Processes a tick update for the provided tick stage.
+     * Depending on the tick stage, this method handles client effects and manages a prediction timer.
+     */
     public void processLevelTick(ClientLevel level, LevelTickStage stage)
     {
         ClientEffectManager.tick(level, stage);
@@ -47,13 +62,70 @@ public class AnarchiumClient
         }
     }
 
-    public static AnarchiumClient getInstance()
+    /**
+     * Retrieves the ticks remaining in the timer.
+     */
+    public int getTimerTicks()
     {
-        return INSTANCE;
+        return this.timerTicks;
     }
 
+    /**
+     * Sets the ticks remaining in the timer.
+     */
+    public void setTimerTicks(int ticks)
+    {
+        this.timerTicks = ticks;
+    }
+
+    /**
+     * Retrieves the duration of the timer.
+     */
+    public int getTimerDuration()
+    {
+        return this.timerDuration;
+    }
+
+    /**
+     * Sets the duration of the timer.
+     *
+     * @param duration The duration of the timer.
+     */
+    public void setTimerDuration(int duration)
+    {
+        this.timerDuration = duration;
+    }
+
+    /**
+     * Resets the timer to its initial duration.
+     */
+    public void resetTimer()
+    {
+        this.timerTicks = this.timerDuration;
+    }
+
+    /**
+     * Retrieves the gui.
+     */
     public AnarchiumGui getGui()
     {
         return this.gui;
+    }
+
+    /**
+     * Retrieves the online players in the current world.
+     */
+    @Override
+    public List<AbstractClientPlayer> getOnlinePlayers()
+    {
+        var minecraft = Minecraft.getInstance();
+        var level = minecraft.level;
+
+        if (level == null)
+        {
+            return List.of();
+        }
+
+        return level.players();
     }
 }

@@ -1,6 +1,6 @@
 package com.zickzenni.anarchium.client.gui;
 
-import com.zickzenni.anarchium.client.AnarchiumClient;
+import com.zickzenni.anarchium.Anarchium;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.util.Mth;
@@ -20,10 +20,11 @@ public class ProgressBarOverlay implements Overlay
     @Override
     public void render(GuiGraphics graphics, float deltaTime)
     {
-        final var instance = AnarchiumClient.getInstance();
+        final var instance = Anarchium.getClient();
         final var minecraft = Minecraft.getInstance();
 
-        final var nextProgress = (float) (instance.timerDuration - instance.timerTicks) / (float) instance.timerDuration;
+        final var nextProgress =
+                (float) (instance.getTimerDuration() - instance.getTimerTicks()) / (float) instance.getTimerDuration();
 
         if (windowWidth != minecraft.getWindow().getGuiScaledWidth())
         {

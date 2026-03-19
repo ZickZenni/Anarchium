@@ -1,8 +1,8 @@
 package com.zickzenni.anarchium.effect.impl;
 
+import com.zickzenni.anarchium.Anarchium;
 import com.zickzenni.anarchium.effect.EffectProperties;
 import com.zickzenni.anarchium.effect.base.InstantEffect;
-import com.zickzenni.anarchium.server.AnarchiumServer;
 
 public class InvertVelocityEffect extends InstantEffect
 {
@@ -20,7 +20,7 @@ public class InvertVelocityEffect extends InstantEffect
     @Override
     public void onStartServer()
     {
-        for (var player : AnarchiumServer.getPlayers())
+        for (var player : Anarchium.getServer().getOnlinePlayers())
         {
             player.setDeltaMovement(player.getDeltaMovement().multiply(-1, -1, -1));
             player.hurtMarked = true;

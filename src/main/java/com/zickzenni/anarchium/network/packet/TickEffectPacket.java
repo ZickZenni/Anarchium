@@ -9,7 +9,7 @@ import org.jspecify.annotations.NonNull;
 
 public record TickEffectPacket(String id, int ticks) implements CustomPacketPayload
 {
-    public static final Type<TickEffectPacket> TYPE = new Type<>(Anarchium.location("tick_effect"));
+    public static final Type<TickEffectPacket> TYPE = new Type<>(Anarchium.getLocation("tick_effect"));
 
     public static final StreamCodec<ByteBuf, TickEffectPacket> STREAM_CODEC = StreamCodec.composite(
             ByteBufCodecs.STRING_UTF8,

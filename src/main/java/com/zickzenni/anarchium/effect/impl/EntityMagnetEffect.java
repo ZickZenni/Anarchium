@@ -1,9 +1,9 @@
 package com.zickzenni.anarchium.effect.impl;
 
+import com.zickzenni.anarchium.Anarchium;
 import com.zickzenni.anarchium.effect.ConfigValue;
 import com.zickzenni.anarchium.effect.EffectProperties;
 import com.zickzenni.anarchium.effect.base.TimedEffect;
-import com.zickzenni.anarchium.server.AnarchiumServer;
 import com.zickzenni.anarchium.util.LevelTickStage;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
@@ -35,7 +35,7 @@ public class EntityMagnetEffect extends TimedEffect
     {
         if (stage == LevelTickStage.POST)
         {
-            for (var player : AnarchiumServer.getPlayers())
+            for (var player : Anarchium.getServer().getOnlinePlayers())
             {
                 int radius = RADIUS.get();
                 var playerPosition = player.position();

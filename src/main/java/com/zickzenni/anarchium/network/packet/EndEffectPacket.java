@@ -9,7 +9,7 @@ import org.jspecify.annotations.NonNull;
 
 public record EndEffectPacket(String id) implements CustomPacketPayload
 {
-    public static final Type<EndEffectPacket> TYPE = new Type<>(Anarchium.location("end_effect"));
+    public static final Type<EndEffectPacket> TYPE = new Type<>(Anarchium.getLocation("end_effect"));
 
     public static final StreamCodec<ByteBuf, EndEffectPacket> STREAM_CODEC = StreamCodec.composite(
             ByteBufCodecs.STRING_UTF8,

@@ -1,10 +1,10 @@
 
 package com.zickzenni.anarchium.effect.impl;
 
+import com.zickzenni.anarchium.Anarchium;
 import com.zickzenni.anarchium.effect.ConfigValue;
 import com.zickzenni.anarchium.effect.EffectProperties;
 import com.zickzenni.anarchium.effect.base.InstantEffect;
-import com.zickzenni.anarchium.server.AnarchiumServer;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.AABB;
@@ -30,7 +30,7 @@ public class ExplodeNearbyEntitiesEvent extends InstantEffect
     @Override
     public void onStartServer()
     {
-        for (var player : AnarchiumServer.getPlayers())
+        for (var player : Anarchium.getServer().getOnlinePlayers())
         {
             int radius = RADIUS.get();
             var level = player.serverLevel();
