@@ -26,6 +26,8 @@ These are the available effects that can be randomly chosen:
 * Dirt
 * Drop Inventory
 * Drop Item
+* Enchant Current Item
+* Enchant Armor Piece
 * Entity Magnet
 * Everyone is a Villager
 * Explode Mobs

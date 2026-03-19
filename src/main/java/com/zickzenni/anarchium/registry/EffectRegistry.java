@@ -44,6 +44,8 @@ public class EffectRegistry
         register(DamagePlayersEffect.PROPERTIES);
         register(DropInventoryEffect.PROPERTIES);
         register(DropItemEffect.PROPERTIES);
+        register(EnchantArmorPieceEffect.PROPERTIES);
+        register(EnchantCurrentItemEffect.PROPERTIES);
         register(EntityMagnetEffect.PROPERTIES);
         register(EveryoneIsAVillagerEffect.PROPERTIES);
         register(ExplodeNearbyEntitiesEvent.PROPERTIES);
