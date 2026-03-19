@@ -1,10 +1,10 @@
 package com.zickzenni.anarchium.mixin.client;
 
 import com.mojang.blaze3d.vertex.PoseStack;
-import com.mojang.math.Axis;
-import com.zickzenni.anarchium.client.EffectStates;
 import com.zickzenni.anarchium.effect.impl.EveryoneIsAVillagerEffect;
 import com.zickzenni.anarchium.effect.impl.SkeletonsHaveSpinbotEffect;
+import com.zickzenni.anarchium.effect.impl.SpinningMobsEffect;
+import com.zickzenni.anarchium.effect.impl.WideMobsEffect;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.LivingEntityRenderer;
@@ -27,74 +27,19 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public abstract class LivingEntityRendererMixin
 {
     @Unique
-    private static final ResourceLocation VILLAGER_BASE_SKIN = ResourceLocation.withDefaultNamespace("textures/entity/villager/villager.png");
+    private static final ResourceLocation VILLAGER_BASE_SKIN =
+            ResourceLocation.withDefaultNamespace("textures/entity/villager/villager.png");
 
     @Unique
-    private static final ResourceLocation VILLAGER_PLAINS_CLOTH = anarchium$getResourceLocation(BuiltInRegistries.VILLAGER_TYPE.getKey(VillagerType.PLAINS));
-
-    @Shadow
-    protected <T extends LivingEntity> RenderType getRenderType(T livingEntity, boolean bodyVisible, boolean translucent, boolean glowing)
-    {
-        return null;
-    }
-
-    @Inject(at = @At(value = "INVOKE", target = "Lcom/mojang/blaze3d/vertex/PoseStack;pushPose()V"),
-            method = "render(Lnet/minecraft/world/entity/LivingEntity;FFLcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/MultiBufferSource;I)V")
-    public <T extends LivingEntity> void render(T entity, float entityYaw, float partialTicks, PoseStack poseStack, MultiBufferSource buffer, int packedLight, CallbackInfo ci)
-    {
-        var isPlayer = entity instanceof Player;
-
-        if (EffectStates.enableWideLivingEntities && !isPlayer)
-        {
-            var rotation = 180.0F - entity.yBodyRot;
-            poseStack.mulPose(Axis.YP.rotationDegrees(rotation));
-            poseStack.scale(2, 1, 1);
-            poseStack.mulPose(Axis.YP.rotationDegrees(-rotation));
-        }
-
-        if (EffectStates.enableSpinningLivingEntities && !isPlayer)
-        {
-            poseStack.mulPose(Axis.YP.rotationDegrees(EffectStates.spinningLivingEntityRotation));
-        }
-
-        if (SkeletonsHaveSpinbotEffect.ENABLED && entity instanceof AbstractSkeleton)
-        {
-            poseStack.mulPose(Axis.YP.rotationDegrees(SkeletonsHaveSpinbotEffect.ROTATION));
-        }
-    }
-
-    @Inject(at = @At(value = "INVOKE", target = "Lnet/minecraft/client/Minecraft;shouldEntityAppearGlowing(Lnet/minecraft/world/entity/Entity;)Z"),
-            method = "render(Lnet/minecraft/world/entity/LivingEntity;FFLcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/MultiBufferSource;I)V")
-    public <T extends LivingEntity> void render$getOverlayCoords(T entity, float entityYaw, float partialTicks, PoseStack poseStack, MultiBufferSource buffer, int packedLight, CallbackInfo ci)
-    {
-        if (EveryoneIsAVillagerEffect.ENABLED)
-        {
-            anarchium$replaceWithVillager(entity, partialTicks, poseStack, buffer, packedLight);
-        }
-    }
-
-    @Redirect(at = @At(value = "INVOKE", target = "Lnet/minecraft/client/renderer/entity/LivingEntityRenderer;getRenderType(Lnet/minecraft/world/entity/LivingEntity;ZZZ)Lnet/minecraft/client/renderer/RenderType;"),
-            method = "render(Lnet/minecraft/world/entity/LivingEntity;FFLcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/MultiBufferSource;I)V")
-    public <T extends LivingEntity> RenderType render$getRenderType(@SuppressWarnings("rawtypes") LivingEntityRenderer ignoredInstance, T livingEntity, boolean bodyVisible, boolean translucent, boolean glowing)
-    {
-        if (EveryoneIsAVillagerEffect.ENABLED)
-        {
-            return null;
-        }
-
-        return getRenderType(livingEntity, bodyVisible, translucent, glowing);
-    }
+    private static final ResourceLocation VILLAGER_PLAINS_CLOTH =
+            anarchium$getResourceLocation(BuiltInRegistries.VILLAGER_TYPE.getKey(VillagerType.PLAINS));
 
     @Unique
-    private static ResourceLocation anarchium$getResourceLocation(ResourceLocation location)
-    {
-        return location.withPath(p_247944_ -> "textures/entity/villager/type/" + p_247944_ + ".png");
-    }
-
-    // =================== EFFECTS ===================
-
-    @Unique
-    private static <T extends LivingEntity> void anarchium$replaceWithVillager(T entity, float partialTicks, PoseStack poseStack, MultiBufferSource buffer, int packedLight)
+    private static <T extends LivingEntity> void anarchium$replaceWithVillager(T entity,
+                                                                               float partialTicks,
+                                                                               PoseStack poseStack,
+                                                                               MultiBufferSource buffer,
+                                                                               int packedLight)
     {
         var model = EveryoneIsAVillagerEffect.VILLAGER_MODEL;
         var shouldSit = entity.isPassenger() && (entity.getVehicle() != null && entity.getVehicle().shouldRiderSit());
@@ -168,5 +113,84 @@ public abstract class LivingEntityRendererMixin
         model.renderToBuffer(poseStack, cloth, packedLight, overlayCoords, -1);
 
         poseStack.scale(0, 0, 0);
+    }
+
+    @Shadow
+    protected <T extends LivingEntity> RenderType getRenderType(T livingEntity,
+                                                                boolean bodyVisible,
+                                                                boolean translucent,
+                                                                boolean glowing)
+    {
+        return null;
+    }
+
+    @Inject(at = @At(value = "INVOKE", target = "Lcom/mojang/blaze3d/vertex/PoseStack;pushPose()V"),
+            method = "render(Lnet/minecraft/world/entity/LivingEntity;FFLcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/MultiBufferSource;I)V")
+    public <T extends LivingEntity> void render(T entity,
+                                                float entityYaw,
+                                                float partialTicks,
+                                                PoseStack poseStack,
+                                                MultiBufferSource buffer,
+                                                int packedLight,
+                                                CallbackInfo ci)
+    {
+        var isPlayer = entity instanceof Player;
+
+        if (WideMobsEffect.ENABLED && !isPlayer)
+        {
+            WideMobsEffect.modifyWidth$LivingEntityRenderer(entity, poseStack);
+        }
+
+        if (SpinningMobsEffect.ENABLED && !isPlayer)
+        {
+            SpinningMobsEffect.modifyRotation$LivingEntityRenderer(poseStack);
+        }
+
+        if (SkeletonsHaveSpinbotEffect.ENABLED && entity instanceof AbstractSkeleton)
+        {
+            SkeletonsHaveSpinbotEffect.modifyRotation$LivingEntityRenderer(poseStack);
+        }
+    }
+
+    @Inject(at = @At(value = "INVOKE",
+            target = "Lnet/minecraft/client/Minecraft;shouldEntityAppearGlowing(Lnet/minecraft/world/entity/Entity;)Z"),
+            method = "render(Lnet/minecraft/world/entity/LivingEntity;FFLcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/MultiBufferSource;I)V")
+    public <T extends LivingEntity> void render$getOverlayCoords(T entity,
+                                                                 float entityYaw,
+                                                                 float partialTicks,
+                                                                 PoseStack poseStack,
+                                                                 MultiBufferSource buffer,
+                                                                 int packedLight,
+                                                                 CallbackInfo ci)
+    {
+        if (EveryoneIsAVillagerEffect.ENABLED)
+        {
+            anarchium$replaceWithVillager(entity, partialTicks, poseStack, buffer, packedLight);
+        }
+    }
+
+    @Unique
+    private static ResourceLocation anarchium$getResourceLocation(ResourceLocation location)
+    {
+        return location.withPath(p_247944_ -> "textures/entity/villager/type/" + p_247944_ + ".png");
+    }
+
+    // =================== EFFECTS ===================
+
+    @Redirect(at = @At(value = "INVOKE",
+            target = "Lnet/minecraft/client/renderer/entity/LivingEntityRenderer;getRenderType(Lnet/minecraft/world/entity/LivingEntity;ZZZ)Lnet/minecraft/client/renderer/RenderType;"),
+            method = "render(Lnet/minecraft/world/entity/LivingEntity;FFLcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/MultiBufferSource;I)V")
+    public <T extends LivingEntity> RenderType render$getRenderType(@SuppressWarnings("rawtypes") LivingEntityRenderer ignoredInstance,
+                                                                    T livingEntity,
+                                                                    boolean bodyVisible,
+                                                                    boolean translucent,
+                                                                    boolean glowing)
+    {
+        if (EveryoneIsAVillagerEffect.ENABLED)
+        {
+            return null;
+        }
+
+        return getRenderType(livingEntity, bodyVisible, translucent, glowing);
     }
 }
