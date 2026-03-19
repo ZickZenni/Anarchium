@@ -9,7 +9,9 @@ import net.neoforged.neoforge.network.handling.IPayloadContext;
 
 public final class ActivateEffectPacketHandler
 {
-    private ActivateEffectPacketHandler() {}
+    private ActivateEffectPacketHandler()
+    {
+    }
 
     public static void handle(final ActivateEffectPacket packet, final IPayloadContext ignoredCtx)
     {
@@ -33,7 +35,7 @@ public final class ActivateEffectPacketHandler
             if (effect.getLocation().equals(location))
             {
                 player.playSound(effect.getDispatchSound().value(), 1.0f, 1.0f);
-                Anarchium.getClient().resetTimer();
+                Anarchium.getClient().getTimer().reset();
                 return;
             }
         }
@@ -45,6 +47,6 @@ public final class ActivateEffectPacketHandler
             player.playSound(effect.getDispatchSound().value(), 1.0f, 1.0f);
         }
 
-        Anarchium.getClient().resetTimer();
+        Anarchium.getClient().getTimer().reset();
     }
 }

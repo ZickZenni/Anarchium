@@ -24,7 +24,8 @@ public class ProgressBarOverlay implements Overlay
         final var minecraft = Minecraft.getInstance();
 
         final var nextProgress =
-                (float) (instance.getTimerDuration() - instance.getTimerTicks()) / (float) instance.getTimerDuration();
+                (float) (instance.getTimer().getDuration() - instance.getTimer()
+                        .getTicks()) / (float) instance.getTimer().getDuration();
 
         if (windowWidth != minecraft.getWindow().getGuiScaledWidth())
         {

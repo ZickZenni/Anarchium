@@ -62,7 +62,7 @@ public final class ClientEvents
     public static void onLoggingOut(ClientPlayerNetworkEvent.LoggingOut event)
     {
         ClientEffectManager.clear();
-        Anarchium.getClient().resetTimer();
+        Anarchium.getClient().getTimer().setDuration(Integer.MAX_VALUE);
     }
 
     @SubscribeEvent

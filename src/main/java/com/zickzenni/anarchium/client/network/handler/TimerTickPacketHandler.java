@@ -8,20 +8,6 @@ public class TimerTickPacketHandler
 {
     public static void handle(final TimerTickPacket packet, final IPayloadContext ignoredCtx)
     {
-        var instance = Anarchium.getClient();
-        var diff = instance.getTimerTicks() - packet.ticks();
-
-        /*
-         * Correct prediction from the client.
-         *
-         * 11 because of 10 prediction ticks and +1
-         */
-        if (diff <= (packet.duration() - 11) && diff >= (packet.duration() - 11))
-        {
-            instance.setTimerTicks(packet.ticks());
-        }
-
-        instance.setTimerDuration(packet.duration());
-        instance.predictTicks = 10;
+        Anarchium.getClient().getTimer().synchronize(packet);
     }
 }

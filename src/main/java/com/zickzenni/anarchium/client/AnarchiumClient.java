@@ -1,6 +1,7 @@
 package com.zickzenni.anarchium.client;
 
 import com.zickzenni.anarchium.Anarchium;
+import com.zickzenni.anarchium.client.util.ClientTimer;
 import com.zickzenni.anarchium.util.LevelTickStage;
 import com.zickzenni.anarchium.util.OnlinePlayersSupplier;
 import net.minecraft.client.Minecraft;
@@ -12,10 +13,7 @@ import java.util.List;
 public class AnarchiumClient implements OnlinePlayersSupplier<AbstractClientPlayer>
 {
     private final AnarchiumGui gui;
-
-    private int timerTicks;
-    private int timerDuration;
-    public int predictTicks;
+    private final ClientTimer timer;
 
     public AnarchiumClient()
     {
@@ -25,6 +23,7 @@ public class AnarchiumClient implements OnlinePlayersSupplier<AbstractClientPlay
         }
 
         this.gui = new AnarchiumGui();
+        this.timer = new ClientTimer();
     }
 
     /**
@@ -45,63 +44,8 @@ public class AnarchiumClient implements OnlinePlayersSupplier<AbstractClientPlay
 
         if (stage == LevelTickStage.POST)
         {
-            if (predictTicks <= 0)
-            {
-                return;
-            }
-
-            predictTicks--;
-
-            if (timerTicks > 0)
-            {
-                timerTicks--;
-            } else
-            {
-                timerTicks = timerDuration;
-            }
+            this.timer.tick();
         }
-    }
-
-    /**
-     * Retrieves the ticks remaining in the timer.
-     */
-    public int getTimerTicks()
-    {
-        return this.timerTicks;
-    }
-
-    /**
-     * Sets the ticks remaining in the timer.
-     */
-    public void setTimerTicks(int ticks)
-    {
-        this.timerTicks = ticks;
-    }
-
-    /**
-     * Retrieves the duration of the timer.
-     */
-    public int getTimerDuration()
-    {
-        return this.timerDuration;
-    }
-
-    /**
-     * Sets the duration of the timer.
-     *
-     * @param duration The duration of the timer.
-     */
-    public void setTimerDuration(int duration)
-    {
-        this.timerDuration = duration;
-    }
-
-    /**
-     * Resets the timer to its initial duration.
-     */
-    public void resetTimer()
-    {
-        this.timerTicks = this.timerDuration;
     }
 
     /**
@@ -110,6 +54,14 @@ public class AnarchiumClient implements OnlinePlayersSupplier<AbstractClientPlay
     public AnarchiumGui getGui()
     {
         return this.gui;
+    }
+
+    /**
+     * Retrieves the timer.
+     */
+    public ClientTimer getTimer()
+    {
+        return this.timer;
     }
 
     /**
