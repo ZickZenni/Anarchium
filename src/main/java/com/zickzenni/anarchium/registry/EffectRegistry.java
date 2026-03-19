@@ -85,6 +85,7 @@ public class EffectRegistry
         register(WhereIsTheSkyEffect.PROPERTIES);
         register(WideMobsEffect.PROPERTIES);
         register(ZeusEffect.PROPERTIES);
+        register(GiveDiamondsEffect.PROPERTIES);
 
         frozen = true;
         LOGGER.info("Finished registration with a total of {} entries", REGISTRY.size());
