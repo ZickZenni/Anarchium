@@ -10,9 +10,7 @@ import net.minecraft.client.gui.GuiGraphics;
 public class BlurryScreenEffect extends TimedEffect
 {
     public static final ConfigValue<Integer> DURATION = ConfigValue.newInteger("duration", 20 * 33);
-
     public static final ConfigValue<Integer> BLUR_RADIUS = ConfigValue.newInteger("blur_radius", 4);
-
     public static final EffectProperties<BlurryScreenEffect> PROPERTIES =
             EffectProperties.Builder.of(BlurryScreenEffect.class)
                     .id("blurry_screen")
@@ -20,8 +18,6 @@ public class BlurryScreenEffect extends TimedEffect
                     .config(DURATION)
                     .config(BLUR_RADIUS)
                     .build();
-
-    // ======================================================
 
     public static boolean ENABLED = false;
 

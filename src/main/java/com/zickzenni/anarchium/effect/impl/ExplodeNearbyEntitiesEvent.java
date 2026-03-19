@@ -12,15 +12,12 @@ import net.minecraft.world.phys.AABB;
 public class ExplodeNearbyEntitiesEvent extends InstantEffect
 {
     public static final ConfigValue<Integer> RADIUS = ConfigValue.newInteger("radius", 50);
-
     public static final EffectProperties<ExplodeNearbyEntitiesEvent> PROPERTIES =
             EffectProperties.Builder.of(ExplodeNearbyEntitiesEvent.class)
                     .id("explode_nearby_entities")
                     .supplier(ExplodeNearbyEntitiesEvent::new)
                     .config(RADIUS)
                     .build();
-
-    // ======================================================
 
     public ExplodeNearbyEntitiesEvent()
     {

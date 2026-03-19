@@ -11,15 +11,12 @@ import net.minecraft.world.phys.AABB;
 public class BurnNearbyMobsEffect extends InstantEffect
 {
     public static final ConfigValue<Integer> RADIUS = ConfigValue.newInteger("radius", 50);
-
     public static final EffectProperties<BurnNearbyMobsEffect> PROPERTIES =
             EffectProperties.Builder.of(BurnNearbyMobsEffect.class)
                     .id("burn_nearby_mobs")
                     .supplier(BurnNearbyMobsEffect::new)
                     .config(RADIUS)
                     .build();
-
-    // ======================================================
 
     public BurnNearbyMobsEffect()
     {

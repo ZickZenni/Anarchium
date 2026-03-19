@@ -11,7 +11,6 @@ import org.slf4j.Logger;
 public class SpawnBoatEffect extends InstantEffect
 {
     private static final Logger LOGGER = LogUtils.getLogger();
-
     public static final EffectProperties<SpawnBoatEffect> PROPERTIES =
             EffectProperties.Builder.of(SpawnBoatEffect.class)
                     .id("spawn_boat")

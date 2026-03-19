@@ -16,7 +16,6 @@ import java.lang.reflect.Field;
 public class SpawnWanderingTraderEffect extends InstantEffect
 {
     private static final Logger LOGGER = LogUtils.getLogger();
-
     public static final EffectProperties<SpawnWanderingTraderEffect> PROPERTIES =
             EffectProperties.Builder.of(SpawnWanderingTraderEffect.class)
                     .id("spawn_wandering_trader")

@@ -11,7 +11,6 @@ import net.minecraft.server.level.ServerLevel;
 public class ReversedGravityEffect extends TimedEffect
 {
     public static final ConfigValue<Integer> DURATION = ConfigValue.newInteger("duration", 20 * 30);
-
     public static final EffectProperties<ReversedGravityEffect> PROPERTIES =
             EffectProperties.Builder.of(ReversedGravityEffect.class)
                     .id("reversed_gravity")
@@ -19,8 +18,6 @@ public class ReversedGravityEffect extends TimedEffect
                     .conflict(NoGravityEffect.class)
                     .config(DURATION)
                     .build();
-
-    // ======================================================
 
     public ReversedGravityEffect()
     {

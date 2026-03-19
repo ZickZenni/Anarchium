@@ -9,7 +9,6 @@ import net.minecraft.world.entity.npc.Villager;
 public class EveryoneIsAVillagerEffect extends TimedEffect
 {
     public static final ConfigValue<Integer> DURATION = ConfigValue.newInteger("duration", 20 * 50);
-
     public static final EffectProperties<EveryoneIsAVillagerEffect> PROPERTIES =
             EffectProperties.Builder.of(EveryoneIsAVillagerEffect.class)
                     .id("everyone_is_a_villager")
@@ -17,10 +16,7 @@ public class EveryoneIsAVillagerEffect extends TimedEffect
                     .config(DURATION)
                     .build();
 
-    // ======================================================
-
     public static VillagerModel<Villager> VILLAGER_MODEL;
-
     public static boolean ENABLED = false;
 
     public EveryoneIsAVillagerEffect()

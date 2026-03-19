@@ -7,7 +7,6 @@ import com.zickzenni.anarchium.effect.base.TimedEffect;
 public class NoGravityEffect extends TimedEffect
 {
     public static final ConfigValue<Integer> DURATION = ConfigValue.newInteger("duration", 20 * 40);
-
     public static final EffectProperties<NoGravityEffect> PROPERTIES =
             EffectProperties.Builder.of(NoGravityEffect.class)
                     .id("no_gravity")
@@ -15,8 +14,6 @@ public class NoGravityEffect extends TimedEffect
                     .conflict(ReversedGravityEffect.class)
                     .config(DURATION)
                     .build();
-
-    // ======================================================
 
     public static boolean ENABLED = false;
 

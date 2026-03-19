@@ -12,9 +12,7 @@ import net.minecraft.world.phys.AABB;
 public class EntityMagnetEffect extends TimedEffect
 {
     public static final ConfigValue<Integer> DURATION = ConfigValue.newInteger("duration", 20 * 30);
-
     public static final ConfigValue<Integer> RADIUS = ConfigValue.newInteger("radius", 10);
-
     public static final EffectProperties<EntityMagnetEffect> PROPERTIES =
             EffectProperties.Builder.of(EntityMagnetEffect.class)
                     .id("entity_magnet")
@@ -22,8 +20,6 @@ public class EntityMagnetEffect extends TimedEffect
                     .config(DURATION)
                     .config(RADIUS)
                     .build();
-
-    // ======================================================
 
     public EntityMagnetEffect()
     {

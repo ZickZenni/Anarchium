@@ -11,15 +11,12 @@ import net.minecraft.world.phys.AABB;
 public class TeleportNearbyMobsToPlayersEffect extends InstantEffect
 {
     public static final ConfigValue<Integer> RADIUS = ConfigValue.newInteger("radius", 50);
-
     public static final EffectProperties<TeleportNearbyMobsToPlayersEffect> PROPERTIES =
             EffectProperties.Builder.of(TeleportNearbyMobsToPlayersEffect.class)
                     .id("teleport_nearby_mobs_to_players")
                     .supplier(TeleportNearbyMobsToPlayersEffect::new)
                     .config(RADIUS)
                     .build();
-
-    // ======================================================
 
     public TeleportNearbyMobsToPlayersEffect()
     {

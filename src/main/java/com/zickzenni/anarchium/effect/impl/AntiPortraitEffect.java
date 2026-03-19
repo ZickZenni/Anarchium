@@ -9,7 +9,6 @@ import net.minecraft.client.gui.GuiGraphics;
 public class AntiPortraitEffect extends TimedEffect
 {
     public static final ConfigValue<Integer> DURATION = ConfigValue.newInteger("duration", 20 * 45);
-
     public static final EffectProperties<AntiPortraitEffect> PROPERTIES =
             EffectProperties.Builder.of(AntiPortraitEffect.class)
                     .id("anti_portrait")
@@ -18,8 +17,6 @@ public class AntiPortraitEffect extends TimedEffect
                     .conflict(PortraitEffect.class)
                     .config(DURATION)
                     .build();
-
-    // ======================================================
 
     public AntiPortraitEffect()
     {

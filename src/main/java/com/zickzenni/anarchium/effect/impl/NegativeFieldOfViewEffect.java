@@ -10,7 +10,6 @@ import net.neoforged.neoforge.client.event.RenderLevelStageEvent;
 public class NegativeFieldOfViewEffect extends TimedEffect
 {
     public static final ConfigValue<Integer> DURATION = ConfigValue.newInteger("duration", 20 * 15);
-
     public static final EffectProperties<NegativeFieldOfViewEffect> PROPERTIES =
             EffectProperties.Builder.of(NegativeFieldOfViewEffect.class)
                     .id("negative_field_of_view")
@@ -18,8 +17,6 @@ public class NegativeFieldOfViewEffect extends TimedEffect
                     .conflict(QuakeFieldOfViewEffect.class)
                     .config(DURATION)
                     .build();
-
-    // ======================================================
 
     public NegativeFieldOfViewEffect()
     {

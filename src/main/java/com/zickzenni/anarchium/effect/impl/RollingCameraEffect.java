@@ -8,9 +8,7 @@ import net.neoforged.neoforge.client.event.RenderLevelStageEvent;
 public class RollingCameraEffect extends TimedEffect
 {
     public static final ConfigValue<Integer> DURATION = ConfigValue.newInteger("duration", 20 * 30);
-
     public static final ConfigValue<Double> SPEED = ConfigValue.newDoubleInRange("speed", 7.67, 0.0, 250.0);
-
     public static final EffectProperties<RollingCameraEffect> PROPERTIES =
             EffectProperties.Builder.of(RollingCameraEffect.class)
                     .id("rolling_camera")
@@ -19,10 +17,7 @@ public class RollingCameraEffect extends TimedEffect
                     .config(SPEED)
                     .build();
 
-    // ======================================================
-
     public static boolean ENABLED = false;
-
     public static float ROTATION = 0;
 
     public RollingCameraEffect()

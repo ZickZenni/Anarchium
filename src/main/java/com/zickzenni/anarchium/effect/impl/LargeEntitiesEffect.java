@@ -7,10 +7,8 @@ import com.zickzenni.anarchium.effect.base.TimedEffect;
 public class LargeEntitiesEffect extends TimedEffect
 {
     public static final ConfigValue<Integer> DURATION = ConfigValue.newInteger("duration", 20 * 45);
-
     public static final ConfigValue<Double> SCALE_MULTIPLIER =
             ConfigValue.newDoubleInRange("scale_multiplier", 10.0, 0.0, 255.0);
-
     public static final EffectProperties<LargeEntitiesEffect> PROPERTIES =
             EffectProperties.Builder.of(LargeEntitiesEffect.class)
                     .id("large_entities")
@@ -18,8 +16,6 @@ public class LargeEntitiesEffect extends TimedEffect
                     .config(DURATION)
                     .config(SCALE_MULTIPLIER)
                     .build();
-
-    // ======================================================
 
     public static boolean ENABLED = false;
 

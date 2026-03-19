@@ -10,7 +10,6 @@ import net.minecraft.client.multiplayer.ClientLevel;
 public class ForceJumpEffect extends TimedEffect
 {
     public static final ConfigValue<Integer> DURATION = ConfigValue.newInteger("duration", 20 * 30);
-
     public static final EffectProperties<ForceJumpEffect> PROPERTIES =
             EffectProperties.Builder.of(ForceJumpEffect.class)
                     .id("force_jump")
@@ -18,8 +17,6 @@ public class ForceJumpEffect extends TimedEffect
                     .conflict(NoJumpingEffect.class)
                     .config(DURATION)
                     .build();
-
-    // ======================================================
 
     public ForceJumpEffect()
     {

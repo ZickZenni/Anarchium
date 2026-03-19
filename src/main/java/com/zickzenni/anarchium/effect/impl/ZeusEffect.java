@@ -21,7 +21,6 @@ public class ZeusEffect extends InstantEffect
                     .build();
 
     private boolean struck;
-
     private int ticks;
 
     public ZeusEffect()

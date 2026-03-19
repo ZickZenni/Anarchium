@@ -7,7 +7,6 @@ import com.zickzenni.anarchium.effect.base.TimedEffect;
 public class ForceSneakEffect extends TimedEffect
 {
     public static final ConfigValue<Integer> DURATION = ConfigValue.newInteger("duration", 20 * 30);
-
     public static final EffectProperties<ForceSneakEffect> PROPERTIES =
             EffectProperties.Builder.of(ForceSneakEffect.class)
                     .id("force_sneak")
@@ -15,8 +14,6 @@ public class ForceSneakEffect extends TimedEffect
                     .conflict(NoGravityEffect.class)
                     .config(DURATION)
                     .build();
-
-    // ======================================================
 
     public static boolean ENABLED = false;
 

@@ -11,7 +11,6 @@ import org.slf4j.Logger;
 public class SpawnMinecartEffect extends InstantEffect
 {
     private static final Logger LOGGER = LogUtils.getLogger();
-
     public static final EffectProperties<SpawnMinecartEffect> PROPERTIES =
             EffectProperties.Builder.of(SpawnMinecartEffect.class)
                     .id("spawn_minecart")

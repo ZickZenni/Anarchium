@@ -21,9 +21,7 @@ public class FakeTeleportToHeavenEffect extends InstantEffect
                     .build();
 
     private final Map<String, Vec3> positions;
-
     private boolean trolled;
-
     private int ticks;
 
     public FakeTeleportToHeavenEffect()

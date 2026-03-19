@@ -7,7 +7,6 @@ import com.zickzenni.anarchium.effect.base.TimedEffect;
 public class WhereAreMyChunksEffect extends TimedEffect
 {
     public static final ConfigValue<Integer> DURATION = ConfigValue.newInteger("duration", 20 * 35);
-
     public static final EffectProperties<WhereAreMyChunksEffect> PROPERTIES =
             EffectProperties.Builder.of(WhereAreMyChunksEffect.class)
                     .id("where_are_my_chunks")
@@ -15,8 +14,6 @@ public class WhereAreMyChunksEffect extends TimedEffect
                     .conflict(BrokenWorldEffect.class)
                     .config(DURATION)
                     .build();
-
-    // ======================================================
 
     public static boolean ENABLED = false;
 

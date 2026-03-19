@@ -10,7 +10,6 @@ import net.minecraft.client.multiplayer.ClientLevel;
 public class HighPitchEffect extends TimedEffect
 {
     public static final ConfigValue<Integer> DURATION = ConfigValue.newInteger("duration", 20 * 45);
-
     public static final EffectProperties<HighPitchEffect> PROPERTIES =
             EffectProperties.Builder.of(HighPitchEffect.class)
                     .id("high_pitch")
@@ -18,8 +17,6 @@ public class HighPitchEffect extends TimedEffect
                     .conflict(LowPitchEffect.class)
                     .config(DURATION)
                     .build();
-
-    // ======================================================
 
     public HighPitchEffect()
     {
