@@ -8,7 +8,6 @@ import net.minecraft.util.Mth;
 public class ProgressBarOverlay implements Overlay
 {
     private int windowWidth;
-
     private float progress;
 
     public ProgressBarOverlay()
@@ -23,38 +22,27 @@ public class ProgressBarOverlay implements Overlay
         final var instance = Anarchium.getClient();
         final var minecraft = Minecraft.getInstance();
 
-        final var nextProgress =
-                (float) (instance.getTimer().getDuration() - instance.getTimer()
-                        .getTicks()) / (float) instance.getTimer().getDuration();
+        final var ticks = instance.getTimer().getTicks();
+        final var duration = instance.getTimer().getDuration();
 
-        if (windowWidth != minecraft.getWindow().getGuiScaledWidth())
+        final var windowWidth = minecraft.getWindow().getGuiScaledWidth();
+        final var progress = (float) (duration - ticks) / (float) duration;
+
+        if (this.windowWidth != windowWidth)
         {
-            windowWidth = minecraft.getWindow().getGuiScaledWidth();
-            progress = nextProgress;
+            this.windowWidth = windowWidth;
+            this.progress = progress;
         } else
         {
-            progress = Mth.lerp(deltaTime * 2.0f, progress, nextProgress);
+            this.progress = Mth.lerp(deltaTime, this.progress, progress);
         }
 
-        if (Float.isNaN(progress))
+        if (Float.isNaN(this.progress))
         {
-            progress = 0;
+            this.progress = 0;
         }
 
-        graphics.fill(
-                0,
-                0,
-                windowWidth,
-                10,
-                0x80000000
-        );
-
-        graphics.fill(
-                0,
-                0,
-                (int) Math.floor(progress * windowWidth),
-                10,
-                0xFF1144CC
-        );
+        graphics.fill(0, 0, this.windowWidth, 10, 0x80000000);
+        graphics.fill(0, 0, (int) Math.floor(this.progress * this.windowWidth), 10, 0xFF1144CC);
     }
 }
