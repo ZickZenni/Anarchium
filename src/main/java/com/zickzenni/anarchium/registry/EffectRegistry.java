@@ -48,6 +48,7 @@ public class EffectRegistry
         register(ExplodePlayersEffect.PROPERTIES);
         register(FakeTeleportToHeavenEffect.PROPERTIES);
         register(FatiguePotionEffect.PROPERTIES);
+        register(FlatWorldEffect.PROPERTIES);
         register(FlingPlayersEffect.PROPERTIES);
         register(ForceJumpEffect.PROPERTIES);
         register(ForceSneakEffect.PROPERTIES);
