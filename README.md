@@ -3,7 +3,7 @@
     <br/>
 </h1>
 
-<p>Anarchium is a Minecraft Mod that brings chaos to your world just like theinfamous <a href="https://www.gta5-mods.com/scripts/chaos-mod-v">Chaos Mod V</a>.</p>
+<p>Anarchium is a Minecraft Mod that brings chaos to your world just like the infamous <a href="https://www.gta5-mods.com/scripts/chaos-mod-v">Chaos Mod V</a>.</p>
 
 <p>No additional content is getting added to your world, allowing you to remove it without any problems, but still giving a
 new chaotic experience to play Minecraft.</p>
