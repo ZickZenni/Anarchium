@@ -23,6 +23,7 @@ These are the available effects that can be randomly chosen:
 * Burn Nearby Mobs
 * Burn Players
 * Damage Players
+* Dirt
 * Drop Inventory
 * Drop Item
 * Entity Magnet
