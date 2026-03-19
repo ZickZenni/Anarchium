@@ -7,11 +7,8 @@ import net.minecraft.client.gui.GuiGraphics;
 public class HistoryOverlay implements Overlay
 {
     private static final int ITEM_X_OFFSET = 24;
-
     private static final int ITEM_Y_OFFSET = 24;
-
     private static final int ITEM_WIDTH = 32;
-
     private static final int ITEM_HEIGHT = 8;
 
     private int y;
@@ -57,35 +54,17 @@ public class HistoryOverlay implements Overlay
             /*
              * Background
              */
-            graphics.fill(
-                    windowWidth - ITEM_X_OFFSET - ITEM_WIDTH,
-                    ITEM_Y_OFFSET + y,
-                    windowWidth - ITEM_X_OFFSET,
-                    ITEM_Y_OFFSET + ITEM_HEIGHT + y,
-                    0x80000000
-            );
+            graphics.fill(windowWidth - ITEM_X_OFFSET - ITEM_WIDTH, ITEM_Y_OFFSET + y, windowWidth - ITEM_X_OFFSET, ITEM_Y_OFFSET + ITEM_HEIGHT + y, 0x80000000);
 
             /*
              * Time "Bar"
              */
-            graphics.fill(
-                    windowWidth - ITEM_X_OFFSET - ITEM_WIDTH,
-                    ITEM_Y_OFFSET + y,
-                    windowWidth - ITEM_X_OFFSET - fillWidth,
-                    ITEM_Y_OFFSET + ITEM_HEIGHT + y,
-                    0xFFFFFFFF
-            );
+            graphics.fill(windowWidth - ITEM_X_OFFSET - ITEM_WIDTH, ITEM_Y_OFFSET + y, windowWidth - ITEM_X_OFFSET - fillWidth, ITEM_Y_OFFSET + ITEM_HEIGHT + y, 0xFFFFFFFF);
 
             textXOffset += ITEM_WIDTH + 10;
         }
 
-        graphics.drawString(
-                minecraft.font,
-                name,
-                windowWidth - ITEM_X_OFFSET - textWidth - textXOffset,
-                ITEM_Y_OFFSET + y,
-                0xFFFFFFFF
-        );
+        graphics.drawString(minecraft.font, name, windowWidth - ITEM_X_OFFSET - textWidth - textXOffset, ITEM_Y_OFFSET + y, 0xFFFFFFFF);
 
         y += ITEM_HEIGHT + 12;
     }
