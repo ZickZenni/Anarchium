@@ -5,7 +5,6 @@ import com.zickzenni.anarchium.effect.Effect;
 import com.zickzenni.anarchium.effect.EffectProperties;
 import com.zickzenni.anarchium.effect.impl.*;
 import net.minecraft.resources.ResourceLocation;
-import net.neoforged.fml.config.IConfigSpec;
 import net.neoforged.neoforge.common.ModConfigSpec;
 import org.slf4j.Logger;
 import org.slf4j.Marker;
@@ -18,15 +17,10 @@ import java.util.Map;
 public class EffectRegistry
 {
     private static final Logger LOGGER = LogUtils.getLogger();
-
     private static final Marker LOADING = MarkerFactory.getMarker("LOADING");
-
     private static final Marker CONFIG = MarkerFactory.getMarker("CONFIG");
 
     private static final Map<ResourceLocation, EffectProperties<?>> REGISTRY = new HashMap<>();
-
-    private static ModConfigSpec SPECS;
-
     private static boolean frozen;
 
     public static void register()
@@ -89,18 +83,14 @@ public class EffectRegistry
 
         frozen = true;
         LOGGER.info("Finished registration with a total of {} entries", REGISTRY.size());
-
-        initConfiguration();
     }
 
-    private static void initConfiguration()
+    public static void createConfigSpecs(ModConfigSpec.Builder builder)
     {
         if (!frozen)
         {
             throw new IllegalStateException("Cannot initialize configuration before the registry has been frozen.");
         }
-
-        var builder = new ModConfigSpec.Builder();
 
         builder.push("effects");
 
@@ -120,8 +110,6 @@ public class EffectRegistry
         }
 
         builder.pop();
-
-        SPECS = builder.build();
         LOGGER.info("Finished configuration of effects");
     }
 
@@ -145,10 +133,5 @@ public class EffectRegistry
     public static Map<ResourceLocation, EffectProperties<?>> getRegistry()
     {
         return Collections.unmodifiableMap(REGISTRY);
-    }
-
-    public static IConfigSpec getSpecs()
-    {
-        return SPECS;
     }
 }

@@ -20,13 +20,11 @@ import java.util.Random;
 
 public class ServerEffectManager
 {
-    private static final int TIMER_DURATION = 20 * 15;
-
     private static final Logger LOGGER = LogUtils.getLogger();
 
     private static final List<Effect> EFFECTS = new ArrayList<>();
 
-    private static int timerTicks = TIMER_DURATION;
+    static int timerTicks = Integer.MAX_VALUE;
 
     private ServerEffectManager()
     {
@@ -68,7 +66,7 @@ public class ServerEffectManager
                 timerTicks--;
             } else
             {
-                timerTicks = TIMER_DURATION;
+                timerTicks = AnarchiumServer.TIMER_DURATION.get();
 
                 var registry = EffectRegistry.getRegistry();
                 var entries = registry.values().stream()
@@ -90,7 +88,7 @@ public class ServerEffectManager
              */
             if (timerTicks % 5 == 0)
             {
-                PacketDistributor.sendToAllPlayers(new TimerTickPacket(timerTicks, TIMER_DURATION));
+                PacketDistributor.sendToAllPlayers(new TimerTickPacket(timerTicks, AnarchiumServer.TIMER_DURATION.get()));
             }
         }
     }

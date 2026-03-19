@@ -31,6 +31,9 @@ public final class ServerEvents
                 value.load();
             }
         }
+
+        AnarchiumServer.TIMER_DURATION.load();
+        ServerEffectManager.timerTicks = AnarchiumServer.TIMER_DURATION.get();
     }
 
     @SubscribeEvent

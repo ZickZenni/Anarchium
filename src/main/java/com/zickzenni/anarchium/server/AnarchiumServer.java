@@ -1,6 +1,7 @@
 package com.zickzenni.anarchium.server;
 
 import com.mojang.logging.LogUtils;
+import com.zickzenni.anarchium.effect.ConfigValue;
 import com.zickzenni.anarchium.util.LevelTickStage;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
@@ -15,6 +16,8 @@ public class AnarchiumServer
     private static final AnarchiumServer INSTANCE = new AnarchiumServer();
 
     private static final Logger LOGGER = LogUtils.getLogger();
+
+    public static final ConfigValue<Integer> TIMER_DURATION = ConfigValue.newInteger("duration", 20 * 45);
 
     private AnarchiumServer() {}
 
