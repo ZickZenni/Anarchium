@@ -19,11 +19,8 @@ import java.util.List;
 public class ClientEffectManager
 {
     private static final int MAX_HISTORY_SIZE = 5;
-
     private static final Logger LOGGER = LogUtils.getLogger();
-
     private static final List<Effect> EFFECTS = new ArrayList<>();
-
     private static final List<String> HISTORY = new ArrayList<>();
 
     private ClientEffectManager()
