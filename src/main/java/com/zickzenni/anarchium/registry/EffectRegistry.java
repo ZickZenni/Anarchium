@@ -96,6 +96,7 @@ public class EffectRegistry
         register(FireworksEffect.PROPERTIES);
         register(ConsoleExperienceEffect.PROPERTIES);
         register(GTA2Effect.PROPERTIES);
+        register(GoodbyeEffect.PROPERTIES);
 
         frozen = true;
         LOGGER.info("Finished registration with a total of {} entries", REGISTRY.size());

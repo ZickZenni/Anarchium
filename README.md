@@ -41,6 +41,7 @@ These are the available effects that can be randomly chosen:
 * Fling Players
 * Get Rotated
 * Give Diamonds
+* Goodbye
 * GTA 2
 * High Pitch
 * Hopping

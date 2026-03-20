@@ -1,6 +1,7 @@
 package com.zickzenni.anarchium.mixin.client;
 
 import com.zickzenni.anarchium.effect.impl.GTA2Effect;
+import com.zickzenni.anarchium.effect.impl.GoodbyeEffect;
 import com.zickzenni.anarchium.effect.impl.RollingCameraEffect;
 import com.zickzenni.anarchium.effect.impl.RotatingCameraEffect;
 import net.minecraft.client.Camera;
@@ -30,14 +31,31 @@ public abstract class CameraMixin
     @Shadow
     private float roll;
 
+
+    @Inject(at = @At("HEAD"),
+            method = "setup(Lnet/minecraft/world/level/BlockGetter;Lnet/minecraft/world/entity/Entity;ZZF)V",
+            cancellable = true)
+    public void setup$head(BlockGetter level,
+                           Entity entity,
+                           boolean detached,
+                           boolean thirdPersonReverse,
+                           float partialTick,
+                           CallbackInfo ci)
+    {
+        if (GoodbyeEffect.ENABLED)
+        {
+            ci.cancel();
+        }
+    }
+
     @Inject(at = @At("TAIL"),
             method = "setup(Lnet/minecraft/world/level/BlockGetter;Lnet/minecraft/world/entity/Entity;ZZF)V")
-    public void setup(BlockGetter level,
-                      Entity entity,
-                      boolean detached,
-                      boolean thirdPersonReverse,
-                      float partialTick,
-                      CallbackInfo ci)
+    public void setup$tail(BlockGetter level,
+                           Entity entity,
+                           boolean detached,
+                           boolean thirdPersonReverse,
+                           float partialTick,
+                           CallbackInfo ci)
     {
         if (GTA2Effect.ENABLED)
         {
