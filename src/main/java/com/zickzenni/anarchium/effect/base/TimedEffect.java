@@ -53,6 +53,11 @@ public class TimedEffect extends BaseEffect
     public void setTicks(int ticks)
     {
         this.ticks = ticks;
+
+        if (this.ticks > 0)
+        {
+            this.ended = false;
+        }
     }
 
     @Override
