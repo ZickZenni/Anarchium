@@ -8,14 +8,16 @@ import net.minecraft.world.item.Items;
 
 public class DirtEffect extends InstantEffect
 {
-    public DirtEffect()
-    {
-        super(PROPERTIES.getId());
-    }    public static final EffectProperties<DirtEffect> PROPERTIES =
+    public static final EffectProperties<DirtEffect> PROPERTIES =
             EffectProperties.Builder.of(DirtEffect.class)
                     .id("dirt")
                     .supplier(DirtEffect::new)
                     .build();
+
+    public DirtEffect()
+    {
+        super(PROPERTIES.getId());
+    }
 
     @Override
     public void onStartServer()
@@ -25,6 +27,4 @@ public class DirtEffect extends InstantEffect
             player.getInventory().add(new ItemStack(Items.DIRT, 1));
         }
     }
-
-
 }
