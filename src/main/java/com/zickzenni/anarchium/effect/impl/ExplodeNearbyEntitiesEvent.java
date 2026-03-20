@@ -2,7 +2,7 @@
 package com.zickzenni.anarchium.effect.impl;
 
 import com.zickzenni.anarchium.Anarchium;
-import com.zickzenni.anarchium.effect.ConfigValue;
+import com.zickzenni.anarchium.config.ConfigValue;
 import com.zickzenni.anarchium.effect.EffectProperties;
 import com.zickzenni.anarchium.effect.base.InstantEffect;
 import net.minecraft.server.level.ServerPlayer;

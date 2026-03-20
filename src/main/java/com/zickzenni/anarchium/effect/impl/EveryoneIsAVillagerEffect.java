@@ -1,7 +1,7 @@
 package com.zickzenni.anarchium.effect.impl;
 
 import com.mojang.blaze3d.vertex.PoseStack;
-import com.zickzenni.anarchium.effect.ConfigValue;
+import com.zickzenni.anarchium.config.ConfigValue;
 import com.zickzenni.anarchium.effect.EffectProperties;
 import com.zickzenni.anarchium.effect.base.TimedEffect;
 import net.minecraft.client.model.VillagerModel;

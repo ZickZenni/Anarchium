@@ -1,6 +1,6 @@
 package com.zickzenni.anarchium.effect.impl;
 
-import com.zickzenni.anarchium.effect.ConfigValue;
+import com.zickzenni.anarchium.config.ConfigValue;
 import com.zickzenni.anarchium.effect.EffectProperties;
 import com.zickzenni.anarchium.effect.base.TimedEffect;
 import com.zickzenni.anarchium.util.LevelTickStage;

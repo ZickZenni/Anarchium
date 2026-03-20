@@ -1,7 +1,7 @@
 package com.zickzenni.anarchium.server;
 
 import com.zickzenni.anarchium.Anarchium;
-import com.zickzenni.anarchium.effect.ConfigValue;
+import com.zickzenni.anarchium.config.ConfigValue;
 import com.zickzenni.anarchium.network.packet.ConfigurationPacket;
 import com.zickzenni.anarchium.registry.EffectRegistry;
 import com.zickzenni.anarchium.util.LevelTickStage;
@@ -65,7 +65,6 @@ public final class ServerEvents
     @SubscribeEvent
     public static void onPlayerLogin(PlayerEvent.PlayerLoggedInEvent event)
     {
-        //noinspection resource
         if (event.getEntity().level().isClientSide())
         {
             return;

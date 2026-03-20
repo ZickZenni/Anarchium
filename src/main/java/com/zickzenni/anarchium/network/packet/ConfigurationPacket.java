@@ -1,7 +1,7 @@
 package com.zickzenni.anarchium.network.packet;
 
 import com.zickzenni.anarchium.Anarchium;
-import com.zickzenni.anarchium.effect.ConfigValue;
+import com.zickzenni.anarchium.config.ValueType;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
@@ -12,7 +12,7 @@ import java.util.List;
 
 public record ConfigurationPacket(List<Effect> effects) implements CustomPacketPayload
 {
-    public record Entry(String id, ConfigValue.Type type, Object value) {}
+    public record Entry(String id, ValueType type, Object value) {}
 
     public record Effect(String id, List<Entry> entries) {}
 
@@ -62,7 +62,7 @@ public record ConfigurationPacket(List<Effect> effects) implements CustomPacketP
             for (int j = 0; j < size2; j++)
             {
                 var entryId = buf.readUtf();
-                var type = buf.readEnum(ConfigValue.Type.class);
+                var type = buf.readEnum(ValueType.class);
 
                 var value = switch (type)
                 {

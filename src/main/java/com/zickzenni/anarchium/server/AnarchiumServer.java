@@ -1,7 +1,7 @@
 package com.zickzenni.anarchium.server;
 
 import com.zickzenni.anarchium.Anarchium;
-import com.zickzenni.anarchium.effect.ConfigValue;
+import com.zickzenni.anarchium.config.ConfigValue;
 import com.zickzenni.anarchium.util.LevelTickStage;
 import com.zickzenni.anarchium.util.function.OnlinePlayersSupplier;
 import net.minecraft.server.MinecraftServer;

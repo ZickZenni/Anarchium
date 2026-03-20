@@ -1,6 +1,7 @@
 package com.zickzenni.anarchium.effect;
 
 import com.zickzenni.anarchium.Anarchium;
+import com.zickzenni.anarchium.config.ConfigValue;
 import net.minecraft.resources.ResourceLocation;
 
 import java.util.ArrayList;
