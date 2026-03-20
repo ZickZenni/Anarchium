@@ -103,6 +103,7 @@ public class EffectRegistry
         register(PTSDEffect.PROPERTIES);
         register(DisableMobAIEffect.PROPERTIES);
         register(BunnyHopEffect.PROPERTIES);
+        register(MissingCSSAssets.PROPERTIES);
 
         frozen = true;
         LOGGER.info("Finished registration with a total of {} entries", REGISTRY.size());

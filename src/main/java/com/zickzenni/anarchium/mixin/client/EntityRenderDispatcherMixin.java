@@ -20,7 +20,16 @@ public class EntityRenderDispatcherMixin
             ),
             method = "render(Lnet/minecraft/world/entity/Entity;DDDFFLcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/MultiBufferSource;I)V"
     )
-    public <E extends Entity> void render(E entity, double x, double y, double z, float rotationYaw, float partialTicks, PoseStack poseStack, MultiBufferSource buffer, int packedLight, CallbackInfo ci)
+    public <E extends Entity> void render(E entity,
+                                          double x,
+                                          double y,
+                                          double z,
+                                          float rotationYaw,
+                                          float partialTicks,
+                                          PoseStack poseStack,
+                                          MultiBufferSource buffer,
+                                          int packedLight,
+                                          CallbackInfo ci)
     {
         if (LargeEntitiesEffect.ENABLED)
         {

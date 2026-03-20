@@ -4,16 +4,11 @@ import com.mojang.blaze3d.platform.Window;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.*;
 import com.mojang.math.Axis;
-import com.zickzenni.anarchium.effect.impl.BrokenWorldEffect;
-import com.zickzenni.anarchium.effect.impl.FlatWorldEffect;
-import com.zickzenni.anarchium.effect.impl.WhereAreMyChunksEffect;
-import com.zickzenni.anarchium.effect.impl.WhereIsTheSkyEffect;
+import com.zickzenni.anarchium.effect.impl.*;
 import net.minecraft.client.Camera;
+import net.minecraft.client.DeltaTracker;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.GameRenderer;
-import net.minecraft.client.renderer.LevelRenderer;
-import net.minecraft.client.renderer.RenderType;
-import net.minecraft.client.renderer.ShaderInstance;
+import net.minecraft.client.renderer.*;
 import org.joml.Matrix4f;
 import org.joml.Quaternionf;
 import org.spongepowered.asm.mixin.Mixin;
@@ -67,6 +62,34 @@ public class LevelRendererMixin
         }
     }
 
+    @Inject(at = @At("HEAD"),
+            method = "renderLevel(Lnet/minecraft/client/DeltaTracker;ZLnet/minecraft/client/Camera;Lnet/minecraft/client/renderer/GameRenderer;Lnet/minecraft/client/renderer/LightTexture;Lorg/joml/Matrix4f;Lorg/joml/Matrix4f;)V")
+    private void renderLevel$head(DeltaTracker deltaTracker,
+                                  boolean renderBlockOutline,
+                                  Camera camera,
+                                  GameRenderer gameRenderer,
+                                  LightTexture lightTexture,
+                                  Matrix4f frustumMatrix,
+                                  Matrix4f projectionMatrix,
+                                  CallbackInfo ci)
+    {
+        MissingCSSAssets.LEVEL_RENDERING = true;
+    }
+
+    @Inject(at = @At("TAIL"),
+            method = "renderLevel(Lnet/minecraft/client/DeltaTracker;ZLnet/minecraft/client/Camera;Lnet/minecraft/client/renderer/GameRenderer;Lnet/minecraft/client/renderer/LightTexture;Lorg/joml/Matrix4f;Lorg/joml/Matrix4f;)V")
+    private void renderLevel$tail(DeltaTracker deltaTracker,
+                                  boolean renderBlockOutline,
+                                  Camera camera,
+                                  GameRenderer gameRenderer,
+                                  LightTexture lightTexture,
+                                  Matrix4f frustumMatrix,
+                                  Matrix4f projectionMatrix,
+                                  CallbackInfo ci)
+    {
+        MissingCSSAssets.LEVEL_RENDERING = false;
+    }
+
     @Redirect(at = @At(value = "INVOKE",
             target = "Lnet/minecraft/client/renderer/ShaderInstance;setDefaultUniforms(Lcom/mojang/blaze3d/vertex/VertexFormat$Mode;Lorg/joml/Matrix4f;Lorg/joml/Matrix4f;Lcom/mojang/blaze3d/platform/Window;)V"),
             method = "renderSectionLayer(Lnet/minecraft/client/renderer/RenderType;DDDLorg/joml/Matrix4f;Lorg/joml/Matrix4f;)V")
@@ -76,6 +99,11 @@ public class LevelRendererMixin
                      Matrix4f projectionMatrix,
                      Window window)
     {
+        if (MissingCSSAssets.ENABLED)
+        {
+            MissingCSSAssets.replaceTexture();
+        }
+
         var camera = Minecraft.getInstance().gameRenderer.getMainCamera();
         var rotation = camera.rotation().conjugate(new Quaternionf());
 

@@ -69,5 +69,6 @@
   "anarchium.create_nether_portal": "Create Nether Portal",
   "anarchium.ptsd": "PTSD",
   "anarchium.disable_mob_ai": "Disable Mob AI",
-  "anarchium.bunny_hop": "Bunny Hop"
+  "anarchium.bunny_hop": "Bunny Hop",
+  "anarchium.missing_css_assets": "Missing CS:S Assets"
 }

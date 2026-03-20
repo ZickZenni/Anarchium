@@ -10,6 +10,7 @@
   ],
   "client": [
     "client.BlockEntityRenderDispatcherMixin",
+    "client.BufferUploaderMixin",
     "client.CameraMixin",
     "client.CameraTypeMixin",
     "client.EntityRenderDispatcherMixin",

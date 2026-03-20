@@ -54,6 +54,7 @@ These are the available effects that can be randomly chosen:
 * Jail
 * Large Entities
 * Low Pitch
+* Missing CS:S Assets
 * My sneak key is broken
 * Negative Field of View
 * No Gravity
