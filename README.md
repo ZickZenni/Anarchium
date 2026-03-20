@@ -60,6 +60,7 @@ These are the available effects that can be randomly chosen:
 * Place Lava
 * Place Nearby Mobs into a Boat
 * Portrait Mode
+* PTSD
 * Quake Field of View
 * Replace Every Sound with Villagers
 * Reversed Gravity

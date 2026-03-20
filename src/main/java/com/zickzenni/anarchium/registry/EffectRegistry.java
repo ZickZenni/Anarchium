@@ -100,6 +100,7 @@ public class EffectRegistry
         register(TimeToDayEffect.PROPERTIES);
         register(TimeToNightEffect.PROPERTIES);
         register(CreateNetherPortalEffect.PROPERTIES);
+        register(PTSDEffect.PROPERTIES);
 
         frozen = true;
         LOGGER.info("Finished registration with a total of {} entries", REGISTRY.size());
@@ -128,8 +129,10 @@ public class EffectRegistry
 
             builder.pop();
 
-            LOGGER.debug(CONFIG, "Configuring effect class {} of mod @{}", property.getClazz()
-                    .getCanonicalName(), property.getId().getNamespace());
+            LOGGER.debug(
+                    CONFIG, "Configuring effect class {} of mod @{}", property.getClazz()
+                            .getCanonicalName(), property.getId().getNamespace()
+            );
         }
 
         builder.pop();
@@ -143,7 +146,8 @@ public class EffectRegistry
     {
         if (frozen)
         {
-            throw new IllegalStateException("Cannot register new entries to EffectRegistry after the registry has been frozen.");
+            throw new IllegalStateException(
+                    "Cannot register new entries to EffectRegistry after the registry has been frozen.");
         }
 
         if (REGISTRY.containsKey(properties.getId()))
@@ -152,8 +156,10 @@ public class EffectRegistry
         }
 
         REGISTRY.put(properties.getId(), properties);
-        LOGGER.debug(LOADING, "Registering new effect class {} of mod @{}", properties.getClazz()
-                .getCanonicalName(), properties.getId().getNamespace());
+        LOGGER.debug(
+                LOADING, "Registering new effect class {} of mod @{}", properties.getClazz()
+                        .getCanonicalName(), properties.getId().getNamespace()
+        );
     }
 
     /**
