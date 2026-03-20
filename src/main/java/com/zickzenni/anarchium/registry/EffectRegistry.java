@@ -92,6 +92,7 @@ public class EffectRegistry
         register(GiveDiamondsEffect.PROPERTIES);
         register(DirtEffect.PROPERTIES);
         register(UpsideDownMobs.PROPERTIES);
+        register(InsaneGravityEffect.PROPERTIES);
 
         frozen = true;
         LOGGER.info("Finished registration with a total of {} entries", REGISTRY.size());
