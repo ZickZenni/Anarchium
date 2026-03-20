@@ -23,6 +23,7 @@ These are the available effects that can be randomly chosen:
 * Burn Nearby Mobs
 * Burn Players
 * Console Experience
+* Create Nether Portal
 * Damage Players
 * Dirt
 * Drop Inventory

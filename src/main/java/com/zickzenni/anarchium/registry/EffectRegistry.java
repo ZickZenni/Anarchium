@@ -99,6 +99,7 @@ public class EffectRegistry
         register(GoodbyeEffect.PROPERTIES);
         register(TimeToDayEffect.PROPERTIES);
         register(TimeToNightEffect.PROPERTIES);
+        register(CreateNetherPortalEffect.PROPERTIES);
 
         frozen = true;
         LOGGER.info("Finished registration with a total of {} entries", REGISTRY.size());
