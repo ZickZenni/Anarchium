@@ -1,5 +1,6 @@
 package com.zickzenni.anarchium.mixin.server;
 
+import com.zickzenni.anarchium.effect.impl.DisableMobAIEffect;
 import com.zickzenni.anarchium.effect.impl.NoGravityEffect;
 import net.minecraft.world.entity.Entity;
 import org.spongepowered.asm.mixin.Mixin;
@@ -16,6 +17,15 @@ public class EntityMixin
         if (NoGravityEffect.ENABLED)
         {
             ci.setReturnValue(true);
+        }
+    }
+
+    @Inject(at = @At("HEAD"), method = "isEffectiveAi()Z", cancellable = true)
+    public void isEffectiveAi(CallbackInfoReturnable<Boolean> ci)
+    {
+        if (DisableMobAIEffect.ENABLED)
+        {
+            ci.setReturnValue(false);
         }
     }
 }

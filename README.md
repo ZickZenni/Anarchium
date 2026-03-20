@@ -26,6 +26,7 @@ These are the available effects that can be randomly chosen:
 * Create Nether Portal
 * Damage Players
 * Dirt
+* Disable Mob AI
 * Drop Inventory
 * Drop Item
 * Enchant Current Item

@@ -101,6 +101,7 @@ public class EffectRegistry
         register(TimeToNightEffect.PROPERTIES);
         register(CreateNetherPortalEffect.PROPERTIES);
         register(PTSDEffect.PROPERTIES);
+        register(DisableMobAIEffect.PROPERTIES);
 
         frozen = true;
         LOGGER.info("Finished registration with a total of {} entries", REGISTRY.size());
