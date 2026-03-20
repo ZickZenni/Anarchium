@@ -85,7 +85,7 @@ public class ClientEffectManager
         /*
          * Remove old items when we reached the maximum size.
          */
-        if (HISTORY.size() >= MAX_HISTORY_SIZE)
+        if (HISTORY.size() >= MAX_HISTORY_SIZE && effect.getDurationTicks() == 0)
         {
             HISTORY.removeFirst();
         }
