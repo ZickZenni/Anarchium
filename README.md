@@ -35,6 +35,7 @@ These are the available effects that can be randomly chosen:
 * Explode Players
 * Fake Teleport to Heaven
 * Fatigue
+* Fireworks!
 * Flat World
 * Fling Players
 * Get Rotated
