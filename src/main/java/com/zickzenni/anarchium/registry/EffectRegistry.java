@@ -94,6 +94,7 @@ public class EffectRegistry
         register(UpsideDownMobs.PROPERTIES);
         register(InsaneGravityEffect.PROPERTIES);
         register(FireworksEffect.PROPERTIES);
+        register(ConsoleExperienceEffect.PROPERTIES);
 
         frozen = true;
         LOGGER.info("Finished registration with a total of {} entries", REGISTRY.size());

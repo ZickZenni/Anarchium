@@ -22,6 +22,7 @@ These are the available effects that can be randomly chosen:
 * Broken World
 * Burn Nearby Mobs
 * Burn Players
+* Console Experience
 * Damage Players
 * Dirt
 * Drop Inventory
