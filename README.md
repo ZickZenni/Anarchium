@@ -58,6 +58,7 @@ These are the available effects that can be randomly chosen:
 * My sneak key is broken
 * Negative Field of View
 * No Gravity
+* No GUI
 * No Jumping
 * No Sneaking
 * Place Lava
