@@ -3,7 +3,7 @@ package com.zickzenni.anarchium.client;
 import com.zickzenni.anarchium.Anarchium;
 import com.zickzenni.anarchium.client.util.ClientTimer;
 import com.zickzenni.anarchium.util.LevelTickStage;
-import com.zickzenni.anarchium.util.OnlinePlayersSupplier;
+import com.zickzenni.anarchium.util.function.OnlinePlayersSupplier;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.player.AbstractClientPlayer;

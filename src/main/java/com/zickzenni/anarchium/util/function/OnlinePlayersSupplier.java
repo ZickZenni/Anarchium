@@ -1,4 +1,4 @@
-package com.zickzenni.anarchium.util;
+package com.zickzenni.anarchium.util.function;
 
 import net.minecraft.world.entity.player.Player;
 

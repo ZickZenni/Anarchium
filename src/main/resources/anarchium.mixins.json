@@ -11,6 +11,7 @@
   "client": [
     "client.BlockEntityRenderDispatcherMixin",
     "client.CameraMixin",
+    "client.CameraTypeMixin",
     "client.EntityRenderDispatcherMixin",
     "client.EntityRendererMixin",
     "client.HumanoidModelMixin",

@@ -3,7 +3,7 @@ package com.zickzenni.anarchium.server;
 import com.zickzenni.anarchium.Anarchium;
 import com.zickzenni.anarchium.effect.ConfigValue;
 import com.zickzenni.anarchium.util.LevelTickStage;
-import com.zickzenni.anarchium.util.OnlinePlayersSupplier;
+import com.zickzenni.anarchium.util.function.OnlinePlayersSupplier;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.neoforged.neoforge.server.ServerLifecycleHooks;

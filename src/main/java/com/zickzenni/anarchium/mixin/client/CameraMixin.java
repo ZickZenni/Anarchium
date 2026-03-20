@@ -1,5 +1,6 @@
 package com.zickzenni.anarchium.mixin.client;
 
+import com.zickzenni.anarchium.effect.impl.GTA2Effect;
 import com.zickzenni.anarchium.effect.impl.RollingCameraEffect;
 import com.zickzenni.anarchium.effect.impl.RotatingCameraEffect;
 import net.minecraft.client.Camera;
@@ -15,6 +16,9 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public abstract class CameraMixin
 {
     @Shadow
+    protected abstract void setPosition(double x, double y, double z);
+
+    @Shadow
     protected abstract void setRotation(float yRot, float xRot, float roll);
 
     @Shadow
@@ -26,9 +30,20 @@ public abstract class CameraMixin
     @Shadow
     private float roll;
 
-    @Inject(at = @At("TAIL"), method = "setup(Lnet/minecraft/world/level/BlockGetter;Lnet/minecraft/world/entity/Entity;ZZF)V")
-    public void setup(BlockGetter level, Entity entity, boolean detached, boolean thirdPersonReverse, float partialTick, CallbackInfo ci)
+    @Inject(at = @At("TAIL"),
+            method = "setup(Lnet/minecraft/world/level/BlockGetter;Lnet/minecraft/world/entity/Entity;ZZF)V")
+    public void setup(BlockGetter level,
+                      Entity entity,
+                      boolean detached,
+                      boolean thirdPersonReverse,
+                      float partialTick,
+                      CallbackInfo ci)
     {
+        if (GTA2Effect.ENABLED)
+        {
+            GTA2Effect.updateCamera$Camera(entity, partialTick, this::setPosition, this::setRotation);
+        }
+
         if (RotatingCameraEffect.ENABLED)
         {
             setRotation(yRot, xRot, RotatingCameraEffect.ROTATION);
