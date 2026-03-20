@@ -91,6 +91,7 @@ public class EffectRegistry
         register(ZeusEffect.PROPERTIES);
         register(GiveDiamondsEffect.PROPERTIES);
         register(DirtEffect.PROPERTIES);
+        register(UpsideDownMobs.PROPERTIES);
 
         frozen = true;
         LOGGER.info("Finished registration with a total of {} entries", REGISTRY.size());

@@ -1,10 +1,7 @@
 package com.zickzenni.anarchium.mixin.client;
 
 import com.mojang.blaze3d.vertex.PoseStack;
-import com.zickzenni.anarchium.effect.impl.EveryoneIsAVillagerEffect;
-import com.zickzenni.anarchium.effect.impl.SkeletonsHaveSpinbotEffect;
-import com.zickzenni.anarchium.effect.impl.SpinningMobsEffect;
-import com.zickzenni.anarchium.effect.impl.WideMobsEffect;
+import com.zickzenni.anarchium.effect.impl.*;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.LivingEntityRenderer;
@@ -35,26 +32,31 @@ public abstract class LivingEntityRendererMixin
     public <T extends LivingEntity> void render(T entity,
                                                 float entityYaw,
                                                 float partialTicks,
-                                                PoseStack poseStack,
+                                                PoseStack stack,
                                                 MultiBufferSource buffer,
                                                 int packedLight,
                                                 CallbackInfo ci)
     {
         var isPlayer = entity instanceof Player;
 
+        if (UpsideDownMobs.ENABLED && !isPlayer)
+        {
+            UpsideDownMobs.modifyRotation$LivingEntityRenderer(entity, stack);
+        }
+
         if (WideMobsEffect.ENABLED && !isPlayer)
         {
-            WideMobsEffect.modifyWidth$LivingEntityRenderer(entity, poseStack);
+            WideMobsEffect.modifyWidth$LivingEntityRenderer(entity, stack);
         }
 
         if (SpinningMobsEffect.ENABLED && !isPlayer)
         {
-            SpinningMobsEffect.modifyRotation$LivingEntityRenderer(poseStack);
+            SpinningMobsEffect.modifyRotation$LivingEntityRenderer(stack);
         }
 
         if (SkeletonsHaveSpinbotEffect.ENABLED && entity instanceof AbstractSkeleton)
         {
-            SkeletonsHaveSpinbotEffect.modifyRotation$LivingEntityRenderer(poseStack);
+            SkeletonsHaveSpinbotEffect.modifyRotation$LivingEntityRenderer(stack);
         }
     }
 
