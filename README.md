@@ -35,12 +35,14 @@ These are the available effects that can be randomly chosen:
 * Explode Players
 * Fake Teleport to Heaven
 * Fatigue
+* Fireworks!
 * Flat World
 * Fling Players
 * Get Rotated
 * Give Diamonds
 * High Pitch
 * Hopping
+* Insane Gravity
 * Invert Velocity
 * Invisibility
 * Jail
@@ -69,6 +71,7 @@ These are the available effects that can be randomly chosen:
 * Teleport Nearby Mobs to Players
 * Teleport to Heaven
 * Teleport to Void
+* Upside Down Mobs
 * W I D E M O B S
 * Where are my chunks?
 * Where is the sky?

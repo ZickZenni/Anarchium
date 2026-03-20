@@ -1,23 +1,15 @@
 package com.zickzenni.anarchium.mixin.client;
 
 import com.mojang.blaze3d.vertex.PoseStack;
-import com.zickzenni.anarchium.effect.impl.EveryoneIsAVillagerEffect;
-import com.zickzenni.anarchium.effect.impl.SkeletonsHaveSpinbotEffect;
-import com.zickzenni.anarchium.effect.impl.SpinningMobsEffect;
-import com.zickzenni.anarchium.effect.impl.WideMobsEffect;
+import com.zickzenni.anarchium.effect.impl.*;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.LivingEntityRenderer;
-import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.util.Mth;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.monster.AbstractSkeleton;
-import net.minecraft.world.entity.npc.VillagerType;
 import net.minecraft.world.entity.player.Player;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
-import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.Redirect;
@@ -26,95 +18,6 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 @Mixin(LivingEntityRenderer.class)
 public abstract class LivingEntityRendererMixin
 {
-    @Unique
-    private static final ResourceLocation VILLAGER_BASE_SKIN =
-            ResourceLocation.withDefaultNamespace("textures/entity/villager/villager.png");
-
-    @Unique
-    private static final ResourceLocation VILLAGER_PLAINS_CLOTH =
-            anarchium$getResourceLocation(BuiltInRegistries.VILLAGER_TYPE.getKey(VillagerType.PLAINS));
-
-    @Unique
-    private static <T extends LivingEntity> void anarchium$replaceWithVillager(T entity,
-                                                                               float partialTicks,
-                                                                               PoseStack poseStack,
-                                                                               MultiBufferSource buffer,
-                                                                               int packedLight)
-    {
-        var model = EveryoneIsAVillagerEffect.VILLAGER_MODEL;
-        var shouldSit = entity.isPassenger() && (entity.getVehicle() != null && entity.getVehicle().shouldRiderSit());
-
-        float f = Mth.rotLerp(partialTicks, entity.yBodyRotO, entity.yBodyRot);
-        float f1 = Mth.rotLerp(partialTicks, entity.yHeadRotO, entity.yHeadRot);
-        float f2 = f1 - f;
-        if (shouldSit && entity.getVehicle() instanceof LivingEntity livingentity)
-        {
-            f = Mth.rotLerp(partialTicks, livingentity.yBodyRotO, livingentity.yBodyRot);
-            f2 = f1 - f;
-            float f7 = Mth.wrapDegrees(f2);
-            if (f7 < -85.0F)
-            {
-                f7 = -85.0F;
-            }
-
-            if (f7 >= 85.0F)
-            {
-                f7 = 85.0F;
-            }
-
-            f = f1 - f7;
-            if (f7 * f7 > 2500.0F)
-            {
-                f += f7 * 0.2F;
-            }
-
-            f2 = f1 - f;
-        }
-
-        float f6 = Mth.lerp(partialTicks, entity.xRotO, entity.getXRot());
-        if (LivingEntityRenderer.isEntityUpsideDown(entity))
-        {
-            f6 *= -1.0F;
-            f2 *= -1.0F;
-        }
-
-        f2 = Mth.wrapDegrees(f2);
-
-        model.attackTime = entity.getAttackAnim(partialTicks);
-        model.riding = shouldSit;
-        model.young = entity.isBaby();
-
-        float f4 = 0.0F;
-        float f5 = 0.0F;
-        if (!shouldSit && entity.isAlive())
-        {
-            f4 = entity.walkAnimation.speed(partialTicks);
-            f5 = entity.walkAnimation.position(partialTicks);
-            if (entity.isBaby())
-            {
-                f5 *= 3.0F;
-            }
-
-            if (f4 > 1.0F)
-            {
-                f4 = 1.0F;
-            }
-        }
-
-        //noinspection DataFlowIssue
-        model.setupAnim(null, f5, f4, (float) entity.tickCount + partialTicks, f2, f6);
-
-        int overlayCoords = LivingEntityRenderer.getOverlayCoords(entity, 0.0f);
-
-        var main = buffer.getBuffer(RenderType.entityCutoutNoCull(VILLAGER_BASE_SKIN));
-        model.renderToBuffer(poseStack, main, packedLight, overlayCoords, -1);
-
-        var cloth = buffer.getBuffer(RenderType.entityCutoutNoCull(VILLAGER_PLAINS_CLOTH));
-        model.renderToBuffer(poseStack, cloth, packedLight, overlayCoords, -1);
-
-        poseStack.scale(0, 0, 0);
-    }
-
     @Shadow
     protected <T extends LivingEntity> RenderType getRenderType(T livingEntity,
                                                                 boolean bodyVisible,
@@ -129,26 +32,31 @@ public abstract class LivingEntityRendererMixin
     public <T extends LivingEntity> void render(T entity,
                                                 float entityYaw,
                                                 float partialTicks,
-                                                PoseStack poseStack,
+                                                PoseStack stack,
                                                 MultiBufferSource buffer,
                                                 int packedLight,
                                                 CallbackInfo ci)
     {
         var isPlayer = entity instanceof Player;
 
+        if (UpsideDownMobs.ENABLED && !isPlayer)
+        {
+            UpsideDownMobs.modifyRotation$LivingEntityRenderer(entity, stack);
+        }
+
         if (WideMobsEffect.ENABLED && !isPlayer)
         {
-            WideMobsEffect.modifyWidth$LivingEntityRenderer(entity, poseStack);
+            WideMobsEffect.modifyWidth$LivingEntityRenderer(entity, stack);
         }
 
         if (SpinningMobsEffect.ENABLED && !isPlayer)
         {
-            SpinningMobsEffect.modifyRotation$LivingEntityRenderer(poseStack);
+            SpinningMobsEffect.modifyRotation$LivingEntityRenderer(stack);
         }
 
         if (SkeletonsHaveSpinbotEffect.ENABLED && entity instanceof AbstractSkeleton)
         {
-            SkeletonsHaveSpinbotEffect.modifyRotation$LivingEntityRenderer(poseStack);
+            SkeletonsHaveSpinbotEffect.modifyRotation$LivingEntityRenderer(stack);
         }
     }
 
@@ -165,14 +73,8 @@ public abstract class LivingEntityRendererMixin
     {
         if (EveryoneIsAVillagerEffect.ENABLED)
         {
-            anarchium$replaceWithVillager(entity, partialTicks, poseStack, buffer, packedLight);
+            EveryoneIsAVillagerEffect.replaceWithVillager$LivingEntityRenderer(entity, partialTicks, poseStack, buffer, packedLight);
         }
-    }
-
-    @Unique
-    private static ResourceLocation anarchium$getResourceLocation(ResourceLocation location)
-    {
-        return location.withPath(p_247944_ -> "textures/entity/villager/type/" + p_247944_ + ".png");
     }
 
     // =================== EFFECTS ===================

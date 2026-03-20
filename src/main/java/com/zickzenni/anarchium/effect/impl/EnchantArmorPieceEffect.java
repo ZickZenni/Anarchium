@@ -70,14 +70,14 @@ public class EnchantArmorPieceEffect extends InstantEffect
 
             if (items.isEmpty())
             {
-                return;
+                continue;
             }
 
             var item = items.get(player.level().random.nextInt(items.size()));
 
             if (!item.getItem().isEnchantable(item))
             {
-                return;
+                continue;
             }
 
             var registry = player.registryAccess().lookupOrThrow(Registries.ENCHANTMENT);

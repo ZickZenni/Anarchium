@@ -45,24 +45,9 @@ public class ServerEffectManager
 
         if (stage == LevelTickStage.POST)
         {
-            for (var it = EFFECTS.iterator(); it.hasNext(); )
-            {
-                var effect = it.next();
-
-                if (!effect.hasEnded())
-                {
-                    effect.onLevelTickServer(level, stage);
-                    PacketDistributor.sendToAllPlayers(new TickEffectPacket(effect.getLocation()
-                            .toString(), effect.getTicks()));
-                } else
-                {
-                    it.remove();
-                    PacketDistributor.sendToAllPlayers(new EndEffectPacket(effect.getLocation().toString()));
-                }
-            }
-
             if (timerTicks > 0)
             {
+                runPostTick(level);
                 timerTicks--;
             } else
             {
@@ -76,11 +61,13 @@ public class ServerEffectManager
 
                 if (property == null)
                 {
+                    runPostTick(level);
                     LOGGER.error("Could not find a random effect!");
                     return;
                 }
 
                 activateEffect(property);
+                runPostTick(level);
             }
 
             /*
@@ -133,5 +120,24 @@ public class ServerEffectManager
         LOGGER.debug("Picked new effect: {}", id);
         EFFECTS.add(effect);
         PacketDistributor.sendToAllPlayers(new ActivateEffectPacket(id.toString()));
+    }
+
+    private static void runPostTick(ServerLevel level)
+    {
+        for (var it = EFFECTS.iterator(); it.hasNext(); )
+        {
+            var effect = it.next();
+
+            if (!effect.hasEnded())
+            {
+                effect.onLevelTickServer(level, LevelTickStage.POST);
+                PacketDistributor.sendToAllPlayers(new TickEffectPacket(effect.getLocation()
+                        .toString(), effect.getTicks()));
+            } else
+            {
+                it.remove();
+                PacketDistributor.sendToAllPlayers(new EndEffectPacket(effect.getLocation().toString()));
+            }
+        }
     }
 }
