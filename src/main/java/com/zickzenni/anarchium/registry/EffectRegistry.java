@@ -102,6 +102,7 @@ public class EffectRegistry
         register(CreateNetherPortalEffect.PROPERTIES);
         register(PTSDEffect.PROPERTIES);
         register(DisableMobAIEffect.PROPERTIES);
+        register(BunnyHopEffect.PROPERTIES);
 
         frozen = true;
         LOGGER.info("Finished registration with a total of {} entries", REGISTRY.size());

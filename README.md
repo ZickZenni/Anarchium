@@ -20,6 +20,7 @@ These are the available effects that can be randomly chosen:
 * Blindness
 * Blurry Screen
 * Broken World
+* Bunny Hop
 * Burn Nearby Mobs
 * Burn Players
 * Console Experience
