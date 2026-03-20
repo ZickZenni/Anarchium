@@ -49,6 +49,7 @@ These are the available effects that can be randomly chosen:
 * High Pitch
 * Hopping
 * Insane Gravity
+* Inverted Mouse
 * Invert Velocity
 * Invisibility
 * Jail

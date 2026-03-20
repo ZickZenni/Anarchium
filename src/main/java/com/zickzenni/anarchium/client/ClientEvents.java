@@ -77,6 +77,7 @@ public final class ClientEvents
     @SubscribeEvent
     public static void onAddEntityLayers(EntityRenderersEvent.AddLayers event)
     {
-        EveryoneIsAVillagerEffect.VILLAGER_MODEL = new VillagerModel<>(event.getContext().bakeLayer(ModelLayers.VILLAGER));
+        EveryoneIsAVillagerEffect.VILLAGER_MODEL =
+                new VillagerModel<>(event.getContext().bakeLayer(ModelLayers.VILLAGER));
     }
 }

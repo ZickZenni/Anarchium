@@ -71,5 +71,6 @@
   "anarchium.disable_mob_ai": "Disable Mob AI",
   "anarchium.bunny_hop": "Bunny Hop",
   "anarchium.missing_css_assets": "Missing CS:S Assets",
-  "anarchium.no_gui": "No GUI"
+  "anarchium.no_gui": "No GUI",
+  "anarchium.inverted_mouse": "Inverted Mouse"
 }

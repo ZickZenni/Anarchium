@@ -105,6 +105,7 @@ public class EffectRegistry
         register(BunnyHopEffect.PROPERTIES);
         register(MissingCSSAssets.PROPERTIES);
         register(NoGUIEffect.PROPERTIES);
+        register(InvertedMouseEffect.PROPERTIES);
 
         frozen = true;
         LOGGER.info("Finished registration with a total of {} entries", REGISTRY.size());
