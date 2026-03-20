@@ -97,6 +97,8 @@ public class EffectRegistry
         register(ConsoleExperienceEffect.PROPERTIES);
         register(GTA2Effect.PROPERTIES);
         register(GoodbyeEffect.PROPERTIES);
+        register(TimeToDayEffect.PROPERTIES);
+        register(TimeToNightEffect.PROPERTIES);
 
         frozen = true;
         LOGGER.info("Finished registration with a total of {} entries", REGISTRY.size());

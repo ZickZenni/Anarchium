@@ -74,6 +74,8 @@ These are the available effects that can be randomly chosen:
 * Teleport Nearby Mobs to Players
 * Teleport to Heaven
 * Teleport to Void
+* Time To Day
+* Time To Night
 * Upside Down Mobs
 * W I D E M O B S
 * Where are my chunks?
