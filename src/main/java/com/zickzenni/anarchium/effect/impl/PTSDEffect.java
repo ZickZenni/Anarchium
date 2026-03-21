@@ -32,31 +32,34 @@ public class PTSDEffect extends TimedEffect
     @Override
     public void onLevelTickClient(ClientLevel level, LevelTickStage stage)
     {
-        var player = Minecraft.getInstance().player;
-        assert player != null;
-
-        if (ticks <= 0)
+        if (stage == LevelTickStage.PRE)
         {
-            var posX = RANDOM.nextInt(3) - RANDOM.nextInt(3);
-            var posY = RANDOM.nextInt(2) - RANDOM.nextInt(2);
-            var posZ = RANDOM.nextInt(3) - RANDOM.nextInt(3);
-            var position = player.blockPosition().offset(posX, posY, posZ);
+            var player = Minecraft.getInstance().player;
+            assert player != null;
 
-            level.playSound(
-                    player,
-                    position.getX(),
-                    position.getY(),
-                    position.getZ(),
-                    SoundEvents.CREEPER_PRIMED,
-                    SoundSource.HOSTILE,
-                    1.0f,
-                    0.5f
-            );
+            if (ticks <= 0)
+            {
+                var posX = RANDOM.nextInt(3) - RANDOM.nextInt(3);
+                var posY = RANDOM.nextInt(2) - RANDOM.nextInt(2);
+                var posZ = RANDOM.nextInt(3) - RANDOM.nextInt(3);
+                var position = player.blockPosition().offset(posX, posY, posZ);
 
-            ticks = RANDOM.nextIntBetweenInclusive(116, 148);
-        } else
-        {
-            ticks--;
+                level.playLocalSound(
+                        position.getX(),
+                        position.getY(),
+                        position.getZ(),
+                        SoundEvents.CREEPER_PRIMED,
+                        SoundSource.HOSTILE,
+                        1.0f,
+                        0.5f,
+                        false
+                );
+
+                ticks = RANDOM.nextIntBetweenInclusive(70, 120);
+            } else
+            {
+                ticks--;
+            }
         }
 
         super.onLevelTickClient(level, stage);
