@@ -4,7 +4,6 @@
   "package": "com.zickzenni.anarchium.mixin",
   "compatibilityLevel": "JAVA_21",
   "mixins": [
-    "client.MouseHandlerMixin",
     "server.EntityMixin",
     "server.PlayerMixin",
     "server.ServerGamePacketListenerImplMixin"
@@ -20,6 +19,7 @@
     "client.KeyboardInputMixin",
     "client.LevelRendererMixin",
     "client.LivingEntityRendererMixin",
+    "client.MouseHandlerMixin",
     "client.OptionsMixin",
     "client.SoundEngineMixin"
   ],
