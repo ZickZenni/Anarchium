@@ -17,6 +17,9 @@ public class MouseHandlerMixin
         if (InvertedMouseEffect.ENABLED)
         {
             instance.turn(-yRot, -xRot);
+        } else
+        {
+            instance.turn(yRot, xRot);
         }
     }
 }
