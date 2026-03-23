@@ -44,8 +44,8 @@ public class EffectRegistry
         register(DamagePlayersEffect.PROPERTIES);
         register(DropInventoryEffect.PROPERTIES);
         register(DropItemEffect.PROPERTIES);
-        register(EnchantArmorPieceEffect.PROPERTIES);
-        register(EnchantCurrentItemEffect.PROPERTIES);
+//        register(EnchantArmorPieceEffect.PROPERTIES);
+//        register(EnchantCurrentItemEffect.PROPERTIES);
         register(EntityMagnetEffect.PROPERTIES);
         register(EveryoneIsAVillagerEffect.PROPERTIES);
         register(ExplodeNearbyEntitiesEvent.PROPERTIES);
@@ -74,7 +74,7 @@ public class EffectRegistry
         register(ReplaceEverySoundWithVillagersEffect.PROPERTIES);
         register(ReversedGravityEffect.PROPERTIES);
         register(RollingCameraEffect.PROPERTIES);
-        register(RotatingCameraEffect.PROPERTIES);
+//        register(RotatingCameraEffect.PROPERTIES);
         register(SkeletonsHaveSpinbotEffect.PROPERTIES);
         register(SpawnBoatEffect.PROPERTIES);
         register(SpawnCreepersEffect.PROPERTIES);
