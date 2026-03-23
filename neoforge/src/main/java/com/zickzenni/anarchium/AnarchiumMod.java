@@ -22,7 +22,7 @@ public class AnarchiumMod
     private static final String NETWORK_VERSION = "1";
     private static final DeferredRegister<SoundEvent> SOUND_EVENTS =
             DeferredRegister.create(BuiltInRegistries.SOUND_EVENT, Constants.MOD_ID);
-    public static final FileConfig CONFIG = FileConfig.of("./config.toml");
+    public static final FileConfig CONFIG = FileConfig.of("./config/" + Constants.MOD_ID + "-common.toml");
 
     public AnarchiumMod(IEventBus bus)
     {
