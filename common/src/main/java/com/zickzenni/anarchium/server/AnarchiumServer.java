@@ -2,6 +2,7 @@ package com.zickzenni.anarchium.server;
 
 import com.zickzenni.anarchium.config.ConfigValue;
 import com.zickzenni.anarchium.event.ILevelTickEvent;
+import com.zickzenni.anarchium.platform.Services;
 import net.minecraft.server.level.ServerLevel;
 
 public class AnarchiumServer
@@ -20,6 +21,11 @@ public class AnarchiumServer
      */
     public void processLevelTick(ILevelTickEvent<ServerLevel> event)
     {
+        if (Services.PLAYER_PROVIDER.getServerPlayers().isEmpty())
+        {
+            return;
+        }
+
         ServerEffectManager.tick(event);
     }
 
