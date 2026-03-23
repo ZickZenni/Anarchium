@@ -74,7 +74,7 @@ public class EffectRegistry
         register(ReplaceEverySoundWithVillagersEffect.PROPERTIES);
         register(ReversedGravityEffect.PROPERTIES);
         register(RollingCameraEffect.PROPERTIES);
-//        register(RotatingCameraEffect.PROPERTIES);
+        register(RotatingCameraEffect.PROPERTIES);
         register(SkeletonsHaveSpinbotEffect.PROPERTIES);
         register(SpawnBoatEffect.PROPERTIES);
         register(SpawnCreepersEffect.PROPERTIES);

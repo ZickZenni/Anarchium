@@ -68,7 +68,7 @@ public final class ClientEvents
     }
 
     @SubscribeEvent
-    public static void onAfterOpaqueBlocksRender(RenderLevelStageEvent forgeEvent)
+    public static void onRenderLevelStage(RenderLevelStageEvent forgeEvent)
     {
         var event = new IRenderLevelEvent()
         {
