@@ -26,6 +26,7 @@ public interface IRenderLevelEvent
         START,
         AFTER_ENTITIES,
         AFTER_TRANSLUCENT,
-        LAST
+        LAST,
+        UNKNOWN
     }
 }

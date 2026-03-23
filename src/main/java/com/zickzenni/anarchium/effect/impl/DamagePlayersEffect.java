@@ -20,7 +20,7 @@ public class DamagePlayersEffect extends InstantEffect
     @Override
     public void onStartServer()
     {
-        for (var player : Anarchium.getServer().getOnlinePlayers())
+        for (var player : Services.PLAYER_PROVIDER.getServerPlayers())
         {
             player.hurt(player.damageSources().playerAttack(player), 2.0f);
         }

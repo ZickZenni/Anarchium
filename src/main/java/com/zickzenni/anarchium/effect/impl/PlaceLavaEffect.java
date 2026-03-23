@@ -21,7 +21,7 @@ public class PlaceLavaEffect extends InstantEffect
     @Override
     public void onStartServer()
     {
-        for (var player : Anarchium.getServer().getOnlinePlayers())
+        for (var player : Services.PLAYER_PROVIDER.getServerPlayers())
         {
             var level = player.serverLevel();
             level.setBlock(player.blockPosition(), Blocks.LAVA.defaultBlockState(), 3);

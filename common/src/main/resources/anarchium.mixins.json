@@ -4,8 +4,24 @@
   "package": "com.zickzenni.anarchium.mixin",
   "compatibilityLevel": "JAVA_18",
   "mixins": [
+    "server.EntityMixin",
+    "server.PlayerMixin",
+    "server.ServerGamePacketListenerImplMixin"
   ],
   "client": [
+    "client.BlockEntityRenderDispatcherMixin",
+    "client.BufferUploaderMixin",
+    "client.CameraMixin",
+    "client.CameraTypeMixin",
+    "client.EntityRenderDispatcherMixin",
+    "client.EntityRendererMixin",
+    "client.HumanoidModelMixin",
+    "client.KeyboardInputMixin",
+    "client.LevelRendererMixin",
+    "client.LivingEntityRendererMixin",
+    "client.MouseHandlerMixin",
+    "client.OptionsMixin",
+    "client.SoundEngineMixin"
   ],
   "injectors": {
     "defaultRequire": 1

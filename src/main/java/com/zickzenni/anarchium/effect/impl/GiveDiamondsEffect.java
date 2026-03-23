@@ -22,7 +22,7 @@ public class GiveDiamondsEffect extends InstantEffect
     @Override
     public void onStartServer()
     {
-        for (var player : Anarchium.getServer().getOnlinePlayers())
+        for (var player : Services.PLAYER_PROVIDER.getServerPlayers())
         {
             player.getInventory().add(new ItemStack(Items.DIAMOND, player.level().random.nextInt(10) + 1));
         }

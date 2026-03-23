@@ -12,7 +12,7 @@ public class BooleanValue extends ConfigValue<Boolean>
     @Override
     public void configure(ConfigSpec builder)
     {
-        builder.define(this.name, this.defaultValue);
+        builder.define(this.getPath(), this.defaultValue);
     }
 
     @Override

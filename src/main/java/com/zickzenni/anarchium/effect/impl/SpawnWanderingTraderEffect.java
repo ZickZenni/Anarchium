@@ -30,7 +30,7 @@ public class SpawnWanderingTraderEffect extends InstantEffect
     @Override
     public void onStartServer()
     {
-        for (var player : Anarchium.getServer().getOnlinePlayers())
+        for (var player : Services.PLAYER_PROVIDER.getServerPlayers())
         {
             var blockPos = player.blockPosition();
             var level = player.serverLevel();

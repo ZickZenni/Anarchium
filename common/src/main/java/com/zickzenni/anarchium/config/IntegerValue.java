@@ -12,7 +12,9 @@ public class IntegerValue extends ConfigValue<Integer>
     @Override
     public void configure(ConfigSpec builder)
     {
-        builder.define(this.name, this.defaultValue);
+        var path = this.getPath();
+
+        builder.define(path, this.defaultValue);
     }
 
     @Override

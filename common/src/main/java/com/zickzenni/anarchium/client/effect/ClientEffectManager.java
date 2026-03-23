@@ -35,7 +35,7 @@ public class ClientEffectManager
         }
     }
 
-    public static void sendRenderLevelStageEvent(IRenderLevelEvent event)
+    public static void dispatchRenderLevelStageEvent(IRenderLevelEvent event)
     {
         var deltaTime = Minecraft.getInstance().getTimer().getRealtimeDeltaTicks();
 
@@ -50,11 +50,11 @@ public class ClientEffectManager
      *
      * @see net.neoforged.neoforge.client.event.RenderGuiEvent
      */
-    public static void sendRenderGuiEvent(IRenderGuiEvent event)
+    public static void dispatchRenderGuiEvent(IRenderGuiEvent event)
     {
         for (var effects : EFFECTS)
         {
-            effects.onRenderGUI(event);
+            effects.onRenderGui(event);
         }
     }
 

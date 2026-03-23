@@ -8,14 +8,13 @@ import net.minecraft.client.Minecraft;
 
 public class AntiPortraitEffect extends TimedEffect
 {
-    public static final ConfigValue<Integer> DURATION =
-            ConfigValue.newInteger("duration", 20 * 45);
+    public static final ConfigValue<Integer> DURATION = ConfigValue.newInteger("duration", 20 * 45);
     public static final EffectProperties<AntiPortraitEffect> PROPERTIES =
             EffectProperties.Builder.of(AntiPortraitEffect.class)
                     .id("anti_portrait")
                     .supplier(AntiPortraitEffect::new)
-//                    .conflict(BlackScreenEffect.class)
-//                    .conflict(PortraitEffect.class)
+                    .conflict(BlackScreenEffect.class)
+                    .conflict(PortraitEffect.class)
                     .config(DURATION)
                     .build();
 
@@ -25,7 +24,7 @@ public class AntiPortraitEffect extends TimedEffect
     }
 
     @Override
-    public void onRenderGUI(IRenderGuiEvent event)
+    public void onRenderGui(IRenderGuiEvent event)
     {
         var window = Minecraft.getInstance().getWindow();
         var width = window.getGuiScaledWidth();

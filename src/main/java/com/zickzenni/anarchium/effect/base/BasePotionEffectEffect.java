@@ -15,7 +15,7 @@ public abstract class BasePotionEffectEffect extends InstantEffect
     @Override
     public void onStartServer()
     {
-        for (var player : Anarchium.getServer().getOnlinePlayers())
+        for (var player : Services.PLAYER_PROVIDER.getServerPlayers())
         {
             player.addEffect(getPotionEffect(player));
         }

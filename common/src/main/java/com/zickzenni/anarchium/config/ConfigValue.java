@@ -2,6 +2,7 @@ package com.zickzenni.anarchium.config;
 
 import com.electronwill.nightconfig.core.Config;
 import com.electronwill.nightconfig.core.ConfigSpec;
+import org.jetbrains.annotations.Nullable;
 
 public abstract class ConfigValue<T>
 {
@@ -11,10 +12,13 @@ public abstract class ConfigValue<T>
 
     protected T value;
 
+    protected String prefix;
+
     ConfigValue(String name, T defaultValue)
     {
         this.name = name;
         this.defaultValue = defaultValue;
+        this.prefix = null;
     }
 
     /**
@@ -58,7 +62,17 @@ public abstract class ConfigValue<T>
      */
     public void load(Config config)
     {
-        this.value = config.get(name);
+        this.value = config.get(this.getPath());
+    }
+
+    public void setPrefix(@Nullable String prefix)
+    {
+        this.prefix = prefix;
+    }
+
+    public String getPath()
+    {
+        return this.prefix == null ? this.name : this.prefix + "." + this.name;
     }
 
     /**

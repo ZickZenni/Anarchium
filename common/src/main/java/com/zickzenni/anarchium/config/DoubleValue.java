@@ -28,18 +28,20 @@ public class DoubleValue extends ConfigValue<Double>
     @Override
     public void configure(ConfigSpec builder)
     {
+        var path = this.getPath();
+
         if (this.min.isPresent() && this.max.isPresent())
         {
-            builder.defineInRange(this.name, this.defaultValue, this.min.get(), this.max.get());
+            builder.defineInRange(path, this.defaultValue, this.min.get(), this.max.get());
         } else if (this.min.isPresent())
         {
-            builder.defineInRange(this.name, this.defaultValue, this.min.get(), Double.MAX_VALUE);
+            builder.defineInRange(path, this.defaultValue, this.min.get(), Double.MAX_VALUE);
         } else if (this.max.isPresent())
         {
-            builder.defineInRange(this.name, this.defaultValue, Double.MIN_VALUE, this.max.get());
+            builder.defineInRange(path, this.defaultValue, Double.MIN_VALUE, this.max.get());
         } else
         {
-            builder.define(this.name, this.defaultValue);
+            builder.define(path, this.defaultValue);
         }
     }
 

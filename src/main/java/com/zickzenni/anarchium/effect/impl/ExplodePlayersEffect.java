@@ -21,7 +21,7 @@ public class ExplodePlayersEffect extends InstantEffect
     @Override
     public void onStartServer()
     {
-        for (var player : Anarchium.getServer().getOnlinePlayers())
+        for (var player : Services.PLAYER_PROVIDER.getServerPlayers())
         {
             var position = player.position();
             player.serverLevel().explode(null, position.x, position.y, position.z, 3, Level.ExplosionInteraction.TNT);

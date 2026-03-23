@@ -30,7 +30,7 @@ public class EnchantCurrentItemEffect extends InstantEffect
     @Override
     public void onStartServer()
     {
-        for (var player : Anarchium.getServer().getOnlinePlayers())
+        for (var player : Services.PLAYER_PROVIDER.getServerPlayers())
         {
             var mainItem = player.getItemInHand(InteractionHand.MAIN_HAND);
             var offItem = player.getItemInHand(InteractionHand.OFF_HAND);

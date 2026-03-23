@@ -31,7 +31,7 @@ public class EntityMagnetEffect extends TimedEffect
     {
         if (stage == LevelTickStage.POST)
         {
-            for (var player : Anarchium.getServer().getOnlinePlayers())
+            for (var player : Services.PLAYER_PROVIDER.getServerPlayers())
             {
                 int radius = RADIUS.get();
                 var playerPosition = player.position();

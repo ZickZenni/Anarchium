@@ -36,7 +36,7 @@ public class FireworksEffect extends TimedEffect
             {
                 var radius = RADIUS.get();
 
-                for (var player : Anarchium.getServer().getOnlinePlayers())
+                for (var player : Services.PLAYER_PROVIDER.getServerPlayers())
                 {
                     var level = player.serverLevel();
                     var amount = RANDOM.nextIntBetweenInclusive(1, 3);

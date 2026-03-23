@@ -28,7 +28,7 @@ public class TeleportNearbyMobsToPlayersEffect extends InstantEffect
     {
         int radius = RADIUS.get();
 
-        for (var player : Anarchium.getServer().getOnlinePlayers())
+        for (var player : Services.PLAYER_PROVIDER.getServerPlayers())
         {
             var level = player.serverLevel();
             var playerPosition = player.position();

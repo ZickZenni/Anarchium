@@ -20,7 +20,7 @@ public class InvertVelocityEffect extends InstantEffect
     @Override
     public void onStartServer()
     {
-        for (var player : Anarchium.getServer().getOnlinePlayers())
+        for (var player : Services.PLAYER_PROVIDER.getServerPlayers())
         {
             player.setDeltaMovement(player.getDeltaMovement().multiply(-1, -1, -1));
             player.hurtMarked = true;

@@ -39,7 +39,7 @@ public interface Effect
     {
     }
 
-    default void onRenderGUI(IRenderGuiEvent event)
+    default void onRenderGui(IRenderGuiEvent event)
     {
     }
 

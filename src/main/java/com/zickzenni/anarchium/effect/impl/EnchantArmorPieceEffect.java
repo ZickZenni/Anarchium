@@ -28,7 +28,7 @@ public class EnchantArmorPieceEffect extends InstantEffect
     @Override
     public void onStartServer()
     {
-        for (var player : Anarchium.getServer().getOnlinePlayers())
+        for (var player : Services.PLAYER_PROVIDER.getServerPlayers())
         {
             List<ItemStack> items = new ArrayList<>();
 

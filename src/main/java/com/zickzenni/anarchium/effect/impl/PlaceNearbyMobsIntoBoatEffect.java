@@ -28,7 +28,7 @@ public class PlaceNearbyMobsIntoBoatEffect extends InstantEffect
     @Override
     public void onStartServer()
     {
-        for (var player : Anarchium.getServer().getOnlinePlayers())
+        for (var player : Services.PLAYER_PROVIDER.getServerPlayers())
         {
             int radius = RADIUS.get();
             var level = player.serverLevel();
