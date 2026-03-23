@@ -3,7 +3,6 @@ package com.zickzenni.anarchium;
 import com.mojang.logging.LogUtils;
 import com.zickzenni.anarchium.client.AnarchiumClient;
 import com.zickzenni.anarchium.client.network.handler.*;
-import com.zickzenni.anarchium.network.packet.*;
 import com.zickzenni.anarchium.registry.EffectRegistry;
 import com.zickzenni.anarchium.registry.SoundRegistry;
 import com.zickzenni.anarchium.server.AnarchiumServer;
