@@ -1,5 +1,5 @@
 <h1>
-    <img alt="The title image for the Minecraft Mod &quot;Anarchium&quot;" src="title.png" title="Title Image for Anarchium"/>
+    <img alt="The title image for the Minecraft Mod &quot;Anarchium&quot;" src=".github/title.png" title="Title Image for Anarchium"/>
     <br/>
 </h1>
 
@@ -93,8 +93,8 @@ These are the available effects that can be randomly chosen:
 
 ### Compatibility
 
-This mod is currently only compatible with [NeoForge](https://neoforged.net) on 1.21.1, but will be compatible with
-other mod loaders in the future.
+This mod is currently compatible with [NeoForge](https://neoforged.net) on 1.21.1 and [Fabric](https://fabricmc.net/)
+will be implemented in the future.
 
 **Note:** There will be no backports for older versions, as it's time-consuming and not worth the effort. Plus
 writing [Mixins](https://github.com/SpongePowered/Mixin) for older versions is a lot of work.
