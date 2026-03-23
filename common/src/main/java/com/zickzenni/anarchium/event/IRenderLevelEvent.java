@@ -1,4 +1,4 @@
-package com.zickzenni.anarchium.effect.event;
+package com.zickzenni.anarchium.event;
 
 import net.minecraft.client.DeltaTracker;
 

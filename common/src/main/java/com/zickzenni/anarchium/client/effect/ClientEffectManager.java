@@ -2,9 +2,9 @@ package com.zickzenni.anarchium.client.effect;
 
 import com.mojang.logging.LogUtils;
 import com.zickzenni.anarchium.effect.Effect;
-import com.zickzenni.anarchium.effect.event.ILevelTickEvent;
-import com.zickzenni.anarchium.effect.event.IRenderGuiEvent;
-import com.zickzenni.anarchium.effect.event.IRenderLevelEvent;
+import com.zickzenni.anarchium.event.ILevelTickEvent;
+import com.zickzenni.anarchium.event.IRenderGuiEvent;
+import com.zickzenni.anarchium.event.IRenderLevelEvent;
 import com.zickzenni.anarchium.registry.EffectRegistry;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.ClientLevel;

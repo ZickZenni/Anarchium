@@ -2,7 +2,7 @@ package com.zickzenni.anarchium.client;
 
 import com.zickzenni.anarchium.client.gui.HistoryOverlay;
 import com.zickzenni.anarchium.client.gui.ProgressBarOverlay;
-import com.zickzenni.anarchium.effect.event.IRenderGuiEvent;
+import com.zickzenni.anarchium.event.IRenderGuiEvent;
 
 public class AnarchiumGui
 {

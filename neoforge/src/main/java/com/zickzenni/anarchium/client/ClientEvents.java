@@ -2,8 +2,8 @@ package com.zickzenni.anarchium.client;
 
 import com.zickzenni.anarchium.Constants;
 import com.zickzenni.anarchium.client.effect.ClientEffectManager;
-import com.zickzenni.anarchium.effect.event.ILevelTickEvent;
-import com.zickzenni.anarchium.effect.event.IRenderGuiEvent;
+import com.zickzenni.anarchium.event.ILevelTickEvent;
+import com.zickzenni.anarchium.event.IRenderGuiEvent;
 import net.minecraft.client.DeltaTracker;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.multiplayer.ClientLevel;

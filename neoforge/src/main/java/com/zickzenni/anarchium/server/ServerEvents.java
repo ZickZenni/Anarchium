@@ -3,7 +3,7 @@ package com.zickzenni.anarchium.server;
 import com.zickzenni.anarchium.AnarchiumMod;
 import com.zickzenni.anarchium.Constants;
 import com.zickzenni.anarchium.config.ConfigValue;
-import com.zickzenni.anarchium.effect.event.ILevelTickEvent;
+import com.zickzenni.anarchium.event.ILevelTickEvent;
 import com.zickzenni.anarchium.network.ConfigurationPacket;
 import com.zickzenni.anarchium.platform.Services;
 import com.zickzenni.anarchium.registry.EffectRegistry;

@@ -3,7 +3,7 @@ package com.zickzenni.anarchium.server;
 import com.mojang.logging.LogUtils;
 import com.zickzenni.anarchium.effect.Effect;
 import com.zickzenni.anarchium.effect.EffectProperties;
-import com.zickzenni.anarchium.effect.event.ILevelTickEvent;
+import com.zickzenni.anarchium.event.ILevelTickEvent;
 import com.zickzenni.anarchium.network.ActivateEffectPacket;
 import com.zickzenni.anarchium.network.EndEffectPacket;
 import com.zickzenni.anarchium.network.TickEffectPacket;

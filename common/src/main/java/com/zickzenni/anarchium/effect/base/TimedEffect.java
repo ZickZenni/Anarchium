@@ -1,6 +1,6 @@
 package com.zickzenni.anarchium.effect.base;
 
-import com.zickzenni.anarchium.effect.event.ILevelTickEvent;
+import com.zickzenni.anarchium.event.ILevelTickEvent;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 

@@ -1,8 +1,8 @@
 package com.zickzenni.anarchium.effect;
 
-import com.zickzenni.anarchium.effect.event.ILevelTickEvent;
-import com.zickzenni.anarchium.effect.event.IRenderGuiEvent;
-import com.zickzenni.anarchium.effect.event.IRenderLevelEvent;
+import com.zickzenni.anarchium.event.ILevelTickEvent;
+import com.zickzenni.anarchium.event.IRenderGuiEvent;
+import com.zickzenni.anarchium.event.IRenderLevelEvent;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.core.Holder;
 import net.minecraft.resources.ResourceLocation;

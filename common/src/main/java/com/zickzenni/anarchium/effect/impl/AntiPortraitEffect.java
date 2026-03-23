@@ -3,7 +3,7 @@ package com.zickzenni.anarchium.effect.impl;
 import com.zickzenni.anarchium.config.ConfigValue;
 import com.zickzenni.anarchium.effect.EffectProperties;
 import com.zickzenni.anarchium.effect.base.TimedEffect;
-import com.zickzenni.anarchium.effect.event.IRenderGuiEvent;
+import com.zickzenni.anarchium.event.IRenderGuiEvent;
 import net.minecraft.client.Minecraft;
 
 public class AntiPortraitEffect extends TimedEffect

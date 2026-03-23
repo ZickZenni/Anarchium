@@ -3,7 +3,7 @@ package com.zickzenni.anarchium.client;
 import com.mojang.logging.LogUtils;
 import com.zickzenni.anarchium.client.effect.ClientEffectManager;
 import com.zickzenni.anarchium.client.util.ClientTimer;
-import com.zickzenni.anarchium.effect.event.ILevelTickEvent;
+import com.zickzenni.anarchium.event.ILevelTickEvent;
 import net.minecraft.client.multiplayer.ClientLevel;
 import org.slf4j.Logger;
 
