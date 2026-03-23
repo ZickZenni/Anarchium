@@ -49,36 +49,38 @@ public class EnchantCurrentItemEffect extends InstantEffect
     }
 
     private static void enchant(ServerPlayer player,
-                                ItemStack stack,
+                                ItemStack item,
                                 ArrayList<Holder.Reference<Enchantment>> enchantments)
     {
-        if (stack.isEmpty() || !stack.getItem().isEnchantable(stack))
+        if (item.isEmpty() || !item.getItem().isEnchantable(item))
         {
             return;
         }
 
         Collections.shuffle(enchantments);
 
-//        for (var enchantment : enchantments)
-//        {
-//            if (!stack.supportsEnchantment(enchantment))
-//            {
-//                continue;
-//            }
-//
-//            var itemEnchantmentLevel = stack.getEnchantmentLevel(enchantment);
-//
-//            if (itemEnchantmentLevel < enchantment.value().getMaxLevel())
-//            {
-//                stack.enchant(enchantment, itemEnchantmentLevel + 1);
-//                break;
-//            } else if (itemEnchantmentLevel == 0)
-//            {
-//                var level = player.level().random.nextInt(enchantment.value().getMinLevel() + 1, enchantment.value()
-//                        .getMaxLevel() + 1);
-//                stack.enchant(enchantment, level);
-//                break;
-//            }
-//        }
+        for (var enchantment : enchantments)
+        {
+            if (!enchantment.value().canEnchant(item))
+            {
+                continue;
+            }
+
+            var itemEnchantmentLevel = item.getEnchantments().getLevel(enchantment);
+
+            if (itemEnchantmentLevel != 0 && itemEnchantmentLevel < enchantment.value().getMaxLevel())
+            {
+                item.enchant(enchantment, itemEnchantmentLevel + 1);
+                break;
+            } else if (itemEnchantmentLevel == 0)
+            {
+                var level = player.level().random.nextInt(
+                        enchantment.value().getMinLevel() + 1,
+                        enchantment.value().getMaxLevel() + 1
+                );
+                item.enchant(enchantment, level);
+                break;
+            }
+        }
     }
 }

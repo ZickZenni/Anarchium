@@ -84,27 +84,29 @@ public class EnchantArmorPieceEffect extends InstantEffect
             var enchantments = registry.listElements().collect(Collectors.toCollection(ArrayList::new));
             Collections.shuffle(enchantments);
 
-//            for (var enchantment : enchantments)
-//            {
-//                if (!item.supportsEnchantment(enchantment))
-//                {
-//                    continue;
-//                }
-//
-//                var itemEnchantmentLevel = item.getEnchantmentLevel(enchantment);
-//
-//                if (itemEnchantmentLevel < enchantment.value().getMaxLevel())
-//                {
-//                    item.enchant(enchantment, itemEnchantmentLevel + 1);
-//                    break;
-//                } else if (itemEnchantmentLevel == 0)
-//                {
-//                    var level = player.level().random.nextInt(enchantment.value().getMinLevel() + 1, enchantment.value()
-//                            .getMaxLevel() + 1);
-//                    item.enchant(enchantment, level);
-//                    break;
-//                }
-//            }
+            for (var enchantment : enchantments)
+            {
+                if (!enchantment.value().canEnchant(item))
+                {
+                    continue;
+                }
+
+                var itemEnchantmentLevel = item.getEnchantments().getLevel(enchantment);
+
+                if (itemEnchantmentLevel != 0 && itemEnchantmentLevel < enchantment.value().getMaxLevel())
+                {
+                    item.enchant(enchantment, itemEnchantmentLevel + 1);
+                    break;
+                } else if (itemEnchantmentLevel == 0)
+                {
+                    var level = player.level().random.nextInt(
+                            enchantment.value().getMinLevel() + 1, enchantment.value()
+                                    .getMaxLevel() + 1
+                    );
+                    item.enchant(enchantment, level);
+                    break;
+                }
+            }
         }
     }
 }
