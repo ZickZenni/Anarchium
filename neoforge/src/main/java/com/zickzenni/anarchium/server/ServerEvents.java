@@ -2,9 +2,7 @@ package com.zickzenni.anarchium.server;
 
 import com.zickzenni.anarchium.AnarchiumMod;
 import com.zickzenni.anarchium.Constants;
-import com.zickzenni.anarchium.config.ConfigValue;
 import com.zickzenni.anarchium.event.ILevelTickEvent;
-import com.zickzenni.anarchium.network.ConfigurationPacket;
 import com.zickzenni.anarchium.platform.Services;
 import com.zickzenni.anarchium.registry.EffectRegistry;
 import net.minecraft.server.level.ServerLevel;
@@ -14,9 +12,6 @@ import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.event.entity.player.PlayerEvent;
 import net.neoforged.neoforge.event.server.ServerStartingEvent;
 import net.neoforged.neoforge.event.tick.LevelTickEvent;
-
-import java.util.ArrayList;
-import java.util.List;
 
 @EventBusSubscriber(modid = Constants.MOD_ID)
 public final class ServerEvents
@@ -83,38 +78,6 @@ public final class ServerEvents
             return;
         }
 
-        List<ConfigurationPacket.Effect> effects = getEffects();
-        Services.PACKET_DISTRIBUTOR.send((ServerPlayer) event.getEntity(), new ConfigurationPacket(effects));
-    }
-
-    private static List<ConfigurationPacket.Effect> getEffects()
-    {
-        var properties = EffectRegistry.getRegistry();
-
-        List<ConfigurationPacket.Effect> effects = new ArrayList<>();
-
-        for (var property : properties.values())
-        {
-            if (property.getConfig().isEmpty())
-            {
-                continue;
-            }
-
-            List<ConfigurationPacket.Entry> entries = new ArrayList<>();
-
-            for (ConfigValue<?> value : property.getConfig())
-            {
-                if (value.getName().equals("enabled") || value.getName().equals("weight"))
-                {
-                    continue;
-                }
-
-                entries.add(new ConfigurationPacket.Entry(value.getName(), value.getType(), value.getRaw()));
-            }
-
-            effects.add(new ConfigurationPacket.Effect(property.getId().toString(), entries));
-        }
-
-        return effects;
+        Services.PACKET_DISTRIBUTOR.send((ServerPlayer) event.getEntity(), EffectRegistry.createConfigurationPacket());
     }
 }

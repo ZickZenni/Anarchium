@@ -2,17 +2,17 @@ package com.zickzenni.anarchium.registry;
 
 import com.electronwill.nightconfig.core.ConfigSpec;
 import com.mojang.logging.LogUtils;
+import com.zickzenni.anarchium.config.ConfigValue;
 import com.zickzenni.anarchium.effect.Effect;
 import com.zickzenni.anarchium.effect.EffectProperties;
 import com.zickzenni.anarchium.effect.impl.AntiPortraitEffect;
+import com.zickzenni.anarchium.network.ConfigurationPacket;
 import net.minecraft.resources.ResourceLocation;
 import org.slf4j.Logger;
 import org.slf4j.Marker;
 import org.slf4j.MarkerFactory;
 
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 public class EffectRegistry
 {
@@ -162,6 +162,43 @@ public class EffectRegistry
                 properties.getClazz().getCanonicalName(),
                 properties.getId().getNamespace()
         );
+    }
+
+    /**
+     * Creates and returns a {@link ConfigurationPacket} containing the configuration data of all registered effects in the registry.
+     *
+     * @return a {@link ConfigurationPacket} containing the configuration details of the registered effects.
+     */
+    public static ConfigurationPacket createConfigurationPacket()
+    {
+        List<ConfigurationPacket.Effect> effects = new ArrayList<>();
+
+        for (var property : REGISTRY.values())
+        {
+            if (property.getConfig().isEmpty())
+            {
+                continue;
+            }
+
+            List<ConfigurationPacket.Entry> entries = new ArrayList<>();
+
+            for (ConfigValue<?> value : property.getConfig())
+            {
+                /*
+                 * These are server-side only used.
+                 */
+                if (value.getName().equals("enabled") || value.getName().equals("weight"))
+                {
+                    continue;
+                }
+
+                entries.add(new ConfigurationPacket.Entry(value.getName(), value.getType(), value.getRaw()));
+            }
+
+            effects.add(new ConfigurationPacket.Effect(property.getId().toString(), entries));
+        }
+
+        return new ConfigurationPacket(effects);
     }
 
     /**
